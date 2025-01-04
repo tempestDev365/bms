@@ -1,11 +1,14 @@
 let sidebar = document.querySelector(".admin-sidebar");
 
 if (sidebar) {
+  const logoPath = "../../assets/img/logo-125.png";
+  
   sidebar.innerHTML = `
          <div class="navbar navbar-expand-sm navbar-light shadow-sm  flex-column  ps-3 align-items-start" style="min-height: 100%; min-width: 300px; background-color: #2D3187;">
                 <div class="navbar-brand">
-                   <img src="../assets/img/logo-125.png" class="img-fluid" width="50px" alt="">
-                   <label class="text-white">BMS</label>
+                   <img src="${logoPath}" class="img-fluid" width="50px" alt="logo" 
+                        onerror="this.onerror=null; this.src='../../assets/img/default-logo.png';">
+                   <label class="text-white">Brgy. Sinbanali</label>
                 </div>
                 
                 <div class="navbar-nav">
@@ -19,8 +22,11 @@ if (sidebar) {
                         <li class="nav-item">
                             <a href="./residents.php" class="nav-link text-light">Residents</a>
                         </li>
+                         <li class="nav-item">
+                            <a href="./pendingAccounts.php" class="nav-link text-light">Pending Accounts</a>
+                        </li>
                         <li class="nav-item">
-                            <a href="./blotter.php" class="nav-link text-light">Blotter</a>
+                            <a href="./blotter.php" class="nav-link text-light">Blotter Case</a>
                         </li>
                         <li class="nav-item">
                             <a href="./documentRequest.php" class="nav-link text-light">Document Requests</a>
@@ -34,6 +40,6 @@ if (sidebar) {
                     </ul>
                 </div>
             </div>
-    
     `;
 }
+
