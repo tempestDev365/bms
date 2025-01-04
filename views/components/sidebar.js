@@ -20,7 +20,7 @@ if(sidebar) {
                             <a href="./residents.html" class="nav-link text-light">Residents</a>
                         </li>
                         <li class="nav-item">
-                            <a href="./issuedClearance.html" class="nav-link text-light">Issued Clearance</a>
+                            <a href="./blotter.html" class="nav-link text-light">Blotter</a>
                         </li>
                         <li class="nav-item">
                             <a href="./documentRequest.html" class="nav-link text-light">Document Requests</a>
