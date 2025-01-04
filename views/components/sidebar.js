@@ -29,7 +29,7 @@ if (sidebar) {
                             <a href="./officials.php" class="nav-link text-light">Officials</a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link text-light">Logout</a>
+                            <a href="../../controllers/logoutController.php" class="nav-link text-light">Logout</a>
                         </li>
                     </ul>
                 </div>

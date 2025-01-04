@@ -34,15 +34,15 @@ if(!isset($_SESSION['admin'])) {
 
                 <div class="h2">Announcement</div>
                 
-                <form action="#">
+                <form action="../../controllers/postAnnouncementController.php" method = "POST">
                     <div class="form-group">
                         <label for="titleAnnouncement" class="h5">Title:</label>
-                        <textarea name="titleAnnouncement" id="titleAnnouncement" class="form-control" placeholder="Enter title..." required></textarea>
+                        <textarea name="titleAnnouncement" id="titleAnnouncement" class="form-control" placeholder="Enter title..." required ></textarea>
                     </div>
 
                     <div class="form-group mt-3">
                         <label for="contentAnnouncement" class="h5">Content:</label>
-                        <textarea class="form-control" id="announcement" placeholder="Enter announcement..." style="min-height: 300px;" required></textarea>
+                        <textarea class="form-control" id="announcement" placeholder="Enter announcement..." style="min-height: 300px;" name = "content" required></textarea>
                     </div>
 
                     <button class="btn btn-primary btn mt-3">Post</button>
