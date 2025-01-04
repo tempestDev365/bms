@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(!isset($_SESSION['admin'])) {
+    header('Location: adminLogin.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,13 +21,17 @@
            
         </div>
 
-        <div class="admin-content flex-grow-1 p-4">
+        <div class="admin-content flex-grow-1 p-4 bg-light">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item active" aria-current="page">BMS</li>
-                  <li class="breadcrumb-item"><a href="./officials.html" class="text-dark">Officials</a></li>
+                  <li class="breadcrumb-item"><a href="./main.html" class="text-dark">Dashboard</a></li>
                 </ol>
-              </nav>
+            </nav>
+
+            <div class="container-fluid  p-3">
+                
+            </div>
               
         </div>
         
@@ -32,7 +42,7 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="./components/sidebar.js" defer></script>
+    <script src="../components/sidebar.js" defer></script>
 
 </body>
 </html>

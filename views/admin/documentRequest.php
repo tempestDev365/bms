@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(!isset($_SESSION['admin'])) {
+    header('Location: adminLogin.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,17 +21,13 @@
            
         </div>
 
-        <div class="admin-content flex-grow-1 p-4 bg-light">
+        <div class="admin-content flex-grow-1 p-4">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item active" aria-current="page">BMS</li>
-                  <li class="breadcrumb-item"><a href="./main.html" class="text-dark">Dashboard</a></li>
+                  <li class="breadcrumb-item"><a href="./docuementRequest.html" class="text-dark">Document Request</a></li>
                 </ol>
-            </nav>
-
-            <div class="container-fluid  p-3">
-                
-            </div>
+              </nav>
               
         </div>
         
