@@ -19,12 +19,12 @@
 </head>
 <body>
 
-    <div class="main-container d-flex" style="min-height: 100vh; min-width: 100vw;">
+    <div class="main-container d-flex" style="min-height: 100vh; min-width: 100%;">
         <div class="admin-sidebar">
            
         </div>
 
-        <div class="admin-content flex-grow-1 p-4 bg-light">
+        <div class="admin-content flex-grow-1 p-4 bg-light" style="position: relative;">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item active" aria-current="page">BMS</li>
@@ -111,6 +111,7 @@
                 </table>
             </div>
 
+            <button class="btn btn-success" style="position: absolute; bottom: 2rem; right: 1rem">Add New Resident</button>
         </div>
         
     </div>

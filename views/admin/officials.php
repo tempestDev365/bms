@@ -28,7 +28,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item active" aria-current="page">BMS</li>
-                  <li class="breadcrumb-item"><a href="./issuedClearance.html" class="text-dark">Residents</a></li>
+                  <li class="breadcrumb-item"><a href="./issuedClearance.html" class="text-dark">Officials</a></li>
                 </ol>
               </nav>
               
