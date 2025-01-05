@@ -83,6 +83,19 @@ if(!isset($_SESSION['admin'])) {
                     </div>
                 </div>
 
+                 <!--Household Card-->
+                 <div class="card p-3" style="max-width: 350px; width: 350px;">
+                    <div class="card-body d-flex justify-content-between align-items-center flex-column">
+                        <div class="card-content">
+                            <img src="../../assets/img/dashboard/home.png" class="img-fluid" style="width: 80px" alt="household">
+                        </div>
+                        <div class="card-title d-flex justify-content-between align-items-center" style="gap: 10px">
+                            <h5>Total Household:</h5>
+                            <h3>0</h5>
+                        </div>
+                    </div>
+                </div>
+
               
             </div>
 

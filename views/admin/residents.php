@@ -35,6 +35,23 @@
 
             <div class="container-fluid p-3 shadow-sm border rounded bg-white">
                 <h1 class="mb-3 text-center">Registered Residents</h1>
+
+                <div class="container-fluid d-flex justify-content-end align-items-center mb-3" style="gap: 1rem; flex-wrap: wrap;">
+                    <div class="filter">
+                        <select id="genderFilter" class="form-select">
+                            <option value="all">All</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="voters">Voters</option>
+                        </select>
+                    </div>
+                    <div class="search">
+                        <label>
+                            Search
+                        </label>
+                        <input type="search" name="" id="">
+                    </div>
+                </div>
                 <table class="table table-bordered nowrap table-hover mt-3" id="example">
                     <thead>
                         <tr>
@@ -49,7 +66,7 @@
                         <tr>
                             <td>01</td>
                             <td>John Doe</td>
-                            <td>Male</td>
+                            <td>Female</td>
                             <td>21</td>
                             <td>
                                 <button class="btn btn-primary">View</button>
@@ -120,7 +137,7 @@
     <script>  
         new DataTable('#example', {
             responsive: true,
-            dom: 'Bfrtip',
+            dom: 'Brtip', 
             buttons: [
                 {
                     extend: 'copy',
@@ -152,8 +169,14 @@
                         doc.styles.tableBodyOdd.alignment = 'center';
                     }
                 },
-                
+                // Removed search button
             ]
+        });
+
+        $('#genderFilter').on('change', function() {
+            var filterValue = $(this).val();
+            var table = $('#example').DataTable();
+            table.column(2).search(filterValue === 'all' ? '' : filterValue, true, false).draw();
         });
     </script>
 </body>
