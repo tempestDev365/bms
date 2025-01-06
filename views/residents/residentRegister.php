@@ -285,7 +285,7 @@
                     <div class="form-contact-info row">
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="eStatus">Employment Status</label>
-                            <input type="number" name="eStatus" id="eStatus" class="form-control">
+                            <input type="text" name="eStatus" id="eStatus" class="form-control">
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
