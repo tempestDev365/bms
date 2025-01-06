@@ -42,7 +42,7 @@
                     </div>
 
                     <div class="form-group mt-3 text-center">
-                        <label>Not registered yet? <a href="#">Register Here</a></label>
+                        <label>Not registered yet? <a href="./residentRegister.php">Register Here</a></label>
                     </div>
 
                 </form>
