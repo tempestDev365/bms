@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resident Login</title>
-    <link rel="shortcut icon" href="../assets/img/logo-125.png" type="image/x-icon">
-    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="shortcut icon" href="../../assets/img/logo-125.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../assets/css/main.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
@@ -13,7 +13,7 @@
     <div class="login-page d-flex justify-content-center align-items-center p-3" style="min-height: 100vh; min-width: 100%; background-color: #2D3187;">
         <div class="card p-4" style="width: 40rem;">
             <div class="card-title d-flex justify-content-center align-items-center" style="gap: 5px;">
-                    <img src="../assets/img/logo-125.png" class="img-fluid" style="width: 100px;" alt="">
+                    <img src="../../assets/img/logo-125.png" class="img-fluid" style="width: 100px;" alt="">
                 <div class="card-logo">
                     <h2>Resident Login</h2>
                     <label>"Barangay Sinbanali, City of Bacoor"</label>

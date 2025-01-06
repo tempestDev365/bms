@@ -20,7 +20,7 @@ if(isset($_SESSION['admin'])) {
         <div class="card p-4" style="width: 40rem;">
             <div class="card-title d-flex justify-content-center align-items-center" style="gap: 5px;">
                     <img src="../../assets/img/logo-125.png" class="img-fluid" style="width: 100px;" alt="">
-                <div class="card-logo">s
+                <div class="card-logo">
                     <h2>Login</h2>
                     <label>"Barangay Sinbanali, City of Bacoor"</label>
                 </div>
