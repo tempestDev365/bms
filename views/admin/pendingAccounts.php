@@ -165,7 +165,7 @@
     <script>  
         new DataTable('#example', {
             responsive: true,
-            dom: 'Brtip', 
+            dom: 'Bfrtip', // Added 'f' for search functionality
             buttons: [
                 {
                     extend: 'copy',
