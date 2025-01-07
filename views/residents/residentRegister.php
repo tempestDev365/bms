@@ -1,3 +1,9 @@
+<?php
+if(!isset($_SESSION['resident_id'])) { 
+    header('Location: residentLogin.php'); 
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +22,7 @@
                 <h1>Register Account</h1>
             </div>  
             <div class="register-body">
-                <form action="#">
+                <form >
 
                 <h5 class="text-center">Personal Information</h5>
                 <hr>
@@ -44,7 +50,19 @@
                             <input type="file" name="validId" id="validId" class="form-control">
                         </div>
                     </div>
-
+                    <!--Login Information-->
+                <h5 class="text-center">Login Information</h5>
+                 <div class="form-personal-info row mt-3">
+                    <div class="form-group mt-2 col-sm-12 col-md-4">
+                            <label for="Username">Username</label>
+                            <input type="text" name="Username" id="Username" class="form-control">
+                        </div>
+                        <div class="form-group mt-2 col-sm-12 col-md-4">
+                            <label for="Password">Password</label>
+                            <input type="password" name="Password" id="Password" class="form-control">
+                        </div>
+                 </div>
+                <hr>
                     <!--Personal Information-->
                     <div class="form-personal-info row mt-3">
                         <div class="form-group mt-2 col-sm-12 col-md-4">
@@ -78,8 +96,8 @@
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
-                            <label for="salutation">Sex</label>
-                            <input type="text" name="" id="salutation" class="form-control">
+                            <label for="sex">Sex</label>
+                            <input type="text" name="sex" id="sex" class="form-control">
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
@@ -131,6 +149,7 @@
                             <label for="ethnic">Precinct Number</label>
                             <input type="text" name="ethnic" id="ethnic" class="form-control">
                         </div>
+                        19
 
                         <div class="form-group mt-2 d-flex justify-content-start align-items-center col-sm-12 col-md-4" style="gap:5px;">
                             <label for="ethnic">Registered Voter</label>
@@ -244,10 +263,10 @@
                         </div>
                     </div>
 
+                    <!--Address Information-->
                     <h5 class="text-center mt-5">Address Information</h5>
                     <hr>
 
-                    <!--Family Information-->
                     <div class="form-contact-info row">
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="houseNo">House Number</label>
