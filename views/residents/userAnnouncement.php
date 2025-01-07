@@ -49,17 +49,13 @@
                             <div class="card-comments">
                                 <label class="text-primary fw-bold">testUser:</label>
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, ad ut? Odio vel numquam nobis? Itaque et, rerum voluptate voluptates quisquam ea labore sed alias. Quia temporibus culpa pariatur natus.</p>
-                                <div class="comment-actions d-flex justify-content-end align-items-center" style="flex-wrap: wrap; gap: 5px;">
-                                    <button class="btn-primary btn-sm">Edit</button>
-                                    <button class="btn-danger btn-sm">Delete</button>
-                                </div>
-
+                                
                             </div>
                         </div>
 
                         <div class="card-group-comment bg-white mt-3 p-3 rounded-3">
                             <div class="card-comments">
-                                <label class="text-primary fw-bold">testUser:</label>
+                                <label class="text-primary fw-bold">testUser2:</label>
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, ad ut? Odio vel numquam nobis? Itaque et, rerum voluptate voluptates quisquam ea labore sed alias. Quia temporibus culpa pariatur natus.</p>
                                 <div class="comment-actions d-flex justify-content-end align-items-center" style="flex-wrap: wrap; gap: 5px;">
                                     <button class="btn-primary btn-sm">Edit</button>

@@ -30,6 +30,76 @@
                 </button>
             </div>
 
+            <div class="container-fluid">
+                <h2>Document Request</h2>
+
+                <div class="container-fluid p-3 rounded-3 bg-white shadow-sm border">
+                    <form action="">
+                        <div class="form-group">
+                            <label>SELECT TYPE OF DOCUMENT</label>
+                            <select name="selectDocument" id="selectDocument" class="form-control">
+                                <option value="value">Barangay Certificate</option>
+                                <option value="value">Barangay Indigency</option>
+                                <option value="value">Barangay Clearance</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <label>PURPOSE OF REQUEST</label>
+                            <textarea name="purpose" id="purpose" class="form-control" rows="3"></textarea>
+                        </div>
+
+                        <div class="form-group d-flex justify-content-end">
+                            <input type="submit" value="Submit Request" class="btn btn-primary btn-sm mt-3">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="container-fluid p-3 rounded-3 bg-white mt-3 shadow-sm border">
+                    <label>REQUEST TRACKER</label>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Tracking Number(TRN)</th>
+                                <th>Document Type</th>
+                                <th>Date Of Request</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    0231
+                                </td>
+                                <td>
+                                    Barangay Certificate
+                                </td>
+                                <td>
+                                    07/01/2021
+                                </td>
+                                <td>
+                                    <span class="badge bg-success">Approved</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    2321
+                                </td>
+                                <td>
+                                    Barangay Indigency
+                                </td>
+                                <td>
+                                    07/01/2021
+                                </td>
+                                <td>
+                                    <span class="badge bg-danger">Rejected</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
        
 
         </main>

@@ -30,11 +30,38 @@
                 </button>
             </div>
 
-            <div class="id-section mt-3">
-                <div class="container-id p-3 d-flex justify-content-center" style="gap: 1rem; flex-wrap: wrap;">
-                    <div class="card shadow-sm" style="flex: 1 1 300px; min-height: 300px">Profile</div>
-                    <div class="card shadow-sm" style="flex: 1 1 300px; min-height: 300px">Signature</div>
-                    <div class="card shadow-sm" style="flex: 1 1 300px; min-height: 300px">Valid ID</div>
+            <div class="section-title px-3">
+                <h2>User Profile</h2>
+            </div>
+
+            <div class="id-section">
+                <div class="container-id px-3 d-flex justify-content-center" style="gap: 1rem; flex-wrap: wrap;">
+                    <div class="card shadow-sm p-3" style="flex: 1 1 300px; min-height: 300px">
+                        <div class="display-img border" style="height: 200px;">
+                            <!-- Display Image -->
+                        </div>
+                        <div class="display-img-label mt-2 fw-bold text-center">
+                            <p>PROFILE</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card shadow-sm p-3" style="flex: 1 1 300px; min-height: 300px">
+                        <div class="display-img border" style="height: 200px;">
+                            <!-- Display Image -->
+                        </div>
+                        <div class="display-img-label mt-2 fw-bold text-center">
+                            <p>SIGNATURE</p>
+                        </div>
+                    </div>
+
+                    <div class="card shadow-sm p-3" style="flex: 1 1 300px; min-height: 300px">
+                        <div class="display-img border" style="height: 200px;">
+                            <!-- Display Image -->
+                        </div>
+                        <div class="display-img-label mt-2 fw-bold text-center">
+                            <p>VALID ID</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 

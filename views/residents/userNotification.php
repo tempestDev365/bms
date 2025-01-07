@@ -30,6 +30,30 @@
                 </button>
             </div>
 
+            <div class="container-fluid p-3">
+                <h2>Notifications</h2>
+
+                <div class="notification-container p-3" style="gap: 5px;">
+                    <div class="alert alert-secondary">
+                        You successfully request <strong>Barangay Clearance</strong> with <strong>TRN-0231</strong>.
+                    </div> 
+
+                    <div class="alert alert-secondary">
+                        <strong>Approved! </strong> Your document with <strong>TRN-0231</strong>  is ready to pickup.
+                    </div> 
+                    
+
+                    <div class="alert alert-secondary">
+                        You successfully request <strong>Barangay Clearance</strong> with <strong>TRN-2321</strong>.
+                    </div> 
+
+                    <div class="alert alert-secondary">
+                        <strong>Rejected!</strong> Sorry, but your document with request <strong>TRN-2321</strong> is not valid .
+                    </div> 
+                </div>
+
+            </div>
+
        
 
         </main>
