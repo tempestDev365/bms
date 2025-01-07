@@ -16,16 +16,16 @@ if (residentSidebar) {
         <div class="sidebar-nav mt-3">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a href="" class="nav-link text-white">Profile</a>
+                    <a href="./userResident.php" class="nav-link text-white">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link text-white">Announcement</a>
+                    <a href="./userAnnouncement.php" class="nav-link text-white">Announcement</a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link text-white">Document Request</a>
+                    <a href="./userDocument.php" class="nav-link text-white">Document Request</a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link text-white">Notification</a>
+                    <a href="./userNotification.php" class="nav-link text-white">Notification</a>
                 </li>
                 <li class="nav-item">
                     <a href="" class="nav-link text-white">Logout</a>
