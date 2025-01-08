@@ -31,7 +31,7 @@
                             <div class="box border rounded-3 w-100 d-flex justify-content-center align-items-center" style="min-height: 200px; min-width: 200px;">
                                 Picture
                             </div>
-                            <input type="file" name="icture" id="picture" class="form-control">
+                            <input type="file" name="picture" id="picture" class="form-control">
                         </div>
 
                         <div class="form-group d-flex flex-column align-items-center justify-content-center img-fluid" style="gap: 1rem;">
@@ -129,8 +129,8 @@
                         </div>
                         
                         <div class="form-group mt-2 col-sm-12 col-md-4">
-                            <label for="weight">Religion</label>
-                            <input type="text" name="weight" id="weight" class="form-control">
+                            <label for="religion">Religion</label>
+                            <input type="text" name="religion" id="religion" class="form-control">
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">

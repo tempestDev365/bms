@@ -5,9 +5,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $current_date = date("Y-m-d H:i:s");
 
    
-    $picture = $_POST['picture'];
-    $signature = $_POST['signature'];
-    $valid_id = $_POST['validId'];
+    $picture = isset($_FILES['picture']['tmp_name']) ? base64_encode("data:image/jpg;base64,". $_FILES['picture']['tmp_name']) : null;
+    $signature = isset($_FILES['signature']['tmp_name']) ? base64_encode("data:image/jpg;base64, ". $_FILES['signature']['tmp_name']) : null;
+    $valid_id = isset($_FILES['validId']['tmp_name']) ? base64_encode("data:image/png;base64,". $_FILES['validId']['tmp_name']) : null;
     $username = $_POST['Username'];
     $password = $_POST['Password'];
     $first_name = $_POST['firstName'];
