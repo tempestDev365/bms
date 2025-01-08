@@ -1,19 +1,9 @@
-<?php
-session_start();
-if(!isset($_SESSION['id'])){
-    header('location: ./residentLogin.php');
-}
-include_once "../../controllers/getAllResidentInformationController.php";
-$user_resident = getAllResidentInformation($_SESSION['id']);
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
+    <title>Brgy. Sinabanali</title>
     <link rel="shortcut icon" href="../../assets/img/logo-125.png" type="image/x-icon">
     <link rel="stylesheet" href="../../assets/css/main.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -40,38 +30,11 @@ $user_resident = getAllResidentInformation($_SESSION['id']);
                 </button>
             </div>
 
-            <div class="section-title px-3">
-                <h2>User Profile</h2>
-            </div>
-
-            <div class="id-section">
-                <div class="container-id px-3 d-flex justify-content-center" style="gap: 1rem; flex-wrap: wrap;">
-                    <div class="card shadow-sm p-3" style="flex: 1 1 300px; min-height: 300px">
-                        <div class="display-img border" style="height: 200px;">
-                            <!-- Display Image -->
-                        </div>
-                        <div class="display-img-label mt-2 fw-bold text-center">
-                            <p>PROFILE</p>
-                        </div>
-                    </div>
-                    
-                    <div class="card shadow-sm p-3" style="flex: 1 1 300px; min-height: 300px">
-                        <div class="display-img border" style="height: 200px;">
-                            <!-- Display Image -->
-                        </div>
-                        <div class="display-img-label mt-2 fw-bold text-center">
-                            <p>SIGNATURE</p>
-                        </div>
-                    </div>
-
-                    <div class="card shadow-sm p-3" style="flex: 1 1 300px; min-height: 300px">
-                        <div class="display-img border" style="height: 200px;">
-                            <!-- Display Image -->
-                        </div>
-                        <div class="display-img-label mt-2 fw-bold text-center">
-                            <p>VALID ID</p>
-                        </div>
-                    </div>
+            <div class="id-section mt-3">
+                <div class="container-id p-3 d-flex justify-content-center" style="gap: 1rem; flex-wrap: wrap;">
+                    <div class="card shadow-sm" style="flex: 1 1 300px; min-height: 300px">Profile</div>
+                    <div class="card shadow-sm" style="flex: 1 1 300px; min-height: 300px">Signature</div>
+                    <div class="card shadow-sm" style="flex: 1 1 300px; min-height: 300px">Valid ID</div>
                 </div>
             </div>
 

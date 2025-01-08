@@ -19,7 +19,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item active" aria-current="page">BMS</li>
-                  <li class="breadcrumb-item"><a href="./issuedClearance.html" class="text-dark">Blotter Case</a></li>
+                  <li class="breadcrumb-item"><a href="./issuedClearance.html" class="text-dark">Add Resident</a></li>
                 </ol>
               </nav>
               

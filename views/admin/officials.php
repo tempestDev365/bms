@@ -24,7 +24,7 @@
            
         </div>
 
-        <div class="admin-content flex-grow-1 p-4 bg-light">
+        <div class="admin-content flex-grow-1 p-4 bg-light" style="max-height: 100vh; overflow-y: scroll">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item active" aria-current="page">BMS</li>
@@ -203,7 +203,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.colVis.min.js"></script>
-    <script src="../components/sidebar.js" defer></script>
+    <script src="../components/sidebar.js?v=<?php echo time(); ?>" defer></script>
     <script>  
         new DataTable('#example', {
             responsive: true,

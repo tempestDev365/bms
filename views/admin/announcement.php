@@ -32,7 +32,7 @@ $announcements = getAllAnnouncement();
            
         </div>
 
-        <div class="admin-content flex-grow-1 p-4 bg-light">
+        <div class="admin-content flex-grow-1 p-4 bg-light" style="max-height: 100vh; overflow-y: scroll">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item active" aria-current="page">BMS</li>
@@ -121,7 +121,7 @@ $announcements = getAllAnnouncement();
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="../components/sidebar.js" defer></script>
+    <script src="../components/sidebar.js?v=<?php echo time(); ?>" defer></script>
   <script>
     const deleteBtn = document.querySelectorAll('#delete');  
    deleteBtn.forEach(btn =>{
