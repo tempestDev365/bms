@@ -1,3 +1,20 @@
+<?php
+include_once "../database/databaseConnection.php";
+
+session_start();
+if(!isset($_SESSION['id'])){
+    header('location: ./residentLogin.php');
+}
+function getAllAnnouncement(){
+    $conn = $GLOBALS['conn'];
+    $qry = "SELECT * FROM announcement_tbl";
+    $result = $conn->prepare($qry);
+    $result->execute();
+    $announcement = $result->fetchAll(PDO::FETCH_ASSOC);
+    return $announcement;
+}
+$announcements = getAllAnnouncement();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

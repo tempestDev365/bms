@@ -3,7 +3,8 @@ session_start();
 if(!isset($_SESSION['id'])){
     header('location: ./residentLogin.php');
 }
-
+include_once "../../controllers/getAllResidentInformationController.php";
+$user_resident = getAllResidentInformation($_SESSION['id']);
 ?>
 
 

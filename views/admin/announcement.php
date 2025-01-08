@@ -1,8 +1,18 @@
 <?php
 session_start();
+include_once "../../database/databaseConnection.php";
 if(!isset($_SESSION['admin'])) {
     header('Location: adminLogin.php');
 }
+function getAllAnnouncement(){
+    $conn = $GLOBALS['conn'];
+    $qry = "SELECT * FROM announcement_tbl";
+    $result = $conn->prepare($qry);
+    $result->execute();
+    $announcement = $result->fetchAll(PDO::FETCH_ASSOC);
+    return $announcement;
+}
+$announcements = getAllAnnouncement();
 ?>
 
 <!DOCTYPE html>
@@ -53,13 +63,15 @@ if(!isset($_SESSION['admin'])) {
                 <div class="h2">Preview</div>
 
                 <!--comments container-->
-                <div class="card mt-2">
+                <?php
+                foreach($announcements as $announcement){
+                    echo '<div class="card mt-2">
                     <div class="card-header h5">
-                        test
+                        '.$announcement['title'].'
                     </div>
                     <div class="card-body">
                         <div class="card-content">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis maiores nesciunt soluta, ipsam ullam obcaecati dolores impedit voluptates! Culpa iure unde distinctio dolor tempore quasi aut repudiandae eius libero quia!
+                           '.$announcement['content'].'
                         </div>
 
                         <div class="card-comments mt-3">
@@ -87,49 +99,14 @@ if(!isset($_SESSION['admin'])) {
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn-secondary btn-sm">Edit</button>
-                        <button class="btn btn-danger btn-sm">Delete</button>
+                        <button class="btn btn-secondary btn-sm" id = "edit" name ="'.$announcement['id'].'">Edit</button>
+                        <button class="btn btn-danger btn-sm" id = "delete" name ="'.$announcement['id'].'" >Delete</button>
                     </div>
-                </div>
+                </div>';
+                }
+                ?>
 
-                <div class="card mt-2">
-                    <div class="card-header h5">
-                        test 2
-                    </div>
-                    <div class="card-body">
-                        <div class="card-content">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis maiores nesciunt soluta, ipsam ullam obcaecati dolores impedit voluptates! Culpa iure unde distinctio dolor tempore quasi aut repudiandae eius libero quia!
-                        </div>
-
-                        <div class="card-comments mt-3">
-                            <label class="fw-bold">Comments:</label>
-                            
-                            <div class="comments mt-2" style="font-size: 0.8rem;">
-                                <div class="username">
-                                    - John Doe
-                                </div>
-                                <div class="user-messages">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum qui, corporis assumenda facilis nemo tenetur dolorum dolores, magni autem odit similique incidunt. Fugit recusandae expedita voluptatum voluptas earum! Doloribus, reiciendis?
-                                </div>
-                            </div>
-
-                            <div class="comments mt-2" style="font-size: 0.8rem;">
-                                <div class="username">
-                                    - Eren Yeager
-                                </div>
-                                <div class="user-messages">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum qui, corporis assumenda facilis nemo tenetur dolorum dolores, magni autem odit similique incidunt. Fugit recusandae expedita voluptatum voluptas earum! Doloribus, reiciendis?
-                                </div>
-                            </div>
-                          
-                           
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <button class="btn btn-secondary btn-sm">Edit</button>
-                        <button class="btn btn-danger btn-sm">Delete</button>
-                    </div>
-                </div>
+           
 
                 <!--/comments container-->
 
@@ -145,6 +122,21 @@ if(!isset($_SESSION['admin'])) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="../components/sidebar.js" defer></script>
-
+  <script>
+    const deleteBtn = document.querySelectorAll('#delete');  
+   deleteBtn.forEach(btn =>{
+    btn.addEventListener('click', async (e) => {
+      try {
+        const id = e.target.name
+        const resposne = await fetch(`../../controllers/editDeleteAnnouncementController.php?id=${id}&action=delete`)
+        if(resposne.ok){
+          location.reload()
+        }
+      }catch(error){
+        console.log(error)
+      }
+    })
+   })
+  </script>
 </body>
 </html>

@@ -15,7 +15,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['admin'] = $result;
         header('Location: ../views/admin/main.php');    
     } else {
-        echo 'Invalid username or password';
+        header('Location: ../views/admin/adminLogin.php?error=1');
+       return;
     }
 }
 ?>
