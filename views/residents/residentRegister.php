@@ -1,7 +1,5 @@
 <?php
-if(!isset($_SESSION['resident_id'])) { 
-    header('Location: residentLogin.php'); 
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +20,7 @@ if(!isset($_SESSION['resident_id'])) {
                 <h1>Register Account</h1>
             </div>  
             <div class="register-body">
-                <form >
+                <form action="../../controllers/residentRegisterController.php" method = "POST" enctype="multipart/form-data">
 
                 <h5 class="text-center">Personal Information</h5>
                 <hr>
@@ -33,7 +31,7 @@ if(!isset($_SESSION['resident_id'])) {
                             <div class="box border rounded-3 w-100 d-flex justify-content-center align-items-center" style="min-height: 200px; min-width: 200px;">
                                 Picture
                             </div>
-                            <input type="file" name="picture" id="picture" class="form-control">
+                            <input type="file" name="icture" id="picture" class="form-control">
                         </div>
 
                         <div class="form-group d-flex flex-column align-items-center justify-content-center img-fluid" style="gap: 1rem;">
@@ -126,8 +124,8 @@ if(!isset($_SESSION['resident_id'])) {
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
-                            <label for="weight">Blood Type</label>
-                            <input type="text" name="weight" id="weight" class="form-control">
+                            <label for="bloodType">Blood Type</label>
+                            <input type="text" name="bloodType" id="bloodType" class="form-control">
                         </div>
                         
                         <div class="form-group mt-2 col-sm-12 col-md-4">
@@ -141,19 +139,19 @@ if(!isset($_SESSION['resident_id'])) {
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
-                            <label for="ethnic">Nationality</label>
-                            <input type="text" name="ethnic" id="ethnic" class="form-control">
+                            <label for="nationality">Nationality</label>
+                            <input type="text" name="nationality" id="nationality" class="form-control">
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
-                            <label for="ethnic">Precinct Number</label>
-                            <input type="text" name="ethnic" id="ethnic" class="form-control">
+                            <label for="precint">Precinct Number</label>
+                            <input type="text" name="precint" id="precint" class="form-control">
                         </div>
-                        19
+                        
 
                         <div class="form-group mt-2 d-flex justify-content-start align-items-center col-sm-12 col-md-4" style="gap:5px;">
-                            <label for="ethnic">Registered Voter</label>
-                            <input type="checkbox" name="ethnic" id="ethnic">
+                            <label for="voter">Registered Voter</label>
+                            <input type="checkbox" name="voter" id="voter">
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-2">
@@ -162,37 +160,37 @@ if(!isset($_SESSION['resident_id'])) {
 
 
                         <div class="form-group mt-2 col-md-12 col-lg-1 d-flex justfy-content-center align-items-center" style="gap: 5px;">
-                            <input type="checkbox" name="4p" id="4p">
+                            <input type="checkbox" name="orgMember[]" id="4p">
                             <label for="4p">4P's</label>
                         </div>
 
                         <div class="form-group mt-2 col-md-12 col-lg-1 d-flex justfy-content-center align-items-center" style="gap: 5px;">
-                            <input type="checkbox" name="pwd" id="pwd">
+                            <input type="checkbox" name="orgMember[]" id="pwd">
                             <label for="pwd">PWD</label>
                         </div>
 
                         <div class="form-group mt-2 col-md-12 col-lg-1 d-flex justfy-content-center align-items-center" style="gap: 5px;">
-                            <input type="checkbox" name="senior" id="senior">
+                            <input type="checkbox" name="orgMember[]" id="senior">
                             <label for="senior">Senior</label>
                         </div>
 
                         <div class="form-group mt-2 col-md-12 col-lg-2 d-flex justfy-content-center align-items-center" style="gap: 5px;">
-                            <input type="checkbox" name="soloParent" id="soloParent">
+                            <input type="checkbox" name="orgMember[]" id="soloParent">
                             <label for="soloParent">Solo Parent</label>
                         </div>
 
                         <div class="form-group mt-2 col-md-12 col-lg-1 d-flex justfy-content-center align-items-center" style="gap: 5px;">
-                            <input type="checkbox" name="hoa" id="hoa">
+                            <input type="checkbox" name="orgMember[]" id="hoa">
                             <label for="hoa">HOA</label>
                         </div>
 
                         <div class="form-group mt-2 col-md-12 col-lg-1 d-flex justfy-content-center align-items-center" style="gap: 5px;">
-                            <input type="checkbox" name="cso" id="cso">
+                            <input type="checkbox" name="orgMember[]" id="cso">
                             <label for="cso">CSO</label>
                         </div>
 
                         <div class="form-group mt-2 col-md-12 col-lg-1 d-flex justfy-content-center align-items-center" style="gap: 5px;">
-                            <input type="checkbox" name="ngo" id="ngo">
+                            <input type="checkbox" name="orgMember[]" id="ngo">
                             <label for="ngo">NGO</label>
                         </div>
                         
