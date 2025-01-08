@@ -71,7 +71,8 @@ if(!isset($_SESSION['admin'])) {
                             <td>Rejected</td>
                             <th>10/17/2024</th>
                             <td>
-                                <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#viewProfile">View</button>
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#viewProfile">View</button>
+                                <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#selectDocument">Certificate</button>
                             </td>
                         </tr>
                         <tr>
@@ -81,7 +82,8 @@ if(!isset($_SESSION['admin'])) {
                             <td>Rejected</td>
                             <th>10/17/2024</th>
                             <td>
-                                <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#viewProfile">View</button>
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#viewProfile">View</button>
+                                <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#selectDocument">Certificate</button>
                             </td>
                         </tr>                        
                     </tbody>
@@ -123,6 +125,42 @@ if(!isset($_SESSION['admin'])) {
                       
                     </div>
                     
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!--modal for resident certificate-->
+    <div class="modal" id="selectDocument">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Select Document</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <label for="selectDocument">Select type of documents</label>
+                    <select name="selectDocument" id="selectDocument" class="form-control">
+                        <option value="CLEARANCE">BARANGAY CLEARANCE</option>
+                        <option value="CERTIFICATE">BARANGAY CERTIFICATE</option>
+                        <option value="INDIGENCY">BARANGAY INDIGENCY</option>
+                        <option value="D.CERTIFICATE">BARANGAY DEATH CERTIFICATE</option>
+                        <option value="RESIDENT">CERTIFICATE FOR RESIDENT</option>
+                        <option value="NON-RESIDENT">CERTIFICATE FOR NON RESIDENT</option>
+                        <option value="B.PERMIT">CERTIFICATE FOR BUSINESS PERMIT</option>
+                        <option value="GUARDIANSHIP">CERTIFICATE FOR GUARDIANSHIP </option>
+                        <option value="DISASTER">CERTIFICATE FOR DISASTER</option>
+                        <option value="RELATIONSHIP">CERTIFICATE FOR RELATIONSHIP</option>
+                        <option value="J.SEEKER">CERTIFICATE FOR FIRST TIME JOB SEEKER</option>
+                        <option value="N.INCOME">CERTIFICATE FOR NO SOURCE OF INCOME</option>
+                        <option value="S,P.CERTIFICATE">SINGLE PARENT CERTIFICATE</option>
+                    </select>
+
+                    <div class="actions d-flex p-3 justify-content-end" style="gap: 5px;">
+                        <button class="btn btn-success btn-sm">PRINT</button>
+                        <button class="btn btn-danger btn-sm">CANCEL</button>
+                    </div>
                 </div>
             </div>
         </div>

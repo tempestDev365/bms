@@ -106,41 +106,93 @@
     </div>
     
 
-    <!--MODAL FOR VIEW-->
-    <div class="modal" id="viewProfile">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
+     <!-- modal for resident details-->
+     <div class="modal" id="viewProfile">
+        <div class="modal-dialog modal-fullscreen">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Profile Information</h5>
+                    <h5 class="modal-title">Resident Details</h5>
                     <button class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
+
                 <div class="modal-body">
-                    <div class="container-fluid d-flex justify-content-evenly align-items-center" style="gap: 1rem;">
-                        <div class="img-group d-flex flex-column align-items-center">
-                            <img src="../../assets/img/sampleProfile/profile.png" class="img-fluid" alt="profile" style="width: 200px">
-                            <label>Picture</label>
-                        </div>
-                        <div class="img-group d-flex flex-column align-items-center">
-                            <img src="../../assets/img/sampleProfile/signature.png" class="img-fluid" alt="signature" style="width: 200px">
-                            <label>Signature</label>
-                        </div>
-                        <div class="img-group d-flex flex-column align-items-center">
-                            <img src="../../assets/img/sampleProfile/card.png" class="img-fluid" alt="id" style="width: 200px">
-                            <label>Valid ID</label>
-                        </div>
-
+                
+                    <div class="container-id p-3 d-flex justify-content-center" style="gap: 1rem; flex-wrap: wrap;">
+                        <div class="card shadow-sm" style="flex: 1 1 300px; min-height: 300px">Profile</div>
+                        <div class="card shadow-sm" style="flex: 1 1 300px; min-height: 300px">Signature</div>
+                        <div class="card shadow-sm" style="flex: 1 1 300px; min-height: 300px">Valid ID</div>
                     </div>
-                    <div class="container-fluid mt-3">
-                            <p>Name:</p>
-                            <p>Age:</p>
-                            <p>Birth Date:</p>
-                            <p>Mobile:</p>
-                            <p>Status</p>
-                            <p>Organization:</p>
+                    <div class="box-body row">
+                            <div class="personal-info col-md-12 col-lg-4 d-flex flex-column" style="gap: 5px;">
+                                <div class="box-header">
+                                    <h4>Personal Information</h4>
+                                </div>
+                                    <label>Full Name:</label>
+                                    <label>Sex:</label>
+                                    <label>Birthdate:</label>
+                                    <label>Birthplace:</label>
+                                    <label>Civil Status:</label>
+                                    <label>Height:</label>
+                                    <label>Weight:</label>
+                                    <label>Blood Type:</label>
+                                    <label>Religion:</label>
+                                    <label>Ethnic Origin:</label>
+                                    <label>Nationality:</label>
+                                    <label>Precinct Number:</label>
+                                    <label>Registered Voter:</label>
+                                    <label>Organization Member:</label>
+                            </div>
+                            <div class="other-info col-md-12 col-lg-4 d-flex flex-column" style="gap: 5px;">
+                                <div class="contact-header">
+                                    <h4>Contact Information</h4>
+                                </div>
+                                    <label>Email:</label>
+                                    <label>Mobile Number:</label>
+                                    <label>Tel No:</label>
+                                <div class="contact-header">
+                                    <h4>Incase of Emergency</h4>
+                                </div>
+                                    <label>Fullname</label>
+                                    <label>Contact Number:</label>
+                                    <label>Address:</label>
+                                <div class="contact-header">
+                                    <h4>Family Information</h4>
+                                </div>
+                                    <label>Mother:</label>
+                                    <label>Father:</label>
+                                    <label>Spouse:</label>
+                                <div class="contact-header">
+                                    <h4>Educational Information:</h4>
+                                </div>
+                                    <label>Highest Education Attainment:</label>
+                                    <label>Type of School:</label>
+                            
+                            </div>
 
+                            <div class="other-info-2 col-md-12 col-lg-4 d-flex flex-column" style="gap: 5px;">
+                                <div class="contact-header">
+                                    <h4>Address Information</h4>
+                                </div>
+                                    <label>House Number:</label>
+                                    <label>Purok:</label>
+                                    <label>Full Address:</label>
+                                    <label>Street:</label>
+                                    <label>Hoa:</label>
+                                <div class="contact-header">
+                                    <h4>Employment Information:</h4>
+                                </div>
+                                    <label>Employment Status:</label>
+                                    <label>Employment Field:</label>
+                                    <label>Occupation:</label>
+                                    <label>Monthly Income:</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-actions d-flex justify-content-end p-3" style="gap: 5px;">
+                        
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 
