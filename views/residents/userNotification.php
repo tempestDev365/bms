@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(!isset($_SESSION['resident_id'])) {
+    header('Location: ./residentLogin.php');
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -1,3 +1,11 @@
+<?php
+session_start();
+include('../../controllers/getAllResidentInformationController.php');
+if(!isset($_SESSION['resident_id'])) {
+    header('Location: ./residentLogin.php');
+}
+$resident_information = getAllResidentInformation($_SESSION['resident_id']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

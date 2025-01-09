@@ -36,7 +36,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     insertIntoResidentAddressTable($resident_id);
     insertIntoResidentEmploymentTable($resident_id);
     echo "<script>alert('Resident has been registered')</script>";
-    header('Location: ../views/admin/residentLogin?success=1.php');
+    header('Location: ../views/residents/residentLogin.php?success=1');
      }catch (PDOException $e){
         echo $e->getMessage();
         echo "<script>alert('An error has occured')</script>";

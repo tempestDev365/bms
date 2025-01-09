@@ -2,8 +2,8 @@
 include_once "../database/databaseConnection.php";
 
 session_start();
-if(!isset($_SESSION['id'])){
-    header('location: ./residentLogin.php');
+if(!isset($_SESSION['resident_id'])) {
+    header('Location: ./residentLogin.php');
 }
 function getAllAnnouncement(){
     $conn = $GLOBALS['conn'];
