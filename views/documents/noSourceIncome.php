@@ -87,7 +87,9 @@
 
                 <div class="a4-main-content text-secondary text-center py-3"style="flex-grow: 1;">
                     <label style="font-size: 1.7rem;">OFFICE OF PUNONG BARANGAY</label>
-                    <label style="font-size: 1.8rem;"> CERTIFICATE OF  FIRST-TIME JOB SEEKER
+                    <label style="font-size: 1.8rem;"> CERTIFICATE FOR NO SOURCE OF INCOME
+
+
 
                     </label>
 
@@ -110,7 +112,7 @@
                     <hr>
                     
                     <label style="text-align: left;" class="mx-2">
-                        This is to certify that the bearer of this document is a bona fide resident of this barangay and is applying for employment as a first-time job seeker. According to the records of this office, the individual has not been previously employed and is seeking opportunities to enter the workforce.
+                        This is to certify that the individual residing in this barangay has no current source of income as per the records and information provided. The individual has been verified to have no regular or documented earnings from employment, business, or any other means of income as of this date.
                     </label>
                     
                     
