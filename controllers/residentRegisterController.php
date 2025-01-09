@@ -2,14 +2,13 @@
 include_once '../database/databaseConnection.php';
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
-    $current_date = date("Y-m-d H:i:s");
-
-   
+    try{
+     $current_date = date("Y-m-d H:i:s");
     $picture = isset($_FILES['picture']['tmp_name']) ? base64_encode("data:image/jpg;base64,". $_FILES['picture']['tmp_name']) : null;
     $signature = isset($_FILES['signature']['tmp_name']) ? base64_encode("data:image/jpg;base64, ". $_FILES['signature']['tmp_name']) : null;
     $valid_id = isset($_FILES['validId']['tmp_name']) ? base64_encode("data:image/png;base64,". $_FILES['validId']['tmp_name']) : null;
     $username = $_POST['Username'];
-    $password = $_POST['Password'];
+    $password = password_hash($_POST['Password'], PASSWORD_DEFAULT);
     $first_name = $_POST['firstName'];
     $middle_name = $_POST['middleName'];
     $last_name = $_POST['lastName'];
@@ -33,10 +32,17 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $resident_id = $conn->lastInsertId();    
     insertIntoResidentInformationTable($resident_id);
     insertIntoResidentFamiltyTable($resident_id);
-    insertIntoResidentCredsTable($resident_id);
     insertIntoResidentContactsTable($resident_id);
     insertIntoResidentAddressTable($resident_id);
     insertIntoResidentEmploymentTable($resident_id);
+    echo "<script>alert('Resident has been registered')</script>";
+    header('Location: ../views/admin/residentLogin?success=1.php');
+     }catch (PDOException $e){
+        echo $e->getMessage();
+        echo "<script>alert('An error has occured')</script>";
+        header('Location: ../views/admin/residentRegister.php');
+
+    }
 }
 function insertIntoResidentInformationTable($id){
     $current_date = date("Y-m-d H:i:s");
@@ -54,28 +60,29 @@ function insertIntoResidentInformationTable($id){
     $nationality = $_POST['nationality'];
     $precint_number = $_POST['precint'];
     $resident_id = $id; 
-    $registered_voter = isset($_POST['registeredVoter']) ? 1 : 0;
+    $registered_voter = isset($_POST['voter']) ? 1 : 0;
     $organization_member = isset($_POST['orgMember']) ? $_POST['orgMember'] : [];
     $org_member = implode(", ", $organization_member);
+    print_r($org_member);
     $qry = "INSERT INTO `resident_information`(`resident_id`, `salutation`, `sex`, `birthdate`, `birthplace`, `civil_status`, `height`, `weight`, `blood_type`, `religion`, `ethnic_origin`, `nationality`, `precint_number`, `registered_voter`, `organization_member`, `time_Created`) 
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     $result = $conn->prepare($qry);
-    $result->bindParam(2, $resident_id, PDO::PARAM_INT);
-    $result->bindParam(3, $salutation, PDO::PARAM_STR);
-    $result->bindParam(4, $sex, PDO::PARAM_STR);
-    $result->bindParam(5, $birthdate, PDO::PARAM_STR);
-    $result->bindParam(6, $birthplace, PDO::PARAM_STR);
-    $result->bindParam(7, $civil_status, PDO::PARAM_STR);
-    $result->bindParam(8, $height, PDO::PARAM_STR);
-    $result->bindParam(9, $weight, PDO::PARAM_STR);
-    $result->bindParam(10, $blood_type, PDO::PARAM_STR);
-    $result->bindParam(11, $religion, PDO::PARAM_STR);
-    $result->bindParam(12, $ethnic_origin, PDO::PARAM_STR);
-    $result->bindParam(13, $nationality, PDO::PARAM_STR);
-    $result->bindParam(14, $precint_number, PDO::PARAM_STR);
-    $result->bindParam(15, $registered_voter, PDO::PARAM_INT);
-    $result->bindParam(16, $org_member, PDO::PARAM_STR);
-    $result->bindParam(17, $current_date, PDO::PARAM_STR);
+    $result->bindParam(1, $resident_id, PDO::PARAM_INT);
+    $result->bindParam(2, $salutation, PDO::PARAM_STR);
+    $result->bindParam(3, $sex, PDO::PARAM_STR);
+    $result->bindParam(4, $birthdate, PDO::PARAM_STR);
+    $result->bindParam(5, $birthplace, PDO::PARAM_STR);
+    $result->bindParam(6, $civil_status, PDO::PARAM_STR);
+    $result->bindParam(7, $height, PDO::PARAM_STR);
+    $result->bindParam(8, $weight, PDO::PARAM_STR);
+    $result->bindParam(9, $blood_type, PDO::PARAM_STR);
+    $result->bindParam(10, $religion, PDO::PARAM_STR);
+    $result->bindParam(11, $ethnic_origin, PDO::PARAM_STR);
+    $result->bindParam(12, $nationality, PDO::PARAM_STR);
+    $result->bindParam(13, $precint_number, PDO::PARAM_STR);
+    $result->bindParam(14, $registered_voter, PDO::PARAM_INT);
+    $result->bindParam(15, $org_member, PDO::PARAM_STR);
+    $result->bindParam(16, $current_date, PDO::PARAM_STR);
     $result->execute();
 }
 function insertIntoResidentFamiltyTable($id){
@@ -85,7 +92,7 @@ function insertIntoResidentFamiltyTable($id){
    $father = $_POST['father'];
    $spouse = $_POST['spouse'] ?? "";
    $current_date = date("Y-m-d H:i:s");
-   $qry = "INSERT INTO `resident_family`( `resident_id`, `mother_fullname`, `father_fullname`, `spouse_fullname`, time_Created) VALUES (?,?,?,?,?)";
+   $qry = "INSERT INTO `residents_family`( `resident_id`, `mother_fullname`, `father_fullname`, `spouse_fullname`, time_Created) VALUES (?,?,?,?,?)";
     $result = $conn->prepare($qry);
     $result->bindParam(1, $resident_id, PDO::PARAM_INT);
     $result->bindParam(2, $mother, PDO::PARAM_STR);
@@ -95,20 +102,7 @@ function insertIntoResidentFamiltyTable($id){
     $result->execute();
 
 }
-function insertIntoResidentCredsTable($id){
-    $conn = $GLOBALS['conn'];
-    $resident_id = $id;
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $current_date = date("Y-m-d H:i:s");
-    $qry = "INSERT INTO `resident_creds`(`resident_id`, `username`, `password`, `time_Created`) VALUES (?,?,?,?)";
-    $result = $conn->prepare($qry);
-    $result->bindParam(1, $resident_id, PDO::PARAM_INT);
-    $result->bindParam(2, $username, PDO::PARAM_STR);
-    $result->bindParam(3, $password, PDO::PARAM_STR);
-    $result->bindParam(4, $current_date, PDO::PARAM_STR);
-    $result->execute();
-}
+
 
 function insertIntoResidentContactsTable($id){
    $conn = $GLOBALS['conn'];
@@ -120,7 +114,7 @@ function insertIntoResidentContactsTable($id){
     $ICOE_address = $_POST['incaseAddress'];
     $resident_id = $id;
     $current_date = date("Y-m-d H:i:s");
-    $qry = "INSERT INTO `resident_address`(`resident_id`, `email`, `mobile_number`, `tel_no`, `ICOE_fullname`, `ICOE_contact_number`, `ICOE_address`, `time_Created`) 
+    $qry = "INSERT INTO `residents_contacts`(`residents_id`, `email`, `mobile_no`, `tel_no`, `ICOE_fullname`, `ICOE_contact`, `ICOE_address`, `time_Created`) 
     VALUES (?,?,?,?,?,?,?,?)";
     $result = $conn->prepare($qry);
     $result->bindParam(1, $resident_id, PDO::PARAM_INT);
@@ -142,7 +136,7 @@ function insertIntoResidentAddressTable($id){
     $hoa = $_POST['familyHoa'];
     $resident_id = $id;
     $current_date = date("Y-m-d H:i:s");
-    $qry = "INSERT INTO `resident_address`(`resident_id`, `house_number`, `street`, `purok`, `full_address`, `hoa`, `time_Created`) VALUES (?,?,?,?,?,?,?)";
+    $qry = "INSERT INTO `residents_address`(`resident_id`, `house_number`, `street`, `purok`, `full_address`, `HOA`, `time_Created`) VALUES (?,?,?,?,?,?,?)";
     $result = $conn->prepare($qry);
     $result->bindParam(1, $resident_id, PDO::PARAM_INT);
     $result->bindParam(2, $house_number, PDO::PARAM_STR);
@@ -165,7 +159,7 @@ function insertIntoResidentEmploymentTable($id){
     $type_of_school = $_POST['tSchool'];
     $resident_id = $id;
     $current_date = date("Y-m-d H:i:s");
-    $qry = "INSERT INTO `resident_employment`(`resident_id`, `employment_status`, `employment_field`, `occupation`, `monthly_income`, `highest_educational_attainment`, `type_of_school`, `time_Created`) 
+    $qry = "INSERT INTO `residents_employment`(`resident_id`, `employment_status`, `employment_field`, `occupation`, `monthly_income`, `highest_education`, `type_of_school`, `time_Created`) 
     VALUES (?,?,?,?,?,?,?,?)";
     $result = $conn->prepare($qry);
     $result->bindParam(1, $resident_id, PDO::PARAM_INT);

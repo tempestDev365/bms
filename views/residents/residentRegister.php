@@ -151,7 +151,7 @@
 
                         <div class="form-group mt-2 d-flex justify-content-start align-items-center col-sm-12 col-md-4" style="gap:5px;">
                             <label for="voter">Registered Voter</label>
-                            <input type="checkbox" name="voter" id="voter">
+                            <input type="checkbox" name="voter"  id="voter">
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-2">
@@ -160,37 +160,37 @@
 
 
                         <div class="form-group mt-2 col-md-12 col-lg-1 d-flex justfy-content-center align-items-center" style="gap: 5px;">
-                            <input type="checkbox" name="orgMember[]" id="4p">
+                            <input type="checkbox" name="orgMember[]" value = "4p" id="4p">
                             <label for="4p">4P's</label>
                         </div>
 
                         <div class="form-group mt-2 col-md-12 col-lg-1 d-flex justfy-content-center align-items-center" style="gap: 5px;">
-                            <input type="checkbox" name="orgMember[]" id="pwd">
+                            <input type="checkbox" name="orgMember[]" value="pwd" id="pwd">
                             <label for="pwd">PWD</label>
                         </div>
 
                         <div class="form-group mt-2 col-md-12 col-lg-1 d-flex justfy-content-center align-items-center" style="gap: 5px;">
-                            <input type="checkbox" name="orgMember[]" id="senior">
+                            <input type="checkbox" name="orgMember[]" value="senior" id="senior">
                             <label for="senior">Senior</label>
                         </div>
 
                         <div class="form-group mt-2 col-md-12 col-lg-2 d-flex justfy-content-center align-items-center" style="gap: 5px;">
-                            <input type="checkbox" name="orgMember[]" id="soloParent">
+                            <input type="checkbox" name="orgMember[]" value="solo_parent" id="soloParent">
                             <label for="soloParent">Solo Parent</label>
                         </div>
 
                         <div class="form-group mt-2 col-md-12 col-lg-1 d-flex justfy-content-center align-items-center" style="gap: 5px;">
-                            <input type="checkbox" name="orgMember[]" id="hoa">
+                            <input type="checkbox" name="orgMember[]" value="parent" id="hoa">
                             <label for="hoa">HOA</label>
                         </div>
 
                         <div class="form-group mt-2 col-md-12 col-lg-1 d-flex justfy-content-center align-items-center" style="gap: 5px;">
-                            <input type="checkbox" name="orgMember[]" id="cso">
+                            <input type="checkbox" name="orgMember[]" value="cso" id="cso">
                             <label for="cso">CSO</label>
                         </div>
 
                         <div class="form-group mt-2 col-md-12 col-lg-1 d-flex justfy-content-center align-items-center" style="gap: 5px;">
-                            <input type="checkbox" name="orgMember[]" id="ngo">
+                            <input type="checkbox" name="orgMember[]" value="ngo" id="ngo">
                             <label for="ngo">NGO</label>
                         </div>
                         
