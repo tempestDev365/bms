@@ -53,7 +53,7 @@
             </div>
 
             <div class="a4-main d-flex mt-4" style="gap: 10px;">
-                <div class="a4-aside-content py-3 d-flex flex-column justify-content-evenly align-items-center" style="max-width: 400px; width: 80rem; height: 800px; border: 2px solid rgb(13, 13, 159); border-radius: 20px;">
+                <div class="a4-aside-content py-3 d-flex flex-column justify-content-evenly align-items-center" style="max-width: 400px; width: 90rem; height: 800px; border: 2px solid rgb(13, 13, 159); border-radius: 20px;">
                     <label style="font-size: 1rem; font-weight: bold;" class="text-secondary">CARIDAD J. SANCHEZ</label>
                     <label style="font-size: 0.9rem; font-weight: bold;" class="text-warning">PUNONG BARANGAY</label>
                     
@@ -86,8 +86,8 @@
                 </div>
 
                 <div class="a4-main-content text-secondary text-center py-3"style="flex-grow: 1;">
-                    <label style="font-size: 1.7rem;">OFFICE OF PUNONG BARANGAY</label>
-                    <label style="font-size: 1.8rem;"> CERTIFICATE OF  FIRST-TIME JOB SEEKER
+                    <label style="font-size: 1.8rem;">OFFICE OF PUNONG BARANGAY</label>
+                    <label style="font-size: 1.8rem;">BARANGAY DEATH CERTIFICATE
 
                     </label>
 
@@ -110,10 +110,12 @@
                     <hr>
                     
                     <label style="text-align: left;" class="mx-2">
-                        This is to certify that the bearer of this document is a bona fide resident of this barangay and is applying for employment as a first-time job seeker. According to the records of this office, the individual has not been previously employed and is seeking opportunities to enter the workforce.
+                        This is to certify that the above-mentioned individual, who was a resident of this barangay, passed away on the date specified in the records.
                     </label>
                     
-                    
+                    <label class="m-2">
+                        This Barangay Certificate is issued upon request for <!--ADD THE ELEMENT TO AUTOMATE--><span style="text-decoration: underline; font-weight: bold;">PURPOSE</span>.
+                    </label>
                     <label style="text-align: left; font-weight: bold;" class="mx-2">Given this day, <!--ADD THE ELEMENT TO AUTOMATE--> <span>Oct 23, 2024.</span></label>
 
                     <div class="sign mt-3 d-flex">
