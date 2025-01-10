@@ -1,47 +1,75 @@
 <?php
 include_once '../database/databaseConnection.php';
 
+
+include_once '../database/databaseConnection.php';
+
+function resizeImage($file, $max_width, $max_height) {
+    list($width, $height) = getimagesize($file);
+    $ratio = $width / $height;
+
+    if ($max_width / $max_height > $ratio) {
+        $max_width = $max_height * $ratio;
+    } else {
+        $max_height = $max_width / $ratio;
+    }
+
+    $src = imagecreatefromstring(file_get_contents($file));
+    $dst = imagecreatetruecolor($max_width, $max_height);
+
+    imagecopyresampled($dst, $src, 0, 0, 0, 0, $max_width, $max_height, $width, $height);
+
+    ob_start();
+    imagejpeg($dst);
+    $data = ob_get_contents();
+    ob_end_clean();
+
+    imagedestroy($src);
+    imagedestroy($dst);
+
+    return $data;
+}
+
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     try{
-     $current_date = date("Y-m-d H:i:s");
-    $picture = isset($_FILES['picture']['tmp_name']) ? base64_encode("data:image/jpg;base64,". $_FILES['picture']['tmp_name']) : null;
-    $signature = isset($_FILES['signature']['tmp_name']) ? base64_encode("data:image/jpg;base64, ". $_FILES['signature']['tmp_name']) : null;
-    $valid_id = isset($_FILES['validId']['tmp_name']) ? base64_encode("data:image/png;base64,". $_FILES['validId']['tmp_name']) : null;
-    $username = $_POST['Username'];
-    $password = password_hash($_POST['Password'], PASSWORD_DEFAULT);
-    $first_name = $_POST['firstName'];
-    $middle_name = $_POST['middleName'];
-    $last_name = $_POST['lastName'];
-    $suffix = $_POST['suffix'] ?? "";
-    $alias = $_POST['alias'];
+        $current_date = date("Y-m-d H:i:s");
 
-    $insert_into_resident_tbl = "INSERT INTO residents_tbl (username, password,picture,signature,valid_id,first_name,middle_name,last_name,suffix,alias,time_Created) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-    $result = $conn->prepare($insert_into_resident_tbl);
-    $result->bindParam(1, $username, PDO::PARAM_STR);
-    $result->bindParam(2, $password, PDO::PARAM_STR);
-    $result->bindParam(3, $picture, PDO::PARAM_STR);
-    $result->bindParam(4, $signature, PDO::PARAM_STR);
-    $result->bindParam(5, $valid_id, PDO::PARAM_STR);
-    $result->bindParam(6, $first_name, PDO::PARAM_STR);
-    $result->bindParam(7, $middle_name, PDO::PARAM_STR);
-    $result->bindParam(8, $last_name, PDO::PARAM_STR);
-    $result->bindParam(9, $suffix, PDO::PARAM_STR);
-    $result->bindParam(10, $alias, PDO::PARAM_STR);
-    $result->bindParam(11, $current_date, PDO::PARAM_STR);
-    $result->execute();
-    $resident_id = $conn->lastInsertId();    
-    insertIntoResidentInformationTable($resident_id);
-    insertIntoResidentFamiltyTable($resident_id);
-    insertIntoResidentContactsTable($resident_id);
-    insertIntoResidentAddressTable($resident_id);
-    insertIntoResidentEmploymentTable($resident_id);
-    echo "<script>alert('Resident has been registered')</script>";
-    header('Location: ../views/residents/residentLogin.php?success=1');
-     }catch (PDOException $e){
-        echo $e->getMessage();
-        echo "<script>alert('An error has occured')</script>";
-        header('Location: ../views/admin/residentRegister.php');
+        $picture = isset($_FILES['picture']['tmp_name']) && !empty($_FILES['picture']['tmp_name']) ? base64_encode(resizeImage($_FILES['picture']['tmp_name'], 200, 200)) : null;
+        $signature = isset($_FILES['signature']['tmp_name']) && !empty($_FILES['signature']['tmp_name']) ? base64_encode(resizeImage($_FILES['signature']['tmp_name'], 200, 200)) : null;
+        $valid_id = isset($_FILES['validId']['tmp_name']) && !empty($_FILES['validId']['tmp_name']) ? base64_encode(resizeImage($_FILES['validId']['tmp_name'], 200, 200)) : null;
 
+        $username = $_POST['Username'];
+        $password = password_hash($_POST['Password'], PASSWORD_DEFAULT);
+        $first_name = $_POST['firstName'];
+        $middle_name = $_POST['middleName'];
+        $last_name = $_POST['lastName'];
+        $suffix = $_POST['suffix'] ?? "";
+        $alias = $_POST['alias'];
+
+        $insert_into_resident_tbl = "INSERT INTO residents_tbl (username, password, picture, signature, valid_id, first_name, middle_name, last_name, suffix, alias, time_Created) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        $result = $conn->prepare($insert_into_resident_tbl);
+        $result->bindParam(1, $username, PDO::PARAM_STR);
+        $result->bindParam(2, $password, PDO::PARAM_STR);
+        $result->bindParam(3, $picture, PDO::PARAM_STR);
+        $result->bindParam(4, $signature, PDO::PARAM_STR);
+        $result->bindParam(5, $valid_id, PDO::PARAM_STR);
+        $result->bindParam(6, $first_name, PDO::PARAM_STR);
+        $result->bindParam(7, $middle_name, PDO::PARAM_STR);
+        $result->bindParam(8, $last_name, PDO::PARAM_STR);
+        $result->bindParam(9, $suffix, PDO::PARAM_STR);
+        $result->bindParam(10, $alias, PDO::PARAM_STR);
+        $result->bindParam(11, $current_date, PDO::PARAM_STR);
+        $result->execute();
+        $resident_id = $conn->lastInsertId();    
+        insertIntoResidentInformationTable($resident_id);
+        insertIntoResidentFamiltyTable($resident_id);
+        insertIntoResidentContactsTable($resident_id);
+        insertIntoResidentAddressTable($resident_id);
+        insertIntoResidentEmploymentTable($resident_id);
+        echo "<script>alert('Resident has been registered')</script>";
+        header('Location: ../views/residents/residentLogin.php?success=1');
+    } catch (Exception $e) {
+        echo 'Error: ' . $e->getMessage();
     }
 }
 function insertIntoResidentInformationTable($id){

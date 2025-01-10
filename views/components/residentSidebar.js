@@ -4,10 +4,10 @@ let residentSidebar = document.querySelector(".resident-sidebar");
 console.log("residentSidebar element:", residentSidebar);
 
 if (residentSidebar) {
-    const logoPath = "../../assets/img/logo-125.png";
-    console.log("Setting sidebar content");
+  const logoPath = "../../assets/img/logo-125.png";
+  console.log("Setting sidebar content");
 
-    residentSidebar.innerHTML = `
+  residentSidebar.innerHTML = `
     <div class="sidebar p-3 d-flex flex-column justify-content-start align-items-start" style="min-height: 100%; min-width: 300px; gap: 5px; background-color: #2D3187;">
         <div class="sidebar-brand d-flex justify-content-start align-items-center text-white">
             <img src="${logoPath}" style="width: 50px;" alt="">
@@ -29,13 +29,12 @@ if (residentSidebar) {
                     <span class="badge bg-danger text-white">3</span>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link text-white">Logout</a>
+                    <a href="../../controllers/logoutController.php" class="nav-link text-white" >Logout</a>
                 </li>
             </ul>
         </div>
     </div>`;
-    console.log("Sidebar content set successfully");
+  console.log("Sidebar content set successfully");
 } else {
-    console.error("residentSidebar element not found");
+  console.error("residentSidebar element not found");
 }
-

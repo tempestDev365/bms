@@ -1,6 +1,5 @@
 <?php
-include_once "../database/databaseConnection.php";
-
+require_once '../../database/databaseConnection.php';
 session_start();
 if(!isset($_SESSION['resident_id'])) {
     header('Location: ./residentLogin.php');
