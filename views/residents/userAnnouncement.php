@@ -1,9 +1,11 @@
 <?php
 require_once '../../database/databaseConnection.php';
+include '../../controllers/getAllResidentInformationController.php';
 session_start();
 if(!isset($_SESSION['resident_id'])) {
     header('Location: ./residentLogin.php');
 }
+$resident_information = getAllResidentInformation($_SESSION['resident_id']);
 function getAllAnnouncement(){
     $conn = $GLOBALS['conn'];
     $qry = "SELECT * FROM announcement_tbl";
@@ -12,7 +14,18 @@ function getAllAnnouncement(){
     $announcement = $result->fetchAll(PDO::FETCH_ASSOC);
     return $announcement;
 }
+
+function getComments( $announcement_id){
+    $conn = $GLOBALS['conn'];
+    $qry = "SELECT * FROM comments_tbl WHERE announcement_id = ?";
+    $stmt = $conn->prepare($qry);
+    $stmt->bindParam(1, $announcement_id);
+    $stmt->execute();
+    $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $comments;
+}
 $announcements = getAllAnnouncement();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,46 +65,44 @@ $announcements = getAllAnnouncement();
                 <!--ANNOUNCEMENT DISPLAYED-->
                 
                 <div class="card mt-3">
-                    <div class="card-header">
-                        <p>Announcement Title</p>
+                    <?php
+                    foreach($announcements as $announcement){
+                      
+                        $comments = getComments($announcement['id']);
+                        echo "
+                        <div class='card-header'>
+                        <p>Title: {$announcement['title']}</p>
                     </div>
-                    <div class="card-body">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit sed rem laborum asperiores fuga aut corrupti adipisci id dolorem quia aspernatur recusandae, temporibus voluptate, numquam veritatis a nostrum, ad illo? Lorem ipsum dolor sit amet consectetur adipisicing elit. Error a aliquam, consequuntur cumque fugit quis ab, sunt non, facere eligendi optio veritatis accusamus autem! Ex velit corrupti sapiente sequi ipsam?
-                    </div>
-                    <div class="card-footer" style="overflow-y: scroll; max-height: 300px;">
-
-                        <!--COMMENT DISPLAYED-->
-                        <div class="card-group-comment bg-white mt-3 p-3 rounded-3">
-                            <div class="card-comments">
-                                <label class="text-primary fw-bold">testUser:</label>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, ad ut? Odio vel numquam nobis? Itaque et, rerum voluptate voluptates quisquam ea labore sed alias. Quia temporibus culpa pariatur natus.</p>
-                                
+                    <div class='card-body'>
+                        <p>Content:{$announcement['content']}</p>
+                    </div>";
+                     
+                    foreach($comments as $comment){
+                        if($comment['announcement_id'] == $announcement['id']){
+                            echo "
+                            <div class='card-footer'>
+                            <p>Comment: {$comment['comment']}</p>
+                        </div>";
+                       
+                        }else{
+                            echo "<p>No comments</p>";
+                        }
+                    }
+                    echo"
+                         <form action='../../controllers/addCommentsController.php' method = 'POST'>
+                            <div class='card-input-comments mt-3'>
+                                <textarea name='comment' id='comment' placeholder='Comment as {$resident_information['resident_fullname']}' class='form-control'></textarea>
+                                <input type='hidden' name='announcement_id' value='{$announcement['id']}'>
                             </div>
-                        </div>
-
-                        <div class="card-group-comment bg-white mt-3 p-3 rounded-3">
-                            <div class="card-comments">
-                                <label class="text-primary fw-bold">testUser2:</label>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, ad ut? Odio vel numquam nobis? Itaque et, rerum voluptate voluptates quisquam ea labore sed alias. Quia temporibus culpa pariatur natus.</p>
-                                <div class="comment-actions d-flex justify-content-end align-items-center" style="flex-wrap: wrap; gap: 5px;">
-                                    <button class="btn-primary btn-sm">Edit</button>
-                                    <button class="btn-danger btn-sm">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--COMMENT INPUT-->
-
-                        <form action="">
-                            <div class="card-input-comments mt-3">
-                                <textarea name="comment" id="comment" placeholder="Comment as testUser" class="form-control"></textarea>
-                            </div>
-                            <div class="comment-input-action mt-2 d-flex justify-content-end">
-                                <input type="submit" value="Comment" class="btn btn-secondary btn-sm">
+                            <div class='comment-input-action mt-2 d-flex justify-content-end'>
+                                <input type='submit' value='Comment' class='btn btn-secondary btn-sm'>
                             </div>
                         </form>
-
-                    </div>
+                        "
+                        ;
+                    }
+                     
+                    ?>
                 </div>
 
 
