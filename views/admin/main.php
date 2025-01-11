@@ -149,6 +149,8 @@ if(!isset($_SESSION['admin'])) {
                 }
             });
         });
+        let session = <?= json_encode($_SESSION['admin']) ?>;
+        console.log(session);
     </script>
     
 

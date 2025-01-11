@@ -1,3 +1,10 @@
+<?php
+session_start();
+include_once "../../database/databaseConnection.php";
+if(!isset($_SESSION['admin'])) {
+    header('Location: adminLogin.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

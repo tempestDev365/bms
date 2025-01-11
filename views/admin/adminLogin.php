@@ -1,7 +1,9 @@
 <?php
 session_start();
-if(isset($_SESSION['admin'])) {
+
+if (isset($_SESSION['admin']) ) {
     header('Location: main.php');
+    exit(); 
 }
 ?>
 <!DOCTYPE html>
@@ -27,20 +29,16 @@ if(isset($_SESSION['admin'])) {
 
             </div>
             <div class="card-body">
-                <form action="../../controllers/adminLoginController.php" method = "POST">
+                <form action="../../controllers/adminLoginController.php" method="POST">
 
                     <div class="form-group">
                         <label>Username:</label>
-                        <input type="text" placeholder="Enter username" class="form-control" name = "username" required>
+                        <input type="text" placeholder="Enter username" class="form-control" name="username" required>
                     </div>
 
                     <div class="form-group mt-3">
                         <label>Password:</label>
-                        <input type="text" placeholder="Enter password" class="form-control" name = "password" required>
-                    </div>
-                    
-                    <div class="form-group mt-3">
-                        <a href="#">Forgot your password?</a>
+                        <input type="password" placeholder="Enter password" class="form-control" name="password" required>
                     </div>
 
                     <div class="form-group mt-3">
@@ -51,19 +49,6 @@ if(isset($_SESSION['admin'])) {
             </div>
         </div>
     </div>
-
-    
-    
-
-
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="./components/sidebar.js" defer></script>
-  <script>
-    if(window.location.search.includes('error=1')) {
-        alert('Invalid username or password');
-    }
-  </script>
 </body>
 </html>

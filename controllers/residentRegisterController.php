@@ -68,6 +68,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         $result->bindParam(2, $resident_id, PDO::PARAM_INT);
         $result->execute();
        }
+        $insert_into_pending = "INSERT INTO approved_tbl (Name, resident_id) VALUES (?, ?)";
+        $result = $conn->prepare($insert_into_pending);
+        $result->bindParam(1, $first_name, PDO::PARAM_STR);
+        $result->bindParam(2, $resident_id, PDO::PARAM_INT);
+        $result->execute();
         insertIntoResidentInformationTable($resident_id);
         insertIntoResidentFamiltyTable($resident_id);
         insertIntoResidentContactsTable($resident_id);
@@ -90,6 +95,8 @@ function insertIntoResidentInformationTable($id){
     $sex = $_POST['sex'];
     $birthdate = $_POST['birthdate'];
     $birthplace = $_POST['birthplace'];
+    $age = $_POST['age'];
+    $gender = $_POST['gender'];
     $civil_status = $_POST['civil'];
     $height = $_POST['height'];
     $weight = $_POST['weight'];
@@ -103,25 +110,27 @@ function insertIntoResidentInformationTable($id){
     $organization_member = isset($_POST['orgMember']) ? $_POST['orgMember'] : [];
     $org_member = implode(", ", $organization_member);
     print_r($org_member);
-    $qry = "INSERT INTO `resident_information`(`resident_id`, `salutation`, `sex`, `birthdate`, `birthplace`, `civil_status`, `height`, `weight`, `blood_type`, `religion`, `ethnic_origin`, `nationality`, `precint_number`, `registered_voter`, `organization_member`, `time_Created`) 
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    $qry = "INSERT INTO `resident_information`(`resident_id`, `salutation`, `sex`, `birthdate`, `birthplace`,`age`,`gender`, `civil_status`, `height`, `weight`, `blood_type`, `religion`, `ethnic_origin`, `nationality`, `precint_number`, `registered_voter`, `organization_member`, `time_Created`) 
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     $result = $conn->prepare($qry);
     $result->bindParam(1, $resident_id, PDO::PARAM_INT);
     $result->bindParam(2, $salutation, PDO::PARAM_STR);
     $result->bindParam(3, $sex, PDO::PARAM_STR);
     $result->bindParam(4, $birthdate, PDO::PARAM_STR);
     $result->bindParam(5, $birthplace, PDO::PARAM_STR);
-    $result->bindParam(6, $civil_status, PDO::PARAM_STR);
-    $result->bindParam(7, $height, PDO::PARAM_STR);
-    $result->bindParam(8, $weight, PDO::PARAM_STR);
-    $result->bindParam(9, $blood_type, PDO::PARAM_STR);
-    $result->bindParam(10, $religion, PDO::PARAM_STR);
-    $result->bindParam(11, $ethnic_origin, PDO::PARAM_STR);
-    $result->bindParam(12, $nationality, PDO::PARAM_STR);
-    $result->bindParam(13, $precint_number, PDO::PARAM_STR);
-    $result->bindParam(14, $registered_voter, PDO::PARAM_INT);
-    $result->bindParam(15, $org_member, PDO::PARAM_STR);
-    $result->bindParam(16, $current_date, PDO::PARAM_STR);
+    $result->bindParam(6, $age, PDO::PARAM_STR);
+    $result->bindParam(7, $gender, PDO::PARAM_STR);
+    $result->bindParam(8, $civil_status, PDO::PARAM_STR);
+    $result->bindParam(9, $height, PDO::PARAM_STR);
+    $result->bindParam(10, $weight, PDO::PARAM_STR);
+    $result->bindParam(11, $blood_type, PDO::PARAM_STR);
+    $result->bindParam(12, $religion, PDO::PARAM_STR);
+    $result->bindParam(13, $ethnic_origin, PDO::PARAM_STR);
+    $result->bindParam(14, $nationality, PDO::PARAM_STR);
+    $result->bindParam(15, $precint_number, PDO::PARAM_STR);
+    $result->bindParam(16, $registered_voter, PDO::PARAM_INT);
+    $result->bindParam(17, $org_member, PDO::PARAM_STR);
+    $result->bindParam(18, $current_date, PDO::PARAM_STR);
     $result->execute();
 }
 function insertIntoResidentFamiltyTable($id){
