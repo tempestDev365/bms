@@ -1,9 +1,4 @@
-<?php
-session_start();
-if(!isset($_SESSION['admin'])) {
-    header('Location: adminLogin.php');
-}
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,8 +8,20 @@ if(!isset($_SESSION['admin'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>BMS</title>
 </head>
+<style>
+    @media (max-width: 842px) {
+    .about-body {
+        flex-direction: column !important;
+    }
+
+    #about-content-2 {
+        order: 2;
+    }
+}
+    
+</style>
 <body>
-    <nav class="navbar navbar-expand-sm fixed-top p-4 navbar-dark" style="background-color: #2D3187;">
+    <nav class="navbar navbar-expand-lg fixed-top py-4 navbar-dark" style="background-color: #2D3187;">
         <div class="container-fluid">
             <div class="navbar-brand">
                 <a class="navbar-brand" href="./landing.html">Barangay Sinbanali</a>
@@ -45,7 +52,7 @@ if(!isset($_SESSION['admin'])) {
                 
               
               <li class="nav-item">
-                <a class="nav-link" href="./residentLogin.html">LOGIN</a>
+                <a class="nav-link" href="../residents/residentLogin.php">LOGIN</a>
               </li>    
             </ul>
           </div>
@@ -53,7 +60,7 @@ if(!isset($_SESSION['admin'])) {
     </nav>
 
     <main class="p-4 text-light d-flex justify-content-center align-items-center" style="background-color: #2D3187; min-height: 80vh;" id="home">
-        <div class="container  text-center">
+        <div class="container mt-5 text-center">
             <h1>
                 Welcome to Barangay Sinbanali, City of Bacoor.
             </h1>
@@ -67,7 +74,7 @@ if(!isset($_SESSION['admin'])) {
         </div>
     </main>
 
-    <section class="p-4 bg-white">
+    <section class="p-4 bg-white" id="announcement">
         <h2>Announcement</h2>
         <div class="announcement-container border">
             <!--announcement here-->
@@ -80,26 +87,29 @@ if(!isset($_SESSION['admin'])) {
             About Us
         </div>
 
-        <div class="about-body d-flex justify-content-center align-items-center mt-3" style="gap: 1rem;">
-            <img src="../../assets/img/barangaysinbanali.jpg" class="img-fluid shadow rounded-3" width="500px" alt="">
-            <div class="about-content " style="width: 500px; min-width: 300px;">
+        <div class="about-body d-flex justify-content-center align-items-center mt-3" id="about-body" style="gap: 1rem;">
+
+            <img src="../../assets/img/barangaysinbanali.jpg" class="img-fluid shadow rounded-3" style=" width: 500px" alt="">
+            
+            <div class="about-content" style="width: 500px; max-width: 300px;">
                 <h2>
                     Barangay Sinbanali
                 </h2>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem cupiditate vel autem quis asperiores molestiae pariatur? Esse molestias sapiente ipsum sequi aperiam quidem nemo aspernatur ex, velit alias ea perferendis?</p>
                 <button class="btn btn-outline-primary btn-sm">Visit</button>
             </div>
+
         </div>
 
         <div class="about-body d-flex justify-content-center align-items-center mt-3" style="gap: 1rem;">
-            <div class="about-content " style="width: 500px; min-width: 300px;">
+            <div class="about-content" id="about-content-2" style="width: 500px; max-width: 300px;">
                 <h2>
                     SK Sinbanali
                 </h2>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem cupiditate vel autem quis asperiores molestiae pariatur? Esse molestias sapiente ipsum sequi aperiam quidem nemo aspernatur ex, velit alias ea perferendis?</p>
                 <button class="btn btn-outline-primary btn-sm">Visit</button>
             </div>
-            <img src="../../assets/img/sk.jpg" class="img-fluid shadow rounded-3" width="500px" alt="">
+            <img src="../../assets/img/sk.jpg" class="img-fluid shadow rounded-3" style=" width: 500px" alt="">
 
         </div>
     </section>
@@ -110,7 +120,7 @@ if(!isset($_SESSION['admin'])) {
         width="100%" height="100%" style="border:0; min-height: 500px;" allowfullscreen="" loading="lazy"></iframe>
     </section>
     
-    <section class="p-5" id="services" style="background-color: #e1dfee;">
+    <section class="p-2" id="services" style="background-color: #e1dfee;">
         <div class="services-title text-center">
             <h2>
                 Services Offered
@@ -118,23 +128,23 @@ if(!isset($_SESSION['admin'])) {
         </div>
 
         <div class="service-body d-flex justify-content-center align-items-center" style="gap: 1rem; flex-wrap: wrap;">
-            <div class="p-3 d-flex justify-content-center align-items-center flex-column bg-light rounded-3 shadow-sm border" style="min-height: 500px; min-width: 400px;">
+            <div class="p-3 d-flex justify-content-center align-items-center flex-column bg-light rounded-3 shadow-sm border" style="min-height: 500px; max-width: 400px; width: 400px;">
                 <img src="../../assets/img/request-documents.png" class="img-fluid" style="width: 100px;" alt="">
                 <h3>Document Request</h3>
                 <p>Login first to acquire this services.</p>
-                <a href="#" class="btn btn-primary btn-sm">Proceed</a>
+                <a href="../residents/residentLogin.php" class="btn btn-primary btn-sm">Proceed</a>
             </div>
-            <div class="p-3 d-flex justify-content-center align-items-center flex-column bg-light rounded-3 shadow-sm border" style="min-height: 500px; min-width: 400px;">
+            <div class="p-3 d-flex justify-content-center align-items-center flex-column bg-light rounded-3 shadow-sm border" style="min-height: 500px; max-width: 400px; width: 400px;">
                 <img src="../../assets/img/resident-account.png" class="img-fluid" style="width: 100px;" alt="">
                 <h3>Resident Account</h3>
                 <p>Login first to acquire this services.</p>
-                <a href="#" class="btn btn-primary btn-sm">Proceed</a>
+                <a href="../residents/residentLogin.php" class="btn btn-primary btn-sm">Proceed</a>
             </div>
-            <div class="p-3 d-flex justify-content-center align-items-center flex-column bg-light rounded-3 shadow-sm border" style="min-height: 500px; min-width: 400px;">
+            <div class="p-3 d-flex justify-content-center align-items-center flex-column bg-light rounded-3 shadow-sm border" style="min-height: 500px; max-width: 400px; width: 400px;">
                 <img src="../../assets/img/announcement.png" class="img-fluid" style="width: 100px;" alt="">
                 <h3>Announcements</h3>
                 <p>Login first to acquire this services.</p>
-                <a href="#" class="btn btn-primary btn-sm">Proceed</a>
+                <a href="../residents/residentLogin.php" class="btn btn-primary btn-sm">Proceed</a>
             </div>
         </div>
     </section>
