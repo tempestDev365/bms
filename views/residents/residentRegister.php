@@ -31,21 +31,21 @@
                             <div class="box border rounded-3 w-100 d-flex justify-content-center align-items-center" style="min-height: 200px; min-width: 200px;">
                                 Picture
                             </div>
-                            <input type="file" name="picture" id="picture" class="form-control">
+                            <input type="file" name="picture" id="picture" class="form-control" accept="image/.jpg">
                         </div>
 
                         <div class="form-group d-flex flex-column align-items-center justify-content-center img-fluid" style="gap: 1rem;">
                             <div class="box border rounded-3 w-100 d-flex justify-content-center align-items-center" style="min-height: 200px; min-width: 200px;">
                                 Signature
                             </div>
-                            <input type="file" name="signature" id="signature" class="form-control">
+                            <input type="file" name="signature" id="signature" class="form-control" accept="image/.jpg">
                         </div>
 
                         <div class="form-group d-flex flex-column align-items-center justify-content-center img-fluid" style="gap: 1rem;">
                             <div class="box border rounded-3 w-100 d-flex justify-content-center align-items-center" style="min-height: 200px; min-width: 200px;">
                                 Valid ID
                             </div>
-                            <input type="file" name="validId" id="validId" class="form-control">
+                            <input type="file" name="validId" id="validId" class="form-control" accept="image/.jpg">
                         </div>
                     </div>
                     <!--Login Information-->

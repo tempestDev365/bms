@@ -28,38 +28,36 @@
                         <h1>Add New Resident</h1>
                     </div>  
                     <div class="register-body">
-                <form >
+                <form action="../../controllers/residentRegisterController.php" method="post" enctype="multipart/form-data">
 
                 <h5 class="text-center">Personal Information</h5>
                 <hr>
 
                     <!--Uploading Ids-->
-                    <div class="form-upload d-flex justify-content-evenly align-items-center" style="flex-wrap: wrap; gap: 1rem">
+                   <div class="form-upload d-flex justify-content-evenly align-items-center" style="flex-wrap: wrap; gap: 1rem">
                         <div class="form-group d-flex flex-column align-items-center justify-content-center img-fluid" style="gap: 1rem;">
                             <div class="box border rounded-3 w-100 d-flex justify-content-center align-items-center" style="min-height: 200px; min-width: 200px;">
                                 Picture
                             </div>
-                            <input type="file" name="picture" id="picture" class="form-control">
+                            <input type="file" name="picture" id="picture" class="form-control" accept="image/.jpg">
                         </div>
 
                         <div class="form-group d-flex flex-column align-items-center justify-content-center img-fluid" style="gap: 1rem;">
                             <div class="box border rounded-3 w-100 d-flex justify-content-center align-items-center" style="min-height: 200px; min-width: 200px;">
                                 Signature
                             </div>
-                            <input type="file" name="signature" id="signature" class="form-control">
+                            <input type="file" name="signature" id="signature" class="form-control" accept="image/.jpg">
                         </div>
 
                         <div class="form-group d-flex flex-column align-items-center justify-content-center img-fluid" style="gap: 1rem;">
                             <div class="box border rounded-3 w-100 d-flex justify-content-center align-items-center" style="min-height: 200px; min-width: 200px;">
                                 Valid ID
                             </div>
-                            <input type="file" name="validId" id="validId" class="form-control">
+                            <input type="file" name="validId" id="validId" class="form-control" accept="image/.jpg">
                         </div>
                     </div>
                     <!--Login Information-->
-                <h5 class="text-center mt-3">Login Information</h5>
-                <hr>
-
+                <h5 class="text-center">Login Information</h5>
                  <div class="form-personal-info row mt-3">
                     <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="Username">Username</label>
@@ -70,6 +68,7 @@
                             <input type="password" name="Password" id="Password" class="form-control">
                         </div>
                  </div>
+                <hr>
                     <!--Personal Information-->
                     <div class="form-personal-info row mt-3">
                         <div class="form-group mt-2 col-sm-12 col-md-4">
@@ -133,13 +132,13 @@
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
-                            <label for="weight">Blood Type</label>
-                            <input type="text" name="weight" id="weight" class="form-control">
+                            <label for="bloodType">Blood Type</label>
+                            <input type="text" name="bloodType" id="bloodType" class="form-control">
                         </div>
                         
                         <div class="form-group mt-2 col-sm-12 col-md-4">
-                            <label for="weight">Religion</label>
-                            <input type="text" name="weight" id="weight" class="form-control">
+                            <label for="religion">Religion</label>
+                            <input type="text" name="religion" id="religion" class="form-control">
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
@@ -148,18 +147,19 @@
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
-                            <label for="ethnic">Nationality</label>
-                            <input type="text" name="ethnic" id="ethnic" class="form-control">
+                            <label for="nationality">Nationality</label>
+                            <input type="text" name="nationality" id="nationality" class="form-control">
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
-                            <label for="ethnic">Precinct Number</label>
-                            <input type="text" name="ethnic" id="ethnic" class="form-control">
+                            <label for="precint">Precinct Number</label>
+                            <input type="text" name="precint" id="precint" class="form-control">
                         </div>
+                        
 
                         <div class="form-group mt-2 d-flex justify-content-start align-items-center col-sm-12 col-md-4" style="gap:5px;">
-                            <label for="ethnic">Registered Voter</label>
-                            <input type="checkbox" name="ethnic" id="ethnic">
+                            <label for="voter">Registered Voter</label>
+                            <input type="checkbox" name="voter"  id="voter">
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-2">
@@ -168,37 +168,37 @@
 
 
                         <div class="form-group mt-2 col-md-12 col-lg-1 d-flex justfy-content-center align-items-center" style="gap: 5px;">
-                            <input type="checkbox" name="4p" id="4p">
+                            <input type="checkbox" name="orgMember[]" value = "4p" id="4p">
                             <label for="4p">4P's</label>
                         </div>
 
                         <div class="form-group mt-2 col-md-12 col-lg-1 d-flex justfy-content-center align-items-center" style="gap: 5px;">
-                            <input type="checkbox" name="pwd" id="pwd">
+                            <input type="checkbox" name="orgMember[]" value="pwd" id="pwd">
                             <label for="pwd">PWD</label>
                         </div>
 
                         <div class="form-group mt-2 col-md-12 col-lg-1 d-flex justfy-content-center align-items-center" style="gap: 5px;">
-                            <input type="checkbox" name="senior" id="senior">
+                            <input type="checkbox" name="orgMember[]" value="senior" id="senior">
                             <label for="senior">Senior</label>
                         </div>
 
                         <div class="form-group mt-2 col-md-12 col-lg-2 d-flex justfy-content-center align-items-center" style="gap: 5px;">
-                            <input type="checkbox" name="soloParent" id="soloParent">
+                            <input type="checkbox" name="orgMember[]" value="solo_parent" id="soloParent">
                             <label for="soloParent">Solo Parent</label>
                         </div>
 
                         <div class="form-group mt-2 col-md-12 col-lg-1 d-flex justfy-content-center align-items-center" style="gap: 5px;">
-                            <input type="checkbox" name="hoa" id="hoa">
+                            <input type="checkbox" name="orgMember[]" value="parent" id="hoa">
                             <label for="hoa">HOA</label>
                         </div>
 
                         <div class="form-group mt-2 col-md-12 col-lg-1 d-flex justfy-content-center align-items-center" style="gap: 5px;">
-                            <input type="checkbox" name="cso" id="cso">
+                            <input type="checkbox" name="orgMember[]" value="cso" id="cso">
                             <label for="cso">CSO</label>
                         </div>
 
                         <div class="form-group mt-2 col-md-12 col-lg-1 d-flex justfy-content-center align-items-center" style="gap: 5px;">
-                            <input type="checkbox" name="ngo" id="ngo">
+                            <input type="checkbox" name="orgMember[]" value="ngo" id="ngo">
                             <label for="ngo">NGO</label>
                         </div>
                         
@@ -350,6 +350,7 @@
                             </select>
                         </div>
                     </div>
+
 
                     <!--Submit Button-->
                     <div class="form-group mt-3">

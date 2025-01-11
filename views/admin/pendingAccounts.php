@@ -1,3 +1,16 @@
+<?php
+include_once "../../database/databaseConnection.php";
+session_start();
+
+if (!isset($_SESSION['admin'])) {
+    header('Location: ../admin/adminLogin.php');
+}
+$get_all_pending_accounts = "SELECT * FROM pending_accounts_tbl";
+$stmt = $conn->prepare($get_all_pending_accounts);
+$stmt->execute();
+$pending_accounts = $stmt->fetchAll();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,61 +54,24 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Gender</th>
-                            <th>Age</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>01</td>
-                            <td>Caridad J. Sanchez</td>
-                            <td>Male</td>
-                            <td>12</td>
-                            <td>
-                                <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#viewProfile">View</button>
-                                <button class="btn btn-sm btn-primary">Approve</button>
-                                <button class="btn btn-sm btn-danger">Decline</button>
+                       <?php
+                       foreach($accounts as $pending_accounts){
+                            echo "<tr>";
+                            echo "<td>".$pending_accounts['id']."</td>";
+                            echo "<td>".$pending_accounts['Name']."</td>";
+                            echo  "
+                            <button class='btn btn-sm btn-primary' name = {$peding_accounts['id']}>Approve</button>
+                            <button class='btn btn-sm btn-danger'>Decline</button>
+                            ";
+                            echo "</tr>";
+                       }
+                       ?>
 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>02</td>
-                            <td>Nieves M, Dela Cruz</td>
-                            <td>Female</td>
-                            <td>12</td>
-                            <td>
-                                <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#viewProfile">View</button>
-                                <button class="btn btn-sm btn-primary">Approve</button>
-                                <button class="btn btn-sm btn-danger">Decline</button>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>03</td>
-                            <td>Ronald F. Marquez</td>
-                            <td>Female</td>
-                            <td>12</td>
-                            <td>
-                                <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#viewProfile">View</button>
-                                <button class="btn btn-sm btn-primary">Approve</button>
-                                <button class="btn btn-sm btn-danger">Decline</button>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>04</td>
-                            <td>Cesar R. Concepcion</td>
-                            <td>Female</td>
-                            <td>12</td>
-                            <td>
-                                <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#viewProfile">View</button>
-                                <button class="btn btn-sm btn-primary">Approve</button>
-                                <button class="btn btn-sm btn-danger">Decline</button>
-
-                            </td>
-                        </tr>
-
+            
                         
                     </tbody>
                 </table>

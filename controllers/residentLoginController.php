@@ -8,6 +8,16 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $stmt->bindParam(1, $username);
     $stmt->execute();
     $result = $stmt->fetch();
+    $get_account_status = "SELECT status FROM pending_accounts_tbl WHERE resident_id = ?";
+    $stmt = $conn->prepare($get_account_status);
+    $stmt->bindParam(1, $result['id']);
+    $stmt->execute();
+    $status = $stmt->fetch();
+    if($status['status'] == "pending" || $status['status'] == "rejected"){
+        header('Location: ../views/residents/residentLogin.php?error=2');
+        echo "<script>alert('Your account is still pending or rejected')</script>";
+        return;
+    }
 
     if ($result && password_verify($password, $result['password'])) {
         session_start();

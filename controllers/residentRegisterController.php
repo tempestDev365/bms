@@ -1,9 +1,7 @@
 <?php
 include_once '../database/databaseConnection.php';
-
-
 include_once '../database/databaseConnection.php';
-
+session_start();
 function resizeImage($file, $max_width, $max_height) {
     list($width, $height) = getimagesize($file);
     $ratio = $width / $height;
@@ -48,6 +46,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
         $insert_into_resident_tbl = "INSERT INTO residents_tbl (username, password, picture, signature, valid_id, first_name, middle_name, last_name, suffix, alias, time_Created) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         $result = $conn->prepare($insert_into_resident_tbl);
+
         $result->bindParam(1, $username, PDO::PARAM_STR);
         $result->bindParam(2, $password, PDO::PARAM_STR);
         $result->bindParam(3, $picture, PDO::PARAM_STR);
@@ -60,14 +59,26 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         $result->bindParam(10, $alias, PDO::PARAM_STR);
         $result->bindParam(11, $current_date, PDO::PARAM_STR);
         $result->execute();
-        $resident_id = $conn->lastInsertId();    
+        $resident_id = $conn->lastInsertId();
+        
+       if(!$_SESSION['admin']){
+        $insert_into_pending = "INSERT INTO pending_accounts_tbl (Name, resident_id,status) VALUES (?, ?, 'pending')";
+        $result = $conn->prepare($insert_into_pending);
+        $result->bindParam(1, $username, PDO::PARAM_STR);
+        $result->bindParam(2, $resident_id, PDO::PARAM_INT);
+        $result->execute();
+       }
         insertIntoResidentInformationTable($resident_id);
         insertIntoResidentFamiltyTable($resident_id);
         insertIntoResidentContactsTable($resident_id);
         insertIntoResidentAddressTable($resident_id);
         insertIntoResidentEmploymentTable($resident_id);
         echo "<script>alert('Resident has been registered')</script>";
-        header('Location: ../views/residents/residentLogin.php?success=1');
+        if($_SESSION['admin']){
+            header("Location: ../views/admin/addResident.php");
+        }else{
+            header('Location: ../views/residents/residentLogin.php?success=1');
+        }
     } catch (Exception $e) {
         echo 'Error: ' . $e->getMessage();
     }
