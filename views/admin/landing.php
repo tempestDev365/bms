@@ -28,6 +28,11 @@ if(!isset($_SESSION['admin'])) {
               <li class="nav-item">
                 <a class="nav-link" href="#home">HOME</a>
               </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="#announcement">ANNOUNCEMENT</a>
+              </li>
+
               <li class="nav-item">
                 <a class="nav-link" href="#about">ABOUT</a>
               </li>
@@ -62,6 +67,14 @@ if(!isset($_SESSION['admin'])) {
         </div>
     </main>
 
+    <section class="p-4 bg-white">
+        <h2>Announcement</h2>
+        <div class="announcement-container border">
+            <!--announcement here-->
+            No announcement yet
+        </div>
+    </section>
+
     <section class="p-4 bg-light" id="about">
         <div class="about-title h2 text-center">
             About Us
@@ -91,8 +104,8 @@ if(!isset($_SESSION['admin'])) {
         </div>
     </section>
 
-    <section" id="map">
-    <iframe
+    <section" id="map" id="announcement">
+        <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3859.938947234338!2d120.9442763153633!3d14.45449998989664!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397cfb9b6c7d4e5%3A0x5e0a0b8b8b8b8b8b!2sFW5J%2BQRF%2C%20Bacoor%2C%20Cavite!5e0!3m2!1sen!2sph!4v1634567890123!5m2!1sen!2sph"
         width="100%" height="100%" style="border:0; min-height: 500px;" allowfullscreen="" loading="lazy"></iframe>
     </section>
