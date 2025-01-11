@@ -1,9 +1,27 @@
 <?php
+include '../../database/databaseConnection.php';
+include '../../controllers/getAllResidentInformationController.php';
 session_start();
 include_once "../../database/databaseConnection.php";
 if(!isset($_SESSION['admin'])) {
     header('Location: adminLogin.php');
 }
+   $conn = $GLOBALS['conn'];
+$resident_qry = "
+    SELECT 
+        r.id, r.first_name, r.middle_name, r.last_name, 
+        ri.sex, ri.age 
+    FROM 
+        residents_tbl r
+    LEFT JOIN 
+        resident_information ri 
+    ON 
+        r.id = ri.resident_id
+";
+$stmt = $conn->prepare($resident_qry);
+$stmt->execute();
+$resident_result = $stmt->fetchAll();
+   
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,55 +88,19 @@ if(!isset($_SESSION['admin'])) {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>01</td>
-                            <td>John Doe</td>
-                            <td>Female</td>
-                            <td>21</td>
-                            <td>
-                                <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#viewDetail">View</button>
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-danger">Remove</button>
-                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#selectDocument">Certificate</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>01</td>
-                            <td>John Doe</td>
-                            <td>Male</td>
-                            <td>21</td>
-                            <td>
-                                <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#viewDetail">View</button>
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-danger">Remove</button>
-                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#selectDocument">Certificate</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>01</td>
-                            <td>John Doe</td>
-                            <td>Male</td>
-                            <td>21</td>
-                            <td>
-                                <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#viewDetail">View</button>
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-danger">Remove</button>
-                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#selectDocument">Certificate</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>01</td>
-                            <td>John Doe</td>
-                            <td>Male</td>
-                            <td>21</td>
-                            <td>
-                                <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#viewDetail">View</button>                            
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-danger">Remove</button>
-                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#selectDocument">Certificate</button>
-                            </td>
-                        </tr>
-                    </tbody>
+             <?php foreach($resident_result as $key => $value): ?>
+             <tr>
+             <td><?php echo $value['id']; ?></td>
+             <td><?php echo $value['first_name'].' '.$value['middle_name'].' '.$value['last_name']; ?></td>
+            <td><?php echo $value['sex']; ?></td>
+            <td><?php echo $value['age']; ?></td>
+            <td>
+                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#viewDetail" id = "viewBtn" name = " <?php echo $value['id']; ?> "</button>View</button>
+                <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#selectDocument">Issue Certificate</button>
+            </td>
+            </tr>
+            <?php endforeach; ?>
+                            </tbody>
                 </table>
             </div>
 
@@ -316,6 +298,16 @@ if(!isset($_SESSION['admin'])) {
             var table = $('#example').DataTable();x
             table.column(2).search(filterValue === 'all' ? '' : filterValue, true, false).draw();
         });
+       const viewDetail = document.querySelectorAll('#viewBtn');
+         viewDetail.forEach((btn) => {
+              btn.addEventListener('click', async (e) => {
+                const id = e.target.name;
+                const response = await fetch(`../../controllers/getAllResidentInformationController.php?id=${id}`);
+                const data = await response.json();
+                console.log(data)
+              });
+         });
+
     </script>
 </body>
 </html>'

@@ -1,40 +1,39 @@
 <?php
 include_once '../database/databaseConnection.php';
-include_once '../database/databaseConnection.php';
 session_start();
-function resizeImage($file, $max_width, $max_height) {
-    list($width, $height) = getimagesize($file);
-    $ratio = $width / $height;
+// function resizeImage($file, $max_width, $max_height) {
+//     list($width, $height) = getimagesize($file);
+//     $ratio = $width / $height;
 
-    if ($max_width / $max_height > $ratio) {
-        $max_width = $max_height * $ratio;
-    } else {
-        $max_height = $max_width / $ratio;
-    }
+//     if ($max_width / $max_height > $ratio) {
+//         $max_width = $max_height * $ratio;
+//     } else {
+//         $max_height = $max_width / $ratio;
+//     }
 
-    $src = imagecreatefromstring(file_get_contents($file));
-    $dst = imagecreatetruecolor($max_width, $max_height);
+//     $src = imagecreatefromstring(file_get_contents($file));
+//     $dst = imagecreatetruecolor($max_width, $max_height);
 
-    imagecopyresampled($dst, $src, 0, 0, 0, 0, $max_width, $max_height, $width, $height);
+//     imagecopyresampled($dst, $src, 0, 0, 0, 0, $max_width, $max_height, $width, $height);
 
-    ob_start();
-    imagejpeg($dst);
-    $data = ob_get_contents();
-    ob_end_clean();
+//     ob_start();
+//     imagejpeg($dst);
+//     $data = ob_get_contents();
+//     ob_end_clean();
 
-    imagedestroy($src);
-    imagedestroy($dst);
+//     imagedestroy($src);
+//     imagedestroy($dst);
 
-    return $data;
-}
+//     return $data;
+// }
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     try{
         $current_date = date("Y-m-d H:i:s");
 
-        $picture = isset($_FILES['picture']['tmp_name']) && !empty($_FILES['picture']['tmp_name']) ? base64_encode(resizeImage($_FILES['picture']['tmp_name'], 200, 200)) : null;
-        $signature = isset($_FILES['signature']['tmp_name']) && !empty($_FILES['signature']['tmp_name']) ? base64_encode(resizeImage($_FILES['signature']['tmp_name'], 200, 200)) : null;
-        $valid_id = isset($_FILES['validId']['tmp_name']) && !empty($_FILES['validId']['tmp_name']) ? base64_encode(resizeImage($_FILES['validId']['tmp_name'], 200, 200)) : null;
+        $picture = isset($_FILES['picture']['tmp_name']) && !empty($_FILES['picture']['tmp_name']) ? base64_encode($_FILES['picture']['tmp_name']) : null;
+        $signature = isset($_FILES['signature']['tmp_name']) && !empty($_FILES['signature']['tmp_name']) ? base64_encode($_FILES['signature']['tmp_name']) : null;
+        $valid_id = isset($_FILES['validId']['tmp_name']) && !empty($_FILES['validId']['tmp_name']) ? base64_encode($_FILES['validId']['tmp_name']) : null;
 
         $username = $_POST['Username'];
         $password = password_hash($_POST['Password'], PASSWORD_DEFAULT);

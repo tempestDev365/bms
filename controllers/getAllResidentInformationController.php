@@ -1,5 +1,4 @@
 <?php
-
 function getAllResidentInformation($id){
     $conn = $GLOBALS['conn'];
     $resident_tbl_qry = "SELECT * FROM residents_tbl WHERE id = ?";
@@ -75,11 +74,11 @@ function getAllResidentInformation($id){
         'resident_employment_field'=>$resident_employment_result['employment_field'],
         'resident_occupation'=>$resident_employment_result['occupation'],
         'resident_monthly_income'=>$resident_employment_result['monthly_income'],
-
-
-
-
    ];
+if($_GET['id']){
+    $resident_information = getAllResidentInformation($_GET['id']);
+    echo json_encode($resident_information);
+}
 }
 
 ?>
