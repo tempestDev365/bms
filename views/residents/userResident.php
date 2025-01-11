@@ -43,13 +43,11 @@ $valid_id = $resident_information['resident_valid_id'];
             </div>
 
             <div class="id-section mt-3">
-                <div class="container-id p-3 d-flex justify-content-center" style="gap: 1rem; flex-wrap: wrap;">
-                   <div class='card shadow-sm' style='flex: 1 1 300px; min-height: 300px'>
-                     <img src="data:image/gif;base64,<?php echo $picture; ?>" alt="Resident Picture">
-                     <img src="data:image/gif;base64,<?php echo $signature; ?>" alt="Resident Picture">
-                    <img src="data:image/gif;base64,<?php echo $valid_id; ?>" alt="Resident Picture">
+                <div class="container-id border bg-white p-3 d-flex justify-content-center" style="gap: 1rem; flex-wrap: wrap;">
+                     <img src="data:image/gif;base64,<?php echo $picture; ?>" class="img-fluid" style="width:300px; height:200px" alt="Resident Picture">
+                     <img src="data:image/gif;base64,<?php echo $signature; ?>" class="img-fluid" style="width:300px; height:200px" alt="Resident Picture">
+                    <img src="data:image/gif;base64,<?php echo $valid_id; ?>" class="img-fluid" style="width:300px; height:200px" alt="Resident Picture">
 
-                   </div>
                 </div>
             </div>
 
