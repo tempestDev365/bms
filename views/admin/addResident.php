@@ -1,3 +1,10 @@
+<?php
+session_start();
+include_once "../../database/databaseConnection.php";
+if(!isset($_SESSION['admin'])) {
+    header('Location: adminLogin.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,13 +35,13 @@
                         <h1>Add New Resident</h1>
                     </div>  
                     <div class="register-body">
-                <form action="../../controllers/residentRegisterController.php" method="post" enctype="multipart/form-data">
+              <form action="../../controllers/residentRegisterController.php" method = "POST" enctype="multipart/form-data">
 
                 <h5 class="text-center">Personal Information</h5>
                 <hr>
 
                     <!--Uploading Ids-->
-                   <div class="form-upload d-flex justify-content-evenly align-items-center" style="flex-wrap: wrap; gap: 1rem">
+                    <div class="form-upload d-flex justify-content-evenly align-items-center" style="flex-wrap: wrap; gap: 1rem">
                         <div class="form-group d-flex flex-column align-items-center justify-content-center img-fluid" style="gap: 1rem;">
                             <div class="box border rounded-3 w-100 d-flex justify-content-center align-items-center" style="min-height: 200px; min-width: 200px;">
                                 Picture
@@ -115,7 +122,14 @@
                             <label for="birthplace">Birthplace</label>
                             <input type="text" name="birthplace" id="birthplace" class="form-control">
                         </div>
-
+                        <div class="form-group mt-2 col-sm-12 col-md-4">
+                            <label for="age">Age</label>
+                            <input type="text" name="age" id="age" class="form-control">
+                        </div>
+                         <div class="form-group mt-2 col-sm-12 col-md-4">
+                            <label for="gender">Gender</label>
+                            <input type="text" name="gender" id="gender" class="form-control">
+                        </div>
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="civil">Civil Status</label>
                             <input type="text" name="civil" id="civil" class="form-control">
@@ -350,6 +364,7 @@
                             </select>
                         </div>
                     </div>
+
 
 
                     <!--Submit Button-->

@@ -3,7 +3,7 @@ include_once "../../database/databaseConnection.php";
 session_start();
 
 if (!isset($_SESSION['admin'])) {
-    header('Location: ../admin/adminLogin.php');
+    header('Location: ./adminLogin.php');
 }
 $get_all_pending_accounts = "SELECT * FROM pending_accounts_tbl";
 $stmt = $conn->prepare($get_all_pending_accounts);
@@ -59,13 +59,14 @@ $pending_accounts = $stmt->fetchAll();
                     </thead>
                     <tbody>
                        <?php
-                       foreach($accounts as $pending_accounts){
+                       foreach($pending_accounts as $accounts){
                             echo "<tr>";
-                            echo "<td>".$pending_accounts['id']."</td>";
-                            echo "<td>".$pending_accounts['Name']."</td>";
-                            echo  "
-                            <button class='btn btn-sm btn-primary' name = {$peding_accounts['id']}>Approve</button>
-                            <button class='btn btn-sm btn-danger'>Decline</button>
+                            echo "<td>".$accounts['id']."</td>";
+                            echo "<td>".$accounts['Name']."</td>";
+                            echo  "<td>
+                            <button class='btn btn-sm btn-primary' name = {$accounts['id']} id = 'approve'>Approve</button>
+                            <button class='btn btn-sm btn-danger'  name = {$accounts['id']} id = 'reject'>Decline</button>
+                            </td>
                             ";
                             echo "</tr>";
                        }
@@ -234,6 +235,33 @@ $pending_accounts = $stmt->fetchAll();
             var table = $('#example').DataTable();
             table.column(2).search(filterValue === 'all' ? '' : filterValue, true, false).draw();
         });
+        const approveBtn = document.querySelectorAll('#approve');
+        approveBtn.forEach(btn =>{
+            btn.addEventListener('click',async (e) => {
+                const id = e.target.name;
+                const api = await fetch(`../../controllers/pendingStatusUpdateController.php?action=approve&id=${id}`)
+                const response =await api.json();
+                if(response === "success"){
+                    alert("Account Approved");
+                    location.reload();
+                }else if(response === "approved"){
+                    alert("Account Already Approved");
+                }
+
+            })
+        })
+        const rejectBtn  = document.querySelectorAll('#reject');
+        rejectBtn.forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                const id = e.target.name;
+                const api = await fetch(`../../controllers/pendingStatusUpdateController.php?action=reject&id=${id}`)
+                const response = await api.json();
+                if(response === "success"){
+                    alert("Account Rejected");
+                    location.reload();
+                }
+            })
+        })
     </script>
 </body>
 </html>
