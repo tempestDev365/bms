@@ -31,21 +31,21 @@
                             <div class="box border rounded-3 w-100 d-flex justify-content-center align-items-center" style="min-height: 200px; min-width: 200px;">
                                 Picture
                             </div>
-                            <input type="file" name="picture" id="picture" class="form-control" accept="image/.jpg">
+                            <input type="file" name="picture" id="picture" class="form-control" accept="image/.jpg" required>
                         </div>
 
                         <div class="form-group d-flex flex-column align-items-center justify-content-center img-fluid" style="gap: 1rem;">
                             <div class="box border rounded-3 w-100 d-flex justify-content-center align-items-center" style="min-height: 200px; min-width: 200px;">
                                 Signature
                             </div>
-                            <input type="file" name="signature" id="signature" class="form-control" accept="image/.jpg">
+                            <input type="file" name="signature" id="signature" class="form-control" accept="image/.jpg" required>
                         </div>
 
                         <div class="form-group d-flex flex-column align-items-center justify-content-center img-fluid" style="gap: 1rem;">
                             <div class="box border rounded-3 w-100 d-flex justify-content-center align-items-center" style="min-height: 200px; min-width: 200px;">
                                 Valid ID
                             </div>
-                            <input type="file" name="validId" id="validId" class="form-control" accept="image/.jpg">
+                            <input type="file" name="validId" id="validId" class="form-control" accept="image/.jpg" required>
                         </div>
                     </div>
                     <!--Login Information-->
@@ -53,11 +53,11 @@
                  <div class="form-personal-info row mt-3">
                     <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="Username">Username</label>
-                            <input type="text" name="Username" id="Username" class="form-control">
+                            <input type="text" name="Username" id="Username" class="form-control" required>
                         </div>
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="Password">Password</label>
-                            <input type="password" name="Password" id="Password" class="form-control">
+                            <input type="password" name="Password" id="Password" class="form-control" required>
                         </div>
                  </div>
                 <hr>
@@ -65,100 +65,100 @@
                     <div class="form-personal-info row mt-3">
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="firsName">First Name</label>
-                            <input type="text" name="firstName" id="firstName" class="form-control">
+                            <input type="text" name="firstName" id="firstName" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="middleName">Middle Name</label>
-                            <input type="text" name="middleName" id="middleName" class="form-control">
+                            <input type="text" name="middleName" id="middleName" class="form-control" required>
                         </div>
                         
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="lastName">Last Name</label>
-                            <input type="text" name="lastName" id="lastName" class="form-control">
+                            <input type="text" name="lastName" id="lastName" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="suffix">Suffix</label>
-                            <input type="text" name="suffix" id="suffix" class="form-control">
+                            <input type="text" name="suffix" id="suffix" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="alias">Alias</label>
-                            <input type="text" name="alias" id="alias" class="form-control">
+                            <input type="text" name="alias" id="alias" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="salutation">Salutation</label>
-                            <input type="text" name="salutation" id="salutation" class="form-control">
+                            <input type="text" name="salutation" id="salutation" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="sex">Sex</label>
-                            <input type="text" name="sex" id="sex" class="form-control">
+                            <input type="text" name="sex" id="sex" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="birthdate">Birthdate</label>
-                            <input type="text" name="birthdate" id="birthdate" class="form-control">
+                            <input type="text" name="birthdate" id="birthdate" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="birthplace">Birthplace</label>
-                            <input type="text" name="birthplace" id="birthplace" class="form-control">
+                            <input type="text" name="birthplace" id="birthplace" class="form-control" required>
                         </div>
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="age">Age</label>
-                            <input type="text" name="age" id="age" class="form-control">
+                            <input type="text" name="age" id="age" class="form-control" required>
                         </div>
                          <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="gender">Gender</label>
-                            <input type="text" name="gender" id="gender" class="form-control">
+                            <input type="text" name="gender" id="gender" class="form-control" required>
                         </div>
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="civil">Civil Status</label>
-                            <input type="text" name="civil" id="civil" class="form-control">
+                            <input type="text" name="civil" id="civil" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="height">Height</label>
-                            <input type="text" name="height" id="height" class="form-control">
+                            <input type="text" name="height" id="height" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="weight">Weight</label>
-                            <input type="text" name="weight" id="weight" class="form-control">
+                            <input type="text" name="weight" id="weight" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="bloodType">Blood Type</label>
-                            <input type="text" name="bloodType" id="bloodType" class="form-control">
+                            <input type="text" name="bloodType" id="bloodType" class="form-control" required>
                         </div>
                         
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="religion">Religion</label>
-                            <input type="text" name="religion" id="religion" class="form-control">
+                            <input type="text" name="religion" id="religion" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="ethnic">Ethnic Origin</label>
-                            <input type="text" name="ethnic" id="ethnic" class="form-control">
+                            <input type="text" name="ethnic" id="ethnic" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="nationality">Nationality</label>
-                            <input type="text" name="nationality" id="nationality" class="form-control">
+                            <input type="text" name="nationality" id="nationality" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="precint">Precinct Number</label>
-                            <input type="text" name="precint" id="precint" class="form-control">
+                            <input type="text" name="precint" id="precint" class="form-control" required>
                         </div>
                         
 
                         <div class="form-group mt-2 d-flex justify-content-start align-items-center col-sm-12 col-md-4" style="gap:5px;">
                             <label for="voter">Registered Voter</label>
-                            <input type="checkbox" name="voter"  id="voter">
+                            <input type="checkbox" name="voter"  id="voter" >
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-2">
@@ -210,17 +210,17 @@
                     <div class="form-contact-info row">
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="email">Email</label>
-                            <input type="email" name="email" id="email" class="form-control">
+                            <input type="email" name="email" id="email" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="mobile">Mobile Number</label>
-                            <input type="number" name="mobile" id="mobile" class="form-control">
+                            <input type="number" name="mobile" id="mobile" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="tel">Tel No.</label>
-                            <input type="number" name="tel" id="tel" class="form-control">
+                            <input type="number" name="tel" id="tel" class="form-control" required>
                         </div>
                     </div>
 
@@ -232,17 +232,17 @@
                     <div class="form-contact-info row">
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="incaseFullname">Fullname</label>
-                            <input type="text" name="incaseFullname" id="incaseFullname" class="form-control">
+                            <input type="text" name="incaseFullname" id="incaseFullname" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="incaseContact">Contact Number</label>
-                            <input type="number" name="incaseContact" id="incaseContact" class="form-control">
+                            <input type="number" name="incaseContact" id="incaseContact" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="incaseAddress">Address</label>
-                            <input type="text" name="incaseAddress" id="incaseAddress" class="form-control">
+                            <input type="text" name="incaseAddress" id="incaseAddress" class="form-control" required>
                         </div>
                     </div>
                     
@@ -254,17 +254,17 @@
                     <div class="form-contact-info row">
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="mother">Mother</label>
-                            <input type="text" name="mother" id="mother" class="form-control">
+                            <input type="text" name="mother" id="mother" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="father">Father</label>
-                            <input type="text" name="father" id="father" class="form-control">
+                            <input type="text" name="father" id="father" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="spouse">Spouse</label>
-                            <input type="text" name="spouse" id="spouse" class="form-control">
+                            <input type="text" name="spouse" id="spouse" class="form-control" required>
                         </div>
                     </div>
 
@@ -275,27 +275,27 @@
                     <div class="form-contact-info row">
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="houseNo">House Number</label>
-                            <input type="number" name="houseNo" id="houseNo" class="form-control">
+                            <input type="number" name="houseNo" id="houseNo" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="purok">Purok</label>
-                            <input type="text" name="purok" id="purok" class="form-control">
+                            <input type="text" name="purok" id="purok" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="fullAddress">Full Address</label>
-                            <input type="text" name="fullAddress" id="fullAddress" class="form-control">
+                            <input type="text" name="fullAddress" id="fullAddress" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="street">Street</label>
-                            <input type="text" name="street" id="street" class="form-control">
+                            <input type="text" name="street" id="street" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="familyHoa">HOA</label>
-                            <input type="text" name="familyHoa" id="familyHoa" class="form-control">
+                            <input type="text" name="familyHoa" id="familyHoa" class="form-control" required>
                         </div>
 
 
@@ -309,22 +309,22 @@
                     <div class="form-contact-info row">
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="eStatus">Employment Status</label>
-                            <input type="text" name="eStatus" id="eStatus" class="form-control">
+                            <input type="text" name="eStatus" id="eStatus" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="eField">Employment Field</label>
-                            <input type="text" name="eField" id="eField" class="form-control">
+                            <input type="text" name="eField" id="eField" class="form-control " required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="occupation">Occupation</label>
-                            <input type="text" name="occupation" id="occupation" class="form-control">
+                            <input type="text" name="occupation" id="occupation" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="mIncome">Monthly Income</label>
-                            <input type="number" name="mIncome" id="mIncome" class="form-control">
+                            <input type="number" name="mIncome" id="mIncome" class="form-control" required>
                         </div>
 
 
@@ -338,12 +338,12 @@
                     <div class="form-contact-info row">
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="higherEducAttain">Higher Education Attainment</label>
-                            <input type="text" name="higherEducAttain" id="higherEducAttain" class="form-control">
+                            <input type="text" name="higherEducAttain" id="higherEducAttain" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="tSchool">Type of School</label>
-                            <select name="tSchool" id="tSchool" class="form-control">
+                            <select name="tSchool" id="tSchool" class="form-control" required>
                                 <option value="public">Public</option>
                                 <option value="private">Private</option>
                             </select>

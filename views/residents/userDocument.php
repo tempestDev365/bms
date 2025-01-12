@@ -1,9 +1,19 @@
 <?php
+include '../../database/databaseConnection.php';
 session_start();
 if(!isset($_SESSION['resident_id'])) {
     header('Location: ./residentLogin.php');
 }
-
+function getDocumentRequested($id){
+    $conn = $GLOBALS['conn'];
+    $qry = "SELECT * FROM document_requested WHERE resident_id = ?";
+    $stmt = $conn->prepare($qry);
+    $stmt->bindParam(1, $id);
+    $stmt->execute();
+    $document_requested = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $document_requested;
+}
+$document_requested = getDocumentRequested($_SESSION['resident_id']);
 ?>
 
 <!DOCTYPE html>
@@ -42,13 +52,13 @@ if(!isset($_SESSION['resident_id'])) {
                 <h2>Document Request</h2>
 
                 <div class="container-fluid p-3 rounded-3 bg-white shadow-sm border">
-                    <form action="">
+                    <form action="../../controllers/documentRequestController.php" method="POST">
                         <div class="form-group">
                             <label>SELECT TYPE OF DOCUMENT</label>
                             <select name="selectDocument" id="selectDocument" class="form-control">
-                                <option value="value">Barangay Certificate</option>
-                                <option value="value">Barangay Indigency</option>
-                                <option value="value">Barangay Clearance</option>
+                                <option value="barangay_certificate">Barangay Certificate</option>
+                                <option value="barangay_indigency">Barangay Indigency</option>
+                                <option value="barangay_clearance">Barangay Clearance</option>
                             </select>
                         </div>
 
@@ -75,34 +85,16 @@ if(!isset($_SESSION['resident_id'])) {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    0231
-                                </td>
-                                <td>
-                                    Barangay Certificate
-                                </td>
-                                <td>
-                                    07/01/2021
-                                </td>
-                                <td>
-                                    <span class="badge bg-success">Approved</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    2321
-                                </td>
-                                <td>
-                                    Barangay Indigency
-                                </td>
-                                <td>
-                                    07/01/2021
-                                </td>
-                                <td>
-                                    <span class="badge bg-danger">Rejected</span>
-                                </td>
-                            </tr>
+                            <?php
+                                 foreach($document_requested as $document){
+                                     echo '<tr>';
+                                     echo '<td>'.$document['id'].'</td>';
+                                    echo '<td>'.$document['document'].'</td>';
+                                    echo '<td>'.$document['time_Created'].'</td>';
+                                    echo '<td>'.$document['status'].'</td>';
+                                   echo '/<tr>';
+                                 }
+                                ?>
                         </tbody>
                     </table>
                 </div>

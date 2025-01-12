@@ -31,9 +31,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     try{
         $current_date = date("Y-m-d H:i:s");
 
-        $picture = isset($_FILES['picture']['tmp_name']) && !empty($_FILES['picture']['tmp_name']) ? base64_encode(resizeImage($_FILES['picture']['tmp_name'],250,250)) : null;
-        $signature = isset($_FILES['signature']['tmp_name']) && !empty($_FILES['signature']['tmp_name']) ? base64_encode(resizeImage($_FILES['signature']['tmp_name'],250,250)) : null;
-        $valid_id = isset($_FILES['validId']['tmp_name']) && !empty($_FILES['validId']['tmp_name']) ? base64_encode(resizeImage($_FILES['validId']['tmp_name'], 250,250)) : null;
+        $picture = isset($_FILES['picture']['tmp_name']) && !empty($_FILES['picture']['tmp_name']) ? base64_encode(resizeImage($_FILES['picture']['tmp_name'],250,250)) : "no images";
+        $signature = isset($_FILES['signature']['tmp_name']) && !empty($_FILES['signature']['tmp_name']) ? base64_encode(resizeImage($_FILES['signature']['tmp_name'],250,250)) : "no images";
+        $valid_id = isset($_FILES['validId']['tmp_name']) && !empty($_FILES['validId']['tmp_name']) ? base64_encode(resizeImage($_FILES['validId']['tmp_name'], 250,250)) : "no images";
 
         $username = $_POST['Username'];
         $password = password_hash($_POST['Password'], PASSWORD_DEFAULT);
@@ -42,7 +42,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         $last_name = $_POST['lastName'];
         $suffix = $_POST['suffix'] ?? "";
         $alias = $_POST['alias'];
-
+        $fullname = $first_name . " " . $middle_name . " " . $last_name . " " . $suffix;
         $insert_into_resident_tbl = "INSERT INTO residents_tbl (username, password, picture, signature, valid_id, first_name, middle_name, last_name, suffix, alias, time_Created) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         $result = $conn->prepare($insert_into_resident_tbl);
 
@@ -63,16 +63,18 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
        if(isset($_SESSION['admin'])){
         $insert_into_pending = "INSERT INTO approved_tbl (Name, resident_id) VALUES (?, ?)";
         $result = $conn->prepare($insert_into_pending);
-        $result->bindParam(1, $username, PDO::PARAM_STR);
+        $result->bindParam(1, $fullname, PDO::PARAM_STR);
         $result->bindParam(2, $resident_id, PDO::PARAM_INT);
         $result->execute();
-       }
         
-        $insert_into_pending = "INSERT INTO pending_accounts_tbl (Name, resident_id,status) VALUES (?, ?, 'pending')";
+       }
+       $insert_into_pending = "INSERT INTO pending_accounts_tbl (Name, resident_id,status) VALUES (?, ?, 'pending')";
         $result = $conn->prepare($insert_into_pending);
-        $result->bindParam(1, $username, PDO::PARAM_STR);
+        $result->bindParam(1, $fullname, PDO::PARAM_STR);
         $result->bindParam(2, $resident_id, PDO::PARAM_INT);
         $result->execute();
+        
+        
         insertIntoResidentInformationTable($resident_id);
         insertIntoResidentFamiltyTable($resident_id);
         insertIntoResidentContactsTable($resident_id);

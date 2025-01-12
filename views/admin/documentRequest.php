@@ -1,8 +1,23 @@
 <?php
 session_start();
+include "../../database/databaseConnection.php";
 if(!isset($_SESSION['admin'])) {
     header('Location: adminLogin.php');
 }
+function getAllDocumentRequest(){
+    $conn = $GLOBALS['conn'];
+    $qry = "SELECT d.*, ri.first_name,ri.middle_name,ri.last_name
+           
+     FROM document_requested d
+     LEFT JOIN residents_tbl ri
+        ON d.resident_id = ri.id
+     ";
+    $result = $conn->prepare($qry);
+    $result->execute();
+    $document_request = $result->fetchAll(PDO::FETCH_ASSOC);
+    return $document_request;
+}
+$document_request = getAllDocumentRequest();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,28 +79,23 @@ if(!isset($_SESSION['admin'])) {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>2301</td>
-                            <td>Caridad J. Sanchez</td>
-                            <td>Barangay Certificate</td>
-                            <td>Rejected</td>
-                            <th>10/17/2024</th>
-                            <td>
-                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#viewProfile">View</button>
-                                <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#selectDocument">Certificate</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>0222</td>
-                            <td>Nieves M, Dela Cruz</td>
-                            <td>Barangay Certificate</td>
-                            <td>Rejected</td>
-                            <th>10/17/2024</th>
-                            <td>
-                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#viewProfile">View</button>
-                                <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#selectDocument">Certificate</button>
-                            </td>
-                        </tr>                        
+                        <?php
+                        foreach($document_request as $request){
+                            echo "
+                            <tr>
+                              <td>{$request['id']}</td>
+                                <td>{$request['first_name']} {$request['middle_name']} {$request['last_name']}</td>
+                                <td>{$request['document']}</td>
+                                <td>{$request['status']}</td>
+                                <td>{$request['time_Created']}</td>
+                                <td>
+                                    <button class='btn btn-primary btn-sm' data-bs-toggle='modal' data-bs-target='#viewProfile' name = '{$request['resident_id']}' data-document = {$request['document']} id = 'viewBtn'>View</button>
+                                    <button class='btn btn-success btn-sm' data-bs-toggle='modal' data-bs-target='#selectDocument' name = '{$request['resident_id']}' id = 'printBtn'>Print</button>
+                                </td>
+                            </tr>
+                            ";
+                        }
+                        ?>
                     </tbody>
                 </table>
             </div>
@@ -106,21 +116,21 @@ if(!isset($_SESSION['admin'])) {
                 <div class="modal-body">
                     <div class="container-fluid">
                       <div class="profile-header d-flex justify-content-start align-items-center" style="gap: 20px">
-                        <img src="../../assets/img/sampleProfile/profile.png" class="img-fluid" style="width: 150px" alt="">
+                        <img src="" class="img-fluid" style="width: 150px" alt="" id = "picture">
                         <div class="profile-detail">
-                            <p>Name:</p>
-                            <p>Age:</p>
-                            <p>Birth Date:</p>
-                            <p>Contact No:</p>
+                            <p id = "name">Name:</p>
+                            <p id = "age">Age:</p>
+                            <p id = "birthDate">Birth Date:</p>
+                            <p id = "contactNo">Contact No:</p>
                         </div>
                       </div>
                       <div class="profile-body border p-3">
-                        <label>Document Request:</label>
-                        <p class="mt-3">Purpose:</p>
+                        <label id = "document">Document Request:</label>
+                        <p class="mt-3" id = "purpose">Purpose:</p>
                       </div>
                       <div class="profile-btn mt-3 d-flex justify-content-end" style="gap: 10px">
-                        <button class="btn btn-success">Approve</button>
-                        <button class="btn btn-danger">Reject</button>
+                        <button class="btn btn-success" name = "" id = "approve" data-document="">Approve</button>
+                        <button class="btn btn-danger" name = "" id = "reject" data-document = "">Reject</button>
                       </div>
                       
                     </div>
@@ -158,7 +168,7 @@ if(!isset($_SESSION['admin'])) {
                     </select>
 
                     <div class="actions d-flex p-3 justify-content-end" style="gap: 5px;">
-                        <button class="btn btn-success btn-sm">PRINT</button>
+                        <button class="btn btn-success btn-sm" id = "modalPrintbtn">PRINT</button>
                         <button class="btn btn-danger btn-sm">CANCEL</button>
                     </div>
                 </div>
@@ -185,49 +195,63 @@ if(!isset($_SESSION['admin'])) {
     <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.colVis.min.js"></script>
     <script src="../components/sidebar.js?v=<?php echo time(); ?>" defer></script>
     <script>  
-        new DataTable('#example', {
-            responsive: true,
-            dom: 'Bfrtip', // Added 'f' for search functionality
-            buttons: [
-                {
-                    extend: 'copy',
-                    exportOptions: {
-                        columns: ':not(:last-child)'
-                    }
-                },
-                {
-                    extend: 'csv',
-                    exportOptions: {
-                        columns: ':not(:last-child)'
-                    }
-                },
-                {
-                    extend: 'excel',
-                    exportOptions: {
-                        columns: ':not(:last-child)'
-                    }
-                },
-                {
-                    extend: 'pdf',
-                    exportOptions: {
-                        columns: ':not(:last-child)'
-                    },
-                    customize: function (doc) {
-                        doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('');
-                        doc.styles.tableHeader.alignment = 'center';
-                        doc.styles.tableBodyEven.alignment = 'center';
-                        doc.styles.tableBodyOdd.alignment = 'center';
-                    }
-                },
-                // Removed search button
-            ]
-        });
-
+        const documentSelected = document.getElementById('selectDocument');
+        const print = document.querySelectorAll('#printBtn');
+        const modalPrintbtn = document.getElementById('modalPrintbtn');
         $('#statusFilter').on('change', function() {
             var filterValue = $(this).val();
             var table = $('#example').DataTable();
             table.column(3).search(filterValue === 'all' ? '' : filterValue, true, false).draw();
         });
+        const approve = document.getElementById('approve');
+        approve.addEventListener('click', async function(e) {
+            const resident_id = e.target.getAttribute('name');
+            const document_request = e.target.getAttribute('data-document');
+            const api = await fetch(`../../controllers/updateDocumentRequest.php?resident_id=${resident_id}&document=${document_request}&action=approve`);
+            const response = await api.json();
+            if(response == 'success'){
+                alert('Document has been approved');
+              window.location.reload();
+            }
+           alert(response.error);
+
+        });
+        const viewBtn = document.querySelectorAll('#viewBtn');
+        viewBtn.forEach(btn => {
+            btn.addEventListener('click', async function(e) {
+                const resident_id = e.target.getAttribute('name');
+                const document_request = e.target.getAttribute('data-document');
+                const api = await fetch(`../../controllers/getDocumentRequestInformation.php?resident_id=${resident_id}&document=${document_request}&action=view`);
+                const response = await api.json();
+               document.querySelector('#picture').src = `data:image/gif;base64,${response.resident_picture}`;
+               document.querySelector('#name').textContent = `Name: ${response.resident_name}`;
+               document.querySelector('#age').textContent = `Age: ${response.resident_age}`;
+               document.querySelector('#birthDate').textContent = `Birth Date: ${response.resident_birthdate}`;
+               document.querySelector('#contactNo').textContent = `Contact No: ${response.mobile_no}`;
+               document.querySelector('#document').textContent = `Document Request: ${response.document_request}`;
+               document.querySelector('#purpose').textContent = `Purpose: ${response.document_purpose}`;
+               document.querySelector('#approve').setAttribute('data-document', response.document_request);
+               document.querySelector('#approve').setAttribute('name', resident_id  );
+                
+            });
+        });
+        print.forEach(btn => {
+            btn.addEventListener('click',  function(e) {
+            
+                const resident_id = e.target.getAttribute('name');
+                const currentURL  = new URL(window.location.href);
+                currentURL.searchParams.delete('resident_id');
+                currentURL.searchParams.set('resident_id', resident_id);
+                window.history.pushState({}, '', currentURL);
+
+            });
+        })
+     modalPrintbtn.addEventListener('click', function(e) {
+        const documentSelected = document.getElementById('selectDocument').value;
+        const params = new URLSearchParams(window.location.search);
+        const resident_id = params.get('resident_id');
+        console.log(resident_id);
+     });
     </script>
 </body>
 </html>

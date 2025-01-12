@@ -12,6 +12,15 @@ function getAllAnnouncement(){
     $announcement = $result->fetchAll(PDO::FETCH_ASSOC);
     return $announcement;
 }
+function getComments( $announcement_id){
+    $conn = $GLOBALS['conn'];
+    $qry = "SELECT * FROM comments_tbl WHERE announcement_id = ?";
+    $stmt = $conn->prepare($qry);
+    $stmt->bindParam(1, $announcement_id);
+    $stmt->execute();
+    $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $comments;
+}
 $announcements = getAllAnnouncement();
 ?>
 
@@ -73,27 +82,18 @@ $announcements = getAllAnnouncement();
                         <div class="card-content">
                            '.$announcement['content'].'
                         </div>
-
-                        <div class="card-comments mt-3">
-                            <label class="fw-bold">Comments:</label>
-                            
-                            <div class="comments mt-2" style="font-size: 0.8rem;">
-                                <div class="username">
-                                    - John Doe
-                                </div>
-                                <div class="user-messages">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum qui, corporis assumenda facilis nemo tenetur dolorum dolores, magni autem odit similique incidunt. Fugit recusandae expedita voluptatum voluptas earum! Doloribus, reiciendis?
-                                </div>
-                            </div>
-
-                            <div class="comments mt-2" style="font-size: 0.8rem;">
-                                <div class="username">
-                                    - Eren Yeager
-                                </div>
-                                <div class="user-messages">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum qui, corporis assumenda facilis nemo tenetur dolorum dolores, magni autem odit similique incidunt. Fugit recusandae expedita voluptatum voluptas earum! Doloribus, reiciendis?
-                                </div>
-                            </div>
+                        <div class="card-footer">
+                            <div class="h6">Comments</div>';
+                            $comments = getComments($announcement['id']);
+                            foreach($comments as $comment){
+                                if($comment['announcement_id'] == $announcement['id']){
+                                    echo '<div class="card-comment">
+                                    '.$comment['comment'].'
+                                </div>';
+                                }
+                            }
+                        echo '</div>
+                        
                           
                            
                         </div>
