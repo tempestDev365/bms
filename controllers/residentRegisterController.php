@@ -60,16 +60,17 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         $result->execute();
         $resident_id = $conn->lastInsertId();
         
-       if(!$_SESSION['admin']){
-        $insert_into_pending = "INSERT INTO pending_accounts_tbl (Name, resident_id,status) VALUES (?, ?, 'pending')";
+       if(isset($_SESSION['admin'])){
+        $insert_into_pending = "INSERT INTO approved_tbl (Name, resident_id) VALUES (?, ?)";
         $result = $conn->prepare($insert_into_pending);
         $result->bindParam(1, $username, PDO::PARAM_STR);
         $result->bindParam(2, $resident_id, PDO::PARAM_INT);
         $result->execute();
        }
-        $insert_into_pending = "INSERT INTO approved_tbl (Name, resident_id) VALUES (?, ?)";
+        
+        $insert_into_pending = "INSERT INTO pending_accounts_tbl (Name, resident_id,status) VALUES (?, ?, 'pending')";
         $result = $conn->prepare($insert_into_pending);
-        $result->bindParam(1, $first_name, PDO::PARAM_STR);
+        $result->bindParam(1, $username, PDO::PARAM_STR);
         $result->bindParam(2, $resident_id, PDO::PARAM_INT);
         $result->execute();
         insertIntoResidentInformationTable($resident_id);
