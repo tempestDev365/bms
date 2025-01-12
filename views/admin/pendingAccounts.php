@@ -66,6 +66,7 @@ $pending_accounts = $stmt->fetchAll();
                             echo  "<td>
                             <button class='btn btn-sm btn-primary' name = {$accounts['id']} id = 'approve'>Approve</button>
                             <button class='btn btn-sm btn-danger'  name = {$accounts['id']} id = 'reject'>Decline</button>
+                             <button class='btn btn-sm btn-primary'  name = {$accounts['resident_id']} id = 'view' data-bs-toggle='modal' data-bs-target='#viewProfile'>view</button>
                             </td>
                             ";
                             echo "</tr>";
@@ -94,75 +95,72 @@ $pending_accounts = $stmt->fetchAll();
 
                 <div class="modal-body">
                 
-                    <div class="container-id p-3 d-flex justify-content-center" style="gap: 1rem; flex-wrap: wrap;">
-                        <div class="card shadow-sm" style="flex: 1 1 300px; min-height: 300px">Profile</div>
-                        <div class="card shadow-sm" style="flex: 1 1 300px; min-height: 300px">Signature</div>
-                        <div class="card shadow-sm" style="flex: 1 1 300px; min-height: 300px">Valid ID</div>
+                        <div class="container-id p-3 d-flex justify-content-center" style="gap: 1rem; flex-wrap: wrap;">
+                        <div class="card shadow-sm" style="flex: 1 1 300px; min-height: 300px"><img src="" alt="" class="picture"></div>
+                        <div class="card shadow-sm" style="flex: 1 1 300px; min-height: 300px"><img src="" alt="" class = "signature"></div>
+                        <div class="card shadow-sm" style="flex: 1 1 300px; min-height: 300px"><img src="" alt="" class = "valid_id"></div>
                     </div>
                     <div class="box-body row">
-                            <div class="personal-info col-md-12 col-lg-4 d-flex flex-column" style="gap: 5px;">
-                                <div class="box-header">
-                                    <h4>Personal Information</h4>
-                                </div>
-                                    <label>Full Name:</label>
-                                    <label>Sex:</label>
-                                    <label>Birthdate:</label>
-                                    <label>Birthplace:</label>
-                                    <label>Civil Status:</label>
-                                    <label>Height:</label>
-                                    <label>Weight:</label>
-                                    <label>Blood Type:</label>
-                                    <label>Religion:</label>
-                                    <label>Ethnic Origin:</label>
-                                    <label>Nationality:</label>
-                                    <label>Precinct Number:</label>
-                                    <label>Registered Voter:</label>
-                                    <label>Organization Member:</label>
+                        <div class="personal-info col-md-12 col-lg-4 d-flex flex-column" style="gap: 5px;">
+                            <div class="box-header">
+                                <h4>Personal Information</h4>
                             </div>
-                            <div class="other-info col-md-12 col-lg-4 d-flex flex-column" style="gap: 5px;">
-                                <div class="contact-header">
-                                    <h4>Contact Information</h4>
-                                </div>
-                                    <label>Email:</label>
-                                    <label>Mobile Number:</label>
-                                    <label>Tel No:</label>
-                                <div class="contact-header">
-                                    <h4>Incase of Emergency</h4>
-                                </div>
-                                    <label>Fullname</label>
-                                    <label>Contact Number:</label>
-                                    <label>Address:</label>
-                                <div class="contact-header">
-                                    <h4>Family Information</h4>
-                                </div>
-                                    <label>Mother:</label>
-                                    <label>Father:</label>
-                                    <label>Spouse:</label>
-                                <div class="contact-header">
-                                    <h4>Educational Information:</h4>
-                                </div>
-                                    <label>Highest Education Attainment:</label>
-                                    <label>Type of School:</label>
-                            
+                            <label id="fullName">Full Name:</label>
+                            <label id="sex">Sex:</label>
+                            <label id="birthdate">Birthdate:</label>
+                            <label id="birthplace">Birthplace:</label>
+                            <label id="civilStatus">Civil Status:</label>
+                            <label id="height">Height:</label>
+                            <label id="weight">Weight:</label>
+                            <label id="bloodType">Blood Type:</label>
+                            <label id="religion">Religion:</label>
+                            <label id="ethnicOrigin">Ethnic Origin:</label>
+                            <label id="nationality">Nationality:</label>
+                            <label id="precinctNumber">Precinct Number:</label>
+                            <label id="registeredVoter">Registered Voter:</label>
+                            <label id="organizationMember">Organization Member:</label>
+                        </div>
+                        <div class="other-info col-md-12 col-lg-4 d-flex flex-column" style="gap: 5px;">
+                            <div class="contact-header">
+                                <h4>Contact Information</h4>
                             </div>
-
-                            <div class="other-info-2 col-md-12 col-lg-4 d-flex flex-column" style="gap: 5px;">
-                                <div class="contact-header">
-                                    <h4>Address Information</h4>
-                                </div>
-                                    <label>House Number:</label>
-                                    <label>Purok:</label>
-                                    <label>Full Address:</label>
-                                    <label>Street:</label>
-                                    <label>Hoa:</label>
-                                <div class="contact-header">
-                                    <h4>Employment Information:</h4>
-                                </div>
-                                    <label>Employment Status:</label>
-                                    <label>Employment Field:</label>
-                                    <label>Occupation:</label>
-                                    <label>Monthly Income:</label>
+                            <label id="email">Email:</label>
+                            <label id="mobileNumber">Mobile Number:</label>
+                            <label id="telNo">Tel No:</label>
+                            <div class="contact-header">
+                                <h4>Incase of Emergency</h4>
                             </div>
+                            <label id="emergencyFullName">Fullname</label>
+                            <label id="emergencyContactNumber">Contact Number:</label>
+                            <label id="emergencyAddress">Address:</label>
+                            <div class="contact-header">
+                                <h4>Family Information</h4>
+                            </div>
+                            <label id="mother">Mother:</label>
+                            <label id="father">Father:</label>
+                            <label id="spouse">Spouse:</label>
+                            <div class="contact-header">
+                                <h4>Educational Information:</h4>
+                            </div>
+                            <label id="highestEducation">Highest Education Attainment:</label>
+                            <label id="typeOfSchool">Type of School:</label>
+                        </div>
+                        <div class="other-info-2 col-md-12 col-lg-4 d-flex flex-column" style="gap: 5px;">
+                            <div class="contact-header">
+                                <h4>Address Information</h4>
+                            </div>
+                            <label id="houseNumber">House Number:</label>
+                            <label id="purok">Purok:</label>
+                            <label id="fullAddress">Full Address:</label>
+                            <label id="street">Street:</label>
+                            <label id="hoa">Hoa:</label>
+                            <div class="contact-header">
+                                <h4>Employment Information:</h4>
+                            </div>
+                            <label id="employmentStatus">Employment Status:</label>
+                            <label id="employmentField">Employment Field:</label>
+                            <label id="occupation">Occupation:</label>
+                            <label id="monthlyIncome">Monthly Income:</label>
                         </div>
                     </div>
 
@@ -262,6 +260,60 @@ $pending_accounts = $stmt->fetchAll();
                 }
             })
         })
+        const viewBtn =document.querySelectorAll('#view');
+        viewBtn.forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                const id = e.target.name;
+                const api = await fetch(`../../controllers/getAllResidentInformationController.php?action=view&id=${id}`)
+                const response = await api.json();
+               populateModal(response.resident_picture,response.resident_signature,response.resident_valid_id,response.resident_fullname,response.resident_sex,response.resident_birthdate,
+               response.resident_birthplace,response.resident_civil_status,response.resident_height,response.resident_weight,response.resident_blood_type,response.resident_religion,response.resident_ethnic_origin,response.resident_nationality,response.resident_precint_number,response.resident_is_voter,response.resident_org_member,
+                response.resident_email,response.resident_mobile_number,response.resident_tel_no,response.resident_ICOE_fullname,response.resident_ICOE_contact_number,response.resident_ICOE_address,response.resident_mother_name,response.resident_father_name,response.resident_spouse_name,response.resident_highest_educational_attainment,response.resident_type_of_school,
+                response.resident_house_number,response.resident_purok,response.resident_full_address,response.resident_street,response.resident_hoa,response.resident_employment_status,response.resident_employment_field,response.resident_occupation,response.resident_monthly_income)
+
+            })
+        })
+        function populateModal(picture,signature,valid_id,fullName,sex,birthdate,birthplace,civilStatus,height,weight,bloodType,religion,ethnicOrigin,nationality,precinctNumber,registeredVoter,organizationMember,email,mobileNumber,telNo,emergencyFullName,emergencyContactNumber,emergencyAddress,mother,father,spouse,highestEducation,typeOfSchool,houseNumber,purok,fullAddress,street,hoa,employmentStatus,employmentField,occupation,monthlyIncome){
+            document.querySelector('.picture').src = "data:image/gif;base64," + picture;
+            document.querySelector('.signature').src = "data:image/gif;base64," + signature;
+            document.querySelector('.valid_id').src = "data:image/gif;base64," + valid_id;
+            document.getElementById('fullName').value = fullName;
+            document.getElementById("sex").value =sex
+            document.getElementById("birthdate").value = birthdate
+             document.getElementById("birthplace").value = birthplace
+            document.getElementById("civilStatus").value = civilStatus
+            document.getElementById("height").value = height
+             document.getElementById("weight").value = weight
+            document.getElementById("bloodType").value = bloodType
+             document.getElementById("religion").value = religion
+            document.getElementById("ethnicOrigin").value = ethnicOrigin
+             document.getElementById("nationality").value
+             document.getElementById("precinctNumber").value = precinctNumber
+            document.getElementById("registeredVoter").value = registeredVoter
+            document.getElementById("organizationMember").value = organizationMember
+            document.getElementById("email").value = email
+            document.getElementById("mobileNumber").value = mobileNumber
+             document.getElementById("telNo").value = telNo
+            document.getElementById("emergencyFullName").value = emergencyFullName
+            document.getElementById("emergencyContactNumber").value = emergencyContactNumber
+             document.getElementById("emergencyAddress").value = emergencyAddress
+             document.getElementById("mother").value = mother
+            document.getElementById("father").value = father
+            document.getElementById("spouse").value = spouse
+             document.getElementById("highestEducation").value = highestEducation
+             document.getElementById("typeOfSchool").value = typeOfSchool
+             document.getElementById("houseNumber").value = houseNumber
+             document.getElementById("purok").value = purok
+             document.getElementById("fullAddress").value = fullAddress
+            document.getElementById("street").value = street
+            document.getElementById("hoa").value = hoa
+            document.getElementById("employmentStatus").value = employmentStatus
+           document.getElementById("employmentField").value = employmentField
+            document.getElementById("occupation").value = occupation
+         document.getElementById("monthlyIncome").value = monthlyIncome
+
+
+        }
     </script>
 </body>
 </html>

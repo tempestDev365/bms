@@ -10,13 +10,14 @@ if(!isset($_SESSION['admin'])) {
 $resident_qry = "
     SELECT 
         r.id, r.first_name, r.middle_name, r.last_name, 
-        ri.sex, ri.age 
+        ri.sex, ri.age, 
+        a.*
     FROM 
-        residents_tbl r
+        approved_tbl a
     LEFT JOIN 
-        resident_information ri 
-    ON 
-        r.id = ri.resident_id
+        residents_tbl r ON a.resident_id = r.id
+    LEFT JOIN 
+        resident_information ri ON r.id = ri.resident_id
 ";
 $stmt = $conn->prepare($resident_qry);
 $stmt->execute();
@@ -302,7 +303,7 @@ $resident_result = $stmt->fetchAll();
          viewDetail.forEach((btn) => {
               btn.addEventListener('click', async (e) => {
                 const id = e.target.name;
-                const response = await fetch(`../../controllers/getAllResidentInformationController.php?id=${id}`);
+                const response = await fetch(`../../controllers/getAllResidentInformationController.php?id=${id}&action=view`);
                 const data = await response.json();
                 console.log(data)
               });

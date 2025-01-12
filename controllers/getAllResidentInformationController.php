@@ -1,6 +1,10 @@
 <?php
+
+$id = $_GET['id'];
 function getAllResidentInformation($id){
+    include '../database/databaseConnection.php';
     $conn = $GLOBALS['conn'];
+
     $resident_tbl_qry = "SELECT * FROM residents_tbl WHERE id = ?";
     $stmt = $conn->prepare($resident_tbl_qry);
     $stmt->bindParam(1, $id);
@@ -75,10 +79,9 @@ function getAllResidentInformation($id){
         'resident_occupation'=>$resident_employment_result['occupation'],
         'resident_monthly_income'=>$resident_employment_result['monthly_income'],
    ];
-if($_GET['id']){
-    $resident_information = getAllResidentInformation($_GET['id']);
-    echo json_encode($resident_information);
 }
+if($_GET['action'] == "view"){
+    header('Content-Type: application/json');
+    echo json_encode(getAllResidentInformation($id));
 }
-
 ?>
