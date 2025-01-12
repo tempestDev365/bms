@@ -216,6 +216,20 @@ $document_request = getAllDocumentRequest();
            alert(response.error);
 
         });
+        const reject = document.getElementById('reject');
+        reject.addEventListener("click", async function(e) {
+            const resident_id = e.target.getAttribute('name');
+            const document_request = e.target.getAttribute('data-document');
+            const api = await fetch(`../../controllers/updateDocumentRequest.php?resident_id=${resident_id}&document=${document_request}&action=reject`);
+            const response = await api.json();
+            if(response.message){
+                alert('Document has been rejected');
+                window.location.reload();
+            }
+           if(response.error){
+               alert(response.error);
+           }
+        });
         const viewBtn = document.querySelectorAll('#viewBtn');
         viewBtn.forEach(btn => {
             btn.addEventListener('click', async function(e) {
@@ -232,6 +246,9 @@ $document_request = getAllDocumentRequest();
                document.querySelector('#purpose').textContent = `Purpose: ${response.document_purpose}`;
                document.querySelector('#approve').setAttribute('data-document', response.document_request);
                document.querySelector('#approve').setAttribute('name', resident_id  );
+                document.querySelector('#reject').setAttribute('data-document', response.document_request);
+                document.querySelector('#reject').setAttribute('name', resident_id);
+
                 
             });
         });
