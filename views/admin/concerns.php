@@ -114,7 +114,7 @@ if(!isset($_SESSION['admin'])) {
     <script>  
         new DataTable('#example', {
             responsive: true,
-            dom: 'Brtip', 
+            dom: 'Bfrtip', 
             buttons: [
                 {
                     extend: 'copy',
@@ -146,7 +146,6 @@ if(!isset($_SESSION['admin'])) {
                         doc.styles.tableBodyOdd.alignment = 'center';
                     }
                 },
-                // Removed search button
             ]
         });
 
