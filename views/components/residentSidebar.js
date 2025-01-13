@@ -25,9 +25,13 @@ if (residentSidebar) {
                     <a href="./userDocument.php" class="nav-link text-white">Document Request</a>
                 </li>
                 <li class="nav-item d-flex justify-content-start align-items-center">
+                    <a href="./residentConcerns.php" class="nav-link text-white">Concerns</a>
+                </li>
+                <li class="nav-item d-flex justify-content-start align-items-center">
                     <a href="./userNotification.php" class="nav-link text-white">Notification</a>
                     <span class="badge bg-danger text-white">3</span>
                 </li>
+                
                 <li class="nav-item">
                     <a href="../../controllers/logoutController.php" class="nav-link text-white" >Logout</a>
                 </li>
