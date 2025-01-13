@@ -253,13 +253,13 @@ $document_request = getAllDocumentRequest();
         const status = document.querySelectorAll('#status');
         status.forEach(stat => {
             if(stat.textContent == 'pending'){
-                stat.style.color = 'yellow';
+                stat.style.color = 'darkorange';
                 print.forEach(btn => {
                     btn.disabled = true;
                 });
             }
             if(stat.textContent == 'approved'){
-                stat.style.color = 'green';
+                stat.style.color = 'lightgreen';
                 print.forEach(btn => {
                     btn.disabled = false;
                 });
