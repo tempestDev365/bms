@@ -58,7 +58,7 @@ if(!isset($_SESSION['admin'])) {
                             <td>Caridad J. Sanchez</td>
                             <td>Punong Barangay</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBtn">Edit</button>
                                 <button class="btn btn-danger">Delete</button>
 
                             </td>
@@ -68,7 +68,7 @@ if(!isset($_SESSION['admin'])) {
                             <td>Nieves M, Dela Cruz</td>
                             <td>Kagawad</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBtn">Edit</button>
                                 <button class="btn btn-danger">Delete</button>
 
                             </td>
@@ -78,7 +78,7 @@ if(!isset($_SESSION['admin'])) {
                             <td>Ronald F. Marquez</td>
                             <td>Kagawad</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBtn">Edit</button>
                                 <button class="btn btn-danger">Delete</button>
 
                             </td>
@@ -88,7 +88,7 @@ if(!isset($_SESSION['admin'])) {
                             <td>Cesar R. Concepcion</td>
                             <td>Kagawad</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBtn">Edit</button>
                                 <button class="btn btn-danger">Delete</button>
 
                             </td>
@@ -98,7 +98,7 @@ if(!isset($_SESSION['admin'])) {
                             <td>Lolita E. Marquez</td>
                             <td>Kagawad</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBtn">Edit</button>
                                 <button class="btn btn-danger">Delete</button>
 
                             </td>
@@ -108,7 +108,7 @@ if(!isset($_SESSION['admin'])) {
                             <td>Angeline Rose D. Sanchez</td>
                             <td>Kagawad</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBtn">Edit</button>
                                 <button class="btn btn-danger">Delete</button>
 
                             </td>
@@ -118,7 +118,7 @@ if(!isset($_SESSION['admin'])) {
                             <td>Leo J. Ignacio</td>
                             <td>Kagawad</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBtn">Edit</button>
                                 <button class="btn btn-danger">Delete</button>
 
                             </td>
@@ -128,7 +128,7 @@ if(!isset($_SESSION['admin'])) {
                             <td>Ervin G. Ignacio</td>
                             <td>Kagawad</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBtn">Edit</button>
                                 <button class="btn btn-danger">Delete</button>
 
                             </td>
@@ -138,7 +138,7 @@ if(!isset($_SESSION['admin'])) {
                             <td>Juanise Raniel I. Ignacio</td>
                             <td>SK Kagawad</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBtn">Edit</button>
                                 <button class="btn btn-danger">Delete</button>
 
                             </td>
@@ -148,7 +148,7 @@ if(!isset($_SESSION['admin'])) {
                             <td>John Paul T. Grande</td>
                             <td>Secretary</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBtn">Edit</button>
                                 <button class="btn btn-danger">Delete</button>
 
                             </td>
@@ -158,7 +158,7 @@ if(!isset($_SESSION['admin'])) {
                             <td>Arthur B. Castor</td>
                             <td>Treasurer</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBtn">Edit</button>
                                 <button class="btn btn-danger">Delete</button>
 
                             </td>
@@ -168,7 +168,7 @@ if(!isset($_SESSION['admin'])) {
                             <td>Robert F. Cuevas</td>
                             <td>Admin.</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBtn">Edit</button>
                                 <button class="btn btn-danger">Delete</button>
 
                             </td>
@@ -178,7 +178,7 @@ if(!isset($_SESSION['admin'])) {
                             <td>Ramon G. Colmenar</td>
                             <td>EX-0</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBtn">Edit</button>
                                 <button class="btn btn-danger">Delete</button>
 
                             </td>
@@ -190,6 +190,31 @@ if(!isset($_SESSION['admin'])) {
 
         </div>
         
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editBtn" tabindex="-1" aria-labelledby="editBtnLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editBtnLabel">Edit Official</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="position" class="form-label">Position</label>
+                            <input type="text" class="form-control" id="position" name="position" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     
 
