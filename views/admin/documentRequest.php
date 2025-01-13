@@ -264,7 +264,7 @@ $document_request = getAllDocumentRequest();
                     btn.disabled = false;
                 });
             }
-            }
+            
             if(stat.textContent == 'rejected'){
                 stat.style.color = 'red';
                 print.forEach(btn => {
@@ -273,6 +273,8 @@ $document_request = getAllDocumentRequest();
                 
             }
         });
+
+      
         print.forEach(btn => {
             btn.addEventListener('click',  function(e) {
             
