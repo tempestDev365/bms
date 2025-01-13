@@ -54,6 +54,11 @@ if (sidebar) {
                         <li class="nav-item">
                             <a href="./officials.php" class="nav-link text-light">Officials</a>
                         </li>
+
+                         <li class="nav-item">
+                            <a href="./concerns.php" class="nav-link text-light">Concerns</a>
+                        </li>
+
                         <li class="nav-item">
                             <a href="../../controllers/logoutController.php" class="nav-link text-light">Logout</a>
                         </li>
