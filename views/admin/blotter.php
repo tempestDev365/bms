@@ -77,7 +77,7 @@ $blotter = getAllBlotter();
                             echo"<td>".$row['first_witness']."</td>";
                             echo"<td>".$row['second_witness']."</td>";
                             echo"<td><button class='btn btn-sm btn-primary' data-bs-toggle='modal' data-bs-target='#viewDetail' id = 'viewBtn' onclick='viewDetail(".$row['id'].")'>View</button>
-                                     <button class='btn btn-sm btn-primary' data-bs-toggle='modal' data-bs-target='#editDetail'>Edit</button>
+                                     <button class='btn btn-sm btn-primary' data-bs-toggle='modal' data-bs-target='#editDetail' onClick = 'editBlotter(".$row['id'].")'>Edit</button>
                                     <button class='btn btn-sm btn-danger' data-bs-toggle='modal' onClick= 'deleteBlotter(".$row['id'].")'>Delete</button>
                                 </td>";
                             echo"</tr>";
@@ -107,18 +107,18 @@ $blotter = getAllBlotter();
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid border p-3">
-                        <form action="">
-                            <p>Barangay: Sinbanali</p>
-                            <p>Purok: <span contenteditable="true" id="purok">1</span></p>
-                            <p>Place of the Incident: <span contenteditable="true" id = "incidentPlace"></span></p>
-                            <p>Date & Time: <span contenteditable="true" id="date"></span></p>
-                            <p>Complainant: <span contenteditable="true" id="complainant"></span></p>
-                            <p>Witness 1: <span  contenteditable="true" id="first_witness"></span></p>
-                            <p>Witness 2: <span contenteditable="true" id="second_witness"></span></p>
-                            <p>Narrative: <span contenteditable="true" id="narrative"></span></p>
-                            <div class="d-flex justify-content-end">
-                                <button class="btn btn-success btn-sm">Save</button>
-                            </div>
+                        <form action="" method = "POST" id = "editBlotter">
+                          <p>Barangay: Sinbanali</p>
+    <p>Purok: <input type="text" name="purok" id="purok" value="1" class="form-control" required></p>
+    <p>Place of the Incident: <input type="text" name="incidentPlace" id="incidentPlace" class="form-control" required></p>
+    <p>Date & Time: <input type="datetime-local" name="date" id="date" class="form-control" required></p>
+    <p>Complainant: <input type="text" name="complainant" id="complainant" class="form-control" required></p>
+    <p>Witness 1: <input type="text" name="first_witness" id="first_witness" class="form-control"></p>
+    <p>Witness 2: <input type="text" name="second_witness" id="second_witness" class="form-control"></p>
+    <p>Narrative: <textarea name="narrative" id="narrative" class="form-control" required></textarea></p>
+    <div class="d-flex justify-content-end">
+        <button class="btn btn-success btn-sm" type="submit">Save</button>
+    </div>
                         </form>
 
                     </div>
@@ -267,6 +267,11 @@ $blotter = getAllBlotter();
             const api = await fetch(`../../controllers/blotterOptionsController.php?id=${id}&action=delete`);
             const data = await api.json();
             location.reload();
+        }
+        const editBlotter = async (id) =>{
+           const form =document.querySelector('#editBlotter');
+           form.action = `../../controllers/blotterOptionsController.php?id=${id}&action=edit`;
+           
         }
     </script>
 

@@ -142,6 +142,7 @@ $officials = getAllOfficials();
     const editOfficial = (id) => {
       const form = document.querySelector('form');
         form.action = `../../controllers/officialsOptionsController.php?action=edit&id=${id}`;
+        
     }
     </script>
 </body>
