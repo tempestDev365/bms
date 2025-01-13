@@ -3,6 +3,45 @@ session_start();
 if(!isset($_SESSION['admin'])) {
     header('Location: adminLogin.php');
 }
+function getAllDemographic(){
+    include '../../database/databaseConnection.php';
+    $conn = $GLOBALS['conn'];
+    $resident_qry_count = "SELECT COUNT(*) as total_resident FROM approved_tbl";
+    $female_qry_count = "SELECT COUNT(ri.sex) as total_female
+    FROM approved_tbl a
+    LEFT JOIN resident_information ri ON a.resident_id = ri.resident_id
+    WHERE ri.sex = 'female'
+    ";
+    $male_qry_count = "SELECT COUNT(ri.sex) as total_male
+    FROM approved_tbl a
+    LEFT JOIN resident_information ri ON a.resident_id = ri.resident_id
+    WHERE ri.sex = 'male'
+    ";
+    $voter_qry_count = "SELECT COUNT(ri.registered_voter) as total_voters
+    FROM approved_tbl a
+    LEFT JOIN resident_information ri ON a.resident_id = ri.resident_id
+    WHERE ri.registered_voter = 1
+    ";
+    $resident_result = $conn->prepare($resident_qry_count);
+    $resident_result->execute();
+    $female_result = $conn->prepare($female_qry_count);
+    $female_result->execute();
+    $male_result = $conn->prepare($male_qry_count);
+    $male_result->execute();
+    $voter_result = $conn->prepare($voter_qry_count);
+    $voter_result->execute();
+    $resident_count = $resident_result->fetch(PDO::FETCH_ASSOC);
+    $female_count = $female_result->fetch(PDO::FETCH_ASSOC);
+    $male_count = $male_result->fetch(PDO::FETCH_ASSOC);
+    $voter_count = $voter_result->fetch(PDO::FETCH_ASSOC);
+    return [
+        'resident_count' => $resident_count['total_resident'],
+        'female_count' => $female_count['total_female'],
+        'male_count' => $male_count['total_male'],
+        'voter_count' => $voter_count['total_voters']
+    ];
+}
+$demographic = getAllDemographic();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +78,7 @@ if(!isset($_SESSION['admin'])) {
                         </div>
                         <div class="card-title d-flex justify-content-between align-items-center" style="gap: 10px">
                             <h5>Total Residents:</h5>
-                            <h3>0</h5>
+                            <h3><?php echo $demographic['resident_count'] ?></h5>
                         </div>
                     </div>
                 </div>
@@ -52,7 +91,7 @@ if(!isset($_SESSION['admin'])) {
                         </div>
                         <div class="card-title d-flex justify-content-between align-items-center" style="gap: 10px">
                             <h5>Total Female:</h5>
-                            <h3>0</h5>
+                            <h3><?php echo $demographic['female_count'] ?></h5>
                         </div>
                     </div>
                 </div>
@@ -65,7 +104,7 @@ if(!isset($_SESSION['admin'])) {
                         </div>
                         <div class="card-title d-flex justify-content-between align-items-center" style="gap: 10px">
                             <h5>Total Male:</h5>
-                            <h3>0</h5>
+                            <h3><?php echo $demographic['male_count'] ?></h5>
                         </div>
                     </div>
                 </div>
@@ -78,7 +117,7 @@ if(!isset($_SESSION['admin'])) {
                         </div>
                         <div class="card-title d-flex justify-content-between align-items-center" style="gap: 10px">
                             <h5>Total Voters:</h5>
-                            <h3>0</h5>
+                            <h3><?php echo $demographic['voter_count'] ?></h5>
                         </div>
                     </div>
                 </div>
