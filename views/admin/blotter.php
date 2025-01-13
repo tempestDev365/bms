@@ -5,8 +5,14 @@ if(!isset($_SESSION['admin'])) {
 }
 function getAllBlotter(){
 include_once "../../database/databaseConnection.php";
-
+   $conn = $GLOBALS['conn'];
+   $qry = "SELECT * FROM blotter_tbl";
+   $stmt = $conn->prepare($qry);
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+    return $result;
 }
+$blotter = getAllBlotter();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +56,21 @@ include_once "../../database/databaseConnection.php";
                         </tr>
                     </thead>
                     <tbody>
-                        
+                        <?php
+                          foreach($blotter as $row){
+                            echo"<tr>";
+                            echo"<td>".$row['id']."</td>";
+                            echo"<td>".$row['narrator_complaint']."</td>";
+                            echo"<td>".$row['first_witness']."</td>";
+                            echo"<td>".$row['second_witness']."</td>";
+                            echo"<td><button class='btn btn-sm btn-primary' data-bs-toggle='modal' data-bs-target='#viewDetail' id = 'viewBtn' onclick='viewDetail(".$row['id'].")'>View</button>
+                                     <button class='btn btn-sm btn-primary' data-bs-toggle='modal' data-bs-target='#viewDetail'>Edit</button>
+                                    <button class='btn btn-sm btn-danger' data-bs-toggle='modal' onClick= 'deleteBlotter(".$row['id'].")'>Delete</button>
+                                </td>";
+                            echo"</tr>";
+
+                          }
+                        ?>
                     </tbody>
                     
                 </table>
@@ -76,12 +96,12 @@ include_once "../../database/databaseConnection.php";
                     <div class="container-fluid border p-3">
                         <p>Barangay: Sinbanali</p>
                         <p>Purok: <span id="purok">1</span></p>
-                        <p>Place of the Incident: <span id="incidentPlace">Kanto</span></p>
-                        <p>Date & Time: <span>1/10/2025 & 8:00 AM</span></p>
-                        <p>Complainant: <span>John Doe</span></p>
-                        <p>Witness 1: <span>Test 1</span></p>
-                        <p>Witness 2: <span>Test 2</span></p>
-                        <p>Narrative: Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab quae ducimus odit quasi quia esse? Saepe suscipit, nesciunt at doloremque possimus quis praesentium rerum? Ipsum aliquam accusamus delectus eaque deserunt!</p>
+                        <p>Place of the Incident: <span id="incidentPlace"></span></p>
+                        <p>Date & Time: <span id ="date"></span></p>
+                        <p>Complainant: <span id = "complainant"></span></p>
+                        <p>Witness 1: <span  id = "first_witness"></span></p>
+                        <p>Witness 2: <span id = "second_witness"></span></p>
+                        <p>Narrative: <span id = "narrative"></span></p>
 
                     </div>
                 </div>
@@ -144,11 +164,6 @@ include_once "../../database/databaseConnection.php";
                             <div class="form-group mt-2 d-flex justify-content-end">
                                 <button class="btn btn-sm btn-success">CREATE</button>
                             </div>
-
-
-
-
-
                         </form>
                     </div>
                 </div>
@@ -191,7 +206,23 @@ include_once "../../database/databaseConnection.php";
                     e.target.value = '';
                 }
               
-        })
+        })        
+        const viewDetail = async (id) =>{
+           const api = await fetch(`../../controllers/blotterOptionsController.php?id=${id}&action=view`);
+            const data = await api.json();
+             document.querySelector("#incidentPlace").textContent = data.place;
+                document.querySelector("#complainant").textContent = data.complainant;
+                document.querySelector("#first_witness").textContent = data.first_witness;
+                document.querySelector("#second_witness").textContent = data.second_witness;
+                document.querySelector("#date").textContent = data.date;
+                document.querySelector("#narrative").textContent = data.narrative;
+
+        }
+        const deleteBlotter = async (id) =>{
+            const api = await fetch(`../../controllers/blotterOptionsController.php?id=${id}&action=delete`);
+            const data = await api.json();
+            location.reload();
+        }
     </script>
 
 </body>
