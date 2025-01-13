@@ -97,6 +97,7 @@ $resident_result = $stmt->fetchAll();
             <td>
                 <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#viewDetail" id = "viewBtn" name = " <?php echo $value['resident_id']; ?> "</button>View</button>
                 <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#selectDocument">Issue Certificate</button>
+                <button class="btn btn-danger btn-sm">Delete</button>
             </td>
             </tr>
             <?php endforeach; ?>
@@ -207,7 +208,7 @@ $resident_result = $stmt->fetchAll();
                 </div>
                 <div class="modal-body">
                     <label for="selectDocument">Select type of documents</label>
-                    <select name="selectDocument" id="selectDocument" class="form-control">
+                    <select name="document" id="document" class="form-control">
                         <option value="CLEARANCE">BARANGAY CLEARANCE</option>
                         <option value="CERTIFICATE">BARANGAY CERTIFICATE</option>
                         <option value="INDIGENCY">BARANGAY INDIGENCY</option>

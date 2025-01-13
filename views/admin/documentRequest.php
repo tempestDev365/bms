@@ -301,7 +301,7 @@ $document_request = getAllDocumentRequest();
                 window.location.href = `${baseURL}certificateResident.php?resident_id=${resident_id}`;
                 break;
                 case 'NON-RESIDENT':
-                window.location.href = `${baseURL}certificateForNonResident.php?resident_id=${resident_id}`;
+                window.location.href = `${baseURL}certificateNonResident.php?resident_id=${resident_id}`;
                 break;
                 case 'B.PERMIT':
                 window.location.href = `${baseURL}businessPermit.php?resident_id=${resident_id}`;
@@ -310,13 +310,13 @@ $document_request = getAllDocumentRequest();
                 window.location.href = `${baseURL}certificateGuardian.php?resident_id=${resident_id}`;
                 break;
                 case 'DISASTER':
-                window.location.href = `${baseURL}certificateForDisaster.php?resident_id=${resident_id}`;
+                window.location.href = `${baseURL}certificateDisaster.php?resident_id=${resident_id}`;
                 break;
                 case 'RELATIONSHIP':
                 window.location.href = `${baseURL}certificateRelationship.php?resident_id=${resident_id}`;
                 break;
                 case 'J.SEEKER':
-                window.location.href = `${baseURL}firstTimeeJob.php?resident_id=${resident_id}`;
+                window.location.href = `${baseURL}firstTimeJob.php?resident_id=${resident_id}`;
                 break;
                 case 'N.INCOME':
                 window.location.href = `${baseURL}noSourceOfIncome.php?resident_id=${resident_id}`;

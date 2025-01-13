@@ -1,8 +1,11 @@
 <?php
 session_start();
-include_once "../../database/databaseConnection.php";
 if(!isset($_SESSION['admin'])) {
     header('Location: adminLogin.php');
+}
+function getAllBlotter(){
+include_once "../../database/databaseConnection.php";
+
 }
 ?>
 <!DOCTYPE html>
@@ -47,18 +50,7 @@ if(!isset($_SESSION['admin'])) {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>0001</td>  
-                            <td>John Doe</td>
-                            <td>Test 1</td>
-                            <td>Test 2</td>
-                            
-                            <td>
-                                <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#viewDetail">View</button> 
-                                <button class="btn btn-sm btn-primary">Edit</button>
-                                <button class="btn btn-sm btn-danger">Delete</button>
-                            </td>
-                        </tr>
+                        
                     </tbody>
                     
                 </table>
@@ -108,7 +100,7 @@ if(!isset($_SESSION['admin'])) {
                 <div class="modal-body">
                     <div class="container-fluid p-3">
                         <h3>New Cases</h3>
-                        <form action="">
+                        <form action="../../controllers/addBlotterController.php" method="POST">
                             <div class="form-group">
                                 <label>BARANGAY</label>
                                 <input type="text" disabled class="form-control" value="Sinbanali" required>
@@ -116,32 +108,32 @@ if(!isset($_SESSION['admin'])) {
 
                             <div class="form-group mt-2">
                                 <label>INCIDENT</label>
-                                <input type="text" class="form-control" required>
+                                <input type="text" name = "incident" class="form-control" required>
                             </div>
 
                             <div class="form-group mt-2">
                                 <label>PLACE OF THE INCIDENT</label>
-                                <input type="text" class="form-control" required>
+                                <input type="text" name = "place" class="form-control" required>
                             </div>
 
                             <div class="form-group mt-2">
                                 <label>DATE & TIME</label>
-                                <input type="datetime-local" class="form-control" required>
+                                <input type="datetime-local" name = "date" id = "date_selected" class="form-control" required>
                             </div>
 
                             <div class="form-group mt-2">
                                 <label>NARRATOR / COMPLAINANT</label>
-                                <input type="text" class="form-control" required>
+                                <input type="text" name = "complainant" class="form-control" required>
                             </div>
 
                             <div class="form-group mt-2">
                                 <label>WITNESS 1</label>
-                                <input type="text" class="form-control" required>
+                                <input type="text" name = "first_witness" class="form-control" required>
                             </div>
 
                             <div class="form-group mt-2">
                                 <label>WITNESS 2</label>
-                                <input type="text" class="form-control" required>
+                                <input type="text" name = "second_witness" class="form-control" required>
                             </div>
 
                             <div class="form-group mt-2">
@@ -183,49 +175,23 @@ if(!isset($_SESSION['admin'])) {
     <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.colVis.min.js"></script>
     <script src="../components/sidebar.js?v=<?php echo time(); ?>" defer></script>
     <script>  
-        new DataTable('#example', {
-            responsive: true,
-            dom: 'Bfrtip', // Added 'f' for search functionality
-            buttons: [
-                {
-                    extend: 'copy',
-                    exportOptions: {
-                        columns: ':not(:last-child)'
-                    }
-                },
-                {
-                    extend: 'csv',
-                    exportOptions: {
-                        columns: ':not(:last-child)'
-                    }
-                },
-                {
-                    extend: 'excel',
-                    exportOptions: {
-                        columns: ':not(:last-child)'
-                    }
-                },
-                {
-                    extend: 'pdf',
-                    exportOptions: {
-                        columns: ':not(:last-child)'
-                    },
-                    customize: function (doc) {
-                        doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('');
-                        doc.styles.tableHeader.alignment = 'center';
-                        doc.styles.tableBodyEven.alignment = 'center';
-                        doc.styles.tableBodyOdd.alignment = 'center';
-                    }
-                },
-                // Removed search button
-            ]
-        });
+    
 
         $('#genderFilter').on('change', function() {
             var filterValue = $(this).val();
             var table = $('#example').DataTable();
             table.column(2).search(filterValue === 'all' ? '' : filterValue, true, false).draw();
         });
+        const date = document.querySelector('#date_selected');
+        date.addEventListener('input',(e)=>{
+           const currentDate = new Date();
+              const selectedDate = new Date(e.target.value);
+                if(selectedDate > currentDate){
+                    alert('Invalid Date');
+                    e.target.value = '';
+                }
+              
+        })
     </script>
 
 </body>
