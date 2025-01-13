@@ -1,4 +1,31 @@
+<?php
+include '../../database/databaseConnection.php';
+function getAllAnnouncement(){
+    $conn = $GLOBALS['conn'];
+    $qry = "SELECT * FROM announcement_tbl";
+    $result = $conn->prepare($qry);
+    $result->execute();
+    $announcement = $result->fetchAll(PDO::FETCH_ASSOC);
+    return $announcement;
+}
 
+function getComments($announcement_id){
+    $conn = $GLOBALS['conn'];
+    $qry = "SELECT c.*,r.first_name, r.middle_name, r.last_name
+       
+     FROM comments_tbl c
+     JOIN residents_tbl r ON c.resident_id = r.id
+
+     WHERE announcement_id = ?";
+    $stmt = $conn->prepare($qry);
+    $stmt->bindParam(1, $announcement_id);
+    $stmt->execute();
+    $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $comments;
+}
+$announcements = getAllAnnouncement();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,7 +105,33 @@
         <h2>Announcement</h2>
         <div class="announcement-container border">
             <!--announcement here-->
-            No announcement yet
+          <?php
+                    foreach($announcements as $announcement){
+                      
+                        $comments = getComments($announcement['id']);
+                        echo "
+                        <div class='card-header'>
+                        <p>Title: {$announcement['title']}</p>
+                    </div>
+                    <div class='card-body'>
+                        <p>Content:{$announcement['content']}</p>
+                    </div>";
+                     echo "comments:";
+                    foreach($comments as $comment){
+                        if($comment['announcement_id'] == $announcement['id']){
+                            $fullname = $comment['first_name'] . " " . $comment['middle_name'] . " " . $comment['last_name'];
+                            echo "
+                            <div class='card-footer'>
+                            <p>{$fullname}: {$comment['comment']}</p>
+                        </div>";
+                       
+                        }else{
+                            echo "<p>No comments</p>";
+                        }
+                    }
+                    echo"</div>";
+                    }
+                    ?>
         </div>
     </section>
 

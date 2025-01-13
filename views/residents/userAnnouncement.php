@@ -5,7 +5,12 @@ session_start();
 if(!isset($_SESSION['resident_id'])) {
     header('Location: ./residentLogin.php');
 }
-$resident_information = getAllResidentInformation($_SESSION['resident_id']);
+$qry = "SELECT * FROM residents_tbl WHERE id = ?";
+$stmt = $conn->prepare($qry);
+$stmt->bindParam(1, $_SESSION['resident_id']);
+$stmt->execute();
+$resident_information = $stmt->fetch(PDO::FETCH_ASSOC);
+$resident_fullname = $resident_information['first_name'] . " " . $resident_information['middle_name'] . " " . $resident_information['last_name'];
 function getAllAnnouncement(){
     $conn = $GLOBALS['conn'];
     $qry = "SELECT * FROM announcement_tbl";
@@ -17,7 +22,12 @@ function getAllAnnouncement(){
 
 function getComments( $announcement_id){
     $conn = $GLOBALS['conn'];
-    $qry = "SELECT * FROM comments_tbl WHERE announcement_id = ?";
+    $qry = "SELECT c.*,r.first_name, r.middle_name, r.last_name
+       
+     FROM comments_tbl c
+     JOIN residents_tbl r ON c.resident_id = r.id
+
+     WHERE announcement_id = ?";
     $stmt = $conn->prepare($qry);
     $stmt->bindParam(1, $announcement_id);
     $stmt->execute();
@@ -79,9 +89,11 @@ $announcements = getAllAnnouncement();
                      
                     foreach($comments as $comment){
                         if($comment['announcement_id'] == $announcement['id']){
+                            $fullname = $comment['first_name'] . " " . $comment['middle_name'] . " " . $comment['last_name'];
                             echo "
                             <div class='card-footer'>
-                            <p>Comment: {$comment['comment']}</p>
+                            <h3>Comments:</h3>
+                            <p>{$fullname}: {$comment['comment']}</p>
                         </div>";
                        
                         }else{
@@ -91,8 +103,10 @@ $announcements = getAllAnnouncement();
                     echo"
                          <form action='../../controllers/addCommentsController.php' method = 'POST'>
                             <div class='card-input-comments mt-3'>
-                                <textarea name='comment' id='comment' placeholder='Comment as {$resident_information['resident_fullname']}' class='form-control'></textarea>
+                                <textarea name='comment' id='comment' placeholder='Comment as {$resident_fullname}' class='form-control'></textarea>
                                 <input type='hidden' name='announcement_id' value='{$announcement['id']}'>
+                                 <input type='hidden' name='resident_id' value='{$_SESSION['resident_id']}'>
+
                             </div>
                             <div class='comment-input-action mt-2 d-flex justify-content-end'>
                                 <input type='submit' value='Comment' class='btn btn-secondary btn-sm'>

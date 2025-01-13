@@ -2,7 +2,7 @@
 session_start();
 include "../../database/databaseConnection.php";
 if(!isset($_SESSION['admin'])) {
-    header('Location: adminLogin.php');
+    header('location: adminLogin.php');
 }
 function getAllDocumentRequest(){
     $conn = $GLOBALS['conn'];
@@ -86,7 +86,7 @@ $document_request = getAllDocumentRequest();
                               <td>{$request['id']}</td>
                                 <td>{$request['first_name']} {$request['middle_name']} {$request['last_name']}</td>
                                 <td>{$request['document']}</td>
-                                <td>{$request['status']}</td>
+                                <td id = 'status'>{$request['status']}</td>
                                 <td>{$request['time_Created']}</td>
                                 <td>
                                     <button class='btn btn-primary btn-sm' data-bs-toggle='modal' data-bs-target='#viewProfile' name = '{$request['resident_id']}' data-document = {$request['document']} id = 'viewBtn'>View</button>
@@ -151,8 +151,8 @@ $document_request = getAllDocumentRequest();
                 </div>
                 <div class="modal-body">
                     <label for="selectDocument">Select type of documents</label>
-                    <select name="selectDocument" id="selectDocument" class="form-control">
-                        <option value="CLEARANCE">BARANGAY CLEARANCE</option>
+                    <select name="selectDocument" id="documentOption" class="form-control">
+                        <option value="BARANGAYCLEARANCE">BARANGAY CLEARANCE</option>
                         <option value="CERTIFICATE">BARANGAY CERTIFICATE</option>
                         <option value="INDIGENCY">BARANGAY INDIGENCY</option>
                         <option value="D.CERTIFICATE">BARANGAY DEATH CERTIFICATE</option>
@@ -247,10 +247,26 @@ $document_request = getAllDocumentRequest();
                document.querySelector('#approve').setAttribute('data-document', response.document_request);
                document.querySelector('#approve').setAttribute('name', resident_id  );
                 document.querySelector('#reject').setAttribute('data-document', response.document_request);
-                document.querySelector('#reject').setAttribute('name', resident_id);
-
-                
+                document.querySelector('#reject').setAttribute('name', resident_id);      
             });
+        });
+        const status = document.querySelectorAll('#status');
+        status.forEach(stat => {
+            if(stat.textContent == 'pending'){
+                stat.style.color = 'red';
+                print.forEach(btn => {
+                    btn.disabled = true;
+                });
+            }
+            if(stat.textContent == 'approved'){
+                stat.style.color = 'green';
+            }
+            if(stat.textContent == 'rejected'){
+                stat.style.color = 'red';
+                print.forEach(btn => {
+                    btn.disabled = true;
+                });
+            }
         });
         print.forEach(btn => {
             btn.addEventListener('click',  function(e) {
@@ -264,10 +280,52 @@ $document_request = getAllDocumentRequest();
             });
         })
      modalPrintbtn.addEventListener('click', function(e) {
-        const documentSelected = document.getElementById('selectDocument').value;
+        const documentSelected = document.getElementById('documentOption').value;
         const params = new URLSearchParams(window.location.search);
         const resident_id = params.get('resident_id');
-        console.log(resident_id);
+        const baseURL = "../documents/";
+            switch(documentSelected){
+                case 'BARANGAYCLEARANCE':
+                window.location.href = `${baseURL}barangayClearance.php?resident_id=${resident_id}`;
+                 break;
+                case 'CERTIFICATE':
+                window.location.href = `${baseURL}barangayCertificate.php?resident_id=${resident_id}`;
+                break;
+                case 'INDIGENCY':
+                window.location.href = `${baseURL}barangayIndigency.php?resident_id=${resident_id}`;
+                break;
+                case 'D.CERTIFICATE':
+                window.location.href = `${baseURL}certificateDeath.php?resident_id=${resident_id}`;
+                break;
+                case 'RESIDENT':
+                window.location.href = `${baseURL}certificateResident.php?resident_id=${resident_id}`;
+                break;
+                case 'NON-RESIDENT':
+                window.location.href = `${baseURL}certificateForNonResident.php?resident_id=${resident_id}`;
+                break;
+                case 'B.PERMIT':
+                window.location.href = `${baseURL}businessPermit.php?resident_id=${resident_id}`;
+                break;
+                case 'GUARDIANSHIP':
+                window.location.href = `${baseURL}certificateGuardian.php?resident_id=${resident_id}`;
+                break;
+                case 'DISASTER':
+                window.location.href = `${baseURL}certificateForDisaster.php?resident_id=${resident_id}`;
+                break;
+                case 'RELATIONSHIP':
+                window.location.href = `${baseURL}certificateRelationship.php?resident_id=${resident_id}`;
+                break;
+                case 'J.SEEKER':
+                window.location.href = `${baseURL}firstTimeeJob.php?resident_id=${resident_id}`;
+                break;
+                case 'N.INCOME':
+                window.location.href = `${baseURL}noSourceOfIncome.php?resident_id=${resident_id}`;
+                break;
+                case 'S,P.CERTIFICATE':
+                window.location.href = `${baseURL}singleParent.php?resident_id=${resident_id}`;
+                break;
+         }
+
      });
     </script>
 </body>
