@@ -196,18 +196,19 @@ $resident_result = $stmt->fetchAll();
                 </div>
         </div>
     </div>
+    </div>
 
 
     <!--modal for resident certificate-->
-    <div class="modal" id="selectDocument">
-        <div class="modal-dialog modal-dialog-centered">
+    <div class="modal fade" id="selectDocument" tabindex="-1" aria-labelledby="selectDocumentLabel" aria-hidden="true">
+        <div class="modal-dialog modal-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Select Document</h5>
                     <button class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <label for="selectDocument">Select type of documents</label>
+                    <label for="document">Select type of documents</label>
                     <select name="document" id="document" class="form-control">
                         <option value="CLEARANCE">BARANGAY CLEARANCE</option>
                         <option value="CERTIFICATE">BARANGAY CERTIFICATE</option>
@@ -233,7 +234,7 @@ $resident_result = $stmt->fetchAll();
         </div>
     </div>
 
-     
+
 
 
 
