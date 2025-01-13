@@ -28,6 +28,19 @@ $blotter = getAllBlotter();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.bootstrap5.min.css">
 </head>
+<style>
+[contenteditable="true"] {
+    border-bottom: 1px solid #ccc;
+    padding: 2px;
+    min-width: 100px;
+    display: inline-block;
+}
+
+[contenteditable="true"]:focus {
+    outline: 1px solid #007bff;
+    background: #f8f9fa;
+}
+</style>
 <body>
 
     <div class="main-container d-flex" style="min-height: 100vh; min-width: 100%;">
@@ -64,7 +77,7 @@ $blotter = getAllBlotter();
                             echo"<td>".$row['first_witness']."</td>";
                             echo"<td>".$row['second_witness']."</td>";
                             echo"<td><button class='btn btn-sm btn-primary' data-bs-toggle='modal' data-bs-target='#viewDetail' id = 'viewBtn' onclick='viewDetail(".$row['id'].")'>View</button>
-                                     <button class='btn btn-sm btn-primary' data-bs-toggle='modal' data-bs-target='#viewDetail'>Edit</button>
+                                     <button class='btn btn-sm btn-primary' data-bs-toggle='modal' data-bs-target='#editDetail'>Edit</button>
                                     <button class='btn btn-sm btn-danger' data-bs-toggle='modal' onClick= 'deleteBlotter(".$row['id'].")'>Delete</button>
                                 </td>";
                             echo"</tr>";
@@ -83,6 +96,37 @@ $blotter = getAllBlotter();
         </div>
         
     </div>
+
+    <!-- Edit Modal -->
+    <div class="modal" id="editDetail">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid border p-3">
+                        <form action="">
+                            <p>Barangay: Sinbanali</p>
+                            <p>Purok: <span contenteditable="true" id="purok">1</span></p>
+                            <p>Place of the Incident: <span contenteditable="true" id = "incidentPlace"></span></p>
+                            <p>Date & Time: <span contenteditable="true" id="date"></span></p>
+                            <p>Complainant: <span contenteditable="true" id="complainant"></span></p>
+                            <p>Witness 1: <span  contenteditable="true" id="first_witness"></span></p>
+                            <p>Witness 2: <span contenteditable="true" id="second_witness"></span></p>
+                            <p>Narrative: <span contenteditable="true" id="narrative"></span></p>
+                            <div class="d-flex justify-content-end">
+                                <button class="btn btn-success btn-sm">Save</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     
     <!-- View Detail Modal -->
     <div class="modal" id="viewDetail">
@@ -97,11 +141,11 @@ $blotter = getAllBlotter();
                         <p>Barangay: Sinbanali</p>
                         <p>Purok: <span id="purok">1</span></p>
                         <p>Place of the Incident: <span id="incidentPlace"></span></p>
-                        <p>Date & Time: <span id ="date"></span></p>
-                        <p>Complainant: <span id = "complainant"></span></p>
-                        <p>Witness 1: <span  id = "first_witness"></span></p>
-                        <p>Witness 2: <span id = "second_witness"></span></p>
-                        <p>Narrative: <span id = "narrative"></span></p>
+                        <p>Date & Time: <span id="date"></span></p>
+                        <p>Complainant: <span id="complainant"></span></p>
+                        <p>Witness 1: <span  id="first_witness"></span></p>
+                        <p>Witness 2: <span id="second_witness"></span></p>
+                        <p>Narrative: <span id="narrative"></span></p>
 
                     </div>
                 </div>
