@@ -253,19 +253,24 @@ $document_request = getAllDocumentRequest();
         const status = document.querySelectorAll('#status');
         status.forEach(stat => {
             if(stat.textContent == 'pending'){
-                stat.style.color = 'red';
+                stat.style.color = 'yellow';
                 print.forEach(btn => {
                     btn.disabled = true;
                 });
             }
             if(stat.textContent == 'approved'){
                 stat.style.color = 'green';
+                print.forEach(btn => {
+                    btn.disabled = false;
+                });
+            }
             }
             if(stat.textContent == 'rejected'){
                 stat.style.color = 'red';
                 print.forEach(btn => {
                     btn.disabled = true;
                 });
+                
             }
         });
         print.forEach(btn => {

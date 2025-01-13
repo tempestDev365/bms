@@ -84,6 +84,16 @@ $document_requested = getDocumentRequested($_SESSION['resident_id']);
                                 <option value="barangay_certificate">Barangay Certificate</option>
                                 <option value="barangay_indigency">Barangay Indigency</option>
                                 <option value="barangay_clearance">Barangay Clearance</option>
+                                <option value="certificate_resident">CERTIFICATE FOR RESIDENT</option>
+                                <option value="certificate_non_resident">CERTIFICATE FOR NON RESIDENT</option>
+                                <option value="certificate_business">CERTIFICATE FOR BUSINESS PERMIT</option>
+                                <option value="certificate_guardian">CERTIFICATE FOR GUARDIANSHIP</option>
+                                <option value="certificate_disaster">CERTIFICATE FOR DISASTER</option>
+                                <option value="certificate_relationship">CERTIFICATE FOR RELATIONSHIP</option>
+                                <option value="certificate_job_seeker">CERTIFICATE FOR FIRST TIME JOB SEEKER</option>
+                                <option value="certificate_src_income">CERTIFICATE FOR NO SOURCE OF INCOME</option>
+                                <option value="single_parent">SINGLE PARENT CERTIFICATE</option>
+
                             </select>
                         </div>
 
