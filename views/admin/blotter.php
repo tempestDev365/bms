@@ -218,6 +218,7 @@ $blotter = getAllBlotter();
                 document.querySelector("#narrative").textContent = data.narrative;
 
         }
+        
         const deleteBlotter = async (id) =>{
             const api = await fetch(`../../controllers/blotterOptionsController.php?id=${id}&action=delete`);
             const data = await api.json();

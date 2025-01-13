@@ -4,6 +4,14 @@ include_once "../../database/databaseConnection.php";
 if(!isset($_SESSION['admin'])) {
     header('Location: adminLogin.php');
 }
+function getAllOfficials(){
+    $conn = $GLOBALS['conn'];
+    $qry = "SELECT * FROM officials_db";
+    $result = $conn->query($qry);
+    $result->execute();
+    return $result->fetchAll();
+}
+$officials = getAllOfficials();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,136 +61,19 @@ if(!isset($_SESSION['admin'])) {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>01</td>
-                            <td>Caridad J. Sanchez</td>
-                            <td>Punong Barangay</td>
-                            <td>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBtn">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>02</td>
-                            <td>Nieves M, Dela Cruz</td>
-                            <td>Kagawad</td>
-                            <td>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBtn">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>03</td>
-                            <td>Ronald F. Marquez</td>
-                            <td>Kagawad</td>
-                            <td>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBtn">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>04</td>
-                            <td>Cesar R. Concepcion</td>
-                            <td>Kagawad</td>
-                            <td>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBtn">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>05</td>
-                            <td>Lolita E. Marquez</td>
-                            <td>Kagawad</td>
-                            <td>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBtn">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>06</td>
-                            <td>Angeline Rose D. Sanchez</td>
-                            <td>Kagawad</td>
-                            <td>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBtn">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>07</td>
-                            <td>Leo J. Ignacio</td>
-                            <td>Kagawad</td>
-                            <td>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBtn">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>08</td>
-                            <td>Ervin G. Ignacio</td>
-                            <td>Kagawad</td>
-                            <td>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBtn">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>09</td>
-                            <td>Juanise Raniel I. Ignacio</td>
-                            <td>SK Kagawad</td>
-                            <td>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBtn">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td>John Paul T. Grande</td>
-                            <td>Secretary</td>
-                            <td>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBtn">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>11</td>
-                            <td>Arthur B. Castor</td>
-                            <td>Treasurer</td>
-                            <td>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBtn">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>12</td>
-                            <td>Robert F. Cuevas</td>
-                            <td>Admin.</td>
-                            <td>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBtn">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>13</td>
-                            <td>Ramon G. Colmenar</td>
-                            <td>EX-0</td>
-                            <td>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBtn">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
-
-                            </td>
-                        </tr>
+                      <?php
+                       foreach($officials as $official){
+                           echo "<tr>";
+                           echo "<td>".$official['id']."</td>";
+                           echo "<td>".$official['name']."</td>";
+                           echo "<td>".$official['role']."</td>";
+                           echo "<td>
+                           <button class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editBtn' onClick = editOfficial(".$official['id'].")>Edit</button>
+                           <button class='btn btn-danger' onClick = 'deleteOfficial(".$official['id'].")'>Delete</button>
+                           </td>";
+                           echo "</tr>";
+                       }
+                      ?>
                         
                     </tbody>
                 </table>
@@ -201,7 +92,7 @@ if(!isset($_SESSION['admin'])) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post">
+                    <form action="" method="post" id = "">
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" class="form-control" id="name" name="name" required>
@@ -237,49 +128,21 @@ if(!isset($_SESSION['admin'])) {
     <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.colVis.min.js"></script>
     <script src="../components/sidebar.js?v=<?php echo time(); ?>" defer></script>
     <script>  
-        new DataTable('#example', {
-            responsive: true,
-            dom: 'Brtip', 
-            buttons: [
-                {
-                    extend: 'copy',
-                    exportOptions: {
-                        columns: ':not(:last-child)'
-                    }
-                },
-                {
-                    extend: 'csv',
-                    exportOptions: {
-                        columns: ':not(:last-child)'
-                    }
-                },
-                {
-                    extend: 'excel',
-                    exportOptions: {
-                        columns: ':not(:last-child)'
-                    }
-                },
-                {
-                    extend: 'pdf',
-                    exportOptions: {
-                        columns: ':not(:last-child)'
-                    },
-                    customize: function (doc) {
-                        doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('');
-                        doc.styles.tableHeader.alignment = 'center';
-                        doc.styles.tableBodyEven.alignment = 'center';
-                        doc.styles.tableBodyOdd.alignment = 'center';
-                    }
-                },
-                // Removed search button
-            ]
-        });
-
+    
         $('#genderFilter').on('change', function() {
             var filterValue = $(this).val();
             var table = $('#example').DataTable();
             table.column(2).search(filterValue === 'all' ? '' : filterValue, true, false).draw();
         });
+    const deleteOfficial = (id) => {
+        if(confirm('Are you sure you want to delete this official?')){
+            window.location.href = `./officialsOptionsController.php?action=delete&id=${id}`;
+        }
+    }
+    const editOfficial = (id) => {
+      const form = document.querySelector('form');
+        form.action = `../../controllers/officialsOptionsController.php?action=edit&id=${id}`;
+    }
     </script>
 </body>
 </html>
