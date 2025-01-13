@@ -99,7 +99,7 @@ $announcements = getAllAnnouncement();
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn-secondary btn-sm" id = "edit" name ="'.$announcement['id'].'">Edit</button>
+                        <button class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editBtn" id = "edit" name ="'.$announcement['id'].'">Edit</button>
                         <button class="btn btn-danger btn-sm" id = "delete" name ="'.$announcement['id'].'" >Delete</button>
                     </div>
                 </div>';
@@ -116,6 +116,30 @@ $announcements = getAllAnnouncement();
         
     </div>
     
+
+    <!--editBtn modal-->
+
+    <div class="modal" id="editBtn">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Announcement</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="announcement-title">
+                        <h2>THIS IS A TITLE</h2>
+                    </div>
+                    <div class="announcement-content">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, doloremque molestias dolorum ducimus exercitationem blanditiis aliquid eum id laboriosam eveniet odit sint quam ipsam ad at eos debitis, soluta maiores?
+                    </div>
+                    <div class="announcement-save mt-3 d-flex justify-content-end">
+                        <button class="btn btn-success">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
