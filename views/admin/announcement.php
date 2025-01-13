@@ -130,14 +130,17 @@ $announcements = getAllAnnouncement();
                     <div class="announcement-title">
                         <h2 contenteditable="true">THIS IS A TITLE</h2>
                     </div>
-                    <div class="announcement-content">
-                        <label contenteditable="true">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque ea officia neque, labore animi aliquam quo, laborum exercitationem veritatis explicabo eaque suscipit id! Alias tempora, doloribus hic mollitia accusantium similique.
-                        </label>
-                    </div>
-                    <div class="announcement-save mt-3 d-flex justify-content-end">
-                        <button class="btn btn-success">Save</button>
-                    </div>
+                    <form action="#">
+                        <div class="announcement-content">
+                            <label contenteditable="true">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque ea officia neque, labore animi aliquam quo, laborum exercitationem veritatis explicabo eaque suscipit id! Alias tempora, doloribus hic mollitia accusantium similique.
+                            </label>
+                        </div>
+                        
+                        <div class="announcement-save mt-3 d-flex justify-content-end">
+                           <button class="btn btn-success">Save</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
