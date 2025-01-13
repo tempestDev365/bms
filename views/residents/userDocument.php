@@ -25,7 +25,29 @@ $document_requested = getDocumentRequested($_SESSION['resident_id']);
     <link rel="shortcut icon" href="../../assets/img/logo-125.png" type="image/x-icon">
     <link rel="stylesheet" href="../../assets/css/main.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.bootstrap5.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.bootstrap5.css">
+
 </head>
+<style>
+      @media (min-width: 701px) {
+        .navbar-toggler {
+            display: none !important;   
+        }
+    }
+
+    @media (max-width: 700px) {
+
+    .resident-sidebar {
+        display: none !important;
+    }
+
+    .navbar-toggler {
+        display: block !important;
+        }
+    }
+</style>
 <body>
 
     <div class="user-page d-flex" style="min-height: 100vh; min-width: 100%;"> 
@@ -43,7 +65,10 @@ $document_requested = getDocumentRequested($_SESSION['resident_id']);
                     </ol>
                 </nav>
 
-                <button class="navbar-toggler navbar-light bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler navbar-light bg-light"
+                        type="button"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#mobile-sidebar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
@@ -75,28 +100,28 @@ $document_requested = getDocumentRequested($_SESSION['resident_id']);
 
                 <div class="container-fluid p-3 rounded-3 bg-white mt-3 shadow-sm border">
                     <label>REQUEST TRACKER</label>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Tracking Number(TRN)</th>
-                                <th>Document Type</th>
-                                <th>Date Of Request</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                                 foreach($document_requested as $document){
-                                     echo '<tr>';
-                                     echo '<td>'.$document['id'].'</td>';
-                                    echo '<td>'.$document['document'].'</td>';
-                                    echo '<td>'.$document['time_Created'].'</td>';
-                                    echo '<td>'.$document['status'].'</td>';
-                                   echo '/<tr>';
-                                 }
+                        <table class="table table-bordered" id="example">
+                            <thead>
+                                <tr>
+                                    <th>Tracking Number(TRN)</th>
+                                    <th>Document Type</th>
+                                    <th>Date Of Request</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                    foreach($document_requested as $document){
+                                        echo '<tr>';
+                                        echo '<td>'.$document['id'].'</td>';
+                                        echo '<td>'.$document['document'].'</td>';
+                                        echo '<td>'.$document['time_Created'].'</td>';
+                                        echo '<td>'.$document['status'].'</td>';
+                                        echo '</tr>';
+                                    }
                                 ?>
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
                 </div>
             </div>
 
@@ -105,11 +130,59 @@ $document_requested = getDocumentRequested($_SESSION['resident_id']);
         </main>
     </div>
 
+    <!--Offcanvas sidebar-->
+    <div class="offcanvas offcanvas-end" id="mobile-sidebar">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Brgy.Sinbanali</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="sidebar">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./userResident.php">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./userAnnouncement.php">Announcement</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./userDocument.php">Document Request</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./userNotification.php">Notification</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./userResidentLogout.php">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+
 
     
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="../components/residentSidebar.js?v=<?php echo time(); ?>" defer></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.2.1/js/dataTables.bootstrap5.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.bootstrap5.js"></script>
+
+    
+
+
+
+
+
+    <script>
+        new DataTable('#example', {
+             responsive: true
+            });
+    </script>
 </body>
 </html>
