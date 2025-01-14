@@ -128,10 +128,10 @@ $purpose = $stmt->fetch(PDO::FETCH_ASSOC);
             <div class="a4-header d-flex justify-content-center align-items-start" style="gap: 5px;">
                 <img src="../../assets/img/sinbanali.png" class="img-fluid" style="width: 80px;">
                     <div class="a4-title d-flex justify-content-center align-items-center flex-column text-secondary">
-                        <label style="font-size: 1rem;">REPUBLIC OF THE PHILIPPINES</label>
+                        <label style="font-size: 0.8rem;">REPUBLIC OF THE PHILIPPINES</label>
                         <label style="font-size: 0,9rem;">CITY OF BACOOR</label>
-                        <label style="font-size: 1.1rem;">BARANGAY</label>
-                        <label style="font-size: 1.1rem;">SINBANALI</label>
+                        <label style="font-size: 1.0.8rem;">BARANGAY</label>
+                        <label style="font-size: 1.0.8rem;">SINBANALI</label>
                         <label style="font-size: 0.7rem;">(046) 431-2569</label>
                         <label style="font-size: 0.7rem;">barangaysinbanali2023@gmail.com</label>
 
@@ -140,28 +140,28 @@ $purpose = $stmt->fetch(PDO::FETCH_ASSOC);
             </div>
 
             <div class="a4-main d-flex mt-4" style="gap: 10px;">
-                <div class="a4-aside-content py-3 d-flex flex-column justify-content-evenly align-items-center" style="max-width: 400px; width: 90rem; height: 800px; border: 2px solid rgb(13, 13, 159); border-radius: 20px;">
-                    <label style="font-size: 1rem; font-weight: bold;" class="text-secondary">CARIDAD J. SANCHEZ</label>
-                    <label style="font-size: 0.9rem; font-weight: bold;" class="text-warning">PUNONG BARANGAY</label>
+                <div class="a4-aside-content py-3 d-flex flex-column justify-content-evenly align-items-center" style="min-width: 200px; width: 90rem; height: 800px; border: 2px solid rgb(13, 13, 159); border-radius: 20px;">
+                    <label style="font-size: 0.8rem; font-weight: bold;" class="text-secondary">CARIDAD J. SANCHEZ</label>
+                    <label style="font-size: 0.8rem; font-weight: bold;" class="text-warning">PUNONG BARANGAY</label>
                     
-                    <label style="font-size: 0.9rem; font-weight: bold;" class="text-warning mt-4">PUNONG BARANGAY</label>
+                    <label style="font-size: 0.8rem; font-weight: bold;" class="text-warning mt-4">PUNONG BARANGAY</label>
                     
-                    <label style="font-size: 1rem; font-weight: bold;" class="mt-2 text-secondary">Nieves M. Dela Cruz</label>                   
-                    <label style="font-size: 1rem; font-weight: bold;" class="mt-2 text-secondary">Ronald F. Marquez</label>
-                    <label style="font-size: 1rem; font-weight: bold;" class="mt-2 text-secondary">Angeline Rose D. Sanchez</label>
-                    <label style="font-size: 1rem; font-weight: bold;" class="mt-2 text-secondary">Ervin G. Ignacio</label>
-                    <label style="font-size: 1rem; font-weight: bold;" class="mt-2 text-secondary">Cesar R. Concepcion</label>
-                    <label style="font-size: 1rem; font-weight: bold;" class="mt-2 text-secondary">Lolita E. Marquez</label>
-                    <label style="font-size: 1rem; font-weight: bold;" class="mt-2 text-secondary">Leo J. Ignacio</label>
+                    <label style="font-size: 0.8rem; font-weight: bold;" class="mt-2 text-secondary">Nieves M. Dela Cruz</label>                   
+                    <label style="font-size: 0.8rem; font-weight: bold;" class="mt-2 text-secondary">Ronald F. Marquez</label>
+                    <label style="font-size: 0.8rem; font-weight: bold;" class="mt-2 text-secondary">Angeline Rose D. Sanchez</label>
+                    <label style="font-size: 0.8rem; font-weight: bold;" class="mt-2 text-secondary">Ervin G. Ignacio</label>
+                    <label style="font-size: 0.8rem; font-weight: bold;" class="mt-2 text-secondary">Cesar R. Concepcion</label>
+                    <label style="font-size: 0.8rem; font-weight: bold;" class="mt-2 text-secondary">Lolita E. Marquez</label>
+                    <label style="font-size: 0.8rem; font-weight: bold;" class="mt-2 text-secondary">Leo J. Ignacio</label>
 
-                    <label style="font-size: 0.9rem; font-weight: bold; text-transform: uppercase;" class="text-secondary mt-4">Arthur B. Castor</label>
-                    <label style="font-size: 0.9rem; font-weight: bold;" class="text-warning">Treasurer</label>
+                    <label style="font-size: 0.8rem; font-weight: bold; text-transform: uppercase;" class="text-secondary mt-4">Arthur B. Castor</label>
+                    <label style="font-size: 0.8rem; font-weight: bold;" class="text-warning">Treasurer</label>
 
-                    <label style="font-size: 0.9rem; font-weight: bold; text-transform: uppercase;" class="text-secondary mt-4">Juanise Rainel I. Ignacio</label>
-                    <label style="font-size: 0.9rem; font-weight: bold;" class="text-warning">SK Chairperson</label>
+                    <label style="font-size: 0.8rem; font-weight: bold; text-transform: uppercase;" class="text-secondary mt-4">Juanise Rainel I. Ignacio</label>
+                    <label style="font-size: 0.8rem; font-weight: bold;" class="text-warning">SK Chairperson</label>
 
-                    <label style="font-size: 0.9rem; font-weight: bold; text-transform: uppercase;" class="text-secondary mt-4">John Paul T. Grande</label>
-                    <label style="font-size: 0.9rem; font-weight: bold;" class="text-warning">Secretary</label>
+                    <label style="font-size: 0.8rem; font-weight: bold; text-transform: uppercase;" class="text-secondary mt-4">John Paul T. Grande</label>
+                    <label style="font-size: 0.8rem; font-weight: bold;" class="text-warning">Secretary</label>
 
 
                     <img src="../../assets/img/service.png" class="img-fluid mt-3" style="width: 150px;" alt="">

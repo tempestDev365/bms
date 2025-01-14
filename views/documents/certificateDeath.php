@@ -141,28 +141,28 @@ $purpose = $stmt->fetch(PDO::FETCH_ASSOC);
             </div>
 
             <div class="a4-main d-flex mt-4" style="gap: 10px;">
-                <div class="a4-aside-content py-3 d-flex flex-column justify-content-evenly align-items-center" style="max-width: 400px; width: 90rem; height: 800px; border: 2px solid rgb(13, 13, 159); border-radius: 20px;">
-                    <label style="font-size: 1rem; font-weight: bold;" class="text-secondary">CARIDAD J. SANCHEZ</label>
-                    <label style="font-size: 0.9rem; font-weight: bold;" class="text-warning">PUNONG BARANGAY</label>
+                <div class="a4-aside-content py-3 d-flex flex-column justify-content-evenly align-items-center" style="min-width: 200px; width: 400px; height: 800px; border: 2px solid rgb(13, 13, 159); border-radius: 20px;">
+                    <label style="font-size: 0.8rem; font-weight: bold;" class="text-secondary">CARIDAD J. SANCHEZ</label>
+                    <label style="font-size: 0.8rem; font-weight: bold;" class="text-warning">PUNONG BARANGAY</label>
                     
-                    <label style="font-size: 0.9rem; font-weight: bold;" class="text-warning mt-4">PUNONG BARANGAY</label>
+                    <label style="font-size: 0.8rem; font-weight: bold;" class="text-warning mt-4">PUNONG BARANGAY</label>
                     
-                    <label style="font-size: 1rem; font-weight: bold;" class="mt-2 text-secondary">Nieves M. Dela Cruz</label>                   
-                    <label style="font-size: 1rem; font-weight: bold;" class="mt-2 text-secondary">Ronald F. Marquez</label>
-                    <label style="font-size: 1rem; font-weight: bold;" class="mt-2 text-secondary">Angeline Rose D. Sanchez</label>
-                    <label style="font-size: 1rem; font-weight: bold;" class="mt-2 text-secondary">Ervin G. Ignacio</label>
-                    <label style="font-size: 1rem; font-weight: bold;" class="mt-2 text-secondary">Cesar R. Concepcion</label>
-                    <label style="font-size: 1rem; font-weight: bold;" class="mt-2 text-secondary">Lolita E. Marquez</label>
-                    <label style="font-size: 1rem; font-weight: bold;" class="mt-2 text-secondary">Leo J. Ignacio</label>
+                    <label style="font-size: 0.8rem; font-weight: bold;" class="mt-2 text-secondary">Nieves M. Dela Cruz</label>                   
+                    <label style="font-size: 0.8rem; font-weight: bold;" class="mt-2 text-secondary">Ronald F. Marquez</label>
+                    <label style="font-size: 0.8rem; font-weight: bold;" class="mt-2 text-secondary">Angeline Rose D. Sanchez</label>
+                    <label style="font-size: 0.8rem; font-weight: bold;" class="mt-2 text-secondary">Ervin G. Ignacio</label>
+                    <label style="font-size: 0.8rem; font-weight: bold;" class="mt-2 text-secondary">Cesar R. Concepcion</label>
+                    <label style="font-size: 0.8rem; font-weight: bold;" class="mt-2 text-secondary">Lolita E. Marquez</label>
+                    <label style="font-size: 0.8rem; font-weight: bold;" class="mt-2 text-secondary">Leo J. Ignacio</label>
 
-                    <label style="font-size: 0.9rem; font-weight: bold; text-transform: uppercase;" class="text-secondary mt-4">Arthur B. Castor</label>
-                    <label style="font-size: 0.9rem; font-weight: bold;" class="text-warning">Treasurer</label>
+                    <label style="font-size: 0.8rem; font-weight: bold; text-transform: uppercase;" class="text-secondary mt-4">Arthur B. Castor</label>
+                    <label style="font-size: 0.8rem; font-weight: bold;" class="text-warning">Treasurer</label>
 
-                    <label style="font-size: 0.9rem; font-weight: bold; text-transform: uppercase;" class="text-secondary mt-4">Juanise Rainel I. Ignacio</label>
-                    <label style="font-size: 0.9rem; font-weight: bold;" class="text-warning">SK Chairperson</label>
+                    <label style="font-size: 0.8rem; font-weight: bold; text-transform: uppercase;" class="text-secondary mt-4">Juanise Rainel I. Ignacio</label>
+                    <label style="font-size: 0.8rem; font-weight: bold;" class="text-warning">SK Chairperson</label>
 
-                    <label style="font-size: 0.9rem; font-weight: bold; text-transform: uppercase;" class="text-secondary mt-4">John Paul T. Grande</label>
-                    <label style="font-size: 0.9rem; font-weight: bold;" class="text-warning">Secretary</label>
+                    <label style="font-size: 0.8rem; font-weight: bold; text-transform: uppercase;" class="text-secondary mt-4">John Paul T. Grande</label>
+                    <label style="font-size: 0.8rem; font-weight: bold;" class="text-warning">Secretary</label>
 
 
                     <img src="../../assets/img/service.png" class="img-fluid mt-3" style="width: 150px;" alt="">
