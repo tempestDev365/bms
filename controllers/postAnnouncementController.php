@@ -10,6 +10,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bindParam(1, $title, PDO::PARAM_STR);
     $stmt->bindParam(2, $content, PDO::PARAM_STR);
     $stmt->execute();
-    header('Location: ../views/admin/main.php');
+    header('Location: ../views/admin/announcement.php');
 }
 ?>

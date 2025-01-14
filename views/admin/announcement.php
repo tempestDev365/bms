@@ -33,6 +33,11 @@ $announcements = getAllAnnouncement();
     <link rel="shortcut icon" href="../../assets/img/logo-125.png" type="image/x-icon">
     <link rel="stylesheet" href="../../assets/css/main.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+   
+    
+
+
 </head>
 <body>
 
@@ -150,30 +155,45 @@ $announcements = getAllAnnouncement();
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!--Data tables-->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.2.1/js/dataTables.bootstrap5.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.bootstrap5.js"></script>
+    <script>
+        new DataTable('#example', {
+            responsive: true
+        });
+    </script>
+
+
     <script src="../components/sidebar.js?v=<?php echo time(); ?>" defer></script>
-  <script>
-    const deleteBtn = document.querySelectorAll('#delete'); 
-    
-    //delete function for announcements
-   deleteBtn.forEach(btn =>{
-    btn.addEventListener('click', async (e) => {
-      try {
-        const id = e.target.name
-        const resposne = await fetch(`../../controllers/editDeleteAnnouncementController.php?id=${id}&action=delete`)
-        location.reload()
-      }catch(error){
-        console.log(error)
-      }
-    })
-   })
-   const edit =document.querySelectorAll('#edit')
-   edit.forEach(btn => {
-        btn.addEventListener('click', async (e) => {
-        const id = e.target.name
-       const form =  document.querySelector('#editForm').action = `../../controllers/editDeleteAnnouncementController.php?id=${id}&action=edit`
-       form.submit()  
+    <script>
+        const deleteBtn = document.querySelectorAll('#delete'); 
+        
+        //delete function for announcements
+        deleteBtn.forEach(btn =>{
+            btn.addEventListener('click', async (e) => {
+            try {
+                const id = e.target.name
+                const resposne = await fetch(`../../controllers/editDeleteAnnouncementController.php?id=${id}&action=delete`)
+                location.reload()
+            }catch(error){
+                console.log(error)
+            }
+            })
         })
-   })
-  </script>
+        const edit =document.querySelectorAll('#edit')
+        edit.forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                const id = e.target.name
+            const form =  document.querySelector('#editForm').action = `../../controllers/editDeleteAnnouncementController.php?id=${id}&action=edit`
+            form.submit()  
+                })
+        })
+    </script>
 </body>
 </html>
