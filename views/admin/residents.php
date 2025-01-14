@@ -69,12 +69,7 @@ $resident_result = $stmt->fetchAll();
                             <option value="voters">Voters</option>
                         </select>
                     </div>
-                    <div class="search">
-                        <label>
-                            Search
-                        </label>
-                        <input type="search" name="" id="">
-                    </div>
+                   
                 </div>
                 <table class="table table-bordered nowrap table-hover mt-3" id="example">
                     <thead>
