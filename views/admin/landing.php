@@ -116,20 +116,6 @@ $announcements = getAllAnnouncement();
                     <div class='card-body'>
                         <p>Content:{$announcement['content']}</p>
                     </div>";
-                     echo "comments:";
-                    foreach($comments as $comment){
-                        if($comment['announcement_id'] == $announcement['id']){
-                            $fullname = $comment['first_name'] . " " . $comment['middle_name'] . " " . $comment['last_name'];
-                            echo "
-                            <div class='card-footer'>
-                            <p>{$fullname}: {$comment['comment']}</p>
-                        </div>";
-                       
-                        }else{
-                            echo "<p>No comments</p>";
-                        }
-                    }
-                    echo"</div>";
                     }
                     ?>
         </div>

@@ -29,7 +29,7 @@ if (residentSidebar) {
                 </li>
                 <li class="nav-item d-flex justify-content-start align-items-center">
                     <a href="./userNotification.php" class="nav-link text-white">Notification</a>
-                    <span class="badge bg-danger text-white">3</span>
+                    <span class="badge bg-danger text-white" id = "notifCount">3</span>
                 </li>
                 
                 <li class="nav-item">
@@ -41,4 +41,8 @@ if (residentSidebar) {
   console.log("Sidebar content set successfully");
 } else {
   console.error("residentSidebar element not found");
+}
+export function notificationCount(count) {
+  let notifCount = document.getElementById("notifCount");
+  notifCount.innerHTML = count;
 }

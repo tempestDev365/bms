@@ -3,6 +3,16 @@ session_start();
 if(!isset($_SESSION['resident_id'])) {
     header('Location: ./residentLogin.php');
 }
+function getAllDocumentRequested($id){
+    include_once "../../database/databaseConnection.php";
+    $conn = $GLOBALS['conn'];
+    $sql = "SELECT * FROM document_requested WHERE resident_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $id);
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+$allDocumentRequested = getAllDocumentRequested($_SESSION['resident_id']);
 
 ?>
 <!DOCTYPE html>
@@ -31,6 +41,10 @@ if(!isset($_SESSION['resident_id'])) {
     .navbar-toggler {
         display: block !important;
         }
+    }
+      .read {
+        background-color: #f0f0f0; /* Light gray background */
+        color: #888; /* Gray text color */
     }
 </style>
 <body>
@@ -62,22 +76,21 @@ if(!isset($_SESSION['resident_id'])) {
                 <h2>Notifications</h2>
 
                 <div class="notification-container p-3" style="gap: 5px;">
-                    <div class="alert alert-secondary">
-                        You successfully request <strong>Barangay Clearance</strong> with <strong>TRN-0231</strong>.
-                    </div> 
-
-                    <div class="alert alert-secondary">
-                        <strong>Approved! </strong> Your document with <strong>TRN-0231</strong>  is ready to pickup.
-                    </div> 
-                    
-
-                    <div class="alert alert-secondary">
-                        You successfully request <strong>Barangay Clearance</strong> with <strong>TRN-2321</strong>.
-                    </div> 
-
-                    <div class="alert alert-secondary">
-                        <strong>Rejected!</strong> Sorry, but your document with request <strong>TRN-2321</strong> is not valid .
-                    </div> 
+                    <?php foreach($allDocumentRequested as $document): ?>
+                        <?php 
+                        $status = $document['status'] == "approved" ? "approved" : "rejected";    
+                        ?>
+                        <div class="notification">
+                            <div class="notification-content">
+                               <div class="notifContainer unread" id = "<?php echo $document['id']; ?>">
+                                <h5 class="notification-title">Document Request</h5>
+                                <p class="notification-message">Your request for <strong><?php echo $document['document']; ?></strong> has been <?php echo $status?>.</p>
+                                <p class="notification-date"><?php echo $document['time_Created']; ?></p>
+                                <button id = "markAsReadBtn" data-id = "<?php echo $document['id']; ?>">Mark As Read</button>
+                               </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
 
             </div>
@@ -121,6 +134,48 @@ if(!isset($_SESSION['resident_id'])) {
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="../components/residentSidebar.js?v=<?php echo time(); ?>" defer></script>
+    <script src="../components/residentSidebar.js?v=<?php echo time(); ?>" defer type = "module"></script>
+     <script type = "module">
+     import { notificationCount} from '../components/residentSidebar.js';
+    const unread = document.querySelectorAll('.unread');
+let count = localStorage.getItem('notificationCount') || 0;
+let readNotifications = JSON.parse(localStorage.getItem('readNotifications')) || [];
+
+// Initialize count and mark read notifications
+unread.forEach(notification => {
+    if (readNotifications.includes(notification.id)) {
+        notification.classList.remove('unread');
+        notification.classList.add('read');
+        notification.querySelector("#markAsReadBtn").style.display = "none";
+    } else {
+        count++;
+    }
+});
+
+notificationCount(count);
+
+const markAsReadBtn = document.querySelectorAll("#markAsReadBtn");
+const notification = document.querySelectorAll(".notifContainer");
+
+markAsReadBtn.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        const id = e.target.getAttribute('data-id');
+        for (let i = 0; i < notification.length; i++) {
+            if (notification[i].getAttribute('id') == id) {
+                notification[i].classList.remove('unread');
+                notification[i].classList.add('read');
+                markAsReadBtn[i].style.display = "none";
+                count--;
+
+                // Save read notification ID to local storage
+                readNotifications.push(id);
+                localStorage.setItem('readNotifications', JSON.stringify(readNotifications));
+                localStorage.setItem('notificationCount', count);
+                notificationCount(count);
+            }
+        }
+    });
+});
+    </script>
 </body>
 </html>
