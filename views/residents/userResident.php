@@ -267,6 +267,48 @@ $valid_id = $resident_information['resident_valid_id'];
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="../components/residentSidebar.js?v=<?php echo time(); ?>" defer></script>
+   <script src="../components/residentSidebar.js?v=<?php echo time(); ?>" defer type = "module"></script>
+     <script type = "module">
+     import { notificationCount} from '../components/residentSidebar.js';
+    const unread = document.querySelectorAll('.unread');
+let count = localStorage.getItem('notificationCount') || 0;
+let readNotifications = JSON.parse(localStorage.getItem('readNotifications')) || [];
+
+// Initialize count and mark read notifications
+unread.forEach(notification => {
+    if (readNotifications.includes(notification.id)) {
+        notification.classList.remove('unread');
+        notification.classList.add('read');
+        notification.querySelector("#markAsReadBtn").style.display = "none";
+    } else {
+        count++;
+    }
+});
+
+notificationCount(count);
+
+const markAsReadBtn = document.querySelectorAll("#markAsReadBtn");
+const notification = document.querySelectorAll(".notifContainer");
+
+markAsReadBtn.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        const id = e.target.getAttribute('data-id');
+        for (let i = 0; i < notification.length; i++) {
+            if (notification[i].getAttribute('id') == id) {
+                notification[i].classList.remove('unread');
+                notification[i].classList.add('read');
+                markAsReadBtn[i].style.display = "none";
+                count--;
+
+                // Save read notification ID to local storage
+                readNotifications.push(id);
+                localStorage.setItem('readNotifications', JSON.stringify(readNotifications));
+                localStorage.setItem('notificationCount', count);
+                notificationCount(count);
+            }
+        }
+    });
+});
+    </script>
 </body>
 </html>
