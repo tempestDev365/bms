@@ -95,8 +95,8 @@ $resident_result = $stmt->fetchAll();
             <td><?php echo $value['sex']; ?></td>
             <td><?php echo $value['age']; ?></td>
             <td>
-                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#viewDetail" id = "viewBtn" name = " <?php echo $value['resident_id']; ?> "</button>View</button>
-                <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#selectDocument">Issue Certificate</button>
+                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#viewDetail" id = "viewBtn" name = "<?php echo $value['resident_id']; ?> "</button>View</button>
+                <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#selectDocument"  name = "<?php echo $value['resident_id']; ?>" id="issueBtn" >Issue Certificate</button>
                 <button class="btn btn-danger btn-sm">Delete</button>
             </td>
             </tr>
@@ -209,8 +209,8 @@ $resident_result = $stmt->fetchAll();
                 </div>
                 <div class="modal-body">
                     <label for="document">Select type of documents</label>
-                    <select name="document" id="document" class="form-control">
-                        <option value="CLEARANCE">BARANGAY CLEARANCE</option>
+                    <select name="documentOption" id="documentOption" class="form-control">
+                        <option value="BARANGAYCLEARANCE">BARANGAY CLEARANCE</option>
                         <option value="CERTIFICATE">BARANGAY CERTIFICATE</option>
                         <option value="INDIGENCY">BARANGAY INDIGENCY</option>
                         <option value="D.CERTIFICATE">BARANGAY DEATH CERTIFICATE</option>
@@ -226,7 +226,7 @@ $resident_result = $stmt->fetchAll();
                     </select>
 
                     <div class="actions d-flex p-3 justify-content-end" style="gap: 5px;">
-                        <button class="btn btn-success btn-sm">PRINT</button>
+                        <button class="btn btn-success btn-sm" id = "printBtn" onclick="printDocu()">PRINT</button>
                         <button class="btn btn-danger btn-sm">CANCEL</button>
                     </div>
                 </div>
@@ -262,7 +262,8 @@ $resident_result = $stmt->fetchAll();
             table.column(2).search(filterValue === 'all' ? '' : filterValue, true, false).draw();
         });
 
-      
+      const issueCertificate = document.querySelectorAll('#issueBtn');
+      const print = document.querySelector('#printBtn');
 const viewDetail = document.querySelectorAll('#viewBtn');
          viewDetail.forEach((btn) => {
               btn.addEventListener('click', async (e) => {
@@ -285,7 +286,7 @@ viewDetail.forEach((btn) => {
             response.resident_birthplace, response.resident_civil_status, response.resident_height, response.resident_weight, response.resident_blood_type, response.resident_religion, response.resident_ethnic_origin, response.resident_nationality, response.resident_precinct_number, response.resident_is_voter, response.resident_org_member,
             response.resident_email, response.resident_mobile_number, response.resident_tel_no, response.resident_ICOE_name, response.resident_ICOE_contact_number, response.resident_ICOE_address, response.resident_mother_name, response.resident_father_name, response.resident_spouse_name, response.resident_highest_educational_attainment, response.resident_type_of_school,
             response.resident_house_number, response.resident_purok, response.resident_full_address, response.resident_street, response.resident_hoa, response.resident_employment_status, response.resident_employment_field, response.resident_occupation, response.resident_monthly_income);
-    });
+    })
 });
 
 function populateModal(picture, signature, valid_id, fullName, sex, birthdate, birthplace, civilStatus, height, weight, bloodType, religion, ethnicOrigin, nationality, precinctNumber, registeredVoter, organizationMember, email, mobileNumber, telNo, emergencyFullName, emergencyContactNumber, emergencyAddress, mother, father, spouse, highestEducation, typeOfSchool, houseNumber, purok, fullAddress, street, hoa, employmentStatus, employmentField, occupation, monthlyIncome) {
@@ -327,7 +328,65 @@ function populateModal(picture, signature, valid_id, fullName, sex, birthdate, b
     document.getElementById('occupation').textContent = `Occupation: ${occupation}`;
     document.getElementById('monthlyIncome').textContent = `Monthly Income: ${monthlyIncome}`;
 }
+issueCertificate.forEach((btn) => {
+    btn.addEventListener('click',  (e) => {
+         const resident_id = e.target.getAttribute('name');
+                const currentURL  = new URL(window.location.href);
+                currentURL.searchParams.delete('resident_id');
+                currentURL.searchParams.set('resident_id', resident_id);
+                window.history.pushState({}, '', currentURL);
+    });
 
+        
+});
+const printDocu = () => {
+    const documentSelected = document.getElementById('documentOption').value;
+     console.log(documentSelected);
+        const params = new URLSearchParams(window.location.search);
+        const resident_id = params.get('resident_id');
+        const baseURL = "../documents/";
+            switch(documentSelected){
+                case 'BARANGAYCLEARANCE':
+                window.location.href = `${baseURL}barangayClearance.php?resident_id=${resident_id}`;
+                 break;
+                case 'CERTIFICATE':
+                window.location.href = `${baseURL}barangayCertificate.php?resident_id=${resident_id}`;
+                break;
+                case 'INDIGENCY':
+                window.location.href = `${baseURL}barangayIndigency.php?resident_id=${resident_id}`;
+                break;
+                case 'D.CERTIFICATE':
+                window.location.href = `${baseURL}certificateDeath.php?resident_id=${resident_id}`;
+                break;
+                case 'RESIDENT':
+                window.location.href = `${baseURL}certificateResident.php?resident_id=${resident_id}`;
+                break;
+                case 'NON-RESIDENT':
+                window.location.href = `${baseURL}certificateNonResident.php?resident_id=${resident_id}`;
+                break;
+                case 'B.PERMIT':
+                window.location.href = `${baseURL}businessPermit.php?resident_id=${resident_id}`;
+                break;
+                case 'GUARDIANSHIP':
+                window.location.href = `${baseURL}certificateGuardian.php?resident_id=${resident_id}`;
+                break;
+                case 'DISASTER':
+                window.location.href = `${baseURL}certificateDisaster.php?resident_id=${resident_id}`;
+                break;
+                case 'RELATIONSHIP':
+                window.location.href = `${baseURL}certificateRelationship.php?resident_id=${resident_id}`;
+                break;
+                case 'J.SEEKER':
+                window.location.href = `${baseURL}firstTimeJob.php?resident_id=${resident_id}`;
+                break;
+                case 'N.INCOME':
+                window.location.href = `${baseURL}noSourceOfIncome.php?resident_id=${resident_id}`;
+                break;
+                case 'S,P.CERTIFICATE':
+                window.location.href = `${baseURL}singleParent.php?resident_id=${resident_id}`;
+                break;
+         }
+}
     </script>
 </body>
 </html>

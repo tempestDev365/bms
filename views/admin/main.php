@@ -22,6 +22,13 @@ function getAllDemographic(){
     LEFT JOIN resident_information ri ON a.resident_id = ri.resident_id
     WHERE ri.registered_voter = 1
     ";
+    $age_qry = "SELECT COUNT(ri.age) as age
+    FROM approved_tbl a
+    LEFT JOIN resident_information ri ON a.resident_id = ri.resident_id
+    ";
+    $age_result = $conn->prepare($age_qry);
+    $age_result->execute();
+    $age_count = $age_result->fetch(PDO::FETCH_ASSOC);
     $resident_result = $conn->prepare($resident_qry_count);
     $resident_result->execute();
     $female_result = $conn->prepare($female_qry_count);
@@ -38,7 +45,8 @@ function getAllDemographic(){
         'resident_count' => $resident_count['total_resident'],
         'female_count' => $female_count['total_female'],
         'male_count' => $male_count['total_male'],
-        'voter_count' => $voter_count['total_voters']
+        'voter_count' => $voter_count['total_voters'],
+        'age_count' => $age_count['age']
     ];
 }
 $demographic = getAllDemographic();
@@ -172,7 +180,7 @@ $demographic = getAllDemographic();
                     labels: ['0-10', '11-20', '21-30', '31-40', '41-50', '51-60', '61-70', '71-80', '81+'],
                     datasets: [{
                         label: 'Age Distribution',
-                        data: [12, 19, 3, 5, 2, 3, 7, 8, 4], // Example data
+                        data: [<?=$demographic['age_count']?>], // Example data
                         backgroundColor: 'rgba(54, 162, 235, 0.2)',
                         borderColor: 'rgba(54, 162, 235, 1)',
                         borderWidth: 1

@@ -201,7 +201,7 @@ $purpose = $stmt->fetch(PDO::FETCH_ASSOC);
                     </label>
                     
                     <label class="m-2">
-                        This Barangay Certificate is issued upon request for <?php echo $purpose['purpose'] ?><span style="text-decoration: underline; font-weight: bold;"></span>.
+                        This Barangay Certificate is issued upon request for <?php echo $purpose['purpose'] ?? "no purpose  " ?><span style="text-decoration: underline; font-weight: bold;"></span>.
                     </label>
                     <label style="text-align: left; font-weight: bold;" class="mx-2">Given this day, <!--ADD THE ELEMENT TO AUTOMATE--> <span><?php echo date('m/d/Y') ?></span></label>
 
