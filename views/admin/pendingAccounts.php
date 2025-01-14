@@ -48,12 +48,7 @@ $pending_accounts = $stmt->fetchAll();
 
             <div class="container-fluid p-3 shadow-sm border rounded bg-white">
                 <h1 class="mb-3 text-center">Pending Accounts</h1>
-             <div class="search">
-                        <label>
-                            Search
-                        </label>
-                        <input type="search" name="" id="">
-                    </div>
+             
                 <table class="table table-bordered nowrap table-hover mt-3" id="example">
                     <thead>
                         <tr>
@@ -194,6 +189,12 @@ $pending_accounts = $stmt->fetchAll();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.colVis.min.js"></script>
     <script src="../components/sidebar.js?v=<?php echo time(); ?>" defer></script>
+    <script>
+
+        new DataTable('#example', {
+            responsive: true
+        });
+    </script>
     <script>  
         $('#genderFilter').on('change', function() {
             var filterValue = $(this).val();
@@ -240,45 +241,45 @@ $pending_accounts = $stmt->fetchAll();
 
             })
         })
-        function populateModal(picture, signature, valid_id, fullName, sex, birthdate, birthplace, civilStatus, height, weight, bloodType, religion, ethnicOrigin, nationality, precinctNumber, registeredVoter, organizationMember, email, mobileNumber, telNo, emergencyFullName, emergencyContactNumber, emergencyAddress, mother, father, spouse, highestEducation, typeOfSchool, houseNumber, purok, fullAddress, street, hoa, employmentStatus, employmentField, occupation, monthlyIncome) {
-    document.querySelector('.picture').src = "data:image/gif;base64," + picture;
-    document.querySelector('.signature').src = "data:image/gif;base64," + signature;
-    document.querySelector('.valid_id').src = "data:image/gif;base64," + valid_id;
-    document.getElementById('fullName').textContent = `Full Name: ${fullName}`;
-    document.getElementById('sex').textContent = `Sex: ${sex}`;
-    document.getElementById('birthdate').textContent = `Birthdate: ${birthdate}`;
-    document.getElementById('birthplace').textContent = `Birthplace: ${birthplace}`;
-    document.getElementById('civilStatus').textContent = `Civil Status: ${civilStatus}`;
-    document.getElementById('height').textContent = `Height: ${height}`;
-    document.getElementById('weight').textContent = `Weight: ${weight}`;
-    document.getElementById('bloodType').textContent = `Blood Type: ${bloodType}`;
-    document.getElementById('religion').textContent = `Religion: ${religion}`;
-    document.getElementById('ethnicOrigin').textContent = `Ethnic Origin: ${ethnicOrigin}`;
-    document.getElementById('nationality').textContent = `Nationality: ${nationality}`;
-    document.getElementById('precinctNumber').textContent = `Precinct Number: ${precinctNumber}`;
-    document.getElementById('registeredVoter').textContent = `Registered Voter: ${registeredVoter}`;
-    document.getElementById('organizationMember').textContent = `Organization Member: ${organizationMember}`;
-    document.getElementById('email').textContent = `Email: ${email}`;
-    document.getElementById('mobileNumber').textContent = `Mobile Number: ${mobileNumber}`;
-    document.getElementById('telNo').textContent = `Tel No: ${telNo}`;
-    document.getElementById('emergencyFullName').textContent = `Fullname: ${emergencyFullName}`;
-    document.getElementById('emergencyContactNumber').textContent = `Contact Number: ${emergencyContactNumber}`;
-    document.getElementById('emergencyAddress').textContent = `Address: ${emergencyAddress}`;
-    document.getElementById('mother').textContent = `Mother: ${mother}`;
-    document.getElementById('father').textContent = `Father: ${father}`;
-    document.getElementById('spouse').textContent = `Spouse: ${spouse}`;
-    document.getElementById('highestEducation').textContent = `Highest Education Attainment: ${highestEducation}`;
-    document.getElementById('typeOfSchool').textContent = `Type of School: ${typeOfSchool}`;
-    document.getElementById('houseNumber').textContent = `House Number: ${houseNumber}`;
-    document.getElementById('purok').textContent = `Purok: ${purok}`;
-    document.getElementById('fullAddress').textContent = `Full Address: ${fullAddress}`;
-    document.getElementById('street').textContent = `Street: ${street}`;
-    document.getElementById('hoa').textContent = `Hoa: ${hoa}`;
-    document.getElementById('employmentStatus').textContent = `Employment Status: ${employmentStatus}`;
-    document.getElementById('employmentField').textContent = `Employment Field: ${employmentField}`;
-    document.getElementById('occupation').textContent = `Occupation: ${occupation}`;
-    document.getElementById('monthlyIncome').textContent = `Monthly Income: ${monthlyIncome}`;
-}
+                function populateModal(picture, signature, valid_id, fullName, sex, birthdate, birthplace, civilStatus, height, weight, bloodType, religion, ethnicOrigin, nationality, precinctNumber, registeredVoter, organizationMember, email, mobileNumber, telNo, emergencyFullName, emergencyContactNumber, emergencyAddress, mother, father, spouse, highestEducation, typeOfSchool, houseNumber, purok, fullAddress, street, hoa, employmentStatus, employmentField, occupation, monthlyIncome) {
+            document.querySelector('.picture').src = "data:image/gif;base64," + picture;
+            document.querySelector('.signature').src = "data:image/gif;base64," + signature;
+            document.querySelector('.valid_id').src = "data:image/gif;base64," + valid_id;
+            document.getElementById('fullName').textContent = `Full Name: ${fullName}`;
+            document.getElementById('sex').textContent = `Sex: ${sex}`;
+            document.getElementById('birthdate').textContent = `Birthdate: ${birthdate}`;
+            document.getElementById('birthplace').textContent = `Birthplace: ${birthplace}`;
+            document.getElementById('civilStatus').textContent = `Civil Status: ${civilStatus}`;
+            document.getElementById('height').textContent = `Height: ${height}`;
+            document.getElementById('weight').textContent = `Weight: ${weight}`;
+            document.getElementById('bloodType').textContent = `Blood Type: ${bloodType}`;
+            document.getElementById('religion').textContent = `Religion: ${religion}`;
+            document.getElementById('ethnicOrigin').textContent = `Ethnic Origin: ${ethnicOrigin}`;
+            document.getElementById('nationality').textContent = `Nationality: ${nationality}`;
+            document.getElementById('precinctNumber').textContent = `Precinct Number: ${precinctNumber}`;
+            document.getElementById('registeredVoter').textContent = `Registered Voter: ${registeredVoter}`;
+            document.getElementById('organizationMember').textContent = `Organization Member: ${organizationMember}`;
+            document.getElementById('email').textContent = `Email: ${email}`;
+            document.getElementById('mobileNumber').textContent = `Mobile Number: ${mobileNumber}`;
+            document.getElementById('telNo').textContent = `Tel No: ${telNo}`;
+            document.getElementById('emergencyFullName').textContent = `Fullname: ${emergencyFullName}`;
+            document.getElementById('emergencyContactNumber').textContent = `Contact Number: ${emergencyContactNumber}`;
+            document.getElementById('emergencyAddress').textContent = `Address: ${emergencyAddress}`;
+            document.getElementById('mother').textContent = `Mother: ${mother}`;
+            document.getElementById('father').textContent = `Father: ${father}`;
+            document.getElementById('spouse').textContent = `Spouse: ${spouse}`;
+            document.getElementById('highestEducation').textContent = `Highest Education Attainment: ${highestEducation}`;
+            document.getElementById('typeOfSchool').textContent = `Type of School: ${typeOfSchool}`;
+            document.getElementById('houseNumber').textContent = `House Number: ${houseNumber}`;
+            document.getElementById('purok').textContent = `Purok: ${purok}`;
+            document.getElementById('fullAddress').textContent = `Full Address: ${fullAddress}`;
+            document.getElementById('street').textContent = `Street: ${street}`;
+            document.getElementById('hoa').textContent = `Hoa: ${hoa}`;
+            document.getElementById('employmentStatus').textContent = `Employment Status: ${employmentStatus}`;
+            document.getElementById('employmentField').textContent = `Employment Field: ${employmentField}`;
+            document.getElementById('occupation').textContent = `Occupation: ${occupation}`;
+            document.getElementById('monthlyIncome').textContent = `Monthly Income: ${monthlyIncome}`;
+        }
     </script>
 </body>
 </html>
