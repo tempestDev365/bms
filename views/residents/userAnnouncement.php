@@ -116,7 +116,7 @@ $announcements = getAllAnnouncement();
                             <h3>Comments:</h3>
                             <p>{$fullname}: {$comment['comment']}</p>
                             <button class='btn btn-danger btn-sm' onclick ='deleteComment({$comment['id']})'>delete</button>
-                            <button class='btn btn-primary btn-sm'>edit</button>
+                            <button class='btn btn-primary btn-sm'  data-bs-toggle='modal' data-bs-target = '#editBtn' name = '{$comment['id']}' id = 'edit'>edit</button>
                         </div>";
                        
                         }else{
@@ -181,7 +181,28 @@ $announcements = getAllAnnouncement();
     </div>
 
 
-    
+    <div class="modal" id="editBtn">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Announcement</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form = "" method="POST" id = "editForm">
+                <div class="modal-body">
+                        <div class="announcement-content">
+                            <label for="content">New Content:</label>
+                            <textarea class="form-control" id="content" name="content" required></textarea>
+                        </div>
+                        
+                        <div class="announcement-save mt-3 d-flex justify-content-end">
+                           <button class="btn btn-success">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -229,8 +250,18 @@ markAsReadBtn.forEach(btn => {
 });
 window.deleteComment = async (id) => {
     const api = await fetch(`../../controllers/commentOptionsController.php?id=${id}&action=delete`);
-   
+    location.reload();
 };
+const editButtons = document.querySelectorAll('#edit');
+const form = document.querySelector('#editForm'); 
+editButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+        const id = e.target.name;
+        form.action = `../../controllers/commentOptionsController.php?id=${id}&action=edit`;
+       
+    });
+});
+
 </script>
     </script>
 </body>
