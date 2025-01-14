@@ -115,6 +115,8 @@ $announcements = getAllAnnouncement();
                             <div class='card-footer'>
                             <h3>Comments:</h3>
                             <p>{$fullname}: {$comment['comment']}</p>
+                            <button class='btn btn-danger btn-sm' onclick ='deleteComment({$comment['id']})'>delete</button>
+                            <button class='btn btn-primary btn-sm'>edit</button>
                         </div>";
                        
                         }else{
@@ -225,6 +227,11 @@ markAsReadBtn.forEach(btn => {
         }
     });
 });
+window.deleteComment = async (id) => {
+    const api = await fetch(`../../controllers/commentOptionsController.php?id=${id}&action=delete`);
+   
+};
+</script>
     </script>
 </body>
 </html>

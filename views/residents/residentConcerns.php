@@ -22,7 +22,6 @@ function getAllReplies($id){
     return $stmt->fetchAll();
 }
 $allConcerns = getAllConcerns($_SESSION['resident_id']);
-$allReplies = getAllReplies($_SESSION['resident_id']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -102,15 +101,14 @@ $allReplies = getAllReplies($_SESSION['resident_id']);
                             <h4>Title: <?php echo $concern['concern_title']; ?></h4>
                             <p>Message:<?php echo $concern['concern_message']; ?></p>
                         </div>
-                        
-                    <?php endforeach; ?>
-                    <?php foreach($allReplies as $reply): ?>
-                        <?php if($concern['id'] == $reply['concern_id']): ?>
+                    <?php $replies = getAllReplies($concern['id'])?>
+                    <?php foreach($replies as $reply): ?>
                         <div class="reply">
                             <p>Reply: <?php echo $reply['message']; ?></p>
                         </div>
-                        <?php endif; ?>
+                     <?php endforeach; ?>
                     <?php endforeach; ?>
+                    
                 </div>
 
             </div>
