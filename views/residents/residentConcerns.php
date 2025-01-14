@@ -3,7 +3,26 @@ session_start();
 if(!isset($_SESSION['resident_id'])) {
     header('Location: ./residentLogin.php');
 }
-
+function getAllConcerns($id){
+    include_once "../../database/databaseConnection.php";
+    $conn = $GLOBALS['conn'];
+    $sql = "SELECT * FROM concerns_tbl WHERE resident_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $id);
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+function getAllReplies($id){
+    include_once "../../database/databaseConnection.php";
+    $conn = $GLOBALS['conn'];
+    $sql = "SELECT * FROM concerns_replies_tbl WHERE concern_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $id);
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+$allConcerns = getAllConcerns($_SESSION['resident_id']);
+$allReplies = getAllReplies($_SESSION['resident_id']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,7 +81,7 @@ if(!isset($_SESSION['resident_id'])) {
                 <h2>Concerns</h2>
 
                 <div class="concerns-container p-3 border bg-white rounded-3 shadow-sm" style="gap: 5px;">
-                    <form action="">
+                    <form action="../../controllers/addConcernController.php" method="POST" id="concern-form">
                         <div class="form-group">
                             <label for="concern">Concern Title</label>
                             <input type="text" name="concern" placeholder="Enter your title..." id="concern" class="form-control"  required></input>
@@ -78,21 +97,23 @@ if(!isset($_SESSION['resident_id'])) {
                 </div>
 
                 <div class="concerns-display mt-3 p-3 border bg-white rounded-3 shadow-sm">
-                    <div class="concern-reply border p-2">
-                        <h5>Concern Title</h5>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium delectus quibusdam recusandae. Nihil soluta, deleniti aliquam aperiam cumque adipisci, ea reprehenderit quaerat, necessitatibus error temporibus! Ex culpa dolorem eligendi quas.</p>
-
-                        <div class="reply">
-                            <h6>Reply</h6>
-                            <p>Reply Message</p>
+                    <?php foreach($allConcerns as $concern): ?>
+                        <div class="concern">
+                            <h4>Title: <?php echo $concern['concern_title']; ?></h4>
+                            <p>Message:<?php echo $concern['concern_message']; ?></p>
                         </div>
-                    </div>
+                        
+                    <?php endforeach; ?>
+                    <?php foreach($allReplies as $reply): ?>
+                        <?php if($concern['id'] == $reply['concern_id']): ?>
+                        <div class="reply">
+                            <p>Reply: <?php echo $reply['message']; ?></p>
+                        </div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 </div>
 
             </div>
-
-       
-
         </main>
     </div>
 

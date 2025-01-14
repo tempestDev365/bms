@@ -170,8 +170,8 @@ $announcements = getAllAnnouncement();
    edit.forEach(btn => {
         btn.addEventListener('click', async (e) => {
         const id = e.target.name
-      const form =  document.querySelector('#editForm').action = `../../controllers/editDeleteAnnouncementController.php?id=${id}&action=edit`
-     form.submit()  
+       const form =  document.querySelector('#editForm').action = `../../controllers/editDeleteAnnouncementController.php?id=${id}&action=edit`
+       form.submit()  
         })
    })
   </script>
