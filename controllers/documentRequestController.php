@@ -11,6 +11,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $stmt->bindParam(2, $document);
     $stmt->bindParam(3, $purpose);
     $stmt->execute();
-    header('Location: ../views/residents/userResident.php');
+    header('Location: ../views/residents/userDocument.php');
 }
 ?>

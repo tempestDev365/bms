@@ -102,18 +102,18 @@ $announcements = getAllAnnouncement();
                         $comments = getComments($announcement['id']);
                         echo "
                         <div class='card-header'>
-                        <p>Title: {$announcement['title']}</p>
+                        <h3>Title: {$announcement['title']}</h3>
                     </div>
                     <div class='card-body'>
-                        <p>Content:{$announcement['content']}</p>
+                        <h5>Content:{$announcement['content']}</h5>
                     </div>";
-                     
+                    
+                    echo `<h5>Comments:</h5>`;
                     foreach($comments as $comment){
                         if($comment['announcement_id'] == $announcement['id']){
                             $fullname = $comment['first_name'] . " " . $comment['middle_name'] . " " . $comment['last_name'];
                             echo "
                             <div class='card-footer'>
-                            <h3>Comments:</h3>
                             <p>{$fullname}: {$comment['comment']}</p>
                             <button class='btn btn-danger btn-sm' onclick ='deleteComment({$comment['id']})'>delete</button>
                             <button class='btn btn-primary btn-sm'  data-bs-toggle='modal' data-bs-target = '#editBtn' name = '{$comment['id']}' id = 'edit'>edit</button>
