@@ -126,15 +126,15 @@ $announcements = getAllAnnouncement();
                     <h5 class="modal-title">Edit Announcement</h5>
                     <button class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
+                <form action="" method="POST" id = "editForm">
                 <div class="modal-body">
                     <div class="announcement-title">
-                        <h2 contenteditable="true">THIS IS A TITLE</h2>
+                        <label for="title">New Title:</label>
+                        <input type="text" class="form-control" id="title" name="title" required>
                     </div>
-                    <form action="#">
                         <div class="announcement-content">
-                            <label contenteditable="true">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque ea officia neque, labore animi aliquam quo, laborum exercitationem veritatis explicabo eaque suscipit id! Alias tempora, doloribus hic mollitia accusantium similique.
-                            </label>
+                            <label for="content">New Content:</label>
+                            <textarea class="form-control" id="content" name="content" required></textarea>
                         </div>
                         
                         <div class="announcement-save mt-3 d-flex justify-content-end">
@@ -165,6 +165,14 @@ $announcements = getAllAnnouncement();
         console.log(error)
       }
     })
+   })
+   const edit =document.querySelectorAll('#edit')
+   edit.forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+        const id = e.target.name
+      const form =  document.querySelector('#editForm').action = `../../controllers/editDeleteAnnouncementController.php?id=${id}&action=edit`
+     form.submit()  
+        })
    })
   </script>
 </body>

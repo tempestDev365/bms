@@ -19,8 +19,27 @@ function deleteAnnouncement($id){
     }
     
 }
+function editAnnouncement($id){
+    $conn = $GLOBALS['conn'];
+    $new_titile = $_POST['title'];
+    $new_content = $_POST['content'];
+    $qry = "UPDATE announcement_tbl SET title = ?, content = ? WHERE id = $id";
+    $stmt = $conn->prepare($qry);
+    $stmt->bindParam(1, $new_titile);
+    $stmt->bindParam(2, $new_content);
+    $stmt->execute();
+    if($stmt){
+        header('Location: ../views/admin/announcement.php');
+    }
+    else{
+        echo "Error";
+    }
+}
 $action = $_GET['action'] ?? "";
 if($action == "delete"){
     deleteAnnouncement($id);
+}
+if($action == "edit"){
+    editAnnouncement($id);
 }
 ?>
