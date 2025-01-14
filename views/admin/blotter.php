@@ -234,44 +234,81 @@ $blotter = getAllBlotter();
     <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.colVis.min.js"></script>
     <script src="../components/sidebar.js?v=<?php echo time(); ?>" defer></script>
     <script>  
-    
-
-        $('#genderFilter').on('change', function() {
-            var filterValue = $(this).val();
-            var table = $('#example').DataTable();
-            table.column(2).search(filterValue === 'all' ? '' : filterValue, true, false).draw();
-        });
-        const date = document.querySelector('#date_selected');
-        date.addEventListener('input',(e)=>{
-           const currentDate = new Date();
-              const selectedDate = new Date(e.target.value);
-                if(selectedDate > currentDate){
-                    alert('Invalid Date');
-                    e.target.value = '';
+    $(document).ready(function() {
+        $('#example').DataTable({
+            responsive: true,
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'copy',
+                    exportOptions: {
+                        columns: ':not(:last-child)'
+                    }
+                },
+                {
+                    extend: 'csv',
+                    exportOptions: {
+                        columns: ':not(:last-child)'
+                    }
+                },
+                {
+                    extend: 'excel',
+                    exportOptions: {
+                        columns: ':not(:last-child)'
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    exportOptions: {
+                        columns: ':not(:last-child)'
+                    }
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: ':not(:last-child)'
+                    }
                 }
-              
-        })        
-        const viewDetail = async (id) =>{
-           const api = await fetch(`../../controllers/blotterOptionsController.php?id=${id}&action=view`);
-            const data = await api.json();
-             document.querySelector("#incidentPlace").textContent = data.place;
-                document.querySelector("#complainant").textContent = data.complainant;
-                document.querySelector("#first_witness").textContent = data.first_witness;
-                document.querySelector("#second_witness").textContent = data.second_witness;
-                document.querySelector("#date").textContent = data.date;
-                document.querySelector("#narrative").textContent = data.narrative;
+            ]
+        });
+    });
 
+    $('#genderFilter').on('change', function() {
+        var filterValue = $(this).val();
+        var table = $('#example').DataTable();
+        table.column(2).search(filterValue === 'all' ? '' : filterValue, true, false).draw();
+    });
+
+    const date = document.querySelector('#date_selected');
+    date.addEventListener('input', (e) => {
+        const currentDate = new Date();
+        const selectedDate = new Date(e.target.value);
+        if (selectedDate > currentDate) {
+            alert('Invalid Date');
+            e.target.value = '';
         }
-        
-        const deleteBlotter = async (id) =>{
-            const api = await fetch(`../../controllers/blotterOptionsController.php?id=${id}&action=delete`);
-            location.reload();
-        }
-        const editBlotter = async (id) =>{
-           const form =document.querySelector('#editBlotter');
-           form.action = `../../controllers/blotterOptionsController.php?id=${id}&action=edit`;
-           
-        }
+    });
+
+    const viewDetail = async (id) => {
+        const api = await fetch(`../../controllers/blotterOptionsController.php?id=${id}&action=view`);
+        const data = await api.json();
+        document.querySelector("#incidentPlace").textContent = data.place;
+        document.querySelector("#complainant").textContent = data.complainant;
+        document.querySelector("#first_witness").textContent = data.first_witness;
+        document.querySelector("#second_witness").textContent = data.second_witness;
+        document.querySelector("#date").textContent = data.date;
+        document.querySelector("#narrative").textContent = data.narrative;
+    }
+
+    const deleteBlotter = async (id) => {
+        const api = await fetch(`../../controllers/blotterOptionsController.php?id=${id}&action=delete`);
+        location.reload();
+    }
+
+    const editBlotter = async (id) => {
+        const form = document.querySelector('#editBlotter');
+        form.action = `../../controllers/blotterOptionsController.php?id=${id}&action=edit`;
+    }
     </script>
 
 </body>
