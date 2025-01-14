@@ -21,7 +21,6 @@ $resident_qry = "
 $stmt = $conn->prepare($resident_qry);
 $stmt->execute();
 $resident_result = $stmt->fetchAll();
-   
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -97,7 +96,7 @@ $resident_result = $stmt->fetchAll();
             <td>
                 <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#viewDetail" id = "viewBtn" name = "<?php echo $value['resident_id']; ?> "</button>View</button>
                 <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#selectDocument"  name = "<?php echo $value['resident_id']; ?>" id="issueBtn" >Issue Certificate</button>
-                <button class="btn btn-danger btn-sm">Delete</button>
+                <button class="btn btn-danger btn-sm" id = "deleteBtn" onclick="deleteResident(<?php echo $value['resident_id']; ?>)">Delete</button>
             </td>
             </tr>
             <?php endforeach; ?>
@@ -386,6 +385,13 @@ const printDocu = () => {
                 window.location.href = `${baseURL}singleParent.php?resident_id=${resident_id}`;
                 break;
          }
+}
+const deleteResident = (id) => {
+   const confirmDelete = confirm('Are you sure you want to delete this resident?');
+    if(confirmDelete){
+         const api = fetch(`../../controllers/deleteResidentController.php?id=${id}&action=delete`);
+         window.location.reload();
+    }
 }
     </script>
 </body>

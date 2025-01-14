@@ -160,9 +160,7 @@ $announcements = getAllAnnouncement();
       try {
         const id = e.target.name
         const resposne = await fetch(`../../controllers/editDeleteAnnouncementController.php?id=${id}&action=delete`)
-        if(resposne.ok){
-          location.reload()
-        }
+        location.reload()
       }catch(error){
         console.log(error)
       }

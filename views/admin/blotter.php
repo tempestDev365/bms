@@ -265,7 +265,6 @@ $blotter = getAllBlotter();
         
         const deleteBlotter = async (id) =>{
             const api = await fetch(`../../controllers/blotterOptionsController.php?id=${id}&action=delete`);
-            const data = await api.json();
             location.reload();
         }
         const editBlotter = async (id) =>{

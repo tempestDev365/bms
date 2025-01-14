@@ -81,6 +81,7 @@ $document_request = getAllDocumentRequest();
                     <tbody>
                         <?php
                         foreach($document_request as $request){
+                           $status = $request['status'] == "approved" ? '' : "disabled";
                             echo "
                             <tr>
                               <td>{$request['id']}</td>
@@ -90,7 +91,7 @@ $document_request = getAllDocumentRequest();
                                 <td>{$request['time_Created']}</td>
                                 <td>
                                     <button class='btn btn-primary btn-sm' data-bs-toggle='modal' data-bs-target='#viewProfile' name = '{$request['resident_id']}' data-document = {$request['document']} id = 'viewBtn'>View</button>
-                                    <button class='btn btn-success btn-sm' data-bs-toggle='modal' data-bs-target='#selectDocument' name = '{$request['resident_id']}' id = 'printBtn'>Print</button>
+                                    <button class='btn btn-success btn-sm' data-bs-toggle='modal' data-bs-target='#selectDocument' name = '{$request['resident_id']}' id = 'printBtn'  $status >Print</button>
                                 </td>
                             </tr>
                             ";
@@ -250,29 +251,7 @@ $document_request = getAllDocumentRequest();
                 document.querySelector('#reject').setAttribute('name', resident_id);      
             });
         });
-        const status = document.querySelectorAll('#status');
-        status.forEach(stat => {
-            if(stat.textContent == 'pending'){
-                stat.style.color = 'darkorange';
-                print.forEach(btn => {
-                    btn.disabled = true;
-                });
-            }
-            if(stat.textContent == 'approved'){
-                stat.style.color = 'lightgreen';
-                print.forEach(btn => {
-                    btn.disabled = false;
-                });
-            }
-            
-            if(stat.textContent == 'rejected'){
-                stat.style.color = 'red';
-                print.forEach(btn => {
-                    btn.disabled = true;
-                });
-                
-            }
-        });
+     
 
       
         print.forEach(btn => {
@@ -334,6 +313,7 @@ $document_request = getAllDocumentRequest();
          }
 
      });
+     const filter = document.getElementById('statusFilter');
     </script>
 </body>
 </html>

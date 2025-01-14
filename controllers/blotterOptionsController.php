@@ -48,6 +48,8 @@ header('Location: ../views/admin/blotter.php');
 }
 if($action == 'delete'){
     deleteBlotter($id);
+    header('Location: ../views/admin/blotter.php');
+
 }
 if($action == 'view'){
     header('Content-Type: application/json');
@@ -55,5 +57,7 @@ if($action == 'view'){
 }
 if($action == 'edit'){
     editBlotter($id);
+    header('Location: ../views/admin/blotter.php');
+
 }
 ?>
