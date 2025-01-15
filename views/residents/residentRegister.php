@@ -20,7 +20,7 @@
                 <h1>Register Account</h1>
             </div>  
             <div class="register-body">
-                <form action="../../controllers/residentRegisterController.php" method = "POST" enctype="multipart/form-data">
+                <form id="registerForm" action="../../controllers/residentRegisterController.php" method = "POST" enctype="multipart/form-data">
 
                 <h5 class="text-center">Personal Information</h5>
                 <hr>
@@ -390,6 +390,13 @@
                 reader.readAsDataURL(file);
             }
         }
+
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Simulate form submission success
+            alert('Registration successful!');
+            window.location.href = './residentLogin.php';
+        });
     </script>
 </body>
 </html>

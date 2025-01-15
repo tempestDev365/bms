@@ -77,20 +77,44 @@ $announcements = getAllAnnouncement();
                 </form>
             </div>
 
-            <div class="container-fluid border mt-3 d-flex flex-column shadow-sm py-3 px-3 bg-white rounded-3" style="gap: 5px;">
+            <div class="container-fluid mt-3 shadow-sm py-3 px-3 bg-white rounded-3 border">
                 <div class="h2">Preview</div>
-
-                <!--comments container-->
-                <?php
-                foreach($announcements as $announcement){
-                    echo '<div class="card mt-2">
-                    <div class="card-header h5">
-                        '.$announcement['title'].'
-                    </div>
-                    <div class="card-body">
-                        <div class="card-content">
-                           '.$announcement['content'].'
+                <div class="announcements-container">
+                    <?php foreach($announcements as $announcement): ?>
+                        <div class="card mt-2">
+                            <div class="card-header h5">
+                                <?php echo $announcement['title']; ?>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-content">
+                                    <?php echo $announcement['content']; ?>
+                                </div>
+                                
+                                <!-- Comments Section -->
+                                <div class="comments-section mt-3">
+                                    <div class="h6">Comments</div>
+                                    <?php 
+                                    $comments = getComments($announcement['id']);
+                                    foreach($comments as $comment):
+                                        if($comment['announcement_id'] == $announcement['id']):
+                                        $resident_comment = $comment['first_name'].' '.$comment['middle_name'].' '.$comment['last_name'] . ": " . $comment['comment'];
+                                    ?>
+                                        <div class="card-comment border-bottom py-2">
+                                               <?php echo $resident_comment; ?>                                             
+                                        </div>
+                                    <?php 
+                                        endif;
+                                    endforeach; 
+                                    ?>
+                                </div>
+                            </div>
+                            
+                            <div class="card-footer">
+                                <button class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editBtn" id="edit" name="<?php echo $announcement['id']; ?>">Edit</button>
+                                <button class="btn btn-danger btn-sm" id="delete" name="<?php echo $announcement['id']; ?>">Delete</button>
+                            </div>
                         </div>
+<<<<<<< HEAD
                         <div class="card-footer">
                             <div class="h6">Comments</div>';
                             $comments = getComments($announcement['id']);
@@ -121,6 +145,10 @@ $announcements = getAllAnnouncement();
 
                 <!--/comments container-->
 
+=======
+                    <?php endforeach; ?>
+                </div>
+>>>>>>> 897da4d1b1ff5eee7a9813bc925d07a5b667fbb4
             </div>
               
         </div>
@@ -162,19 +190,7 @@ $announcements = getAllAnnouncement();
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-    <!--Data tables-->
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
-    <script src="https://cdn.datatables.net/2.2.1/js/dataTables.bootstrap5.js"></script>
-    <script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
-    <script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.bootstrap5.js"></script>
-    <script>
-        new DataTable('#example', {
-            responsive: true
-        });
-    </script>
-
+   
 
     <script src="../components/sidebar.js?v=<?php echo time(); ?>" defer></script>
     <script>

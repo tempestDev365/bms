@@ -30,7 +30,7 @@
 
                     <div class="form-group mt-3">
                         <label>Password:</label>
-                        <input type="text" placeholder="Enter password" name = "password" class="form-control" required>
+                        <input type="password" placeholder="Enter password" name = "password" class="form-control" required>
                     </div>
                     
                     <div class="form-group mt-3">
