@@ -391,12 +391,7 @@
             }
         }
 
-        document.getElementById('registerForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            // Simulate form submission success
-            alert('Registration successful!');
-            window.location.href = './residentLogin.php';
-        });
+      
     </script>
 </body>
 </html>

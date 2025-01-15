@@ -387,6 +387,34 @@ if(!isset($_SESSION['admin'])) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="../components/sidebar.js?v=<?php echo time(); ?>" defer></script>
+    <script>
+        document.getElementById('picture').addEventListener('change', function(event) {
+            previewImage(event, 'picture');
+        });
+
+        document.getElementById('signature').addEventListener('change', function(event) {
+            previewImage(event, 'signature');
+        });
+
+        document.getElementById('validId').addEventListener('change', function(event) {
+            previewImage(event, 'validId');
+        });
+
+        function previewImage(event, elementId) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const box = document.querySelector(`input[name="${elementId}"]`).previousElementSibling;
+                    box.style.backgroundImage = `url(${e.target.result})`;
+                    box.style.backgroundSize = 'cover';
+                    box.style.backgroundPosition = 'center';
+                    box.textContent = '';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
 
 </body>
 </html>

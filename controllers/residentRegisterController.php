@@ -84,7 +84,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         if($_SESSION['admin']){
             header("Location: ../views/admin/addResident.php");
         }else{
-            header('Location: ../views/residents/residentLogin.php?success=1');
         }
     } catch (Exception $e) {
         echo 'Error: ' . $e->getMessage();

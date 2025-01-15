@@ -258,7 +258,6 @@ editButtons.forEach(button => {
     button.addEventListener('click', (e) => {
         const id = e.target.name;
         form.action = `../../controllers/commentOptionsController.php?id=${id}&action=edit`;
-       
     });
 });
 
