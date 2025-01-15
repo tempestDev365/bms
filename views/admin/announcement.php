@@ -14,7 +14,10 @@ function getAllAnnouncement(){
 }
 function getComments( $announcement_id){
     $conn = $GLOBALS['conn'];
-    $qry = "SELECT * FROM comments_tbl WHERE announcement_id = ?";
+    $qry = "SELECT c.*, r.first_name,r.middle_name,r.last_name 
+    FROM comments_tbl c
+    JOIN residents_tbl r ON r.id = c.resident_id
+    WHERE announcement_id = ?";
     $stmt = $conn->prepare($qry);
     $stmt->bindParam(1, $announcement_id);
     $stmt->execute();
@@ -22,6 +25,7 @@ function getComments( $announcement_id){
     return $comments;
 }
 $announcements = getAllAnnouncement();
+
 ?>
 
 <!DOCTYPE html>
@@ -91,9 +95,11 @@ $announcements = getAllAnnouncement();
                             <div class="h6">Comments</div>';
                             $comments = getComments($announcement['id']);
                             foreach($comments as $comment){
+                        $resident_comment = $comment['first_name'].' '.$comment['middle_name'].' '.$comment['last_name'] . ": " . $comment['comment'];
+
                                 if($comment['announcement_id'] == $announcement['id']){
                                     echo '<div class="card-comment">
-                                    '.$comment['comment'].'
+                                    '.$resident_comment.'
                                 </div>';
                                 }
                             }
