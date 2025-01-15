@@ -100,7 +100,8 @@ $announcements = getAllAnnouncement();
                                         $resident_comment = $comment['first_name'].' '.$comment['middle_name'].' '.$comment['last_name'] . ": " . $comment['comment'];
                                     ?>
                                         <div class="card-comment border-bottom py-2">
-                                               <?php echo $resident_comment; ?>                                             
+                                            <?php echo $resident_comment; ?>
+                                            
                                         </div>
                                     <?php 
                                         endif;
@@ -114,41 +115,18 @@ $announcements = getAllAnnouncement();
                                 <button class="btn btn-danger btn-sm" id="delete" name="<?php echo $announcement['id']; ?>">Delete</button>
                             </div>
                         </div>
-<<<<<<< HEAD
-                        <div class="card-footer">
-                            <div class="h6">Comments</div>';
-                            $comments = getComments($announcement['id']);
-                            foreach($comments as $comment){
-                        $resident_comment = $comment['first_name'].' '.$comment['middle_name'].' '.$comment['last_name'] . ": " . $comment['comment'];
-
-                                if($comment['announcement_id'] == $announcement['id']){
-                                    echo '<div class="card-comment">
-                                    '.$resident_comment.'
-                                </div>';
-                                }
-                            }
-                        echo '</div>
                         
-                          
                            
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <button class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editBtn" id = "edit" name ="'.$announcement['id'].'">Edit</button>
-                        <button class="btn btn-danger btn-sm" id = "delete" name ="'.$announcement['id'].'" >Delete</button>
-                    </div>
-                </div>';
-                }
-                ?>
-
+                  
+              
            
 
                 <!--/comments container-->
 
-=======
                     <?php endforeach; ?>
                 </div>
->>>>>>> 897da4d1b1ff5eee7a9813bc925d07a5b667fbb4
             </div>
               
         </div>
