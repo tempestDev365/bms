@@ -81,9 +81,10 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         insertIntoResidentAddressTable($resident_id);
         insertIntoResidentEmploymentTable($resident_id);
         echo "<script>alert('Resident has been registered')</script>";
-        if($_SESSION['admin']){
+        if(isset($_SESSION['admin'])){
             header("Location: ../views/admin/addResident.php");
         }else{
+            header("Location: ../views/resident/residentRegister.php");
         }
     } catch (Exception $e) {
         echo 'Error: ' . $e->getMessage();

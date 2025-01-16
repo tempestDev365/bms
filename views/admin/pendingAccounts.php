@@ -191,9 +191,6 @@ $pending_accounts = $stmt->fetchAll();
     <script src="../components/sidebar.js?v=<?php echo time(); ?>" defer></script>
     <script>
 
-        new DataTable('#example', {
-            responsive: true
-        });
     </script>
     <script>  
         $('#genderFilter').on('change', function() {
