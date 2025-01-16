@@ -94,8 +94,11 @@
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
-                            <label for="sex">Sex</label>
-                            <input type="text" name="sex" id="sex" class="form-control" required>
+                            <label for="male">Male</label>
+                            <input type="radio" name="sex" id="male" value="male" required>
+                            <label for="female">Female</label>
+                            <input type="radio" name="sex" id="female" value="female"  required>
+
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
@@ -111,10 +114,7 @@
                             <label for="age">Age</label>
                             <input type="text" name="age" id="age" class="form-control" required>
                         </div>
-                         <div class="form-group mt-2 col-sm-12 col-md-4">
-                            <label for="gender">Gender</label>
-                            <input type="text" name="gender" id="gender" class="form-control" required>
-                        </div>
+                        
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="civil">Civil Status</label>
                             <input type="text" name="civil" id="civil" class="form-control" required>

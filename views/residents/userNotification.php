@@ -3,6 +3,7 @@ session_start();
 if(!isset($_SESSION['resident_id'])) {
     header('Location: ./residentLogin.php');
 }
+$count = 0;
 function getAllDocumentRequested($id){
     include_once "../../database/databaseConnection.php";
     $conn = $GLOBALS['conn'];
@@ -12,8 +13,20 @@ function getAllDocumentRequested($id){
     $stmt->execute();
     return $stmt->fetchAll();
 }
+function getAllConcernsReplies(){
+    include_once "../../database/databaseConnection.php";
+    $conn = $GLOBALS['conn'];
+    $sql = "SELECT cr.*,c.id,c.resident_id 
+    FROM concerns_replies_tbl cr
+    JOIN concerns_tbl c 
+    ON cr.concern_id = c.id
+    WHERE c.resident_id = {$_SESSION['resident_id']}";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
 $allDocumentRequested = getAllDocumentRequested($_SESSION['resident_id']);
-
+$allConcernsReplies = getAllConcernsReplies();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -82,12 +95,29 @@ $allDocumentRequested = getAllDocumentRequested($_SESSION['resident_id']);
                         ?>
                         <div class="notification">
                             <div class="notification-content">
-                               <div class="notifContainer unread" id = "<?php echo $document['id']; ?>">
+                               <div class="notifContainer unread" id = "<?php echo $count ?>"   >
+                                <input type="text" value = "<?php echo $_SESSION['resident_id']; ?>" hidden>
                                 <h5 class="notification-title">Document Request</h5>
                                 <p class="notification-message">Your request for <strong><?php echo $document['document']; ?></strong> has been <?php echo $status?>.</p>
                                 <p class="notification-date"><?php echo $document['time_Created']; ?></p>
-                                <button id = "markAsReadBtn" data-id = "<?php echo $document['id']; ?>">Mark As Read</button>
+                                <button id = "markAsReadBtn" data-id = "<?php echo $count ?>">Mark As Read</button>
+                            </div>
+                            </div>
+                            <?php $count ++?>
+                        </div>
+                    <?php endforeach; ?>
+                    
+                    <?php foreach($allConcernsReplies as $replies): ?>
+                        <div class="notification">
+                            <div class="notification-content">
+                               <div class="notifContainer unread" id =  "<?php echo $count ?>">
+                                <h5 class="notification-title">Concern reply</h5>
+                                <p class="notification-message">The admin has replied to your concern:</p>
+                                <p class="notification-date"><?php echo $replies['message']; ?></p>
+                                <button id = "markAsReadBtn" data-id =  "<?php echo $count ?>">Mark As Read</button>
                                </div>
+                            <?php  $count ++?>
+
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -139,8 +169,7 @@ $allDocumentRequested = getAllDocumentRequested($_SESSION['resident_id']);
      import { notificationCount} from '../components/residentSidebar.js';
     const unread = document.querySelectorAll('.unread');
 let count = localStorage.getItem('notificationCount') || 0;
-let readNotifications = JSON.parse(localStorage.getItem('readNotifications')) || [];
-
+let readNotifications = JSON.parse(localStorage.getItem('readNotification<?=$_SESSION['resident_id']?>')) || [];
 // Initialize count and mark read notifications
 unread.forEach(notification => {
     if (readNotifications.includes(notification.id)) {
@@ -162,14 +191,13 @@ markAsReadBtn.forEach(btn => {
         const id = e.target.getAttribute('data-id');
         for (let i = 0; i < notification.length; i++) {
             if (notification[i].getAttribute('id') == id) {
+            
                 notification[i].classList.remove('unread');
                 notification[i].classList.add('read');
                 markAsReadBtn[i].style.display = "none";
                 count--;
-
-                // Save read notification ID to local storage
                 readNotifications.push(id);
-                localStorage.setItem('readNotifications', JSON.stringify(readNotifications));
+                localStorage.setItem('readNotification<?= $_SESSION['resident_id']?>', JSON.stringify(readNotifications));
                 localStorage.setItem('notificationCount', count);
                 notificationCount(count);
             }

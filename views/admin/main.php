@@ -92,7 +92,8 @@ $demographic = getAllDemographic();
                 </div>
 
                  <!--Female Card-->
-                 <div class="card" style="max-width: 350px; width: 350px;">
+                 <a href="./residents.php?filter=female">
+                    <div class="card" style="max-width: 350px; width: 350px;">
                     <div class="card-body d-flex justify-content-between align-items-center flex-column">
                         <div class="card-content">
                             <img src="../../assets/img/dashboard/female.png" class="img-fluid" style="width: 80px" alt="female">
@@ -104,8 +105,10 @@ $demographic = getAllDemographic();
                     </div>
                 </div>
 
+                 </a>
                  <!--Male Card-->
-                 <div class="card" style="max-width: 350px; width: 350px;">
+                 <a href="./residents.php?filter=male">
+                    <div class="card" style="max-width: 350px; width: 350px;">
                     <div class="card-body d-flex justify-content-between align-items-center flex-column">
                         <div class="card-content">
                             <img src="../../assets/img/dashboard/male.png" class="img-fluid" style="width: 80px" alt="male">
@@ -116,9 +119,11 @@ $demographic = getAllDemographic();
                         </div>
                     </div>
                 </div>
+                 </a>
 
                  <!--Voters Card-->
-                 <div class="card" style="max-width: 350px; width: 350px;">
+                 <a href="./residents.php?filter=voter">
+                    <div class="card" style="max-width: 350px; width: 350px;">
                     <div class="card-body d-flex justify-content-between align-items-center flex-column">
                         <div class="card-content">
                             <img src="../../assets/img/dashboard/voters.png" class="img-fluid" style="width: 80px" alt="residents">
@@ -129,6 +134,7 @@ $demographic = getAllDemographic();
                         </div>
                     </div>
                 </div>
+                 </a>
 
                  <!--Household Card-->
                  <div class="card p-3" style="max-width: 350px; width: 350px;">

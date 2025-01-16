@@ -81,7 +81,7 @@ $resident_result = $stmt->fetchAll();
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class = "tBody">
              <?php foreach($resident_result as $key => $value): ?>
              <tr>
              <td><?php echo $value['id']; ?></td>
@@ -89,8 +89,8 @@ $resident_result = $stmt->fetchAll();
             <td><?php echo $value['sex']; ?></td>
             <td><?php echo $value['age']; ?></td>
             <td>
-                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#viewDetail" id = "viewBtn" name = "<?php echo $value['resident_id']; ?> "</button>View</button>
-                <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#selectDocument"  name = "<?php echo $value['resident_id']; ?>" id="issueBtn" >Issue Certificate</button>
+                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#viewDetail" id = "viewBtn" name = "<?php echo $value['resident_id']; ?> " onclick = "viewDetail(<?php echo $value['resident_id']; ?>)"</button>View</button>
+                <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#selectDocument"  name = "<?php echo $value['resident_id']; ?>" id="issueBtn" onclick = "setUrlId(${resident.resident_id})" >Issue Certificate</button>
                 <button class="btn btn-danger btn-sm" id = "deleteBtn" onclick="deleteResident(<?php echo $value['resident_id']; ?>)">Delete</button>
             </td>
             </tr>
@@ -250,39 +250,18 @@ $resident_result = $stmt->fetchAll();
     <script>
        
 
-        $('#genderFilter').on('change', function() {
-            var filterValue = $(this).val();
-            var table = $('#example').DataTable();x
-            table.column(2).search(filterValue === 'all' ? '' : filterValue, true, false).draw();
-        });
-
       const issueCertificate = document.querySelectorAll('#issueBtn');
       const print = document.querySelector('#printBtn');
-const viewDetail = document.querySelectorAll('#viewBtn');
-         viewDetail.forEach((btn) => {
-              btn.addEventListener('click', async (e) => {
-                const id = e.target.name;
-                const api = await fetch(`../../controllers/getAllResidentInformationController.php?id=${id}&action=view`);
-                const response = await api.json();
-
-                populateModal(response.resident_picture,response.resident_signature,response.resident_valid_id,response.resident_fullname,response.resident_sex,response.resident_birthdate,
-               response.resident_birthplace,response.resident_civil_status,response.resident_height,response.resident_weight,response.resident_blood_type,response.resident_religion,response.resident_ethnic_origin,response.resident_nationality,response.resident_precint_number,response.resident_is_voter,response.resident_org_member,
-                response.resident_email,response.resident_mobile_number,response.resident_tel_no,response.resident_ICOE_fullname,response.resident_ICOE_contact_number,response.resident_ICOE_address,response.resident_mother_name,response.resident_father_name,response.resident_spouse_name,response.resident_highest_educational_attainment,response.resident_type_of_school,
-                response.resident_house_number,response.resident_purok,response.resident_full_address,response.resident_street,response.resident_hoa,response.resident_employment_status,response.resident_employment_field,response.resident_occupation,response.resident_monthly_income)
-              });
-         });
-viewDetail.forEach((btn) => {
-    btn.addEventListener('click', async (e) => {
-        const id = e.target.name;
+     async  function viewDetail(id){
         const api = await fetch(`../../controllers/getAllResidentInformationController.php?id=${id}&action=view`);
         const response = await api.json();
         populateModal(response.resident_picture, response.resident_signature, response.resident_valid_id, response.resident_fullname, response.resident_sex, response.resident_birthdate,
             response.resident_birthplace, response.resident_civil_status, response.resident_height, response.resident_weight, response.resident_blood_type, response.resident_religion, response.resident_ethnic_origin, response.resident_nationality, response.resident_precinct_number, response.resident_is_voter, response.resident_org_member,
             response.resident_email, response.resident_mobile_number, response.resident_tel_no, response.resident_ICOE_name, response.resident_ICOE_contact_number, response.resident_ICOE_address, response.resident_mother_name, response.resident_father_name, response.resident_spouse_name, response.resident_highest_educational_attainment, response.resident_type_of_school,
             response.resident_house_number, response.resident_purok, response.resident_full_address, response.resident_street, response.resident_hoa, response.resident_employment_status, response.resident_employment_field, response.resident_occupation, response.resident_monthly_income);
-    })
-});
-
+       }
+ 
+    
 function populateModal(picture, signature, valid_id, fullName, sex, birthdate, birthplace, civilStatus, height, weight, bloodType, religion, ethnicOrigin, nationality, precinctNumber, registeredVoter, organizationMember, email, mobileNumber, telNo, emergencyFullName, emergencyContactNumber, emergencyAddress, mother, father, spouse, highestEducation, typeOfSchool, houseNumber, purok, fullAddress, street, hoa, employmentStatus, employmentField, occupation, monthlyIncome) {
     document.querySelector('.picture').src = "data:image/gif;base64," + picture;
     document.querySelector('.signature').src = "data:image/gif;base64," + signature;
@@ -322,17 +301,12 @@ function populateModal(picture, signature, valid_id, fullName, sex, birthdate, b
     document.getElementById('occupation').textContent = `Occupation: ${occupation}`;
     document.getElementById('monthlyIncome').textContent = `Monthly Income: ${monthlyIncome}`;
 }
-issueCertificate.forEach((btn) => {
-    btn.addEventListener('click',  (e) => {
-         const resident_id = e.target.getAttribute('name');
-                const currentURL  = new URL(window.location.href);
-                currentURL.searchParams.delete('resident_id');
-                currentURL.searchParams.set('resident_id', resident_id);
-                window.history.pushState({}, '', currentURL);
-    });
-
-        
-});
+async function setUrlId(id){
+    const currentURL  = new URL(window.location.href);
+    currentURL.searchParams.delete('resident_id');
+    currentURL.searchParams.set('resident_id', id);
+    window.history.pushState({}, '', currentURL);
+}
 const printDocu = () => {
     const documentSelected = document.getElementById('documentOption').value;
      console.log(documentSelected);
@@ -388,6 +362,36 @@ const deleteResident = (id) => {
          window.location.reload();
     }
 }
+const params = new URLSearchParams(window.location.search);
+const filter = params.get('filter');
+const tableBody = document.querySelector('.tBody');
+if (filter) {
+    filterResident(filter).then(filtered => {
+        tableBody.innerHTML = '';
+        filtered.forEach((resident) => {
+            tableBody.innerHTML += `
+                <tr>
+                    <td>${resident.id}</td>
+                    <td>${resident.first_name} ${resident.middle_name} ${resident.last_name}</td>
+                    <td>${resident.sex}</td>
+                    <td>${resident.age}</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#viewDetail" id="viewBtn" name="${resident.resident_id}" onclick = "viewDetail(${resident.resident_id})">View</button>
+                        <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#selectDocument" name="${resident.resident_id}" id="issueBtn" onclick = "setUrlId(${resident.resident_id})">Issue Certificate</button>
+                        <button class="btn btn-danger btn-sm" id="deleteBtn" onclick="deleteResident(${resident.resident_id})">Delete</button>
+                    </td>
+                </tr>
+            `;
+        });
+    }).catch(error => console.error('Error:', error));
+}
+async function filterResident(filter) {
+      
+        const api = await fetch(`../../controllers/filterResidentController.php?filter=${filter}`);
+        const response = await api.json();
+        return response;
+}
+
     </script>
 </body>
 </html>
