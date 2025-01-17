@@ -103,7 +103,7 @@
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="birthdate">Birthdate</label>
-                            <input type="text" name="birthdate" id="birthdate" class="form-control" required>
+                            <input type="date" name="birthdate" id="birthdate" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
@@ -117,22 +117,37 @@
                         
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="civil">Civil Status</label>
-                            <input type="text" name="civil" id="civil" class="form-control" required>
+                            <select name="civil" id="civil" class="form-control" required>
+                                <option value="single">Single</option>
+                                <option value="married">Married</option>
+                                <option value="widowed">Widowed</option>
+                                <option value="divorced">Divorced</option>
+                                <option value="separated">Separated</option>
+                            </select>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="height">Height</label>
-                            <input type="text" name="height" id="height" class="form-control" required>
+                            <input type="number" name="height" id="height" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="weight">Weight</label>
-                            <input type="text" name="weight" id="weight" class="form-control" required>
+                            <input type="number" name="weight" id="weight" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="bloodType">Blood Type</label>
-                            <input type="text" name="bloodType" id="bloodType" class="form-control" required>
+                            <select name="bloodType" id="bloodType" class="form-control" required>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                            </select>
                         </div>
                         
                         <div class="form-group mt-2 col-sm-12 col-md-4">
@@ -309,7 +324,13 @@
                     <div class="form-contact-info row">
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="eStatus">Employment Status</label>
-                            <input type="text" name="eStatus" id="eStatus" class="form-control" required>
+                            <select name="eStatus" id="eStatus" class="form-control" required>
+                                <option value="employed">Employed</option>
+                                <option value="unemployed">Unemployed</option>
+                                <option value="self-employed">Self-Employed</option>
+                                <option value="student">Student</option>
+                                <option value="retired">Retired</option>
+                            </select>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
@@ -338,7 +359,14 @@
                     <div class="form-contact-info row">
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="higherEducAttain">Higher Education Attainment</label>
-                            <input type="text" name="higherEducAttain" id="higherEducAttain" class="form-control" required>
+                            <select name="higherEducAttain" id="higherEducAttain" class="form-control" required>
+                                <option value="none">None</option>
+                                <option value="high_school">High School</option>
+                                <option value="associate">Associate Degree</option>
+                                <option value="bachelor">Bachelor's Degree</option>
+                                <option value="master">Master's Degree</option>
+                                <option value="doctorate">Doctorate</option>
+                            </select>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
@@ -391,6 +419,25 @@
             }
         }
 
+        // Prevent number input for specific text fields
+        const textFields = ['firstName', 'middleName', 'lastName', 'suffix', 'alias', 'salutation'];
+        textFields.forEach(id => {
+            document.getElementById(id).addEventListener('input', function(event) {
+                this.value = this.value.replace(/[0-9]/g, '');
+            });
+        });
+
+        // Automatically compute age based on birthdate
+        document.getElementById('birthdate').addEventListener('change', function() {
+            const birthdate = new Date(this.value);
+            const today = new Date();
+            let age = today.getFullYear() - birthdate.getFullYear();
+            const monthDiff = today.getMonth() - birthdate.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthdate.getDate())) {
+                age--;
+            }
+            document.getElementById('age').value = age;
+        });
       
     </script>
 </body>
