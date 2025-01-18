@@ -61,7 +61,21 @@
 <script>
     const params = new URLSearchParams(window.location.search); 
     if(params.get('error') == 2){
-        alert('Your account is still pending or rejected');
+        alert('Your account is still pending.');
+        setInterval(() => {
+           params.delete('error');
+           history.replaceState(history.state,'', window.location.pathname);
+        }, 1000);
+    }
+    if(params.get('error') == 3){
+        alert('Your account is rejected. Please contact the admin.');
+        setInterval(() => {
+           params.delete('error');
+           history.replaceState(history.state,'', window.location.pathname);
+        }, 1000);
+    }
+    if(params.get('error') == 4){
+        alert('Account does not exist.');
         setInterval(() => {
            params.delete('error');
            history.replaceState(history.state,'', window.location.pathname);

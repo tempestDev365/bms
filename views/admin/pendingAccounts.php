@@ -60,7 +60,8 @@ $pending_accounts = $stmt->fetchAll();
                     <tbody>
                        <?php
                        foreach($pending_accounts as $accounts){
-                            echo "<tr>";
+                        $status = $accounts['status'] == "rejected" ? 'none': '';
+                            echo "<tr style='display: $status'>";
                             echo "<td>".$accounts['id']."</td>";
                             echo "<td>".$accounts['Name']."</td>";
                             echo  "<td>

@@ -8,14 +8,25 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $stmt->bindParam(1, $username);
     $stmt->execute();
     $result = $stmt->fetch();
-    $get_account_status = "SELECT * FROM approved_tbl WHERE resident_id = ?";
+    $get_account_status = "SELECT status FROM pending_accounts_tbl WHERE resident_id = ?";
     $stmt = $conn->prepare($get_account_status);
     $stmt->bindParam(1, $result['id']);
     $stmt->execute();
     $status = $stmt->fetch();
-    if(!$status){
+    
+    if($status['status'] == "pending"){
         header('Location: ../views/residents/residentLogin.php?error=2');
-        echo "<script>alert('Account not yet approved by the admin.');</script>";   
+        echo "<script>alert('Account is still pending.');</script>";   
+        return;
+    }
+    if($status['status'] == "rejected"){
+        header('Location: ../views/residents/residentLogin.php?error=3');
+        echo "<script>alert('Account is rejected. Please contact the admin.');</script>";   
+        return;
+    }
+    if(!$status){
+        header('Location: ../views/residents/residentLogin.php?error=4');
+        echo "<script>alert('Account does not exist.');</script>";   
         return;
     }
 

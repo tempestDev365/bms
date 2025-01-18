@@ -42,8 +42,8 @@ function rejectAccount($id){
     $status_result->bindParam(1, $id, PDO::PARAM_INT); 
     $status_result->execute();
     $get_status = $status_result->fetch(PDO::FETCH_ASSOC);  
-     $qry = "DELETE FROM `pending_accounts_tbl` WHERE `id` = ?";
-        $result = $conn->prepare($qry);
+     $qry = "UPDATE `pending_accounts_tbl` SET `status` = 'rejected' WHERE `id` = ?";       
+      $result = $conn->prepare($qry);
         $result->bindParam(1, $id, PDO::PARAM_INT);
         $result->execute();
         $insert_into_rejected_qry = "INSERT INTO rejected_tbl (name,resident_id,time_Created) VALUES (?,?,NOW())";
