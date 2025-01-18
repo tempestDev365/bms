@@ -39,6 +39,11 @@ $resident_result = $stmt->fetchAll();
         table th, table td {
             text-align: center;
         }
+        @media print {
+            .action-column {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -78,24 +83,24 @@ $resident_result = $stmt->fetchAll();
                             <th>Name</th>
                             <th>Gender</th>
                             <th>Age</th>
-                            <th>Action</th>
+                            <th class="action-column">Action</th>
                         </tr>
                     </thead>
-                    <tbody class = "tBody">
-             <?php foreach($resident_result as $key => $value): ?>
-             <tr>
-             <td><?php echo $value['id']; ?></td>
-             <td><?php echo $value['first_name'].' '.$value['middle_name'].' '.$value['last_name']; ?></td>
-            <td><?php echo $value['sex']; ?></td>
-            <td><?php echo $value['age']; ?></td>
-            <td>
-                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#viewDetail" id = "viewBtn" name = "<?php echo $value['resident_id']; ?> " onclick = "viewDetail(<?php echo $value['resident_id']; ?>)"</button>View</button>
-                <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#selectDocument"  name = "<?php echo $value['resident_id']; ?>" id="issueBtn" onclick = "setUrlId(${resident.resident_id})" >Issue Certificate</button>
-                <button class="btn btn-danger btn-sm" id = "deleteBtn" onclick="deleteResident(<?php echo $value['resident_id']; ?>)">Delete</button>
-            </td>
-            </tr>
-            <?php endforeach; ?>
-                            </tbody>
+                    <tbody class="tBody">
+                        <?php foreach($resident_result as $key => $value): ?>
+                        <tr>
+                            <td><?php echo $value['id']; ?></td>
+                            <td><?php echo $value['first_name'].' '.$value['middle_name'].' '.$value['last_name']; ?></td>
+                            <td><?php echo $value['sex']; ?></td>
+                            <td><?php echo $value['age']; ?></td>
+                            <td class="action-column">
+                                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#viewDetail" id="viewBtn" name="<?php echo $value['resident_id']; ?>" onclick="viewDetail(<?php echo $value['resident_id']; ?>)">View</button>
+                                <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#selectDocument" name="<?php echo $value['resident_id']; ?>" id="issueBtn" onclick="setUrlId(<?php echo $value['resident_id']; ?>)">Issue Certificate</button>
+                                <button class="btn btn-danger btn-sm" id="deleteBtn" onclick="deleteResident(<?php echo $value['resident_id']; ?>)">Delete</button>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
                 </table>
             </div>
 
@@ -391,7 +396,25 @@ async function filterResident(filter) {
         const response = await api.json();
         return response;
 }
-
+$(document).ready(function() {
+    $('#example').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':not(.action-column)'
+                }
+            },
+            {
+                extend: 'pdf',
+                exportOptions: {
+                    columns: ':not(.action-column)'
+                }
+            }
+        ]
+    });
+});
     </script>
 </body>
 </html>
