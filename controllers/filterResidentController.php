@@ -57,11 +57,16 @@ function filterResident($filter){
         LEFT JOIN 
             resident_information ri ON r.id = ri.resident_id";
     }
+    
+                      
+
+
     $result = $conn->prepare($qry);
     $result->execute();
     $residents = $result->fetchAll(PDO::FETCH_ASSOC);
     return $residents;
 }
+
 
 if($filter){
     header('Content-Type: application/json');

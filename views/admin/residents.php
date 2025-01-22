@@ -396,6 +396,7 @@ if (filter) {
         });
     }).catch(error => console.error('Error:', error));
 }
+
 //function to get the filter 
 async function filterResident(filter) {     
         const api = await fetch(`../../controllers/filterResidentController.php?filter=${filter}`);
