@@ -45,6 +45,17 @@ function filterResident($filter){
         WHERE 
             ri.registered_voter = 1
         ";
+    }else if($filter == 'all'){
+         $qry = "SELECT 
+            r.id, r.first_name, r.middle_name, r.last_name, 
+            ri.sex, ri.age,ri.resident_id, 
+            a.*
+        FROM 
+            approved_tbl a
+        LEFT JOIN 
+            residents_tbl r ON a.resident_id = r.id
+        LEFT JOIN 
+            resident_information ri ON r.id = ri.resident_id";
     }
     $result = $conn->prepare($qry);
     $result->execute();

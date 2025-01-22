@@ -68,10 +68,11 @@ $resident_result = $stmt->fetchAll();
                 <div class="container-fluid d-flex justify-content-end align-items-center mb-3" style="gap: 1rem; flex-wrap: wrap;">
                     <div class="filter">
                         <select id="genderFilter" class="form-select">
+                            <option value="" selected>==SELECT FILTER==</option>
                             <option value="all">All</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
-                            <option value="voters">Voters</option>
+                            <option value="voter">Voters</option>
                         </select>
                     </div>
                    
@@ -257,6 +258,7 @@ $resident_result = $stmt->fetchAll();
 
       const issueCertificate = document.querySelectorAll('#issueBtn');
       const print = document.querySelector('#printBtn');
+      // view the resident details
      async  function viewDetail(id){
         const api = await fetch(`../../controllers/getAllResidentInformationController.php?id=${id}&action=view`);
         const response = await api.json();
@@ -306,12 +308,14 @@ function populateModal(picture, signature, valid_id, fullName, sex, birthdate, b
     document.getElementById('occupation').textContent = `Occupation: ${occupation}`;
     document.getElementById('monthlyIncome').textContent = `Monthly Income: ${monthlyIncome}`;
 }
+// ssets thee url to the resident id for the document printing
 async function setUrlId(id){
     const currentURL  = new URL(window.location.href);
     currentURL.searchParams.delete('resident_id');
     currentURL.searchParams.set('resident_id', id);
     window.history.pushState({}, '', currentURL);
 }
+//goes to the document to print
 const printDocu = () => {
     const documentSelected = document.getElementById('documentOption').value;
      console.log(documentSelected);
@@ -360,6 +364,7 @@ const printDocu = () => {
                 break;
          }
 }
+// deletes the resident from the database
 const deleteResident = (id) => {
    const confirmDelete = confirm('Are you sure you want to delete this resident?');
     if(confirmDelete){
@@ -367,6 +372,7 @@ const deleteResident = (id) => {
          window.location.reload();
     }
 }
+// renders the filtered resident
 const params = new URLSearchParams(window.location.search);
 const filter = params.get('filter');
 const tableBody = document.querySelector('.tBody');
@@ -390,12 +396,22 @@ if (filter) {
         });
     }).catch(error => console.error('Error:', error));
 }
-async function filterResident(filter) {
-      
+//function to get the filter 
+async function filterResident(filter) {     
         const api = await fetch(`../../controllers/filterResidentController.php?filter=${filter}`);
         const response = await api.json();
         return response;
 }
+// set the filter
+document.getElementById('genderFilter').value = filter;
+document.getElementById('genderFilter').addEventListener('change', (e) => {
+    const filter = e.target.value;
+    const currentURL = new URL(window.location.href);
+    currentURL.searchParams.delete('filter');
+    currentURL.searchParams.set('filter', filter);
+    window.location.href = currentURL;
+    
+});
 $(document).ready(function() {
     $('#example').DataTable({
         dom: 'Bfrtip',
