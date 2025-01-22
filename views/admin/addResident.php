@@ -35,7 +35,7 @@ if(!isset($_SESSION['admin'])) {
                         <h1>Add New Resident</h1>
                     </div>  
                     <div class="register-body">
-              <form action="../../controllers/residentRegisterController.php" method = "POST" enctype="multipart/form-data">
+              <form action="../../controllers/adminRegisterController.php" method = "POST" enctype="multipart/form-data">
 
                 <h5 class="text-center">Personal Information</h5>
                 <hr>
@@ -413,6 +413,13 @@ if(!isset($_SESSION['admin'])) {
                 };
                 reader.readAsDataURL(file);
             }
+        }
+        const params = new URLSearchParams(window.location.search);
+        if(params.has('success')) {
+            alert('Resident added successfully');
+        }
+        if(params.get('error') == 1) {
+            alert('Duplicate username');
         }
     </script>
 

@@ -418,7 +418,14 @@
                 reader.readAsDataURL(file);
             }
         }
-
+   const params = new URLSearchParams(window.location.search);
+         if(params.get('error') == 1){
+        alert('Your account is disabled.');
+        setInterval(() => {
+           params.delete('error');
+           history.replaceState(history.state,'', window.location.pathname);
+        }, 1000);
+    }
         // Prevent number input for specific text fields
         const textFields = ['firstName', 'middleName', 'lastName', 'suffix', 'alias', 'salutation'];
         textFields.forEach(id => {

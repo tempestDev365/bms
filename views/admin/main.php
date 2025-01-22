@@ -26,6 +26,13 @@ function getAllDemographic(){
     FROM approved_tbl a
     LEFT JOIN resident_information ri ON a.resident_id = ri.resident_id
     ";
+     $household_qry = "SELECT COUNT(DISTINCT ra.full_address) as total_household
+                      FROM approved_tbl a
+                      LEFT JOIN residents_address ra ON a.resident_id = ra.resident_id";
+
+    $household_result = $conn->prepare($household_qry);
+    $household_result->execute();
+    $household_count = $household_result->fetch(PDO::FETCH_ASSOC);
     $age_result = $conn->prepare($age_qry);
     $age_result->execute();
     $age_count = $age_result->fetch(PDO::FETCH_ASSOC);
@@ -46,7 +53,8 @@ function getAllDemographic(){
         'female_count' => $female_count['total_female'],
         'male_count' => $male_count['total_male'],
         'voter_count' => $voter_count['total_voters'],
-        'age_count' => $age_count['age']
+        'age_count' => $age_count['age'],
+        'household_count' => $household_count['total_household']
     ];
 }
 $demographic = getAllDemographic();
@@ -144,7 +152,7 @@ $demographic = getAllDemographic();
                         </div>
                         <div class="card-title d-flex justify-content-between align-items-center" style="gap: 10px">
                             <h5>Total Household:</h5>
-                            <h3>0</h5>
+                            <h3><?php echo $demographic['household_count'] ?></h5>
                         </div>
                     </div>
                 </div>

@@ -24,11 +24,12 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         echo "<script>alert('Account is rejected. Please contact the admin.');</script>";   
         return;
     }
-    if(!$status){
+    if(!$result){
         header('Location: ../views/residents/residentLogin.php?error=4');
         echo "<script>alert('Account does not exist.');</script>";   
         return;
     }
+    
 
     if ($result && password_verify($password, $result['password'])) {
         session_start();

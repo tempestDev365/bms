@@ -43,14 +43,14 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         $suffix = $_POST['suffix'] ?? "";
         $alias = $_POST['alias'];
         $fullname = $first_name . " " . $middle_name . " " . $last_name . " " . $suffix;
-         $checkDuplicate = "SELECT * FROM residents_tbl WHERE username = ?";
+        $checkDuplicate = "SELECT * FROM residents_tbl WHERE username = ?";
         $result = $conn->prepare($checkDuplicate);
         $result->bindParam(1, $username, PDO::PARAM_STR);
         $result->execute();
         $result = $result->fetch();
         if($result){
             echo "<script>alert('Username already exist')</script>";
-            header("Location: ../views/residents/residentRegister.php?error=1");
+            header("Location: ../views/admin/addResident.php?error=1");
             exit();
         }
         $insert_into_resident_tbl = "INSERT INTO residents_tbl (username, password, picture, signature, valid_id, first_name, middle_name, last_name, suffix, alias, time_Created) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
@@ -69,10 +69,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         $result->bindParam(11, $current_date, PDO::PARAM_STR);
         $result->execute();
         $resident_id = $conn->lastInsertId();
-    
         
- 
-       $insert_into_pending = "INSERT INTO pending_accounts_tbl (Name, resident_id,status) VALUES (?, ?, 'pending')";
+        $insert_into_pending = "INSERT INTO approved_tbl (Name, resident_id) VALUES (?, ?)";
         $result = $conn->prepare($insert_into_pending);
         $result->bindParam(1, $fullname, PDO::PARAM_STR);
         $result->bindParam(2, $resident_id, PDO::PARAM_INT);
@@ -83,12 +81,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         insertIntoResidentAddressTable($resident_id);
         insertIntoResidentEmploymentTable($resident_id);
         echo "<script>alert('Resident has been registered')</script>";
-        if(isset($_SESSION['admin'])){
-            header("Location: ../views/admin/addResident.php");
-        }else{
-            header("Location: ../views/residents/residentLogin.php");
-            
-        }
+        header("Location: ../views/admin/addResident.php");
+        
     } catch (Exception $e) {
         echo 'Error: ' . $e->getMessage();
     }

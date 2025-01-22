@@ -34,7 +34,7 @@
                     </div>
                     
                     <div class="form-group mt-3">
-                        <a href="#">Forgot your password?</a>
+                        <a href="./forgotPassword.php">Forgot your password?</a>
                     </div>
 
                     <div class="form-group mt-3">
@@ -61,6 +61,14 @@
 <script>
     // types of error
     const params = new URLSearchParams(window.location.search); 
+    if(params.get('success') == 1){
+        alert('Password reset link sent to your email.');
+        setInterval(() => {
+           params.delete('success');
+           history.replaceState(history.state,'', window.location.pathname);
+        }, 1000);
+    }
+   
     if(params.get('error') == 2){
         alert('Your account is still pending.');
         setInterval(() => {
@@ -82,6 +90,7 @@
            history.replaceState(history.state,'', window.location.pathname);
         }, 1000);
     }
+    
 </script>
 </body>
 </html>
