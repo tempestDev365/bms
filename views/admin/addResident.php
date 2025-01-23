@@ -86,7 +86,7 @@ if(!isset($_SESSION['admin'])) {
 
                                         <div class="form-group mt-2 col-sm-12 col-md-4">
                                             <label for="middleName">Middle Name</label>
-                                            <input type="text" name="middleName" id="middleName" class="form-control" required>
+                                            <input type="text" name="middleName" id="middleName" class="form-control">
                                         </div>
                                         
                                         <div class="form-group mt-2 col-sm-12 col-md-4">
