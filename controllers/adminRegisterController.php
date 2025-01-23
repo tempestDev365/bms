@@ -43,7 +43,10 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         $suffix = $_POST['suffix'] ?? "";
         $alias = $_POST['alias'];
         $fullname = $first_name . " " . $middle_name . " " . $last_name . " " . $suffix;
-        $checkDuplicate = "SELECT * FROM residents_tbl WHERE username = ?";
+        $checkDuplicate = "SELECT r.*, a.resident_id 
+        FROM residents_tbl r 
+        LEFT JOIN approved_tbl a ON r.id = a.resident_id
+        WHERE username = ?";
         $result = $conn->prepare($checkDuplicate);
         $result->bindParam(1, $username, PDO::PARAM_STR);
         $result->execute();

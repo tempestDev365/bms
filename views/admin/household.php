@@ -28,7 +28,7 @@ include_once "../../database/databaseConnection.php";
         </thead>
         <tbody>
             <?php foreach($household as $house): ?>
-                <tr>
+                <tr onclick="viewMembers(<?php echo $house['house_number']; ?>)">
                     <td><?php echo $house['house_number']; ?></td>
                     <td><?php echo $house['total_household']; ?></td>
                     <td><?php echo $house['purok']; ?></td>
@@ -39,3 +39,27 @@ include_once "../../database/databaseConnection.php";
     </table>
 </body>
 </html>
+<script>
+    //gawan mo nalang modal tapos gawin mo yung populateModal function
+    async function viewMembers(house_number){
+      const api = await fetch(`../../controllers/viewHouseholdMembers.php?house_number=${house_number ?? " "}&action=view`);
+      const response = await api.json();
+      //ganto structure nunung marreereceive na data
+      /*
+      first_name
+      middle_name
+      last_name
+      age
+      sex
+
+      */
+      populateModal()
+      
+    }
+    //lagay mo lahat yung mga parameters
+    function populateModal(){
+        // lagay mo nalang lahat dyan 
+        //tapos document.getElementById('modal').innerHTML = ``
+    }
+    
+</script>
