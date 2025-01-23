@@ -20,6 +20,8 @@ if (sidebar) {
                             <a href="./announcement.php" class="nav-link text-light">Announcement</a>
                         </li>
 
+                       
+
                         <li class="nav-item">
                             <div class="nav-link text-white" data-bs-toggle="collapse" data-bs-target="#residentNav" style="cursor: pointer;">Residents</div>
                         </li>
@@ -42,6 +44,10 @@ if (sidebar) {
 
 
                         </div>
+
+                          <li class="nav-item">
+                            <a href="./household.php" class="nav-link text-light">Household</a>
+                        </li>
 
 
                        
