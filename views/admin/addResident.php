@@ -68,7 +68,7 @@ if(!isset($_SESSION['admin'])) {
                  <div class="form-personal-info row mt-3">
                     <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="Username">Username</label>
-                            <input type="text" name="Username" id="Username" class="form-control">
+                            <input type="text" name="Username" id="Username" class="form-control" required>
                         </div>
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="Password">Password</label>
@@ -80,17 +80,17 @@ if(!isset($_SESSION['admin'])) {
                     <div class="form-personal-info row mt-3">
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="firsName">First Name</label>
-                            <input type="text" name="firstName" id="firstName" class="form-control">
+                            <input type="text" name="firstName" id="firstName" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="middleName">Middle Name</label>
-                            <input type="text" name="middleName" id="middleName" class="form-control">
+                            <input type="text" name="middleName" id="middleName" class="form-control" required>
                         </div>
                         
                         <div class="form-group mt-2 col-sm-12 col-md-4">
                             <label for="lastName">Last Name</label>
-                            <input type="text" name="lastName" id="lastName" class="form-control">
+                            <input type="text" name="lastName" id="lastName" class="form-control" required>
                         </div>
 
                         <div class="form-group mt-2 col-sm-12 col-md-4">
@@ -419,7 +419,7 @@ if(!isset($_SESSION['admin'])) {
             alert('Resident added successfully');
         }
         if(params.get('error') == 1) {
-            alert('Duplicate username');
+            alert('Duplicate username'); required
         }
     </script>
 
