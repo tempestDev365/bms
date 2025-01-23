@@ -69,11 +69,11 @@ if(!isset($_SESSION['admin'])) {
                                 <div class="form-personal-info row mt-3">
                                     <div class="form-group mt-2 col-sm-12 col-md-4">
                                             <label for="Username">Username</label>
-                                            <input type="text" name="Username" id="Username" class="form-control">
+                                            <input type="text" name="Username" id="Username" class="form-control" required>
                                         </div>
                                         <div class="form-group mt-2 col-sm-12 col-md-4">
                                             <label for="Password">Password</label>
-                                            <input type="password" name="Password" id="Password" class="form-control">
+                                            <input type="password" name="Password" id="Password" class="form-control" required>
                                         </div>
                                 </div>
                                 <hr>
@@ -442,16 +442,14 @@ if(!isset($_SESSION['admin'])) {
                 reader.readAsDataURL(file);
             }
         }
-
-        const params = new URLSearchParams(window.location.search);
-        if(params.get('error') == 1){
-            alert('Your account is disabled.');
-            setInterval(() => {
-                params.delete('error');
-                history.replaceState(history.state,'', window.location.pathname);
-            }, 1000);
-        }
-
+   const params = new URLSearchParams(window.location.search);
+         if(params.get('error') == 1){
+        alert('Your account is disabled.');
+        setInterval(() => {
+           params.delete('error');
+           history.replaceState(history.state,'', window.location.pathname);
+        }, 1000);
+    }
         // Prevent number input for specific text fields
         const textFields = ['firstName', 'middleName', 'lastName', 'suffix', 'alias', 'salutation'];
         textFields.forEach(id => {
@@ -470,13 +468,6 @@ if(!isset($_SESSION['admin'])) {
                 age--;
             }
             document.getElementById('age').value = age;
-
-            // Validate birthdate to ensure it is not a future date
-            if (birthdate > today) {
-                alert('Birthdate cannot be a future date.');
-                this.value = '';
-                document.getElementById('age').value = '';
-            }
         });
     </script>
 

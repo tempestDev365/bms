@@ -50,7 +50,7 @@ $announcements = getAllAnnouncement();
            
         </div>
 
-        <div class="admin-content flex-grow-1 p-4 bg-light" style="max-height: 100vh; overflow-y: scroll">
+        <div class="admin-content flex-grow-1 p-4 bg-light" style="max-height: 100vh; overflow-y: scroll; border : 1px solid red;">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item active" aria-current="page">BMS</li>
@@ -79,7 +79,7 @@ $announcements = getAllAnnouncement();
 
             <div class="container-fluid mt-3 shadow-sm py-3 px-3 bg-white rounded-3 border">
                 <div class="h2">Preview</div>
-                <div class="announcements-container">
+                <div class="announcements-container" style="border: 2px solid red">
                     <?php foreach($announcements as $announcement): ?>
                         <div class="card mt-2">
                             <div class="card-header h5">
@@ -115,24 +115,11 @@ $announcements = getAllAnnouncement();
                                 <button class="btn btn-danger btn-sm" id="delete" name="<?php echo $announcement['id']; ?>">Delete</button>
                             </div>
                         </div>
-                        
-                           
-                        </div>
-                    </div>
-                  
-              
-           
-
-                <!--/comments container-->
-
                     <?php endforeach; ?>
                 </div>
             </div>
-              
         </div>
-        
     </div>
-    
 
     <!--editBtn modal-->
 
