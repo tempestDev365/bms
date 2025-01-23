@@ -420,7 +420,7 @@
         }
    const params = new URLSearchParams(window.location.search);
          if(params.get('error') == 1){
-        alert('Your account is disabled.');
+        alert('duplicate Username.');
         setInterval(() => {
            params.delete('error');
            history.replaceState(history.state,'', window.location.pathname);

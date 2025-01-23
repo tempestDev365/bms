@@ -43,7 +43,7 @@ function getAllResidentInformation($id){
     $stmt->execute();
     $resident_employment_result = $stmt->fetch();
    return [
-        'resident_picture'=>$resident_tbl_result['picture'],
+        'resident_picture'=>$resident_tbl_result['picture'] ?? " ",
         'resident_signature'=>$resident_tbl_result['signature'],
         'resident_valid_id'=>$resident_tbl_result['valid_id'],
         'resident_fullname'=>$resident_tbl_result['first_name'].' '.$resident_tbl_result['middle_name'].' '.$resident_tbl_result['last_name'],

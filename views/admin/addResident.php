@@ -111,9 +111,9 @@ if(!isset($_SESSION['admin'])) {
 
                                         <div class="form-group mt-2 col-sm-12 col-md-4">
                                             <label for="male">Male</label>
-                                            <input type="radio" name="sex" id="male" value="male" >
+                                            <input type="radio" name="sex" id="male" value="male" required >
                                             <label for="female">Female</label>
-                                            <input type="radio" name="sex" id="female" value="female"  >
+                                            <input type="radio" name="sex" id="female" value="female" required  >
 
                                         </div>
 
@@ -442,14 +442,6 @@ if(!isset($_SESSION['admin'])) {
                 reader.readAsDataURL(file);
             }
         }
-   const params = new URLSearchParams(window.location.search);
-         if(params.get('error') == 1){
-        alert('Your account is disabled.');
-        setInterval(() => {
-           params.delete('error');
-           history.replaceState(history.state,'', window.location.pathname);
-        }, 1000);
-    }
         // Prevent number input for specific text fields
         const textFields = ['firstName', 'middleName', 'lastName', 'suffix', 'alias', 'salutation'];
         textFields.forEach(id => {
