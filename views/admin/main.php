@@ -87,17 +87,19 @@ $demographic = getAllDemographic();
             <div class="container-fluid d-flex justify-content-center align-items-center p-3" style="flex-wrap: wrap; gap: 30px">
 
                 <!--Resident Card-->
-                <div class="card" style="max-width: 350px; width: 350px;">
-                    <div class="card-body d-flex justify-content-between align-items-center flex-column">
-                        <div class="card-content">
-                            <img src="../../assets/img/dashboard/residents.png" class="img-fluid" style="width: 80px" alt="residents">
-                        </div>
-                        <div class="card-title d-flex justify-content-between align-items-center" style="gap: 10px">
-                            <h5>Total Residents:</h5>
-                            <h3><?php echo $demographic['resident_count'] ?></h5>
+                <a href="./residents.php">
+                    <div class="card" style="max-width: 350px; width: 350px;">
+                        <div class="card-body d-flex justify-content-between align-items-center flex-column">
+                            <div class="card-content">
+                                <img src="../../assets/img/dashboard/residents.png" class="img-fluid" style="width: 80px" alt="residents">
+                            </div>
+                            <div class="card-title d-flex justify-content-between align-items-center" style="gap: 10px">
+                                <h5>Total Residents:</h5>
+                                <h3><?php echo $demographic['resident_count'] ?></h3>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
 
                  <!--Female Card-->
                  <a href="./residents.php?filter=female">
