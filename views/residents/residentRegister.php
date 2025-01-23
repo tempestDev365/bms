@@ -418,16 +418,14 @@
                 reader.readAsDataURL(file);
             }
         }
-
-        const params = new URLSearchParams(window.location.search);
-        if(params.get('error') == 1){
-            alert('Your account is disabled.');
-            setInterval(() => {
-                params.delete('error');
-                history.replaceState(history.state,'', window.location.pathname);
-            }, 1000);
-        }
-
+   const params = new URLSearchParams(window.location.search);
+         if(params.get('error') == 1){
+        alert('Your account is disabled.');
+        setInterval(() => {
+           params.delete('error');
+           history.replaceState(history.state,'', window.location.pathname);
+        }, 1000);
+    }
         // Prevent number input for specific text fields
         const textFields = ['firstName', 'middleName', 'lastName', 'suffix', 'alias', 'salutation'];
         textFields.forEach(id => {
@@ -436,23 +434,22 @@
             });
         });
 
-        // Automatically compute age based on birthdate
+        // Automatically compute age based on birthdate and validate date
         document.getElementById('birthdate').addEventListener('change', function() {
             const birthdate = new Date(this.value);
             const today = new Date();
+            if (birthdate > today) {
+                alert('Birthdate cannot be in the future.');
+                this.value = '';
+                document.getElementById('age').value = '';
+                return;
+            }
             let age = today.getFullYear() - birthdate.getFullYear();
             const monthDiff = today.getMonth() - birthdate.getMonth();
             if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthdate.getDate())) {
                 age--;
             }
             document.getElementById('age').value = age;
-
-            // Validate birthdate to ensure it is not a future date
-            if (birthdate > today) {
-                alert('Birthdate cannot be a future date.');
-                this.value = '';
-                document.getElementById('age').value = '';
-            }
         });
     </script>
 
