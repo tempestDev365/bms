@@ -458,10 +458,16 @@ if(!isset($_SESSION['admin'])) {
             });
         });
 
-        // Automatically compute age based on birthdate
+        // Automatically compute age based on birthdate and validate date
         document.getElementById('birthdate').addEventListener('change', function() {
             const birthdate = new Date(this.value);
             const today = new Date();
+            if (birthdate > today) {
+                alert('Birthdate cannot be in the future.');
+                this.value = '';
+                document.getElementById('age').value = '';
+                return;
+            }
             let age = today.getFullYear() - birthdate.getFullYear();
             const monthDiff = today.getMonth() - birthdate.getMonth();
             if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthdate.getDate())) {
