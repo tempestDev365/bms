@@ -50,7 +50,7 @@ $announcements = getAllAnnouncement();
            
         </div>
 
-        <div class="admin-content flex-grow-1 p-4 bg-light" style="max-height: 100vh; overflow-y: scroll; border : 1px solid red;">
+        <div class="admin-content flex-grow-1 p-4 bg-light" style="max-height: 100vh; overflow-y: scroll;">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item active" aria-current="page">BMS</li>
