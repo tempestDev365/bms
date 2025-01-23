@@ -69,11 +69,11 @@ if(!isset($_SESSION['admin'])) {
                                 <div class="form-personal-info row mt-3">
                                     <div class="form-group mt-2 col-sm-12 col-md-4">
                                             <label for="Username">Username</label>
-                                            <input type="text" name="Username" id="Username" class="form-control" required>
+                                            <input type="text" name="Username" id="Username" class="form-control">
                                         </div>
                                         <div class="form-group mt-2 col-sm-12 col-md-4">
                                             <label for="Password">Password</label>
-                                            <input type="password" name="Password" id="Password" class="form-control" required>
+                                            <input type="password" name="Password" id="Password" class="form-control">
                                         </div>
                                 </div>
                                 <hr>
