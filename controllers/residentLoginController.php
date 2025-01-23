@@ -3,7 +3,10 @@ include_once "../database/databaseConnection.php";
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $qry = "SELECT id, username, password FROM residents_tbl WHERE username = ?";
+    $qry = "SELECT r.id, r.username, r.password, a.resident_id
+    FROM approved_tbl a 
+    JOIN residents_tbl r ON a.resident_id = r.id    
+    WHERE r.username = ?";
     $stmt = $conn->prepare($qry);
     $stmt->bindParam(1, $username);
     $stmt->execute();
