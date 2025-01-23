@@ -392,7 +392,7 @@
     </div>
 
     <script>
-        document.getElementById('picture').addEventListener('change', function(event) {
+      document.getElementById('picture').addEventListener('change', function(event) {
             previewImage(event, 'picture');
         });
 
@@ -418,14 +418,16 @@
                 reader.readAsDataURL(file);
             }
         }
-   const params = new URLSearchParams(window.location.search);
-         if(params.get('error') == 1){
-        alert('Your account is disabled.');
-        setInterval(() => {
-           params.delete('error');
-           history.replaceState(history.state,'', window.location.pathname);
-        }, 1000);
-    }
+
+        const params = new URLSearchParams(window.location.search);
+        if(params.get('error') == 1){
+            alert('Your account is disabled.');
+            setInterval(() => {
+                params.delete('error');
+                history.replaceState(history.state,'', window.location.pathname);
+            }, 1000);
+        }
+
         // Prevent number input for specific text fields
         const textFields = ['firstName', 'middleName', 'lastName', 'suffix', 'alias', 'salutation'];
         textFields.forEach(id => {
@@ -444,8 +446,15 @@
                 age--;
             }
             document.getElementById('age').value = age;
+
+            // Validate birthdate to ensure it is not a future date
+            if (birthdate > today) {
+                alert('Birthdate cannot be a future date.');
+                this.value = '';
+                document.getElementById('age').value = '';
+            }
         });
-      
     </script>
+
 </body>
 </html>
