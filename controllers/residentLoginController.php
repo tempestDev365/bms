@@ -6,7 +6,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     
     $get_account_status = "SELECT p.status 
     FROM pending_accounts_tbl p
-    JOIN residents_tbl r ON r.id = p.resident_id   
+    LEFT JOIN residents_tbl r ON r.id = p.resident_id   
     WHERE r.username = ?";
     $stmt = $conn->prepare($get_account_status);
     $stmt->bindParam(1, $username);

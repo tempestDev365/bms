@@ -91,23 +91,7 @@ $announcements = getAllAnnouncement();
                                 </div>
                                 
                                 <!-- Comments Section -->
-                                <div class="comments-section mt-3">
-                                    <div class="h6">Comments</div>
-                                    <?php 
-                                    $comments = getComments($announcement['id']);
-                                    foreach($comments as $comment):
-                                        if($comment['announcement_id'] == $announcement['id']):
-                                        $resident_comment = $comment['first_name'].' '.$comment['middle_name'].' '.$comment['last_name'] . ": " . $comment['comment'];
-                                    ?>
-                                        <div class="card-comment border-bottom py-2">
-                                            <?php echo $resident_comment; ?>
-                                            
-                                        </div>
-                                    <?php 
-                                        endif;
-                                    endforeach; 
-                                    ?>
-                                </div>
+                              
                             </div>
                             
                             <div class="card-footer">

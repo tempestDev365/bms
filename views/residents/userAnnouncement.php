@@ -108,37 +108,8 @@ $announcements = getAllAnnouncement();
                         <h5>Content:{$announcement['content']}</h5>
                     </div>";
                     
-                    echo `<h5>Comments:</h5>`;
-                    foreach($comments as $comment){
-                        if($comment['announcement_id'] == $announcement['id']){
-                            $fullname = $comment['first_name'] . " " . $comment['middle_name'] . " " . $comment['last_name'];
-                            echo "
-                            <div class='card-footer'>
-                            <p>{$fullname}: {$comment['comment']}</p>
-                            <button class='btn btn-danger btn-sm' onclick ='deleteComment({$comment['id']})'>delete</button>
-                            <button class='btn btn-primary btn-sm'  data-bs-toggle='modal' data-bs-target = '#editBtn' name = '{$comment['id']}' id = 'edit'>edit</button>
-                        </div>";
-                       
-                        }else{
-                            echo "<p>No comments</p>";
-                        }
+                
                     }
-                    echo"
-                         <form action='../../controllers/addCommentsController.php' method = 'POST'>
-                            <div class='card-input-comments mt-3'>
-                                <textarea name='comment' id='comment' placeholder='Comment as {$resident_fullname}' class='form-control'></textarea>
-                                <input type='hidden' name='announcement_id' value='{$announcement['id']}'>
-                                 <input type='hidden' name='resident_id' value='{$_SESSION['resident_id']}'>
-
-                            </div>
-                            <div class='comment-input-action mt-2 d-flex justify-content-end'>
-                                <input type='submit' value='Comment' class='btn btn-secondary btn-sm'>
-                            </div>
-                        </form>
-                        "
-                        ;
-                    }
-                     
                     ?>
                 </div>
 
