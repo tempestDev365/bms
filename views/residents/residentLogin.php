@@ -34,7 +34,7 @@
                     </div>
                     
                     <div class="form-group mt-3">
-                        <a href="./forgotPassword.php">Forgot your password?</a>
+                        <a type="button" data-bs-toggle="modal" data-bs-target="#forgot">Forgot your password?</a>
                     </div>
 
                     <div class="form-group mt-3">
@@ -51,7 +51,24 @@
     </div>
 
     
-    
+    <!-- Modal -->
+     <div class="modal fade" id="forgot">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Forgot Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                <form action="../../controllers/forgotPasswordController.php" method="post">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" class="form-control" required>
+                    <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                </form>
+                </div>
+            </div>
+        </div>
+     </div>
 
 
 

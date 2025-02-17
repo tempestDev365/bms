@@ -99,10 +99,11 @@ $document_requested = getDocumentRequested($_SESSION['resident_id']);
 
                         <div class="form-group mt-3">
                             <label>PURPOSE OF REQUEST</label>
-                            <textarea name="purpose" id="purpose" class="form-control" rows="3"></textarea>
+                            <textarea name="purpose" id="purpose" class="form-control" rows="3" required></textarea>
                         </div>
 
-                        <div class="form-group d-flex justify-content-end">
+                        <div class="form-group d-flex justify-content-end" style="gap: 5px;">
+                            <input type="submit" value="Request for Other Person" class="btn btn-primary btn-sm mt-3">
                             <input type="submit" value="Submit Request" class="btn btn-primary btn-sm mt-3">
                         </div>
                     </form>
@@ -169,6 +170,10 @@ $document_requested = getDocumentRequested($_SESSION['resident_id']);
         </div>
         
     </div>
+
+
+    <!--modal-->
+    <div class="modal fade" id="requestForOthers"></div>
 
 
     
