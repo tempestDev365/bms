@@ -61,10 +61,11 @@ $blotter = getAllBlotter();
                 <table class="table table-bordered mt-3" id="example">
                     <thead>
                         <tr>
-                            <th>TRN</th>
-                            <th>Complainant</th>
-                            <th>Witness1</th>
-                            <th>Witness2</th>
+                            <th>TIme Of Accident</th>
+                            <th>Place Of Accident</th>
+                            <th>Date Schedule</th>
+                            <th>Meeting Time</th>
+                            <th>Description</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -108,17 +109,7 @@ $blotter = getAllBlotter();
                 <div class="modal-body">
                     <div class="container-fluid border p-3">
                         <form action="" method = "POST" id = "editBlotter">
-                          <p>Barangay: Sinbanali</p>
-    <p>Purok: <input type="text" name="purok" id="purok" value="1" class="form-control" required></p>
-    <p>Place of the Incident: <input type="text" name="incidentPlace" id="incidentPlace" class="form-control" required></p>
-    <p>Date & Time: <input type="datetime-local" name="date" id="date" class="form-control" required></p>
-    <p>Complainant: <input type="text" name="complainant" id="complainant" class="form-control" required></p>
-    <p>Witness 1: <input type="text" name="first_witness" id="first_witness" class="form-control"></p>
-    <p>Witness 2: <input type="text" name="second_witness" id="second_witness" class="form-control"></p>
-    <p>Narrative: <textarea name="narrative" id="narrative" class="form-control" required></textarea></p>
-    <div class="d-flex justify-content-end">
-        <button class="btn btn-success btn-sm" type="submit">Save</button>
-    </div>
+                         
                         </form>
 
                     </div>
@@ -166,47 +157,33 @@ $blotter = getAllBlotter();
                         <h3>New Cases</h3>
                         <form action="../../controllers/addBlotterController.php" method="POST">
                             <div class="form-group">
-                                <label>BARANGAY</label>
-                                <input type="text" disabled class="form-control" value="Sinbanali" required>
+                                <label>Time Of Accident</label>
+                                <input type="time" class="form-control"  required>
                             </div>
 
                             <div class="form-group mt-2">
-                                <label>INCIDENT</label>
+                                <label>Place Of Incident</label>
                                 <input type="text" name = "incident" class="form-control" required>
                             </div>
 
                             <div class="form-group mt-2">
-                                <label>PLACE OF THE INCIDENT</label>
-                                <input type="text" name = "place" class="form-control" required>
+                                <label>Select Date Schedule</label>
+                                <input type="date" name = "" class="form-control" required>
                             </div>
 
                             <div class="form-group mt-2">
-                                <label>DATE & TIME</label>
-                                <input type="datetime-local" name = "date" id = "date_selected" class="form-control" required>
+                                <label>Meeting Time</label>
+                                <input type="time" name = "date" id = "date_selected" class="form-control" required>
                             </div>
 
                             <div class="form-group mt-2">
-                                <label>NARRATOR / COMPLAINANT</label>
-                                <input type="text" name = "complainant" class="form-control" required>
+                                <label>Description</label>
+                                <textarea name="narrative" class="form-control" required></textarea>    
                             </div>
 
-                            <div class="form-group mt-2">
-                                <label>WITNESS 1</label>
-                                <input type="text" name = "first_witness" class="form-control" required>
-                            </div>
-
-                            <div class="form-group mt-2">
-                                <label>WITNESS 2</label>
-                                <input type="text" name = "second_witness" class="form-control" required>
-                            </div>
-
-                            <div class="form-group mt-2">
-                                <label>NARRATIVE</label>
-                                <textarea name="narrative" id="narrative" class="form-control"></textarea>
-                            </div>
-
+                           
                             <div class="form-group mt-2 d-flex justify-content-end">
-                                <button class="btn btn-sm btn-success">CREATE</button>
+                                <button class="btn btn-sm btn-success">Report</button>
                             </div>
                         </form>
                     </div>
@@ -292,7 +269,7 @@ $blotter = getAllBlotter();
     const viewDetail = async (id) => {
         const api = await fetch(`../../controllers/blotterOptionsController.php?id=${id}&action=view`);
         const data = await api.json();
-        document.querySelector("#incidentPlace").textContent = data.place;
+        document.querySelector("#incident").textContent = data.place;
         document.querySelector("#complainant").textContent = data.complainant;
         document.querySelector("#first_witness").textContent = data.first_witness;
         document.querySelector("#second_witness").textContent = data.second_witness;
