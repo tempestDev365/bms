@@ -77,13 +77,12 @@ $document_requested = getDocumentRequested($_SESSION['resident_id']);
                 <h2>Document Request</h2>
 
                 <div class="container-fluid p-3 rounded-3 bg-white shadow-sm border">
-                    <form action="../../controllers/documentRequestController.php" method="POST">
+                    <form action="../../controllers/documentRequestController.php" method="POST" onsubmit="showAlert(event)">
                         <div class="form-group">
                             <label>SELECT TYPE OF DOCUMENT</label>
                             <select name="selectDocument" id="selectDocument" class="form-control">
                                 <option value="barangay_certificate">Barangay Certificate</option>
                                 <option value="barangay_indigency">Barangay Indigency</option>
-                                <option value="barangay_clearance">Barangay Clearance</option>
                                 <option value="certificate_resident">CERTIFICATE FOR RESIDENT</option>
                                 <option value="certificate_non_resident">CERTIFICATE FOR NON RESIDENT</option>
                                 <option value="certificate_business">CERTIFICATE FOR BUSINESS PERMIT</option>
@@ -99,7 +98,7 @@ $document_requested = getDocumentRequested($_SESSION['resident_id']);
 
                         <div class="form-group mt-3">
                             <label>PURPOSE OF REQUEST</label>
-                            <textarea name="purpose" id="purpose" class="form-control" rows="3" required></textarea>
+                            <textarea name="purpose" id="purpose" class="form-control" rows="3"></textarea>
                         </div>
 
                         <div class="form-group d-flex justify-content-end" style="gap: 5px;">
@@ -193,6 +192,12 @@ $document_requested = getDocumentRequested($_SESSION['resident_id']);
             responsive: true
         });
     });
+
+    function showAlert(event) {
+        event.preventDefault();
+        alert("The total cost is only 20 pesos. However, students, persons with disabilities (PWDs), and senior citizens may avail of free admission.");
+        event.target.submit();
+    }
     </script>
 
     <script src="../components/residentSidebar.js?v=<?php echo time(); ?>" defer type = "module"></script>
