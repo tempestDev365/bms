@@ -227,9 +227,16 @@ $valid_id = $resident_information['resident_valid_id'];
                     </div>
                 </div>
             </div>
-       
+
+            <div class="edit d-flex justify-content-end mt-3">
+                <button class="btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#editInfo">EDIT</button>
+            </div>
+
+
 
         </main>
+
+
     </div>
 
     <!--Offcanvas sidebar-->
@@ -262,6 +269,97 @@ $valid_id = $resident_information['resident_valid_id'];
         
     </div>
 
+
+    <!-- Edit Modal -->
+     <div class="modal fade" id="editInfo">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Information</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                <div class="info-section mt-3">
+                <div class="box bg-white shadow-sm border rounded-3 p-3">
+                   <?php
+                   echo"
+                   <div class='box-body row'>
+                        <div class='personal-info col-md-12 col-lg-4 d-flex flex-column' style='gap: 5px;'>
+                            <div class='box-header'>
+                                <h4>Personal Information</h4>
+                            </div>
+                                <label>Full Name:{$resident_information['resident_fullname']}</label>
+                                <label>Sex:{$resident_information['resident_sex']}</label>
+                                <label>Birthdate:{$resident_information['resident_birthdate']}</label>
+                                <label>Birthplace:{$resident_information['resident_birthplace']}</label>
+                                <label>Civil Status:{$resident_information['resident_civil_status']}</label>
+                                <label>Height:{$resident_information['resident_height']}</label>
+                                <label>Weight:{$resident_information['resident_weight']}</label>
+                                <label>Blood Type:{$resident_information['resident_blood_type']}</label>
+                                <label>Religion:{$resident_information['resident_religion']}</label>
+                                <label>Ethnic Origin:{$resident_information['resident_ethnic_origin']}</label>
+                                <label>Nationality:{$resident_information['resident_nationality']}</label>
+                                <label>Precinct Number:{$resident_information['resident_precint_number']}</label>
+                                <label>Registered Voter:{$resident_information['resident_is_voter']}</label>
+                                <label>Organization Member:{$resident_information['resident_org_member']}</label>
+                        </div>
+                        <div class='other-info col-md-12 col-lg-4 d-flex flex-column' style='gap: 5px;'>
+                            <div class='contact-header'>
+                                <h4>Contact Information</h4>
+                            </div>
+                                <label>Email:{$resident_information['resident_email']}</label>
+                                <label>Mobile Number:{$resident_information['resident_mobile_number']}</label>
+                                <label>Tel No:{$resident_information['resident_tel_number']}</label>
+                            <div class='contact-header'>
+                                <h4>Incase of Emergency</h4>
+                            </div>
+                                <label>Fullname:{$resident_information['resident_ICOE_name']}</label>
+                                <label>Contact Number:{$resident_information['resident_ICOE_contact_number']}</label>
+                                <label>Address:{$resident_information['resident_ICOE_address']}</label>
+                            <div class='contact-header'>
+                                <h4>Family Information</h4>
+                            </div>
+                                <label>Mother:{$resident_information['resident_mother_name']}</label>
+                                <label>Father:{$resident_information['resident_father_name']}</label>
+                                <label>Spouse:{$resident_information['resident_spouse_name']}</label>
+                            <div class='contact-header'>
+                                <h4>Educational Information:</h4>
+                            </div>
+                                <label>Highest Education Attainment:{$resident_information['resident_highest_educational_attainment']}</label>
+                                <label>Type of School:{$resident_information['resident_type_of_school']}</label>
+                           
+                        </div>
+
+                        <div class='other-info-2 col-md-12 col-lg-4 d-flex flex-column' style='gap: 5px;'>
+                            <div class='contact-header'>
+                                <h4>Address Information</h4>
+                            </div>
+                                <label>House Number:{$resident_information['resident_house_number']}</label>
+                                <label>Purok:{$resident_information['resident_purok']}</label>
+                                <label>Full Address:{$resident_information['resident_full_address']}</label>
+                                <label>Street:{$resident_information['resident_street']}</label>
+                                <label>Hoa:{$resident_information['resident_hoa']}</label>
+                            <div class='contact-header'>
+                                <h4>Employment Information:</h4>
+                            </div>
+                                <label>Employment Status:{$resident_information['resident_employment_status']}</label>
+                                <label>Employment Field:{$resident_information['resident_employment_field']}</label>
+                                <label>Occupation:{$resident_information['resident_occupation']}</label>
+                                <label>Monthly Income:{$resident_information['resident_monthly_income']}</label>
+                        </div>
+                   "
+                   
+                   
+                   ?>
+                
+                    </div>
+                </div>
+            </div>
+
+                </div>
+            </div>
+        </div>
+     </div>
 
     
 
