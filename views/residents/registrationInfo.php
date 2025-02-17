@@ -34,7 +34,13 @@
                         
                         <select name="suffix" id="suffix">  
                             <option value="Suffix" disabled selected>Suffix</option>
-                            <option value=""></option>
+                            <option value="">JR</option>
+                            <option value="">SR</option>
+                            <option value="">I</option>
+                            <option value="">II</option>
+                            <option value="">III</option>
+                            <option value="">IV</option>
+                            <option value="">V</option>
                           </select>
                     </div>
 

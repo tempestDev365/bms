@@ -19,14 +19,18 @@
                     <div class="form-group mt-2 d-flex justify-content-between" style="gap: 5px">
                         <select name="suffix" id="suffix" class="form-select">  
                             <option value="Suffix" disabled selected>Civil Status</option>
-                            <option value="">Male</option>
-                            <option value="">Female</option>
+                            <option value="">SINGLE</option>
+                            <option value="">MARRIED</option>
+                            <option value="">DIVORCED</option>
+                            <option value="">WIDOWED</option>
+
                           </select>
 
                           <select name="suffix" id="suffix" class="form-select">  
                             <option value="Suffix" disabled selected>Purok</option>
-                            <option value="">Male</option>
-                            <option value="">Female</option>
+                            <option value="">ALMA</option>
+                            <option value="">BANALO</option>
+                            <option value="">SINEGUELASAN</option>
                           </select>
                     </div>
 
