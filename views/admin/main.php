@@ -146,6 +146,8 @@ $demographic = getAllDemographic();
                 </div>
                  </a>
 
+                 
+
                  <!--Household Card-->
                  <a href="./household.php">
                     <div class="card" style="max-width: 350px; width: 350px;">
@@ -161,7 +163,20 @@ $demographic = getAllDemographic();
                 </div>
                  </a>
 
-              
+               <!--Resident Card-->
+               <a href="./residents.php">
+                    <div class="card" style="max-width: 350px; width: 350px;">
+                        <div class="card-body d-flex justify-content-between align-items-center flex-column">
+                            <div class="card-content">
+                                <img src="../../assets/img/salary.png" class="img-fluid" style="width: 80px" alt="residents">
+                            </div>
+                            <div class="card-title d-flex justify-content-between align-items-center" style="gap: 10px">
+                                <h5>Total Revenue:</h5>
+                                <h3><?php echo $demographic['resident_count'] ?></h3>
+                            </div>
+                        </div>
+                    </div>
+                </a>
             </div>
 
             <div class="container-fluid">

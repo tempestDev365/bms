@@ -28,6 +28,7 @@ $document_requested = getDocumentRequested($_SESSION['resident_id']);
     
     <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.bootstrap5.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.bootstrap5.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 <style>
@@ -77,13 +78,12 @@ $document_requested = getDocumentRequested($_SESSION['resident_id']);
                 <h2>Document Request</h2>
 
                 <div class="container-fluid p-3 rounded-3 bg-white shadow-sm border">
-                    <form action="../../controllers/documentRequestController.php" method="POST">
+                    <form action="../../controllers/documentRequestController.php" method="POST" onsubmit="showSweetAlert(event)">
                         <div class="form-group">
                             <label>SELECT TYPE OF DOCUMENT</label>
                             <select name="selectDocument" id="selectDocument" class="form-control">
                                 <option value="barangay_certificate">Barangay Certificate</option>
                                 <option value="barangay_indigency">Barangay Indigency</option>
-                                <option value="barangay_clearance">Barangay Clearance</option>
                                 <option value="certificate_resident">CERTIFICATE FOR RESIDENT</option>
                                 <option value="certificate_non_resident">CERTIFICATE FOR NON RESIDENT</option>
                                 <option value="certificate_business">CERTIFICATE FOR BUSINESS PERMIT</option>
@@ -99,11 +99,13 @@ $document_requested = getDocumentRequested($_SESSION['resident_id']);
 
                         <div class="form-group mt-3">
                             <label>PURPOSE OF REQUEST</label>
-                            <textarea name="purpose" id="purpose" class="form-control" rows="3" required></textarea>
+                            <textarea name="purpose" id="purpose" class="form-control" rows="3"></textarea>
                         </div>
 
                         <div class="form-group d-flex justify-content-end" style="gap: 5px;">
-                            <input type="submit" value="Request for Other Person" class="btn btn-primary btn-sm mt-3">
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#requestForOthers" class="btn btn-primary btn-sm mt-3">
+                                Request for Other Person                                
+                            </button>
                             <input type="submit" value="Submit Request" class="btn btn-primary btn-sm mt-3">
                         </div>
                     </form>
@@ -173,7 +175,53 @@ $document_requested = getDocumentRequested($_SESSION['resident_id']);
 
 
     <!--modal-->
-    <div class="modal fade" id="requestForOthers"></div>
+    <div class="modal fade" id="requestForOthers">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Request for Other Person</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form">
+                        <div class="form-group">
+                            <label for="">Name:</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-group mt-3" >
+                            <label>SELECT TYPE OF DOCUMENT</label>
+                            <select name="selectDocument" id="selectDocument" class="form-control">
+                                <option value="barangay_certificate">Barangay Certificate</option>
+                                <option value="barangay_indigency">Barangay Indigency</option>
+                                <option value="certificate_resident">CERTIFICATE FOR RESIDENT</option>
+                                <option value="certificate_non_resident">CERTIFICATE FOR NON RESIDENT</option>
+                                <option value="certificate_business">CERTIFICATE FOR BUSINESS PERMIT</option>
+                                <option value="certificate_guardian">CERTIFICATE FOR GUARDIANSHIP</option>
+                                <option value="certificate_disaster">CERTIFICATE FOR DISASTER</option>
+                                <option value="certificate_relationship">CERTIFICATE FOR RELATIONSHIP</option>
+                                <option value="certificate_job_seeker">CERTIFICATE FOR FIRST TIME JOB SEEKER</option>
+                                <option value="certificate_src_income">CERTIFICATE FOR NO SOURCE OF INCOME</option>
+                                <option value="single_parent">SINGLE PARENT CERTIFICATE</option>
+
+                            </select>
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <label>PURPOSE OF REQUEST</label>
+                            <textarea name="purpose" id="purpose" class="form-control" rows="3"></textarea>
+                        </div>
+
+
+                        <div class="form-group mt-3">
+                            <label>PROOF OF REQUEST</label>
+                            <input type="file" class="form-control">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     
@@ -193,6 +241,20 @@ $document_requested = getDocumentRequested($_SESSION['resident_id']);
             responsive: true
         });
     });
+
+    function showSweetAlert(event) {
+        event.preventDefault();
+        Swal.fire({
+            title: 'Information',
+            text: 'The total cost is only 20 pesos. However, students, persons with disabilities (PWDs), and senior citizens may avail of free admission.',
+            icon: 'info',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                event.target.submit();
+            }
+        });
+    }
     </script>
 
     <script src="../components/residentSidebar.js?v=<?php echo time(); ?>" defer type = "module"></script>
