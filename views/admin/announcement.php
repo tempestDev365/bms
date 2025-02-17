@@ -69,6 +69,11 @@ $announcements = getAllAnnouncement();
                     </div>
 
                     <div class="form-group mt-3">
+                        <label for="upload-img">Upload Image</label>
+                        <input type="file" class="form-control" name="upload-img" id="upload-img">
+                    </div>
+
+                    <div class="form-group mt-3">
                         <label for="contentAnnouncement" class="h5">Content:</label>
                         <textarea class="form-control" id="announcement" placeholder="Enter announcement..." style="min-height: 300px;" name = "content" required></textarea>
                     </div>
@@ -79,7 +84,7 @@ $announcements = getAllAnnouncement();
 
             <div class="container-fluid mt-3 shadow-sm py-3 px-3 bg-white rounded-3 border">
                 <div class="h2">Preview</div>
-                <div class="announcements-container" style="border: 2px solid red">
+                <div class="announcements-container">
                     <?php foreach($announcements as $announcement): ?>
                         <div class="card mt-2">
                             <div class="card-header h5">

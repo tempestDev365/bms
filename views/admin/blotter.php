@@ -57,7 +57,7 @@ $blotter = getAllBlotter();
             </nav>
 
             <div class="container-fluid bg-white border p-3 shadow-sm rounded-3">
-                <h2>Blotter Record</h2>
+                <h2>Blotter Schedule</h2>
                 <table class="table table-bordered mt-3" id="example">
                     <thead>
                         <tr>
