@@ -1,3 +1,10 @@
+<?php
+$email = $_GET['email'];
+if (!isset($email)) {
+    header('Location: ./registrationVerifyEmail.php?error=1');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +42,7 @@
             <div class="card-body">
                 <form action="">
                     <div class="form-group">
-                        <input type="email" placeholder="Email" class="form-control">
+                        <input type="email" placeholder="Email" class="form-control" value = <?php echo $email; ?>>
                     </div>
                     <div class="form-group mt-2">
                         <input type="text" placeholder="First Name" class="form-control">

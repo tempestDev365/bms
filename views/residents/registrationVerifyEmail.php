@@ -14,10 +14,10 @@
                 <h2>Sign Up</h2>
             </div>
             <div class="card-body mt-5 mb-5">
-                <form action="">
+                <form action="../../controllers/sendEmailVerification.php" method="POST">
                     <div class="form-group">
                         <label for="email">Please Enter Your Email</label>
-                        <input type="email" class="form-control">
+                        <input type="email" class="form-control" name = "email">
                         <div class="phone-link d-flex justify-content-end mt-3">
                             <a href="#">Login via phone number</a>
                         </div>
@@ -37,4 +37,16 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const error = params.get('error');
+    if(error == 1){
+         if (error == 1) {
+        alert('Please verify an email first before proceeding to registration');
+        const url = new URL(window.location);
+        url.searchParams.delete('error');
+        window.history.replaceState({}, document.title, url);
+    }   
+    }
+</script>
 </html>

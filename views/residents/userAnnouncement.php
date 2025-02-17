@@ -99,7 +99,6 @@ $announcements = getAllAnnouncement();
                     <?php
                     foreach($announcements as $announcement){
                       
-                        $comments = getComments($announcement['id']);
                         echo "
                         <div class='card-header'>
                         <h3>Title: {$announcement['title']}</h3>
