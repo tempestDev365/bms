@@ -24,15 +24,16 @@
                 <form action="../../controllers/residentLoginController.php" method="post">
 
                     <div class="form-group">
-                        <label>Username:</label>
-                        <input type="text" placeholder="Enter username" name = "username" class="form-control" required>
+                        <label>Email:</label>
+                        <input type="email" placeholder="Enter username" name = "username" class="form-control" required>
                     </div>
 
+                    <!--
                     <div class="form-group mt-3">
                         <label>Password:</label>
                         <input type="password" placeholder="Enter password" name = "password" class="form-control" required>
                     </div>
-                    
+                    -->
                     <div class="form-group mt-3">
                         <a type="button" data-bs-toggle="modal" data-bs-target="#forgot">Forgot your password?</a>
                     </div>
