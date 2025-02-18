@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="form-group mt-3 text-center">
-                        <label>Not registered yet? <a href="./registrationInfo.php">Register Here</a></label>
+                        <label>Not registered yet? <a href="./registrationVerifyEmail.php">Register Here</a></label>
                     </div>
 
                 </form>

@@ -18,9 +18,7 @@
                     <div class="form-group">
                         <label for="email">Please Enter Your Email</label>
                         <input type="email" class="form-control" name = "email">
-                        <div class="phone-link d-flex justify-content-end mt-3">
-                            <a href="#">Login via phone number</a>
-                        </div>
+                      
                     </div>
 
                     <div class="button mt-5">
