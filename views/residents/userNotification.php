@@ -1,8 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['resident_id'])) {
-    header('Location: ./residentLogin.php');
-}
+
 $count = 0;
 function getAllDocumentRequested($id){
     include_once "../../database/databaseConnection.php";

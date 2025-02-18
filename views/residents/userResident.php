@@ -1,8 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['resident_id'])) {
-    header('Location: ./residentLogin.php');
-}
+
 function getAllResidentInformation($id){
     include '../../database/databaseConnection.php';
     $conn = $GLOBALS['conn'];
