@@ -154,14 +154,14 @@ $email = $_SESSION['email'];
                         <label>No black and white images</label>
                     </div>
                     <div class="bottom-card mt-3 border d-flex">
-                        <div class="form-group" style="flex: 1;">
+                        <div class="form-group" style="flex-grow: 1;">
                             <input type="file" name="frontID" hidden id="frontID" onchange="previewImage(this, 'frontPreview')">
                             <label class="d-flex justify-content-center align-items-center" for="frontID" style="width: 100%; border: 1px dotted black; height: 200px; cursor: pointer;">
                                 <img id="frontPreview" src="#" alt="Front ID Preview" style="display: none; max-width: 100%; max-height: 100%; object-fit: contain;">
                                 <span id="frontUploadText">Upload Front</span>
                             </label>
                         </div>
-                        <div class="form-group" style="flex: 1;">
+                        <div class="form-group" style="flex-grow: 1;">
                             <input type="file" name="backID" hidden id="backID" onchange="previewImage(this, 'backPreview')">
                             <label class="d-flex justify-content-center align-items-center" for="backID" style="width: 100%; border: 1px dotted black; height: 200px; cursor: pointer;">
                                 <img id="backPreview" src="#" alt="Back ID Preview" style="display: none; max-width: 100%; max-height: 100%; object-fit: contain;">
