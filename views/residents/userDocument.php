@@ -91,6 +91,7 @@ $document_requested = getDocumentRequested($_SESSION['user_id']);
                         <div class="form-group">
                             <label>SELECT TYPE OF DOCUMENT</label>
                             <select name="selectDocument" id="selectDocument" class="form-control">
+                                <option value="barangay_id">Barangay ID</option>
                                 <option value="barangay_certificate">Barangay Certificate</option>
                                 <option value="barangay_indigency">Barangay Indigency</option>
                                 <option value="certificate_resident">CERTIFICATE FOR RESIDENT</option>
@@ -209,6 +210,7 @@ $document_requested = getDocumentRequested($_SESSION['user_id']);
                         <div class="form-group mt-3" >
                             <label>SELECT TYPE OF DOCUMENT</label>
                             <select name="selectDocument" id="selectDocument" class="form-control">
+                                <option value="barangay_id">Barangay ID</option>
                                 <option value="barangay_certificate">Barangay Certificate</option>
                                 <option value="barangay_indigency">Barangay Indigency</option>
                                 <option value="certificate_resident">CERTIFICATE FOR RESIDENT</option>

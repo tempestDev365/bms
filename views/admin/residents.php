@@ -182,6 +182,7 @@ $resident_result = $stmt->fetchAll();
                 <div class="modal-body">
                     <label for="document">Select type of documents</label>
                     <select name="documentOption" id="documentOption" class="form-control">
+                        <option value="BARANGAYID">BARANGAY ID</option>
                         <option value="BARANGAYCLEARANCE">BARANGAY CLEARANCE</option>
                         <option value="CERTIFICATE">BARANGAY CERTIFICATE</option>
                         <option value="INDIGENCY">BARANGAY INDIGENCY</option>
@@ -295,6 +296,9 @@ const printDocu = () => {
         const resident_id = params.get('resident_id');
         const baseURL = "../documents/";
             switch(documentSelected){
+                case 'BARANGAYID':
+                window.location.href = `${baseURL}barangayId.php?resident_id=${resident_id}`;
+                break;
                 case 'BARANGAYCLEARANCE':
                 window.location.href = `${baseURL}barangayClearance.php?resident_id=${resident_id}`;
                  break;
