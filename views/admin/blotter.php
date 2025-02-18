@@ -17,9 +17,7 @@ $qry= "SELECT time FROM blotter_tbl";
 $stmt = $conn->prepare($qry);
 $stmt->execute();
 $result = $stmt->fetchAll();
-foreach($result as $row){
-   echo strtotime($row['time']) . "<br>";
-}
+
 $blotter = getAllBlotter();
 ?>
 <!DOCTYPE html>
