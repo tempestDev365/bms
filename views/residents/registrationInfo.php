@@ -54,20 +54,20 @@ $email = $_SESSION['email'];
                         <input type="text" placeholder="Last Name" class="form-control me-2" name = "last_name">
                         <select name="suffix" id="suffix">
                             <option value="Suffix" disabled selected>Suffix</option>
-                            <option value="">JR</option>
-                            <option value="">SR</option>
-                            <option value="">I</option>
-                            <option value="">II</option>
-                            <option value="">III</option>
-                            <option value="">IV</option>
-                            <option value="">V</option>
+                            <option value="Jr">JR</option>
+                            <option value="Sr">SR</option>
+                            <option value="I">I</option>
+                            <option value="II">II</option>
+                            <option value="III">III</option>
+                            <option value="IV">IV</option>
+                            <option value="V">V</option>
                         </select>
                     </div>
                     <div class="form-group mt-2 d-flex justify-content-between" style="gap: 5px">
                         <select name="sex" id="suffix" class="form-control">
                             <option value="Suffix" disabled selected>Sex</option>
-                            <option value="">Male</option>
-                            <option value="">Female</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
                         </select>
                         <input type="number" placeholder="Age" class="form-control" name = "age" required>
                     </div>
@@ -89,22 +89,22 @@ $email = $_SESSION['email'];
                     <div class="form-group mt-2 d-flex justify-content-between" style="gap: 5px">
                         <select name="civil_status" id="civil_status" class="form-select" required>
                             <option value="civil_status" disabled selected>Civil Status</option>
-                            <option value="">SINGLE</option>
-                            <option value="">MARRIED</option>
-                            <option value="">DIVORCED</option>
-                            <option value="">WIDOWED</option>
+                            <option value="Single">SINGLE</option>
+                            <option value="Married">MARRIED</option>
+                            <option value="Divorced">DIVORCED</option>
+                            <option value="Widowed">WIDOWED</option>
                         </select>
                           <select name="employment_status" id="employment_status" class="form-select" required>
                             <option value="employment_status" disabled selected>Employment Status</option>
-                            <option value="">Student</option>
-                            <option value="">PWD</option>
-                            <option value="">Senior</option>
+                            <option value="student">Student</option>
+                            <option value="pwd">PWD</option>
+                            <option value="senior">Senior</option>
                         </select>
                         <select name="purok" id="purok" class="form-select">
                             <option value="purok" disabled selected required>Purok</option>
-                            <option value="">ALMA</option>
-                            <option value="">BANALO</option>
-                            <option value="">SINEGUELASAN</option>
+                            <option value="Alma">ALMA</option>
+                            <option value="Banalo">BANALO</option>
+                            <option value="Sineguelasan">SINEGUELASAN</option>
                         </select>
                     </div>
                     <div class="form-group mt-2 d-flex justify-content-between" style="gap: 5px">
@@ -174,17 +174,17 @@ $email = $_SESSION['email'];
                 <label for="">Please make sure that all the details are correct</label>
             </div>
             <div class="card-body">
-                <p>First Name::</p>
-                <p>Middle Name:</p>
-                <p>Last Name:</p>
-                <p>Suffix</p>
-                <p>Sex:</p>
-                <p>Age:</p>
-                <p>Date of birth:</p>
-                <p>Civil Status:</p>
-                <p>Purok:</p>
-                <p>House no./Bldg./Street name:</p>
-                <p>Name of the house owner:</p>
+                <p class = "first_name">First Name: </p>
+                <p class = "middle_name">Middle Name:</p>
+                <p class = "last_name">Last Name:</p>
+                <p class = "suffix">Suffix</p>
+                <p class = "sex">Sex:</p>
+                <p class = "age">Age:</p>
+                <p class = "birthday">Date of birth:</p>
+                <p class = "civil_status">Civil Status:</p>
+                <p class = "purok">Purok:</p>
+                <p class = "address">House no./Bldg./Street name:</p>
+                <p class = "home_owner">Name of the house owner:</p>
             </div>
             <div class="card-edit d-flex justify-content-end">
                 <a href="#">Edit Details</a>
@@ -235,8 +235,35 @@ $email = $_SESSION['email'];
             document.getElementById('form4').style.display = 'none';
             document.getElementById('form5').style.display = 'block';
         });
-
-       
+        const inputs = {}
+    const input = document.querySelectorAll('input');
+   input.forEach(input => {
+       input.addEventListener('input', function(e) {
+           inputs[e.target.name] = e.target.value
+           document.querySelector('.first_name').textContent = `First name: ${inputs.first_name}`
+           document.querySelector('.middle_name').textContent = `Middle name: ${inputs.middle_name}`
+           document.querySelector('.last_name').textContent = `Last name: ${inputs.last_name}`
+           document.querySelector('.suffix').textContent = `Suffix: ${inputs.suffix}`
+           document.querySelector('.sex').textContent = `Sex: ${inputs.sex}`
+           document.querySelector('.age').textContent = `Age: ${inputs.age}` 
+            document.querySelector('.birthday').textContent = `Date of birth: ${inputs.birthday}`
+            document.querySelector('.civil_status').textContent = `Civil Status: ${inputs.civil_status}`
+            document.querySelector('.purok').textContent = `Purok: ${inputs.purok}`
+            document.querySelector('.address').textContent = `House no./Bldg./Street name: ${inputs.house_number} ${inputs.street}`
+            document.querySelector('.home_owner').textContent = `Name of the house owner: ${inputs.house_owner}` 
+       })
+    })
+    const select = document.querySelectorAll('select');
+    select.forEach(select => {
+        select.addEventListener('change', function(e) {
+            inputs[e.target.name] = e.target.value
+            document.querySelector('.suffix').textContent = `Suffix: ${inputs.suffix}`
+            document.querySelector('.sex').textContent = `Sex: ${inputs.sex}`
+            document.querySelector('.civil_status').textContent = `Civil Status: ${inputs.civil_status}`
+            document.querySelector('.purok').textContent = `Purok: ${inputs.purok}`
+            console.log(inputs)
+        })
+    })  
     </script>
 </body>
 </html>

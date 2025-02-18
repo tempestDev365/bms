@@ -34,6 +34,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $mail->send();
     $_SESSION['email'] = $email;
     echo "<script>alert('Email sent successfully')</script>";
-    header("Location: ../views/residents/registrationInfo.php");
+    
 }
 ?>

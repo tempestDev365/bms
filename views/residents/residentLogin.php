@@ -21,25 +21,15 @@
 
             </div>
             <div class="card-body">
-<<<<<<< HEAD
                 <form action="../../controllers/sendOtp.php" method="post">
-=======
-                <form action="../../controllers/residentLoginController.php" method="post">
 
                     <div class="form-group">
                         <label>Email:</label>
-                        <input type="email" placeholder="Enter username" name = "username" class="form-control" required>
+                        <input type="email" placeholder="Enter username" name = "email" class="form-control" required>
                     </div>
 
-                    <!--
-                    <div class="form-group mt-3">
-                        <label>Password:</label>
-                        <input type="password" placeholder="Enter password" name = "password" class="form-control" required>
-                    </div>
-                    -->
-                    <div class="form-group mt-3">
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#forgot">Forgot your password?</a>
-                    </div>
+                   
+                   
 
                     <div class="form-group mt-3">
                         <input type="submit" value="Login" class="btn btn-primary w-100">
@@ -48,10 +38,7 @@
                     <div class="form-group mt-3 text-center">
                         <label>Not registered yet? <a href="./registrationInfo.php">Register Here</a></label>
                     </div>
->>>>>>> c3c72b3e5dad44f19f69ff8725c8ff716f6b7390
 
-                  <input type="text" name="email" id="email" class="form-control" placeholder="Email" required>
-                    <button type="submit" class="btn btn-primary mt-2">Submit</button>
                 </form>
             </div>
         </div>
@@ -87,6 +74,7 @@
     const params = new URLSearchParams(window.location.search); 
     if(params.get('success') == 1){
         alert("Registration Successful! Please login to continue.");
+        window.history.replaceState({}, document.title, "/" + "bms/views/residents/residentLogin.php");
     }
 </script>
 </body>

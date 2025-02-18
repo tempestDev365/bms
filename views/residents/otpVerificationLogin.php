@@ -19,12 +19,14 @@
                 <div class="">
                     <h5>Enter OTP</h5>
                     <div class="pin-group d-flex justify-content-between align-items-center" style="gap: 5px;">
-                        <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="" id="">
-                        <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="" id="">
-                        <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="" id="">
-                        <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="" id="">
-                        <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="" id="">
-                        <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="" id="">
+                        <form action="" method="post">
+                            <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="1" id="">
+                        <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="2" id="">
+                        <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="3" id="">
+                        <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="4" id="">
+                        <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="5" id="">
+                        <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="6" id="">
+                        </form>
                     </div>
                     <div class="resend-code d-flex justify-content-between align-items-center mt-1">
                         <label for="">Didn't get a code ? <a href="#">Resend</a></label>

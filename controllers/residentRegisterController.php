@@ -63,7 +63,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $stmt->bindParam(15,$front_id);
     $stmt->bindParam(16,$back_id);
     $stmt->execute();
-    header("Location: ../views/residentLogin.php?success=1");
+    unset($_SESSION['email']);
+
+    header("Location: ../views/residents/residentLogin.php?success=1");
 
 }
 

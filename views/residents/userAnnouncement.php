@@ -2,9 +2,7 @@
 require_once '../../database/databaseConnection.php';
 include '../../controllers/getAllResidentInformationController.php';
 session_start();
-if(!isset($_SESSION['resident_id'])) {
-    header('Location: ./residentLogin.php');
-}
+
 $qry = "SELECT * FROM residents_tbl WHERE id = ?";
 $stmt = $conn->prepare($qry);
 $stmt->bindParam(1, $_SESSION['resident_id']);

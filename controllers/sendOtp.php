@@ -33,7 +33,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
      <h2>Your OTP is: <b?>{$otp}</b></h2>
     ";
     $_SESSION['otp'] = $otp;
+    $_SESSION['email'] = $email;
     $mail->send();
+    header("Location: ../views/residents/otpVerificationLogin.php");
 }
 function checkIfEmailInDb($email){
     include_once '../database/databaseConnection.php';
