@@ -170,12 +170,12 @@ $email = $_SESSION['email'];
                         </div>
                     </div>
                     <div class="bottom-camera mt-3" style="gap: 5px">
-                        <button class="btn btn-primary w-100 mb-2" onclick="openCamera('front')">CAMERA FOR FRONT</button>
-                        <button class="btn btn-primary w-100" onclick="openCamera('back')">CAMERA FOR BACK</button>
+                        <button type="button" class="btn btn-primary w-100 mb-2" onclick="openCamera('front')">CAMERA FOR FRONT</button>
+                        <button type = "button" class="btn btn-primary w-100" onclick="openCamera('back')">CAMERA FOR BACK</button>
                         <video id="camera" style="display: none; width: 100%; margin-top: 10px;" autoplay></video>
                         <canvas id="canvas" style="display: none;"></canvas>
                         <button id="captureBtn" class="btn btn-success w-100 mt-2" style="display: none;" onclick="captureImage()">Capture</button>
-                    </div>
+                    </div> 
                 </div>
             </div>
         </div>

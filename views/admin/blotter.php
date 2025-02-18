@@ -1,4 +1,4 @@
-<?php
+  <?php
 session_start();
 if(!isset($_SESSION['admin'])) {
     header('Location: adminLogin.php');
@@ -11,6 +11,14 @@ include_once "../../database/databaseConnection.php";
     $stmt->execute();
     $result = $stmt->fetchAll();
     return $result;
+}
+include_once "../../database/databaseConnection.php";
+$qry= "SELECT time FROM blotter_tbl";
+$stmt = $conn->prepare($qry);
+$stmt->execute();
+$result = $stmt->fetchAll();
+foreach($result as $row){
+   echo strtotime($row['time']) . "<br>";
 }
 $blotter = getAllBlotter();
 ?>
@@ -66,21 +74,17 @@ $blotter = getAllBlotter();
                             <th>Date Schedule</th>
                             <th>Meeting Time</th>
                             <th>Description</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                           foreach($blotter as $row){
                             echo"<tr>";
-                            echo"<td>".$row['id']."</td>";
-                            echo"<td>".$row['narrator_complaint']."</td>";
-                            echo"<td>".$row['first_witness']."</td>";
-                            echo"<td>".$row['second_witness']."</td>";
-                            echo"<td><button class='btn btn-sm btn-primary' data-bs-toggle='modal' data-bs-target='#viewDetail' id = 'viewBtn' onclick='viewDetail(".$row['id'].")'>View</button>
-                                     <button class='btn btn-sm btn-primary' data-bs-toggle='modal' data-bs-target='#editDetail' onClick = 'editBlotter(".$row['id'].")'>Edit</button>
-                                    <button class='btn btn-sm btn-danger' data-bs-toggle='modal' onClick= 'deleteBlotter(".$row['id'].")'>Delete</button>
-                                </td>";
+                            echo"<td>".$row['time_of_accident']."</td>";
+                            echo"<td>".$row['place_of_accident']."</td>";
+                            echo"<td>".$row['date_schedule']."</td>";
+                            echo"<td>".$row['meeting_time']."</td>";
+                            echo"<td>".$row['description']."</td>";
                             echo"</tr>";
 
                           }
@@ -158,27 +162,27 @@ $blotter = getAllBlotter();
                         <form action="../../controllers/addBlotterController.php" method="POST">
                             <div class="form-group">
                                 <label>Time Of Accident</label>
-                                <input type="time" class="form-control"  required>
+                                <input type="time" class="form-control" name = "time_of_accident"  required>
                             </div>
 
                             <div class="form-group mt-2">
                                 <label>Place Of Incident</label>
-                                <input type="text" name = "incident" class="form-control" required>
+                                <input type="text" name = "place_of_accident" class="form-control" required>
                             </div>
 
                             <div class="form-group mt-2">
                                 <label>Select Date Schedule</label>
-                                <input type="date" name = "" class="form-control" required>
+                                <input type="date" name = "date_schedule" class="form-control" required>
                             </div>
 
                             <div class="form-group mt-2">
                                 <label>Meeting Time</label>
-                                <input type="time" name = "date" id = "date_selected" class="form-control" required>
+                                <input type="time" name = "meeting_time" id = "date_selected" class="form-control" required>
                             </div>
 
                             <div class="form-group mt-2">
                                 <label>Description</label>
-                                <textarea name="narrative" class="form-control" required></textarea>    
+                                <textarea name="description" class="form-control"  required></textarea>    
                             </div>
 
                            
@@ -256,36 +260,7 @@ $blotter = getAllBlotter();
         table.column(2).search(filterValue === 'all' ? '' : filterValue, true, false).draw();
     });
 
-    const date = document.querySelector('#date_selected');
-    date.addEventListener('input', (e) => {
-        const currentDate = new Date();
-        const selectedDate = new Date(e.target.value);
-        if (selectedDate > currentDate) {
-            alert('Invalid Date');
-            e.target.value = '';
-        }
-    });
 
-    const viewDetail = async (id) => {
-        const api = await fetch(`../../controllers/blotterOptionsController.php?id=${id}&action=view`);
-        const data = await api.json();
-        document.querySelector("#incident").textContent = data.place;
-        document.querySelector("#complainant").textContent = data.complainant;
-        document.querySelector("#first_witness").textContent = data.first_witness;
-        document.querySelector("#second_witness").textContent = data.second_witness;
-        document.querySelector("#date").textContent = data.date;
-        document.querySelector("#narrative").textContent = data.narrative;
-    }
-
-    const deleteBlotter = async (id) => {
-        const api = await fetch(`../../controllers/blotterOptionsController.php?id=${id}&action=delete`);
-        location.reload();
-    }
-
-    const editBlotter = async (id) => {
-        const form = document.querySelector('#editBlotter');
-        form.action = `../../controllers/blotterOptionsController.php?id=${id}&action=edit`;
-    }
     </script>
 
 </body>

@@ -31,7 +31,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $firstName = $_POST['first_name'];
     $lastName = $_POST['last_name'];
     $middleName = $_POST['middle_name'];
-    $suffix = $_POST['suffix'];
+    $suffix = $_POST['suffix'] ?? "";
     $sex = $_POST['sex'];
     $birthDate = $_POST['birthday'];
     $age = $_POST['age'];
