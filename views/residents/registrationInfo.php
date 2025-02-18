@@ -69,10 +69,12 @@ $email = $_SESSION['email'];
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                         </select>
-                        <input type="number" placeholder="Age" class="form-control" name = "age" required>
+                        <input type="number" placeholder="Age" class="form-control" name="age" id="age" readonly required>
                     </div>
                     <div class="form-group mt-2">
-                        <input type="date" class="form-control" name = "birthday" required>
+                        <label for="birthday">Date of Birth</label>
+                        <input type="date" class="form-control" name="birthday" id="birthday" required 
+                               onchange="calculateAge()" max="<?php echo date('Y-m-d'); ?>">
                     </div>
                     
               
@@ -212,6 +214,33 @@ $email = $_SESSION['email'];
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
+        function calculateAge() {
+            const birthdayInput = document.getElementById('birthday');
+            const ageInput = document.getElementById('age');
+            
+            const birthday = new Date(birthdayInput.value);
+            const today = new Date();
+            
+            // Check if selected date is in the future
+            if (birthday > today) {
+                alert("Birthday cannot be in the future!");
+                birthdayInput.value = ''; // Clear the input
+                ageInput.value = ''; // Clear the age
+                return;
+            }
+            
+            let age = today.getFullYear() - birthday.getFullYear();
+            const monthDiff = today.getMonth() - birthday.getMonth();
+            
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthday.getDate())) {
+                age--;
+            }
+            
+            ageInput.value = age;
+            inputs['age'] = age;
+            document.querySelector('.age').textContent = `Age: ${age}`;
+        }
+        
         // JavaScript to handle pagination
         document.getElementById('page1').addEventListener('click', function(event) {
             event.preventDefault();
