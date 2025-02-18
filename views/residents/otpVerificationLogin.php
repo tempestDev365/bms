@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,25 +22,26 @@
                 <div class="">
                     <h5>Enter OTP</h5>
                     <div class="pin-group d-flex justify-content-between align-items-center" style="gap: 5px;">
-                        <form action="" method="post">
-                            <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="1" id="">
-                        <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="2" id="">
-                        <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="3" id="">
-                        <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="4" id="">
-                        <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="5" id="">
-                        <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="6" id="">
-                        </form>
+                        <form action="../../controllers/verifyOtp.php" method="post">
+                            <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="first" id="">
+                        <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="second" id="">
+                        <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="third" id="">
+                        <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="fourth" id="">
+                        <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="fifth" id="">
+                        <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="sixth" id="">
                     </div>
+                      <div class="card-btn mt-3">
+                <button id="clear" class="btn btn-primary w-100 p-3" style="border-radius: 20px;">CONFIRM</button>
+            </div>
+                </form>
                     <div class="resend-code d-flex justify-content-between align-items-center mt-1">
-                        <label for="">Didn't get a code ? <a href="#">Resend</a></label>
+                        <label for="">Didn't get a code ? <a href="../../controllers/resendOtp.php?action=resend">Resend</a></label>
                         <button id="clearBtn" class="btn">Clear</button>
                     </div>
                 </div>
             </div>
-         
-            <div class="card-btn mt-3">
-                <button id="clear" class="btn btn-primary w-100 p-3" style="border-radius: 20px;">CONFIRM</button>
-            </div>
+            
+          
 
             
         </div>
@@ -57,6 +61,11 @@
                 input.value = '';
             });
         });
+        const params = new URLSearchParams(window.location.search);
+        const error = params.get('error');
+        if(error){
+            alert("OTP is incorrect");
+        }
     </script>
 </body>
 </html>

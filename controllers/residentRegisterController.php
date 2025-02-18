@@ -43,8 +43,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $employment_status = $_POST['employment_status'];
     $front_id = isset($_FILES['frontID']['tmp_name']) ? base64_encode(resizeImage($_FILES['frontID']['tmp_name'],250,250)) : null;
     $back_id = isset($_FILES['backID']['tmp_name']) ? base64_encode(resizeImage($_FILES['backID']['tmp_name'],250,250)) : null;
-    $qry = "INSERT INTO `residents_information`( `first_name`, `middle_name`, `last_name`, `email`, `suffix`, `sex`, `age`, `employment_status`, `birthday`, `civil_status`, `purok`, `house_number`, `street`, `house_owner`, `id_front`, `id_back`, `time_Created`) 
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())";
+    $qry = "INSERT INTO `residents_information`( `first_name`, `middle_name`, `last_name`, `email`, `suffix`, `sex`, `age`,  `birthday`, `civil_status`, `purok`, `house_number`, `street`, `house_owner`, `id_front`, `id_back`, `time_Created`) 
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())";
     $stmt = $conn->prepare($qry);
     $stmt->bindParam(1,$firstName);
     $stmt->bindParam(2,$middleName);
@@ -53,15 +53,15 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $stmt->bindParam(5,$suffix);
     $stmt->bindParam(6,$sex);
     $stmt->bindParam(7,$age);
-    $stmt->bindParam(8,$employment_status);
-    $stmt->bindParam(9,$birthDate);
-    $stmt->bindParam(10,$civil_status);
-    $stmt->bindParam(11,$purok);
-    $stmt->bindParam(12,$house_number);
-    $stmt->bindParam(13,$street);
-    $stmt->bindParam(14,$house_owner);
-    $stmt->bindParam(15,$front_id);
-    $stmt->bindParam(16,$back_id);
+    $stmt->bindParam(8,$birthDate);
+    $stmt->bindParam(9,$civil_status);
+    $stmt->bindParam(10,$purok);
+    $stmt->bindParam(11,$house_number);
+    $stmt->bindParam(12,$street);
+    $stmt->bindParam(13,$house_owner);
+    $stmt->bindParam(14,$front_id);
+    $stmt->bindParam(15,$back_id);
+    
     $stmt->execute();
     unset($_SESSION['email']);
 

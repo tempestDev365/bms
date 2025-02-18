@@ -5,22 +5,22 @@ session_start();
 if(!isset($_SESSION['admin'])) {
     header('Location: adminLogin.php');
 }
-   $conn = $GLOBALS['conn'];
-$resident_qry = "
-    SELECT 
-        r.id, r.first_name, r.middle_name, r.last_name, 
-        ri.sex, ri.age,ri.resident_id, 
-        a.*
-    FROM 
-        approved_tbl a
-    LEFT JOIN 
-        residents_tbl r ON a.resident_id = r.id
-    LEFT JOIN 
-        resident_information ri ON r.id = ri.resident_id
-";
-$stmt = $conn->prepare($resident_qry);
-$stmt->execute();
-$resident_result = $stmt->fetchAll();
+//    $conn = $GLOBALS['conn'];
+// $resident_qry = "
+//     SELECT 
+//         r.id, r.first_name, r.middle_name, r.last_name, 
+//         ri.sex, ri.age,ri.resident_id, 
+//         a.*
+//     FROM 
+//         approved_tbl a
+//     LEFT JOIN 
+//         residents_tbl r ON a.resident_id = r.id
+//     LEFT JOIN 
+//         resident_information ri ON r.id = ri.resident_id
+// ";
+// $stmt = $conn->prepare($resident_qry);
+// $stmt->execute();
+// $resident_result = $stmt->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -80,10 +80,10 @@ function getAllResidentInformation($id){
         'resident_monthly_income'=>$resident_employment_result['monthly_income'],
    ];
 }
-$resident_information = getAllResidentInformation($_SESSION['resident_id']);
-$picture = $resident_information['resident_picture'];
-$signature = $resident_information['resident_signature'];
-$valid_id = $resident_information['resident_valid_id'];
+// $resident_information = getAllResidentInformation($_SESSION['resident_id']);
+// $picture = $resident_information['resident_picture'];
+// $signature = $resident_information['resident_signature'];
+// $valid_id = $resident_information['resident_valid_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
