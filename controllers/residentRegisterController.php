@@ -47,6 +47,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $employment_status = $_POST['employment_status'];
     $front_id = isset($_FILES['frontID']['tmp_name']) ? base64_encode(resizeImage($_FILES['frontID']['tmp_name'],250,250)) : null;
     $back_id = isset($_FILES['backID']['tmp_name']) ? base64_encode(resizeImage($_FILES['backID']['tmp_name'],250,250)) : null;
+    
+    
     $qry = "INSERT INTO `residents_information`( `first_name`, `middle_name`, `last_name`, `email`, `suffix`, `sex`, `age`,  `birthday`, `civil_status`, `purok`, `house_number`, `street`, `house_owner`, `id_front`, `id_back`, `time_Created`) 
     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())";
     $stmt = $conn->prepare($qry);
@@ -67,6 +69,16 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $stmt->bindParam(15,$back_id);
     
     $stmt->execute();
+    $id = $conn->lastInsertId();
+    $insert_into_personal = "INSERT INTO `residents_personal_information`(`resident_id`, `birth_place`, `resident_picture`, `valid_id`, `height`, `weight`, `blood_type`, `religion`, `nationality`, `registered_voter`, `organization_member`, `time_Created`) 
+    VALUES ($id,'','','','','','','','','','','')";
+    $stmt = $conn->query($insert_into_personal);
+    $insert_into_contact = "INSERT INTO `residents_contact_information`( `resident_id`, `phone_number`, `email`, `tel_no`, `time_Created`)
+     VALUES ($id,'','','','')";
+    $stmt = $conn->query($insert_into_contact);
+    $insert_into_additional = "INSERT INTO `residents_additional_information`( `resident_id`, `employment_status`, `employment_field`, `monthly_income`, `highest_educational_attainment`, `type_of_school`, `occupation`, `time_Created`) 
+    VALUES ($id,'','','','','','','')";
+    $stmt = $conn->query($insert_into_additional);
     unset($_SESSION['email']);
 
     header("Location: ../views/residents/residentLogin.php?success=1");

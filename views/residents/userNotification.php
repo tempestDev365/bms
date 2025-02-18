@@ -18,12 +18,12 @@ function getAllConcernsReplies(){
     FROM concerns_replies_tbl cr
     JOIN concerns_tbl c 
     ON cr.concern_id = c.id
-    WHERE c.resident_id = {$_SESSION['resident_id']}";
+    WHERE c.resident_id = {$_SESSION['user_id']}";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     return $stmt->fetchAll();
 }
-$allDocumentRequested = getAllDocumentRequested($_SESSION['resident_id']);
+$allDocumentRequested = getAllDocumentRequested($_SESSION['user_id']);
 $allConcernsReplies = getAllConcernsReplies();
 ?>
 <!DOCTYPE html>
