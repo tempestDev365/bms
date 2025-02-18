@@ -92,25 +92,21 @@ $announcements = getAllAnnouncement();
                 <h2>Announcements</h2>
 
                 <!--ANNOUNCEMENT DISPLAYED-->
-                
-                <div class="card mt-3">
-                    <?php
-                    foreach($announcements as $announcement){
-                      
-                        echo "
+                <?php foreach($announcements as $announcement): ?>
+                    <div class="card mt-3" style="margin-top: 20px;">
                         <div class='card-header'>
-                        <h3>Title: {$announcement['title']}</h3>
+                            <h3>Title: <?php echo $announcement['title']; ?></h3>
+                        </div>
+                        <div class='card-body'>
+                            <div class="container border d-flex justify-content-center align-items-center rounded-3 shadow-sm p-3">
+
+                            <!-- img here-->
+                             
+                            </div>
+                            <h5 class="mt-2">Content: <?php echo $announcement['content']; ?></h5>
+                        </div>
                     </div>
-                    <div class='card-body'>
-                        <h5>Content:{$announcement['content']}</h5>
-                    </div>";
-                    
-                
-                    }
-                    ?>
-                </div>
-
-
+                <?php endforeach; ?>
             </div>
 
        
