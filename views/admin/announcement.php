@@ -92,7 +92,7 @@ $announcements = getAllAnnouncement();
                                 <?php echo $announcement['title']; ?>
                             </div>
                             <div class="card-body">
-                                <div class="card-content">
+                                <div class="card-content d-flex flex-column">
                                     <?php echo $announcement['content']; ?>
                                     <img src="data:image/jpeg;base64, <?php echo $announcement['image'] ;?>" alt="">
                                 </div>

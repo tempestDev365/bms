@@ -81,9 +81,12 @@ $announcements = getAllAnnouncement();
                         </div>
                         <div class='card-body'>
                             <div class="container border d-flex justify-content-center align-items-center rounded-3 shadow-sm p-3">
-
-                            <!-- img here-->
-                             
+                                <?php if(!empty($announcement['image'])): ?>
+                                    <img src="data:image/jpeg;base64,<?php echo $announcement['image']; ?>" 
+                                         alt="Announcement Image"
+                                         class="img-fluid"
+                                         style="max-height: 500PX; width:100%; object-fit: contain;">
+                                <?php endif; ?>
                             </div>
                             <h5 class="mt-2">Content: <?php echo $announcement['content']; ?></h5>
                         </div>
