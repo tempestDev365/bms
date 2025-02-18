@@ -14,7 +14,24 @@ function getAllDemographic(){
     $stmt->execute();
     $female_count = $stmt->fetch();
     $male_count_qry = "SELECT COUNT('sex') as male_count FROM residents_information WHERE sex = `Male`";
-
+    $stmt = $conn->prepare($qry);
+    $stmt->execute();
+    $male_count = $stmt->fetch();
+    $voter_count_qry = "SELECT COUNT('voter_status') as voter_count FROM resident_personal_information WHERE registered_voter = 1";
+    $stmt = $conn->prepare($qry);
+    $stmt->execute();
+    $voter_count = $stmt->fetch();
+    $household_count_qry = "SELECT COUNT(DISTINCT 'house_number') as household_count FROM residents_information";
+    $stmt = $conn->prepare($qry);
+    $stmt->execute();
+    $household_count = $stmt->fetch();
+    return [
+        'resident_count' => $resident_count['resident_count'],
+        'female_count' => $female_count['female_count'],
+        'male_count' => $male_count['male_count'],
+        'voter_count' => $voter_count['voter_count'],
+        'household_count' => $household_count['household_count']
+    ];
 
 
 }
@@ -93,7 +110,19 @@ $demographic = getAllDemographic();
                  </a>
 
                  <!--Voters Card-->
-               
+               <a href="./residents.php?filter=voter">
+                    <div class="card" style="max-width: 350px; width: 350px;">
+                    <div class="card-body d-flex justify-content-between align-items-center flex-column">
+                        <div class="card-content">
+                            <img src="../../assets/img/dashboard/male.png" class="img-fluid" style="width: 80px" alt="male">
+                        </div>
+                        <div class="card-title d-flex justify-content-between align-items-center" style="gap: 10px">
+                            <h5>Total Male:</h5>
+                            <h3><?php echo $demographic['voter_count'] ?></h5>
+                        </div>
+                    </div>
+                </div>
+                 </a>
                  </a>
 
                  

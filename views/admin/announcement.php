@@ -62,7 +62,7 @@ $announcements = getAllAnnouncement();
 
                 <div class="h2">Announcement</div>
                 
-                <form action="../../controllers/postAnnouncementController.php" method = "POST">
+                <form action="../../controllers/postAnnouncementController.php" method = "POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="titleAnnouncement" class="h5">Title:</label>
                         <textarea name="titleAnnouncement" id="titleAnnouncement" class="form-control" placeholder="Enter title..." required ></textarea>
@@ -70,7 +70,7 @@ $announcements = getAllAnnouncement();
 
                     <div class="form-group mt-3">
                         <label for="upload-img">Upload Image</label>
-                        <input type="file" class="form-control" name="upload-img" id="upload-img" onchange="previewImage(event)">
+                        <input type="file" class="form-control" name="upload-img"  onchange="previewImage(event)">
                         <img id="img-preview" src="#" alt="Image Preview" style="display: none; max-width: 100%; margin-top: 10px;">
                     </div>
 
@@ -94,6 +94,7 @@ $announcements = getAllAnnouncement();
                             <div class="card-body">
                                 <div class="card-content">
                                     <?php echo $announcement['content']; ?>
+                                    <img src="data:image/jpeg;base64, <?php echo $announcement['image'] ;?>" alt="">
                                 </div>
                                 
                                 <!-- Comments Section -->
