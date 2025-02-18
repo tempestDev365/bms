@@ -1,8 +1,6 @@
 <?php
 $email = $_GET['email'];
-if (!isset($email)) {
-    header('Location: ./registrationVerifyEmail.php?error=1');
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -43,10 +41,10 @@ if (!isset($email)) {
                         <input type="email" placeholder="Email" class="form-control" value = <?php echo $email; ?>>
                     </div>
                     <div class="form-group mt-2">
-                        <input type="text" placeholder="First Name" class="form-control">
+                        <input type="text" placeholder="First Name" class="form-control" name="first_name" required>
                     </div>
                     <div class="form-group mt-2">
-                        <input type="text" placeholder="Middle Name" class="form-control">
+                        <input type="text" placeholder="Middle Name" class="form-control" name = "middle_name">
                     </div>
                     <div class="form-group mt-2 d-flex justify-content-end">
                         <input type="checkbox"> &nbsp;
@@ -66,15 +64,15 @@ if (!isset($email)) {
                         </select>
                     </div>
                     <div class="form-group mt-2 d-flex justify-content-between" style="gap: 5px">
-                        <select name="suffix" id="suffix" class="form-control">
+                        <select name="sex" id="suffix" class="form-control">
                             <option value="Suffix" disabled selected>Sex</option>
                             <option value="">Male</option>
                             <option value="">Female</option>
                         </select>
-                        <input type="number" placeholder="Age" class="form-control">
+                        <input type="number" placeholder="Age" class="form-control" required>
                     </div>
                     <div class="form-group mt-2">
-                        <input type="date" class="form-control">
+                        <input type="date" class="form-control" name = "birthday" required>
                     </div>
                     <div class="button mt-4">
                         <button class="btn btn-primary w-100 p-3" style="border-radius: 20px;">CONTINUE</button>
@@ -91,26 +89,26 @@ if (!isset($email)) {
             <div class="card-body">
                 <form action="">
                     <div class="form-group mt-2 d-flex justify-content-between" style="gap: 5px">
-                        <select name="suffix" id="suffix" class="form-select">
+                        <select name="civil_status" id="suffix" class="form-select" required>
                             <option value="Suffix" disabled selected>Civil Status</option>
                             <option value="">SINGLE</option>
                             <option value="">MARRIED</option>
                             <option value="">DIVORCED</option>
                             <option value="">WIDOWED</option>
                         </select>
-                        <select name="suffix" id="suffix" class="form-select">
-                            <option value="Suffix" disabled selected>Purok</option>
+                        <select name="purok" id="purok" class="form-select">
+                            <option value="purok" disabled selected required>Purok</option>
                             <option value="">ALMA</option>
                             <option value="">BANALO</option>
                             <option value="">SINEGUELASAN</option>
                         </select>
                     </div>
                     <div class="form-group mt-2 d-flex justify-content-between" style="gap: 5px">
-                        <input type="text" placeholder="House Number" class="form-control">
-                        <input type="text" placeholder="Street" class="form-control">
+                        <input type="text" placeholder="House Number" class="form-control" name = "house_number" required>
+                        <input type="text" placeholder="Street" class="form-control" name = "street" required>
                     </div>
                     <div class="form-group mt-2">
-                        <input type="text" placeholder="Name of the house Owner (Optional)" class="form-control">
+                        <input type="text" placeholder="Name of the house Owner (Optional)" class="form-control" name = "house_owner">
                     </div>
                     <div class="button mt-4">
                         <button class="btn btn-primary w-100 p-3" style="border-radius: 20px;">CONTINUE</button>

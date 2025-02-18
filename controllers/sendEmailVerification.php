@@ -25,8 +25,10 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $mail->Subject = 'Verification Link';
     $mail->Body    = "Please click the link to register
     NOTE: If you did not request a this, please ignore this email.
-    <a href='http://localhost/bms/views/residents/registrationInfo.php?email={$email}'>Reset Password</a>
+    <a href='http://localhost/bms/views/residents/registrationInfo.php?email={$email}'>Registration Link</a>
     ";
     $mail->send();
+    echo "<script>alert('Email sent successfully')</script>";
+    header("Location: ../views/residents/registrationInfo.php");
 }
 ?>
