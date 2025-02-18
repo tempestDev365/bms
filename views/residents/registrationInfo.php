@@ -19,7 +19,7 @@ $email = $_SESSION['email'];
 </head>
 <body>
 
-    <main style="background-color: #2D3187;" class="vh-100 d-flex justify-content-center align-items-center p-2 flex-column">
+    <main style="background-color: #2D3187; min-height: 100vh" class="d-flex justify-content-center align-items-center p-2 flex-column">
 
         <!-- Pagination -->
         <ul class="pagination">
@@ -153,15 +153,28 @@ $email = $_SESSION['email'];
                         <label>Original full-sized. Unedited Document</label>
                         <label>No black and white images</label>
                     </div>
-                    <div class="bottom-card mt-3">
-                            <div class="form-group" style="flex-grow: 1;">
-                                <input type="file" name="frontID" hidden id="frontID">
-                                <label class="d-flex justify-content-center align-items-center" for="frontID" style="width: 100%; border: 1px dotted black; height: 200px; cursor: pointer;">Upload Front</label>
-                            </div>
-                            <div class="form-group" style="flex-grow: 1;">
-                                <input type="file" name="backID" hidden id="backID">
-                                <label class="d-flex justify-content-center align-items-center" for="backID" style="width: 100%; border: 1px dotted black; height: 200px; cursor: pointer;">Upload Back</label>
-                            </div>
+                    <div class="bottom-card mt-3 border d-flex">
+                        <div class="form-group" style="flex-grow: 1;">
+                            <input type="file" name="frontID" hidden id="frontID" onchange="previewImage(this, 'frontPreview')">
+                            <label class="d-flex justify-content-center align-items-center" for="frontID" style="width: 100%; border: 1px dotted black; height: 200px; cursor: pointer;">
+                                <img id="frontPreview" src="#" alt="Front ID Preview" style="display: none; max-width: 100%; max-height: 100%; object-fit: contain;">
+                                <span id="frontUploadText">Upload Front</span>
+                            </label>
+                        </div>
+                        <div class="form-group" style="flex-grow: 1;">
+                            <input type="file" name="backID" hidden id="backID" onchange="previewImage(this, 'backPreview')">
+                            <label class="d-flex justify-content-center align-items-center" for="backID" style="width: 100%; border: 1px dotted black; height: 200px; cursor: pointer;">
+                                <img id="backPreview" src="#" alt="Back ID Preview" style="display: none; max-width: 100%; max-height: 100%; object-fit: contain;">
+                                <span id="backUploadText">Upload Back</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="bottom-camera mt-3" style="gap: 5px">
+                        <button class="btn btn-primary w-100 mb-2" onclick="openCamera('front')">CAMERA FOR FRONT</button>
+                        <button class="btn btn-primary w-100" onclick="openCamera('back')">CAMERA FOR BACK</button>
+                        <video id="camera" style="display: none; width: 100%; margin-top: 10px;" autoplay></video>
+                        <canvas id="canvas" style="display: none;"></canvas>
+                        <button id="captureBtn" class="btn btn-success w-100 mt-2" style="display: none;" onclick="captureImage()">Capture</button>
                     </div>
                 </div>
             </div>
@@ -186,9 +199,7 @@ $email = $_SESSION['email'];
                 <p class = "address">House no./Bldg./Street name:</p>
                 <p class = "home_owner">Name of the house owner:</p>
             </div>
-            <div class="card-edit d-flex justify-content-end">
-                <a href="#">Edit Details</a>
-            </div>
+          
             <div class="card-btn mt-3">
                 <button class="btn btn-primary w-100 p-3" style="border-radius: 20px;">CONFIRM</button>
             </div>
@@ -264,6 +275,81 @@ $email = $_SESSION['email'];
             console.log(inputs)
         })
     })  
+
+    let currentMode = '';
+    let stream = null;
+
+    function previewImage(input, previewId) {
+        const preview = document.getElementById(previewId);
+        const uploadText = document.getElementById(previewId === 'frontPreview' ? 'frontUploadText' : 'backUploadText');
+        
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+                uploadText.style.display = 'none';
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    async function openCamera(mode) {
+        currentMode = mode;
+        const video = document.getElementById('camera');
+        const captureBtn = document.getElementById('captureBtn');
+        
+        try {
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+            }
+            
+            stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            video.srcObject = stream;
+            video.style.display = 'block';
+            captureBtn.style.display = 'block';
+        } catch (err) {
+            console.error('Error accessing camera:', err);
+            alert('Error accessing camera');
+        }
+    }
+
+    function captureImage() {
+        const video = document.getElementById('camera');
+        const canvas = document.getElementById('canvas');
+        const preview = document.getElementById(currentMode === 'front' ? 'frontPreview' : 'backPreview');
+        const uploadText = document.getElementById(currentMode === 'front' ? 'frontUploadText' : 'backUploadText');
+        
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        canvas.getContext('2d').drawImage(video, 0, 0);
+        
+        // Convert canvas to blob and create a File object
+        canvas.toBlob((blob) => {
+            const file = new File([blob], `${currentMode}ID.jpg`, { type: 'image/jpeg' });
+            const input = document.getElementById(currentMode === 'front' ? 'frontID' : 'backID');
+            
+            // Create a FileList object
+            const dataTransfer = new DataTransfer();
+            dataTransfer.items.add(file);
+            input.files = dataTransfer.files;
+            
+            // Show preview
+            preview.src = canvas.toDataURL('image/jpeg');
+            preview.style.display = 'block';
+            uploadText.style.display = 'none';
+            
+            // Hide camera elements
+            video.style.display = 'none';
+            document.getElementById('captureBtn').style.display = 'none';
+            
+            // Stop camera stream
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+                stream = null;
+            }
+        }, 'image/jpeg');
+    }
     </script>
 </body>
 </html>
