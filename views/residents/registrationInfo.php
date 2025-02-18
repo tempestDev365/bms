@@ -119,25 +119,51 @@ $email = $_GET['email'];
 
      
         <!-- Form 4 -->
-        <div class="card p-3" id="form4" style="min-width: 500px; min-height: 500px; width: 500px;">
+        <div class="card p-3" id="form4" style="min-width: 600px; min-height: 600px; width: 600px;">
             <div class="card-title">
                 <h2>IDENTITY VERIFICATION!</h2>
             </div>
             <div class="card-body">
                 <div class="upper-card">
-                    <label for="">Please upload proof of living.</label>
-                </div>
-                <div class="middle-cards mt-3">
-                    <form action="" class="d-flex justify-content-center align-items-center" style="gap: 5px;">
-                        <div class="form-group" style="flex-grow: 1;">
-                            <input type="file" name="proofOfLiving" hidden id="proofOfLiving">
-                            <label class="d-flex justify-content-center align-items-center" for="proofOfLiving" style="width: 100%; border: 1px dotted black; height: 200px; cursor: pointer;"></label>
+                    <label for="">Please upload barangay ID / valid ID</label>
+                    <div class="upper-card-img">
+                        <div class="img-group d-flex justify-content-center align-items-center">
+                            <div class="card-img">
+                                <img src="../../assets/img/good-id.png" alt="good" class="img-fluid">
+                            </div>
+                            <div class="card-img">
+                                <img src="../../assets/img/bad-img1.png" alt="bad-img1.png" class="img-fluid">
+                            </div>
+                            <div class="card-img">
+                                <img src="../../assets/img/bad-img2.png" alt="bad-img2.png" class="img-fluid">
+                            </div>
                         </div>
-                    </form>
-                    <div class="note mt-2">
-                        <label for="">Take Note: This is optional if your ID is not addressed in this barangay. Please provide proof of living if possible.</label>
+                        <div class="img-label d-flex justify-content-around align-items-center">
+                            <label for="">Good</label>
+                            <label for="">Bad</label>
+                            <label for="">Bad</label>
+                        </div>
                     </div>
-                    <button class="btn btn-primary w-100 mt-5 p-3" style="border-radius: 20px;">NEXT</button>
+                    <div class="middle-card mt-3 d-flex flex-column">
+                        <p>Make sure your ID is</p>
+                        <label>Valid</label>
+                        <label>Readable</label>
+                        <label>Original full-sized. Unedited Document</label>
+                        <label>No black and white images</label>
+                    </div>
+                    <div class="bottom-card mt-3">
+                        <form action="" class="d-flex justify-content-center align-items-center" style="gap: 5px;">
+                            <div class="form-group" style="flex-grow: 1;">
+                                <input type="file" name="frontID" hidden id="frontID">
+                                <label class="d-flex justify-content-center align-items-center" for="frontID" style="width: 100%; border: 1px dotted black; height: 200px; cursor: pointer;">Upload Front</label>
+                            </div>
+                            <div class="form-group" style="flex-grow: 1;">
+                                <input type="file" name="backID" hidden id="backID">
+                                <label class="d-flex justify-content-center align-items-center" for="backID" style="width: 100%; border: 1px dotted black; height: 200px; cursor: pointer;">Upload Back</label>
+                            </div>
+                        </form>
+                        <button class="btn btn-primary w-100 mt-3 p-3" style="border-radius: 20px;">NEXT</button>
+                    </div>
                 </div>
             </div>
         </div>
