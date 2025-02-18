@@ -1,25 +1,22 @@
-  <?php
+<?php
 session_start();
 if(!isset($_SESSION['admin'])) {
     header('Location: adminLogin.php');
+    exit();
 }
+
 function getAllBlotter(){
-include_once "../../database/databaseConnection.php";
-   $conn = $GLOBALS['conn'];
-   $qry = "SELECT * FROM blotter_tbl";
-   $stmt = $conn->prepare($qry);
+    include_once "../../database/databaseConnection.php";
+    $conn = $GLOBALS['conn'];
+    $qry = "SELECT *, (NOW() > DATE_ADD(time, INTERVAL 24 HOUR)) AS is_past_24_hours FROM blotter_tbl";
+    $stmt = $conn->prepare($qry);
     $stmt->execute();
     $result = $stmt->fetchAll();
     return $result;
 }
-include_once "../../database/databaseConnection.php";
-$qry= "SELECT time FROM blotter_tbl";
-$stmt = $conn->prepare($qry);
-$stmt->execute();
-$result = $stmt->fetchAll();
-
 $blotter = getAllBlotter();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,10 +64,11 @@ $blotter = getAllBlotter();
                 <table class="table table-bordered mt-3" id="example">
                     <thead>
                         <tr>
-                            <th>TIme Of Accident</th>
+                            <th>Time Of Accident</th>
                             <th>Place Of Accident</th>
                             <th>Date Schedule</th>
                             <th>Meeting Time</th>
+                            <th>Status</th>
                             <th>Description</th>
                         </tr>
                     </thead>
@@ -82,6 +80,7 @@ $blotter = getAllBlotter();
                             echo"<td>".$row['place_of_accident']."</td>";
                             echo"<td>".$row['date_schedule']."</td>";
                             echo"<td>".$row['meeting_time']."</td>";
+                            echo"<td>".($row['is_past_24_hours'] ? 'expired' : 'active')."</td>";
                             echo"<td>".$row['description']."</td>";
                             echo"</tr>";
 

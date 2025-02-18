@@ -9,7 +9,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $description = $_POST['description'];   
     $current_time = date("h:i:s A");
     $qry = "INSERT INTO `blotter_tbl`( `time_of_accident`, `place_of_accident`, `date_schedule`, `meeting_time`, `description`,`status`, `time`)
-     VALUES (?,?,?,?,?,'active',?)";
+     VALUES (?,?,?,?,?,'active',NOW())";
 
     $stmt = $conn->prepare($qry);
     $stmt->bindParam(1, $time_of_accident, PDO::PARAM_STR);
@@ -17,7 +17,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $stmt->bindParam(3, $date_schedule, PDO::PARAM_STR);
     $stmt->bindParam(4, $meeting_time, PDO::PARAM_STR);
     $stmt->bindParam(5, $description, PDO::PARAM_STR);
-    $stmt->bindParam(6, $current_time, PDO::PARAM_STR);
     $stmt->execute();
     header('Location: ../views/admin/blotter.php');
 }
