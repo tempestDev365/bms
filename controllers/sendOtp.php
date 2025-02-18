@@ -8,6 +8,10 @@ require '../vendor/autoload.php';
 $mail = new PHPMailer(true);
 if($_SERVER['REQUEST_METHOD'] == "POST"){
    $email = $_POST['email'];
+   if(!checkIfEmailInDb($email)){
+         echo "Email not found";    
+         return;
+   }
    $otp = rand(100000,999999);
     $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
     $mail->isSMTP();                                            //Send using SMTP
@@ -30,5 +34,18 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     ";
     $_SESSION['otp'] = $otp;
     $mail->send();
+}
+function checkIfEmailInDb($email){
+    include_once '../database/databaseConnection.php';
+    $qry = "SELECT * FROM residents_information WHERE email = ?";
+    $stmt = $conn->prepare($qry);
+    $stmt->bindParam(1,$email);
+    $stmt->execute();
+    $result = $stmt->fetch();
+    if($result){
+        return true;
+    }else{
+        return false;
+    }
 }
 ?>

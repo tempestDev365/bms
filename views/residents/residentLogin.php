@@ -21,30 +21,10 @@
 
             </div>
             <div class="card-body">
-                <form action="../../controllers/residentLoginController.php" method="post">
+                <form action="../../controllers/sendOtp.php" method="post">
 
-                    <div class="form-group">
-                        <label>Username:</label>
-                        <input type="text" placeholder="Enter username" name = "username" class="form-control" required>
-                    </div>
-
-                    <div class="form-group mt-3">
-                        <label>Password:</label>
-                        <input type="password" placeholder="Enter password" name = "password" class="form-control" required>
-                    </div>
-                    
-                    <div class="form-group mt-3">
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#forgot">Forgot your password?</a>
-                    </div>
-
-                    <div class="form-group mt-3">
-                        <input type="submit" value="Login" class="btn btn-primary w-100">
-                    </div>
-
-                    <div class="form-group mt-3 text-center">
-                        <label>Not registered yet? <a href="./residentRegister.php">Register Here</a></label>
-                    </div>
-
+                  <input type="text" name="email" id="email" class="form-control" placeholder="Email" required>
+                    <button type="submit" class="btn btn-primary mt-2">Submit</button>
                 </form>
             </div>
         </div>
@@ -79,35 +59,8 @@
     // types of error
     const params = new URLSearchParams(window.location.search); 
     if(params.get('success') == 1){
-        alert('Password reset link sent to your email.');
-        setInterval(() => {
-           params.delete('success');
-           history.replaceState(history.state,'', window.location.pathname);
-        }, 1000);
+        alert("Registration Successful! Please login to continue.");
     }
-   
-    if(params.get('error') == 2){
-        alert('Your account is still pending.');
-        setInterval(() => {
-           params.delete('error');
-           history.replaceState(history.state,'', window.location.pathname);
-        }, 1000);
-    }
-    if(params.get('error') == 3){
-        alert('Your account is rejected. Please contact the admin.');
-        setInterval(() => {
-           params.delete('error');
-           history.replaceState(history.state,'', window.location.pathname);
-        }, 1000);
-    }
-    if(params.get('error') == 4){
-        alert('Account does not exist.');
-        setInterval(() => {
-           params.delete('error');
-           history.replaceState(history.state,'', window.location.pathname);
-        }, 1000);
-    }
-    
 </script>
 </body>
 </html>

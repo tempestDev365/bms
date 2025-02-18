@@ -2,7 +2,7 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
-
+session_start();
 require '../vendor/autoload.php';
 $mail = new PHPMailer(true);
 
@@ -28,6 +28,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     <a href='http://localhost/bms/views/residents/registrationInfo.php?email={$email}'>Registration Link</a>
     ";
     $mail->send();
+    $_SESSION['email'] = $email;
     echo "<script>alert('Email sent successfully')</script>";
     header("Location: ../views/residents/registrationInfo.php");
 }

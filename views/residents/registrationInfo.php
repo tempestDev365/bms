@@ -1,6 +1,6 @@
 <?php
-$email = $_GET['email'];
-
+session_start();
+$email = $_SESSION['email'];
 ?>
 
 <!DOCTYPE html>
@@ -36,9 +36,9 @@ $email = $_GET['email'];
                 <h2>Register!</h2>
             </div>
             <div class="card-body">
-                <form action="">
-                    <div class="form-group">
-                        <input type="email" placeholder="Email" class="form-control" value = <?php echo $email; ?>>
+              <form action="../../controllers/residentRegisterController.php" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                        <input type="email" placeholder="Email" class="form-control" value = <?php echo $email; ?> name="email" required>   
                     </div>
                     <div class="form-group mt-2">
                         <input type="text" placeholder="First Name" class="form-control" name="first_name" required>
@@ -51,7 +51,7 @@ $email = $_GET['email'];
                         <label for="">I have no middle name</label>
                     </div>
                     <div class="form-group mt-2 d-flex">
-                        <input type="text" placeholder="Last Name" class="form-control me-2">
+                        <input type="text" placeholder="Last Name" class="form-control me-2" name = "last_name">
                         <select name="suffix" id="suffix">
                             <option value="Suffix" disabled selected>Suffix</option>
                             <option value="">JR</option>
@@ -69,15 +69,13 @@ $email = $_GET['email'];
                             <option value="">Male</option>
                             <option value="">Female</option>
                         </select>
-                        <input type="number" placeholder="Age" class="form-control" required>
+                        <input type="number" placeholder="Age" class="form-control" name = "age" required>
                     </div>
                     <div class="form-group mt-2">
                         <input type="date" class="form-control" name = "birthday" required>
                     </div>
-                    <div class="button mt-4">
-                        <button class="btn btn-primary w-100 p-3" style="border-radius: 20px;">CONTINUE</button>
-                    </div>
-                </form>
+                    
+              
             </div>
         </div>
 
@@ -87,14 +85,20 @@ $email = $_GET['email'];
                 <h2>Register!</h2>
             </div>
             <div class="card-body">
-                <form action="">
+                
                     <div class="form-group mt-2 d-flex justify-content-between" style="gap: 5px">
-                        <select name="civil_status" id="suffix" class="form-select" required>
-                            <option value="Suffix" disabled selected>Civil Status</option>
+                        <select name="civil_status" id="civil_status" class="form-select" required>
+                            <option value="civil_status" disabled selected>Civil Status</option>
                             <option value="">SINGLE</option>
                             <option value="">MARRIED</option>
                             <option value="">DIVORCED</option>
                             <option value="">WIDOWED</option>
+                        </select>
+                          <select name="employment_status" id="employment_status" class="form-select" required>
+                            <option value="employment_status" disabled selected>Employment Status</option>
+                            <option value="">Student</option>
+                            <option value="">PWD</option>
+                            <option value="">Senior</option>
                         </select>
                         <select name="purok" id="purok" class="form-select">
                             <option value="purok" disabled selected required>Purok</option>
@@ -110,10 +114,8 @@ $email = $_GET['email'];
                     <div class="form-group mt-2">
                         <input type="text" placeholder="Name of the house Owner (Optional)" class="form-control" name = "house_owner">
                     </div>
-                    <div class="button mt-4">
-                        <button class="btn btn-primary w-100 p-3" style="border-radius: 20px;">CONTINUE</button>
-                    </div>
-                </form>
+                    
+              
             </div>
         </div>
 
@@ -152,7 +154,6 @@ $email = $_GET['email'];
                         <label>No black and white images</label>
                     </div>
                     <div class="bottom-card mt-3">
-                        <form action="" class="d-flex justify-content-center align-items-center" style="gap: 5px;">
                             <div class="form-group" style="flex-grow: 1;">
                                 <input type="file" name="frontID" hidden id="frontID">
                                 <label class="d-flex justify-content-center align-items-center" for="frontID" style="width: 100%; border: 1px dotted black; height: 200px; cursor: pointer;">Upload Front</label>
@@ -161,8 +162,6 @@ $email = $_GET['email'];
                                 <input type="file" name="backID" hidden id="backID">
                                 <label class="d-flex justify-content-center align-items-center" for="backID" style="width: 100%; border: 1px dotted black; height: 200px; cursor: pointer;">Upload Back</label>
                             </div>
-                        </form>
-                        <button class="btn btn-primary w-100 mt-3 p-3" style="border-radius: 20px;">NEXT</button>
                     </div>
                 </div>
             </div>
@@ -194,6 +193,7 @@ $email = $_GET['email'];
                 <button class="btn btn-primary w-100 p-3" style="border-radius: 20px;">CONFIRM</button>
             </div>
         </div>
+    </form>
 
        
 

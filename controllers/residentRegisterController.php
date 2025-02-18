@@ -26,6 +26,45 @@ function resizeImage($file, $max_width, $max_height) {
 
     return $data;
 }
+if($_SERVER['REQUEST_METHOD'] == "POST"){
+    $email = $_POST['email'];
+    $firstName = $_POST['first_name'];
+    $lastName = $_POST['last_name'];
+    $middleName = $_POST['middle_name'];
+    $suffix = $_POST['suffix'];
+    $sex = $_POST['sex'];
+    $birthDate = $_POST['birthday'];
+    $age = $_POST['age'];
+    $civil_status = $_POST['civil_status'];
+    $purok = $_POST['purok'];
+    $house_number = $_POST['house_number'];
+    $street = $_POST['street'];
+    $house_owner = $_POST['house_owner'];
+    $employment_status = $_POST['employment_status'];
+    $front_id = isset($_FILES['frontID']['tmp_name']) ? base64_encode(resizeImage($_FILES['frontID']['tmp_name'],250,250)) : null;
+    $back_id = isset($_FILES['backID']['tmp_name']) ? base64_encode(resizeImage($_FILES['backID']['tmp_name'],250,250)) : null;
+    $qry = "INSERT INTO `residents_information`( `first_name`, `middle_name`, `last_name`, `email`, `suffix`, `sex`, `age`, `employment_status`, `birthday`, `civil_status`, `purok`, `house_number`, `street`, `house_owner`, `id_front`, `id_back`, `time_Created`) 
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())";
+    $stmt = $conn->prepare($qry);
+    $stmt->bindParam(1,$firstName);
+    $stmt->bindParam(2,$middleName);
+    $stmt->bindParam(3,$lastName);
+    $stmt->bindParam(4,$email);
+    $stmt->bindParam(5,$suffix);
+    $stmt->bindParam(6,$sex);
+    $stmt->bindParam(7,$age);
+    $stmt->bindParam(8,$employment_status);
+    $stmt->bindParam(9,$birthDate);
+    $stmt->bindParam(10,$civil_status);
+    $stmt->bindParam(11,$purok);
+    $stmt->bindParam(12,$house_number);
+    $stmt->bindParam(13,$street);
+    $stmt->bindParam(14,$house_owner);
+    $stmt->bindParam(15,$front_id);
+    $stmt->bindParam(16,$back_id);
+    $stmt->execute();
+    header("Location: ../views/residentLogin.php?success=1");
 
+}
 
 ?>
