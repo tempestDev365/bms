@@ -1,4 +1,8 @@
 <?php
+
+ini_set("display_errors", "1");
+error_reporting(E_ALL);
+
 include_once '../database/databaseConnection.php';
 session_start();
 function resizeImage($file, $max_width, $max_height) {
