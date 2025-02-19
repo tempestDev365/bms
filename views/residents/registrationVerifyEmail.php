@@ -65,7 +65,7 @@
         if (error == 1) {
             Swal.fire({
                 title: 'Email already in use!',
-                text: 'The email you entered is not registered in our system. Please try again.',
+                text: 'The email you entered is already registered in our system. Please try again.',
                 icon: 'error',
                 confirmButtonColor: '#d33'
             }).then(() => {
