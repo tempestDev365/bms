@@ -134,6 +134,7 @@ $resident_result = $stmt->fetchAll();
                                 <h4>Personal Information</h4>
                             </div>
                             <label id="fullName">Full Name:</label>
+                            <label for="age">Age:</label>
                             <label id="sex">Sex:</label>
                             <label id="birthdate">Birthdate:</label>
                             <label id="civilStatus">Civil Status:</label>
