@@ -333,6 +333,15 @@ if(!isset($_SESSION['admin'])) {
         document.addEventListener('DOMContentLoaded', function() {
             toggleMiddleName();
         });
+
+        // Ensure contact and telephone numbers are numbers only
+        document.getElementById('mobile_no').addEventListener('input', function(event) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+
+        document.getElementById('tel_no').addEventListener('input', function(event) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
     </script>
 
     
