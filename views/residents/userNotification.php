@@ -35,13 +35,13 @@ function getAllConcernsReplies(){
 function getBlotter(){
     include_once "../../database/databaseConnection.php";
     $conn = $GLOBALS['conn'];
-    $sql = "SELECT * FROM blotter_tbl WHERE resident_id = ?";
+    $sql = "SELECT * FROM blotter_tbl WHERE resident_id = ? AND status != 'pending'";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(1, $_SESSION['user_id']);
     $stmt->execute();
     return $stmt->fetchAll();
 }
-$blottters = getBlotter();
+$blotters = getBlotter();
 $allDocumentRequested = getAllDocumentRequested($_SESSION['user_id']);
 $allOthersDocumentRequested = getOthersDocumentRequested($_SESSION['user_id']);
 $allConcernsReplies = getAllConcernsReplies();
@@ -146,6 +146,24 @@ $allConcernsReplies = getAllConcernsReplies();
                                 <h5 class="notification-title">Document request for <?php echo $document['name']; ?></h5>
                                 <p class="notification-message">Your request for <strong><?php echo $document['document_type']; ?></strong> has been <?php echo $status?>.</p>
                                 <p class="notification-date"><?php echo $document['time_Created']; ?></p>
+                                <button id = "markAsReadBtn" data-id =  "<?php echo $count ?>">Mark As Read</button>
+                               </div>
+                            <?php  $count ++?>
+
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                    <?php foreach($blotters as $blotter): ?>
+                        <div class="notification">
+                            <div class="notification-content">
+                               <div class="notifContainer unread" id =  "<?php echo $count ?>">
+                                <h5 class="notification-title">Your scheduled blotter has been <?php echo $blotter['status']; ?></h5>
+                                <?php if($blotter['status'] == "rescheduled"): ?>
+                                    <p class="notification-message">Your scheduled blotter has been rescheduled to <?php echo $blotter['date_schedule']; ?> at <?php echo $blotter['meeting_time']; ?></p>
+                                <?php endif; ?>
+                                    <p class="notification-message">With the schdule of: <?php echo $blotter['date_schedule']; ?> at <?php echo $blotter['meeting_time']; ?></p>
+                               
+                                <p class="notification-date"><?php echo $blotter['time']; ?></p>
                                 <button id = "markAsReadBtn" data-id =  "<?php echo $count ?>">Mark As Read</button>
                                </div>
                             <?php  $count ++?>

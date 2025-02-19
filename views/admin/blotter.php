@@ -64,8 +64,8 @@ $blotter = getAllBlotter();
                 <table class="table table-bordered mt-3" id="example">
                     <thead>
                         <tr>
-                            <th>Time Of Accident</th>
-                            <th>Place Of Accident</th>
+                            <th>Time Of Incident</th>
+                            <th>Place Of Incident</th>
                             <th>Date Schedule</th>
                             <th>Meeting Time</th>
                             <th>Status</th>
@@ -74,18 +74,20 @@ $blotter = getAllBlotter();
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
+                         <?php
                           foreach($blotter as $row){
                             echo"<tr style = 'display: ".($row['is_past_24_hours'] ? 'hidden' : '')."'>";
                             echo"<td>".$row['time_of_accident']."</td>";
                             echo"<td>".$row['place_of_accident']."</td>";
                             echo"<td>".$row['date_schedule']."</td>";
                             echo"<td>".$row['meeting_time']."</td>";
+                            echo"<td>".$row['status']."</td>";
                             echo"<td>".$row['description']."</td>";
-                            echo"<td>";
-                            echo"<button class='btn btn-success btn-sm'>Approve</button>";
-                            echo"<button class='btn btn-warning btn-sm' data-bs-toggle='modal' data-bs-target='#rescheduleModal' data-id='".$row['id']."'>Reschedule</button>";
-                            echo"</td>";
+                            echo "<td>";
+                            echo "<button class='btn btn-success btn-sm me-2 mb-2' onclick='approveBlotter(".$row['id'].")' ".($row['status'] == 'approved' ? 'disabled' : '').">Approve</button>";
+                            echo "<button class='btn btn-danger btn-sm me-2 mb-2' onclick='disapproveBlotter(".$row['id'].")' data-bs-toggle='modal' data-id='".$row['id']."' ".($row['status'] == 'reject' ? 'disabled' : '').">Reject</button>";
+                            echo "<button class='btn btn-warning btn-sm mb-2' data-bs-toggle='modal' data-bs-target='#editDetail' onclick = 'setUrl(".$row['id'].")' data-id='".$row['id']."'>Reschedule</button>";
+                            echo "</td>";
                             echo"</tr>";
                           }
                         ?>
@@ -110,65 +112,9 @@ $blotter = getAllBlotter();
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid border p-3">
-                        <form action="" method = "POST" id = "editBlotter">
-                         
-                        </form>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    
-    <!-- View Detail Modal -->
-    <div class="modal" id="viewDetail">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Report Details</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid border p-3">
-                        <p>Barangay: Sinbanali</p>
-                        <p>Purok: <span id="purok">1</span></p>
-                        <p>Place of the Incident: <span id="incidentPlace"></span></p>
-                        <p>Date & Time: <span id="date"></span></p>
-                        <p>Complainant: <span id="complainant"></span></p>
-                        <p>Witness 1: <span  id="first_witness"></span></p>
-                        <p>Witness 2: <span id="second_witness"></span></p>
-                        <p>Narrative: <span id="narrative"></span></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-
-    <!-- Create Report -->
-     <div class="modal" id="createReport">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Create Report</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid p-3">
-                        <h3>New Cases</h3>
-                        <form action="../../controllers/addBlotterController.php" method="POST">
-                            <div class="form-group">
-                                <label>Time Of Accident</label>
-                                <input type="time" class="form-control" name = "time_of_accident"  required>
-                            </div>
-
-                            <div class="form-group mt-2">
-                                <label>Place Of Incident</label>
-                                <input type="text" name = "place_of_accident" class="form-control" required>
-                            </div>
-
-                            <div class="form-group mt-2">
+                        <form action="../../controllers/reschedBlotter.php" method = "POST" id = "editBlotter">
+                            <input type="hidden" name = "id" id = "id"> 
+                         <div class="form-group mt-2">
                                 <label>Select Date Schedule</label>
                                 <input type="date" name = "date_schedule" class="form-control" required>
                             </div>
@@ -177,52 +123,24 @@ $blotter = getAllBlotter();
                                 <label>Meeting Time</label>
                                 <input type="time" name = "meeting_time" id = "date_selected" class="form-control" required>
                             </div>
+                <button class='btn btn-warning btn-sm' >Reschedule</button>
 
-                            <div class="form-group mt-2">
-                                <label>Description</label>
-                                <textarea name="description" class="form-control"  required></textarea>    
-                            </div>
-
-                           
-                            <div class="form-group mt-2 d-flex justify-content-end">
-                                <button class="btn btn-sm btn-success">Report</button>
-                            </div>
                         </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-     </div>
 
-    <!-- Reschedule Modal -->
-    <div class="modal" id="rescheduleModal">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Reschedule Meeting</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid p-3">
-                        <form action="../../controllers/rescheduleBlotterController.php" method="POST">
-                            <input type="hidden" name="blotter_id" id="blotter_id">
-                            <div class="form-group">
-                                <label>Select New Date</label>
-                                <input type="date" name="new_date" class="form-control" required>
-                            </div>
-                            <div class="form-group mt-2">
-                                <label>Select New Time</label>
-                                <input type="time" name="new_time" class="form-control" required>
-                            </div>
-                            <div class="form-group mt-2 d-flex justify-content-end">
-                                <button class="btn btn-sm btn-warning">Reschedule</button>
-                            </div>
-                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    
+
+    
+
+    
+
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -284,13 +202,22 @@ $blotter = getAllBlotter();
         var table = $('#example').DataTable();
         table.column(2).search(filterValue === 'all' ? '' : filterValue, true, false).draw();
     });
+  function approveBlotter(id){
+    const api = fetch(`../../controllers/blotterOptions.php?id=${id}&action=approve`);
+    location.reload();
 
-    $('#rescheduleModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget);
-        var blotterId = button.data('id');
-        var modal = $(this);
-        modal.find('#blotter_id').val(blotterId);
-    });
+  }
+    function disapproveBlotter(id){
+    const api = fetch(`../../controllers/blotterOptions.php?id=${id}&action=disapprove`);
+ 
+            location.reload();
+    
+   
+    }
+    function setUrl(id){
+       document.getElementById('id').value = id;
+       
+    }
 
     </script>
 

@@ -2,6 +2,7 @@
 session_start();
 date_default_timezone_set('Asia/Manila');
 include '../database/databaseConnection.php';
+var_dump($_SESSION['user_id']);
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     $time_of_accident = $_POST['time_of_accident'];
     $place_of_accident = $_POST['place_of_accident'];
@@ -10,7 +11,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $description = $_POST['description'];   
     $current_time = date("h:i:s A");
     $qry = "INSERT INTO `blotter_tbl`( `resident_id`, `time_of_accident`, `place_of_accident`, `date_schedule`, `meeting_time`, `description`,`status`, `time`)
-     VALUES (?,?,?,?,?,?,'active',NOW())";
+     VALUES (?,?,?,?,?,?,'pending',NOW())";
 
     $stmt = $conn->prepare($qry);
     $stmt->bindParam(1,$_SESSION['user_id']);
