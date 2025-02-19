@@ -9,7 +9,7 @@ $mail = new PHPMailer(true);
 if($_SERVER['REQUEST_METHOD'] == "POST"){
    $email = $_POST['email'];
    if(!checkIfEmailInDb($email)){
-         header("Location: ../views/residents/residentLogin .php?error=1");    
+         header("Location: ../views/residents/residentLogin.php?error=1");    
          return;
    }
    $otp = rand(100000,999999);
