@@ -88,8 +88,8 @@
     if(params.get('error') == 1){
       alert("Email not found");
       const url = new URL(window.location);
-            url.searchParams.delete('success');
-            window.history.replaceState({}, document.title, url);
+      url.searchParams.delete('error');
+        window.history.replaceState({}, document.title, url);
       
     }
 </script>
