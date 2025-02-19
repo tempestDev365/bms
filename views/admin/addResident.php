@@ -250,6 +250,14 @@ if(!isset($_SESSION['admin'])) {
 
         // Set max date for birthdate to today
         document.getElementById('birthdate').setAttribute('max', new Date().toISOString().split('T')[0]);
+
+        // Prevent symbols in all text fields
+        const textFields = document.querySelectorAll('input[type="text"]');
+        textFields.forEach(input => {
+            input.addEventListener('input', function(event) {
+                this.value = this.value.replace(/[^a-zA-Z0-9\s]/g, '');
+            });
+        });
     </script>
 
     
