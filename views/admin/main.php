@@ -32,6 +32,8 @@ function getAllDemographic(){
     $revenue_count_qry = "SELECT SUM(amount) as revenue_count FROM revenue_tbl";
     $stmt = $conn->prepare($revenue_count_qry);
     $stmt->execute();
+    $revenue_count = $stmt->fetch();
+
     return [
         'resident_count' => $resident_count['resident_count'],
         'female_count' => $female_count['female_count'],
@@ -44,6 +46,7 @@ function getAllDemographic(){
 
 
 }
+
 $demographic = getAllDemographic();
 ?>
 <!DOCTYPE html>

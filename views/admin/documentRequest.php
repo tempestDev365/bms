@@ -374,50 +374,48 @@ $document_request = getAllDocumentRequest();
         const resident_id = params.get('resident_id') ? params.get('resident_id') : params.get('id');
         const search = params.get('resident_id') ? 'resident_id' : 'id';
 
-        const baseURL = "../documents/";
-            switch(documentSelected){
-                case 'BARANGAYCLEARANCE':
+               const baseURL = "../documents/";
+        switch(documentSelected){
+            case 'BARANGAYCLEARANCE':
                 window.location.href = `${baseURL}barangayClearance.php?${search}=${resident_id}`;
-                 break;
-                case 'CERTIFICATE':
+                break;
+            case 'CERTIFICATE':
                 window.location.href = `${baseURL}barangayCertificate.php?${search}=${resident_id}`;
                 break;
-                case 'INDIGENCY':
-                window.location.href = `${baseURL}barangayIndigency.php?resident_id=${resident_id}`;
+            case 'INDIGENCY':
+                window.location.href = `${baseURL}barangayIndigency.php?${search}=${resident_id}`;
                 break;
-                case 'D.CERTIFICATE':
-                window.location.href = `${baseURL}certificateDeath.php?resident_id=${resident_id}`;
+            case 'D.CERTIFICATE':
+                window.location.href = `${baseURL}certificateDeath.php?${search}=${resident_id}`;
                 break;
-                case 'RESIDENT':
-                window.location.href = `${baseURL}certificateResident.php?resident_id=${resident_id}`;
+            case 'RESIDENT':
+                window.location.href = `${baseURL}certificateResident.php?${search}=${resident_id}`;
                 break;
-                case 'NON-RESIDENT':
-                window.location.href = `${baseURL}certificateNonResident.php?resident_id=${resident_id}`;
+            case 'NON-RESIDENT':
+                window.location.href = `${baseURL}certificateNonResident.php?${search}=${resident_id}`;
                 break;
-                case 'B.PERMIT':
-                window.location.href = `${baseURL}businessPermit.php?resident_id=${resident_id}`;
+            case 'B.PERMIT':
+                window.location.href = `${baseURL}businessPermit.php?${search}=${resident_id}`;
                 break;
-                case 'GUARDIANSHIP':
-                window.location.href = `${baseURL}certificateGuardian.php?resident_id=${resident_id}`;
+            case 'GUARDIANSHIP':
+                window.location.href = `${baseURL}certificateGuardian.php?${search}=${resident_id}`;
                 break;
-                case 'DISASTER':
-                window.location.href = `${baseURL}certificateDisaster.php?resident_id=${resident_id}`;
+            case 'DISASTER':
+                window.location.href = `${baseURL}certificateDisaster.php?${search}=${resident_id}`;
                 break;
-                case 'RELATIONSHIP':
-                window.location.href = `${baseURL}certificateRelationship.php?resident_id=${resident_id}`;
+            case 'RELATIONSHIP':
+                window.location.href = `${baseURL}certificateRelationship.php?${search}=${resident_id}`;
                 break;
-                case 'J.SEEKER':
-                window.location.href = `${baseURL}firstTimeJob.php?resident_id=${resident_id}`;
+            case 'J.SEEKER':
+                window.location.href = `${baseURL}firstTimeJob.php?${search}=${resident_id}`;
                 break;
-                case 'N.INCOME':
-                window.location.href = `${baseURL}noSourceOfIncome.php?resident_id=${resident_id}`;
+            case 'N.INCOME':
+                window.location.href = `${baseURL}noSourceIncome.php?${search}=${resident_id}`;
                 break;
-                case 'S,P.CERTIFICATE':
-                window.location.href = `${baseURL}singleParent.php?resident_id=${resident_id}`;
+            case 'S,P.CERTIFICATE':
+                window.location.href = `${baseURL}singleParent.php?${search}=${resident_id}`;
                 break;
-         }
-
-     });
+        }
      const filter = document.getElementById('statusFilter');
     </script>
 </body>

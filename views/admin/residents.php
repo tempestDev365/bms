@@ -241,7 +241,12 @@ $resident_result = $stmt->fetchAll();
             response.resident_house_number, response.resident_purok, response.resident_full_address, response.resident_street, response.resident_hoa, response.resident_employment_status, response.resident_employment_field, response.resident_occupation, response.resident_monthly_income);
        }
  
-    
+     function setUrlId(id){
+    const currentURL  = new URL(window.location.href);
+    currentURL.searchParams.delete('resident_id');
+    currentURL.searchParams.set('resident_id', id);
+    window.history.pushState({}, '', currentURL);
+}
 function populateModal(picture, signature, valid_id, fullName, sex, birthdate, birthplace, civilStatus, height, weight, bloodType, religion, ethnicOrigin, nationality, precinctNumber, registeredVoter, organizationMember, email, mobileNumber, telNo, emergencyFullName, emergencyContactNumber, emergencyAddress, mother, father, spouse, highestEducation, typeOfSchool, houseNumber, purok, fullAddress, street, hoa, employmentStatus, employmentField, occupation, monthlyIncome) {
     document.querySelector('.picture').src = "data:image/gif;base64," + picture;
     document.querySelector('.signature').src = "data:image/gif;base64," + signature;
@@ -282,12 +287,7 @@ function populateModal(picture, signature, valid_id, fullName, sex, birthdate, b
     document.getElementById('monthlyIncome').textContent = `Monthly Income: ${monthlyIncome}`;
 }
 // ssets thee url to the resident id for the document printing
-async function setUrlId(id){
-    const currentURL  = new URL(window.location.href);
-    currentURL.searchParams.delete('resident_id');
-    currentURL.searchParams.set('resident_id', id);
-    window.history.pushState({}, '', currentURL);
-}
+
 //goes to the document to print
 const printDocu = () => {
     const documentSelected = document.getElementById('documentOption').value;
@@ -295,51 +295,48 @@ const printDocu = () => {
         const params = new URLSearchParams(window.location.search);
         const resident_id = params.get('resident_id');
         const baseURL = "../documents/";
-            switch(documentSelected){
-                case 'BARANGAYID':
-                window.location.href = `${baseURL}barangayId.php?resident_id=${resident_id}`;
-                break;
-                case 'BARANGAYCLEARANCE':
+        switch(documentSelected){
+            case 'BARANGAYCLEARANCE':
                 window.location.href = `${baseURL}barangayClearance.php?resident_id=${resident_id}`;
-                 break;
-                case 'CERTIFICATE':
+                break;
+            case 'CERTIFICATE':
                 window.location.href = `${baseURL}barangayCertificate.php?resident_id=${resident_id}`;
                 break;
-                case 'INDIGENCY':
+            case 'INDIGENCY':
                 window.location.href = `${baseURL}barangayIndigency.php?resident_id=${resident_id}`;
                 break;
-                case 'D.CERTIFICATE':
+            case 'D.CERTIFICATE':
                 window.location.href = `${baseURL}certificateDeath.php?resident_id=${resident_id}`;
                 break;
-                case 'RESIDENT':
+            case 'RESIDENT':
                 window.location.href = `${baseURL}certificateResident.php?resident_id=${resident_id}`;
                 break;
-                case 'NON-RESIDENT':
+            case 'NON-RESIDENT':
                 window.location.href = `${baseURL}certificateNonResident.php?resident_id=${resident_id}`;
                 break;
-                case 'B.PERMIT':
+            case 'B.PERMIT':
                 window.location.href = `${baseURL}businessPermit.php?resident_id=${resident_id}`;
                 break;
-                case 'GUARDIANSHIP':
+            case 'GUARDIANSHIP':
                 window.location.href = `${baseURL}certificateGuardian.php?resident_id=${resident_id}`;
                 break;
-                case 'DISASTER':
+            case 'DISASTER':
                 window.location.href = `${baseURL}certificateDisaster.php?resident_id=${resident_id}`;
                 break;
-                case 'RELATIONSHIP':
+            case 'RELATIONSHIP':
                 window.location.href = `${baseURL}certificateRelationship.php?resident_id=${resident_id}`;
                 break;
-                case 'J.SEEKER':
+            case 'J.SEEKER':
                 window.location.href = `${baseURL}firstTimeJob.php?resident_id=${resident_id}`;
                 break;
-                case 'N.INCOME':
-                window.location.href = `${baseURL}noSourceOfIncome.php?resident_id=${resident_id}`;
+            case 'N.INCOME':
+                window.location.href = `${baseURL}noSourceIncome.php?resident_id=${resident_id}`;
                 break;
-                case 'S,P.CERTIFICATE':
+            case 'S,P.CERTIFICATE':
                 window.location.href = `${baseURL}singleParent.php?resident_id=${resident_id}`;
                 break;
-         }
-}
+        }
+    }
 // deletes the resident from the database
 const deleteResident = (id) => {
    const confirmDelete = confirm('Are you sure you want to delete this resident?');

@@ -9,14 +9,13 @@ if(!isset($_SESSION['admin'])) {
 function getAllConcerns(){
     include_once "../../database/databaseConnection.php";
     $conn = $GLOBALS['conn'];
-    $sql = "SELECT c.*, r.first_name, r.last_name, r.middle_name 
-    FROM concerns_tbl c
-    JOIN residents_tbl r ON c.resident_id = r.id";
+   $sql  = "SELECT  c.id as concerns_id,c.*, r.* FROM concerns_tbl c LEFT JOIN residents_information r ON c.resident_id = r.id";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     return $stmt->fetchAll();
+
 }
-$allConcerns = getAllConcerns();
+$allConcerns = getAllConcerns(); 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,7 +71,7 @@ $allConcerns = getAllConcerns();
                             <td><?= $concern['first_name'] . ' ' . $concern['middle_name'] . ' ' . $concern['last_name'] ?></td>
                             <td><?= $concern['concern_message'] ?></td>
                             <td>
-                                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#viewConcern" onclick="viewConcern(<?= $concern['id'] ?>)" id ="viewBtn ">View</button>
+                                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#viewConcern" onclick="viewConcern(<?= $concern['concerns_id'] ?>)" id ="viewBtn ">View</button>
                             </td>
 
                         </tr>

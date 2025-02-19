@@ -225,8 +225,7 @@ if(isset($other_id)){
                             <label>Birthday: <?php echo $resident_information['resident_birthdate']  ?></label>
                             <label>Gender:  <?php echo $resident_information['resident_sex']  ?></label>
                             <label>Civil Status: <?php echo $resident_information['resident_civil_status']  ?></label>
-                            <label>Nationality:  <?php echo $resident_information['resident_nationality']  ?></label>
-                            <label>Precinct:  <?php echo $resident_information['resident_precint_number']  ?></label>
+                       
                         </div>
                     </div>
 
