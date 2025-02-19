@@ -50,7 +50,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $nationality = $_POST['nationality'] ?? "";
     $registered_voter = $_POST['registered_voter'] ?? "";
     $organization_member = $_POST['organization_member'] ?? [];
-    $org_member = "";
     if (is_array($organization_member)) {
         foreach ($organization_member as $org) {
             $org_member .= $org . ", ";

@@ -10,7 +10,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $age = $_POST['age'] ?? "";
     $suffix = $_POST['suffix'] ?? "";
     $sex = $_POST['sex'] ?? "";
-    $birthday = $_POST['birthday'] ?? "";
+    $birthday = $_POST['birthdate'] ?? "";
     $civil_status = $_POST['civil_status'] ?? "";
     $height = $_POST['height'] ?? "";
     $weight = $_POST['weight'] ?? "";
@@ -135,7 +135,7 @@ $stmt3->bindParam(':type_of_school', $type_of_school, PDO::PARAM_STR);
 $stmt3->bindParam(':occupation', $occupation, PDO::PARAM_STR);
 $stmt3->bindParam(':time_Created', $time_Created, PDO::PARAM_STR);
 $stmt3->execute();
-header('../views/admin/residents.php');
+    exit();
 }
 
    
