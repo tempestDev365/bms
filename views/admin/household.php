@@ -56,7 +56,7 @@ include_once "../../database/databaseConnection.php";
                         </thead>
                         <tbody>
                             <?php foreach($household as $house): ?>
-                                <tr onclick="viewMembers(<?php echo $house['house_number']; ?>, '<?php echo $house['purok']; ?>')">
+                                <tr onclick="viewMembers('<?php echo $house['house_number']; ?>', '<?php echo $house['purok']; ?>')">
                                     <td><?php echo $house['house_number']; ?></td>
                                     <td><?php echo $house['total_household']; ?></td>
                                     <td><?php echo $house['purok']; ?></td>
