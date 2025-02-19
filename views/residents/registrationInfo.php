@@ -340,6 +340,10 @@ $email = $_GET['email'];
             input.addEventListener('input', () => validateForm('form1', 'next1'));
         });
 
+        document.querySelectorAll('#form1 select[name="sex"]').forEach(select => {
+            select.addEventListener('change', () => validateForm('form1', 'next1'));
+        });
+
         document.querySelectorAll('#form2 input[required], #form2 select[required]').forEach(input => {
             input.addEventListener('input', () => validateForm('form2', 'next2'));
         });
