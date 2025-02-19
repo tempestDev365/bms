@@ -82,8 +82,8 @@ if(!isset($_SESSION['admin'])) {
                                         <label>Middle Name:</label>
                                         <input type="text" class="form-control" id="middle_name" name="middle_name" value="<?php echo $resident_information['resident_information']['middle_name'] ?? ''; ?>">
                                         <div class="d-flex">
-                                            <input type="checkbox" class="form-check-input" id="no_middle_name" name="no_middle_name" value="N/A" onchange="toggleMiddleName()">
-                                            <label for="no_middle_name">No Middle Name</label>
+                                            <input type="checkbox" class="form-check-input" id="middle_name" name="middle_name" value="N/A">
+                                            <label for="">No Middle Name</label>
                                         </div>
                                         </div>
                                         <label>Last Name:</label>
@@ -168,7 +168,7 @@ if(!isset($_SESSION['admin'])) {
                                             <input type="text" class="form-control" id="type_of_school" name="type_of_school" value="<?php echo $resident_information['additional_information']['type_of_school'] ?? ''; ?>">
                                             <h4 class="mt-2">Contact Information</h4>
                                             <label>Phone Number:</label>
-                                            <input type=" number" maxlength="11" class="form-control" id="mobile_no" name="mobile_no" value="<?php echo $resident_information['contact_information']['phone_number'] ?? ''; ?>"
+                                            <input type=" number" maxlength="11" class="form-control" id="mobile_no" name="mobile_no" value="<?php echo $resident_information['contact_information']['phone_number'] ?? ''; ?>">
                                             <label>Tel No.:</label>
                                             <input type=" number" maxlength="11" class="form-control" id="tel_no" name="tel_no" value="<?php echo $resident_information['contact_information']['tel_no'] ?? ''; ?>">
                                         </div>
@@ -265,21 +265,13 @@ if(!isset($_SESSION['admin'])) {
             });
         });
 
-        function toggleMiddleName() {
-            const middleNameInput = document.getElementById('middle_name');
-            const noMiddleNameCheckbox = document.getElementById('no_middle_name');
-            if (noMiddleNameCheckbox.checked) {
-                middleNameInput.disabled = true;
-                middleNameInput.value = 'N/A';
-            } else {
-                middleNameInput.disabled = false;
-                middleNameInput.value = '';
-            }
-        }
+        // Ensure phone number and tel number inputs accept only numbers
+        document.getElementById('mobile_no').addEventListener('input', function(event) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
 
-        // Initialize the middle name input state on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            toggleMiddleName();
+        document.getElementById('tel_no').addEventListener('input', function(event) {
+            this.value = this.value.replace(/[^0-9]/g, '');
         });
     </script>
 
