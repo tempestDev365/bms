@@ -101,20 +101,17 @@ if(!isset($_SESSION['admin'])) {
                                         <label>Birth Place:</label>
                                         <input type="text" class="form-control" id="birthplace" name="birthplace" value="<?php echo $resident_information['personal_information']['birth_place'] ?? ''; ?>">
                                         <label>Height:</label>
-                                        <input type="text" class="form-control" id="height" name="height" value="<?php echo $resident_information['personal_information']['height'] ?? ''; ?>">
+                                        <input type="number" class="form-control" id="height" name="height" value="<?php echo $resident_information['personal_information']['height'] ?? ''; ?>">
                                         <label>Weight:</label>
-                                        <input type="text" class="form-control" id="weight" name="weight" value="<?php echo $resident_information['personal_information']['weight'] ?? ''; ?>">
+                                        <input type="number" class="form-control" id="weight" name="weight" value="<?php echo $resident_information['personal_information']['weight'] ?? ''; ?>">
                                         <label>Blood Type:</label>
                                         <input type="text" class="form-control" id="blood_type" name="blood_type" value="<?php echo $resident_information['personal_information']['blood_type'] ?? ''; ?>">
                                         <label>Religion:</label>
                                         <input type="text" class="form-control" id="religion" name="religion" value="<?php echo $resident_information['personal_information']['religion'] ?? ''; ?>">
                                         <label>Nationality:</label>
                                         <input type="text" class="form-control" id="nationality" name="nationality" value="<?php echo $resident_information['personal_information']['nationality'] ?? ''; ?>">
-                                        <label>Registered Voters:</label>   
-                                        <select class="form-select" id="registered_voter" name="registered_voter">
-                                            <option value="YES">YES</option>
-                                            <option value="NO" >NO</option>
-                                        </select>
+                                        <label>Registered Voters:</label>
+                                        <input type="text" class="form-control" id="registered_voter" name="registered_voter" value="<?php echo $resident_information['personal_information']['registered_voter'] ?? ''; ?>">
                                         <label>Organization Member:</label>
                                         <div class="form-group">
     <div class="form-check">
@@ -165,9 +162,9 @@ if(!isset($_SESSION['admin'])) {
                                             <input type="text" class="form-control" id="type_of_school" name="type_of_school" value="<?php echo $resident_information['additional_information']['type_of_school'] ?? ''; ?>">
                                             <h4 class="mt-2">Contact Information</h4>
                                             <label>Phone Number:</label>
-                                            <input type="text" class="form-control" id="mobile_no" name="mobile_no" value="<?php echo $resident_information['contact_information']['phone_number'] ?? ''; ?>"
+                                            <input type=" number" maxlength="11" class="form-control" id="mobile_no" name="mobile_no" value="<?php echo $resident_information['contact_information']['phone_number'] ?? ''; ?>"
                                             <label>Tel No.:</label>
-                                            <input type="text" class="form-control" id="tel_no" name="tel_no" value="<?php echo $resident_information['contact_information']['tel_no'] ?? ''; ?>">
+                                            <input type=" number" maxlength="11" class="form-control" id="tel_no" name="tel_no" value="<?php echo $resident_information['contact_information']['tel_no'] ?? ''; ?>">
                                         </div>
                   
                                 </div>
@@ -211,11 +208,12 @@ if(!isset($_SESSION['admin'])) {
                 reader.readAsDataURL(file);
             }
         }
-        // Prevent number input for specific text fields
-        const textFields = ['firstName', 'middleName', 'lastName', 'suffix', 'alias', 'salutation'];
-        textFields.forEach(id => {
-            document.getElementById(id).addEventListener('input', function(event) {
-                this.value = this.value.replace(/[0-9]/g, '');
+
+        // Prevent symbols in all input fields
+        const inputFields = document.querySelectorAll('input[type="text"], input[type="number"], input[type="date"]');
+        inputFields.forEach(input => {
+            input.addEventListener('input', function(event) {
+                this.value = this.value.replace(/[^a-zA-Z0-9\s]/g, '');
             });
         });
 
@@ -235,6 +233,19 @@ if(!isset($_SESSION['admin'])) {
                 age--;
             }
             document.getElementById('age').value = age;
+        });
+
+        // Limit height and weight to 5 digits
+        document.getElementById('height').addEventListener('input', function(event) {
+            if (this.value.length > 5) {
+                this.value = this.value.slice(0, 5);
+            }
+        });
+
+        document.getElementById('weight').addEventListener('input', function(event) {
+            if (this.value.length > 5) {
+                this.value = this.value.slice(0, 5);
+            }
         });
     </script>
 
