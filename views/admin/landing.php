@@ -9,20 +9,7 @@ function getAllAnnouncement(){
     return $announcement;
 }
 
-function getComments($announcement_id){
-    $conn = $GLOBALS['conn'];
-    $qry = "SELECT c.*,r.first_name, r.middle_name, r.last_name
-       
-     FROM comments_tbl c
-     JOIN residents_tbl r ON c.resident_id = r.id
 
-     WHERE announcement_id = ?";
-    $stmt = $conn->prepare($qry);
-    $stmt->bindParam(1, $announcement_id);
-    $stmt->execute();
-    $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return $comments;
-}
 $announcements = getAllAnnouncement();
 
 ?>
@@ -101,25 +88,7 @@ $announcements = getAllAnnouncement();
         </div>
     </main>
 
-    <section class="p-4 bg-white" id="announcement">
-        <h2>Announcement</h2>
-        <div class="announcement-container border">
-            <!--announcement here-->
-          <?php
-                    foreach($announcements as $announcement){
-                      
-                        $comments = getComments($announcement['id']);
-                        echo "
-                        <div class='card-header'>
-                        <p>Title: {$announcement['title']}</p>
-                    </div>
-                    <div class='card-body'>
-                        <p>Content:{$announcement['content']}</p>
-                    </div>";
-                    }
-                    ?>
-        </div>
-    </section>
+ 
 
     <section class="p-4 bg-light" id="about">
         <div class="about-title h2 text-center">
