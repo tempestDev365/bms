@@ -141,6 +141,7 @@ $demographic = getAllDemographic();
 
                  <!--Household Card-->
                
+                 <a href="./household.php">
                     <div class="card" style="max-width: 350px; width: 350px;">
                     <div class="card-body d-flex justify-content-between align-items-center flex-column">
                         <div class="card-content">
@@ -152,6 +153,7 @@ $demographic = getAllDemographic();
                         </div>
                     </div>
                 </div>
+                </a>
                  
 
                <!--Resident Card-->
