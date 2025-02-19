@@ -41,20 +41,23 @@ if(!isset($_SESSION['admin'])) {
                     <div class=" d-flex justify-content-center align-items-center" style="gap: 10px;">
                         
                     <div class="form-group d-flex flex-column justify-content-center align-items-center"> 
-                        <img id="picturePreview" src="#" alt="Resident Picture Preview" style="display:none; max-width: 400px; max-height: 400px;" class="img-fluid border shadow-sm rounded-3">
-
+                    <div class="border rounded-3 shadow-sm" id="picturePreview" style="max-width: 500px; max-height: 400px; height: 400px; width: 500px; display: flex; justify-content: center; align-items: center;">
+                                <img id="picturePreviewImg" style="max-width: 100%; max-height: 100%; display: none;">
+                            </div>
                         <div>
                             <label>Resident Picture:</label>
-                            <input type="file" class="form-control" id="picture" name="picture" onchange="previewImage(event, 'picturePreview')">
+                            <input type="file" class="form-control" id="picture" name="picture" onchange="previewImage(event, 'picturePreviewImg')">
                         </div>
                     </div>
 
                         
-                    <div class="form-group d-flex flex-column justify-content-center align-items-center">  
-                       <img id="validIdPreview" src="#" alt="Valid ID Preview" style="display:none; max-width: 400px; max-height: 400px;" class="img-fluid border shadow-sm rounded-3">
+                    <div class="form-group d-flex flex-column justify-content-center align-items-center"> 
+                    <div class="border rounded-3 shadow-sm" id="validIdPreview" style="max-width: 500px; max-height: 400px; height: 400px; width: 500px; display: flex; justify-content: center; align-items: center;">
+                                <img id="validIdPreviewImg" style="max-width: 100%; max-height: 100%; display: none;">
+                            </div>
                         <div>
                             <label>Valid ID:</label>
-                            <input type="file" class="form-control" id="valid_id" name="valid_id" onchange="previewImage(event, 'validIdPreview')">
+                            <input type="file" class="form-control" id="valid_id" name="valid_id" onchange="previewImage(event, 'validIdPreviewImg')">
                         </div>
                     </div>
                         
@@ -184,11 +187,11 @@ if(!isset($_SESSION['admin'])) {
     <script src="../components/sidebar.js?v=<?php echo time(); ?>" defer></script>
     <script>
       document.getElementById('picture').addEventListener('change', function(event) {
-            previewImage(event, 'picturePreview');
+            previewImage(event, 'picturePreviewImg');
         });
 
         document.getElementById('valid_id').addEventListener('change', function(event) {
-            previewImage(event, 'validIdPreview');
+            previewImage(event, 'validIdPreviewImg');
         });
 
         function previewImage(event, elementId) {

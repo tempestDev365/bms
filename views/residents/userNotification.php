@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+var_dump($_SESSION);
 $count = 0;
 function getAllDocumentRequested($id){
     include_once "../../database/databaseConnection.php";
