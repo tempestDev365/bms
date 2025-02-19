@@ -126,9 +126,9 @@ if(!isset($_SESSION['admin'])) {
                                         <input type="text" class="form-control" id="street" name="street" value="<?php echo $resident_information['resident_information']['street'] ?? ''; ?>">
                                         <label>Birth Place:</label>
                                         <input type="text" class="form-control" id="birthplace" name="birthplace" value="<?php echo $resident_information['personal_information']['birth_place'] ?? ''; ?>">
-                                        <label>Height:</label>
+                                        <label>Height(CM):</label>
                                         <input type="number" class="form-control" id="height" name="height" value="<?php echo $resident_information['personal_information']['height'] ?? ''; ?>">
-                                        <label>Weight:</label>
+                                        <label>Weight(KG):</label>
                                         <input type="number" class="form-control" id="weight" name="weight" value="<?php echo $resident_information['personal_information']['weight'] ?? ''; ?>">
                                         <label>Blood Type:</label>
                                         <select class="form-control" id="blood_type" name="blood_type">

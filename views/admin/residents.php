@@ -240,38 +240,83 @@ $resident_result = $stmt->fetchAll();
                                         <input type="text" class="form-control" id="edit_first_name" name="first_name">
                                         <label>Middle Name:</label>
                                         <input type="text" class="form-control" id="edit_middle_name" name="middle_name">
+                                        <div class="d-flex">
+                                            <input type="checkbox" class="form-check-input" id="edit_no_middle_name" name="no_middle_name" value="N/A" onchange="toggleEditMiddleName()">
+                                            <label for="edit_no_middle_name">No Middle Name</label>
+                                        </div>
                                         <label>Last Name:</label>
                                         <input type="text" class="form-control" id="edit_last_name" name="last_name">
                                         <label>Suffix:</label>
-                                        <input type="text" class="form-control" id="edit_suffix" name="suffix">
+                                        <select class="form-control" id="edit_suffix" name="suffix">
+                                            <option value="Jr">Jr</option>
+                                            <option value="Senior">Senior</option>
+                                            <option value="II">II</option>
+                                            <option value="III">III</option>
+                                            <option value="IV">IV</option>
+                                            <option value="V">V</option>
+                                            <option value="N/A">N/A</option>
+                                        </select>
                                         <label>Sex:</label>
-                                        <input type="text" class="form-control" id="edit_sex" name="sex">
+                                        <select class="form-control" id="edit_sex" name="sex">
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
                                         <label>Age:</label>
                                         <input type="number" class="form-control" id="edit_age" name="age">
                                         <label>Date Of Birth:</label>
                                         <input type="date" class="form-control" id="edit_birthdate" name="birthdate">
                                         <label>Civil Status:</label>
-                                        <input type="text" class="form-control" id="edit_civil_status" name="civil_status">
+                                        <select class="form-control" id="edit_civil_status" name="civil_status">
+                                            <option value="Single">Single</option>
+                                            <option value="Married">Married</option>
+                                            <option value="Divorced">Divorced</option>
+                                            <option value="Widowed">Widowed</option>
+                                        </select>
                                         <label>Purok:</label>
-                                        <input type="text" class="form-control" id="edit_purok" name="purok">
+                                        <select class="form-control" id="edit_purok" name="purok">
+                                            <option value="Alima">Alima</option>
+                                            <option value="Banalo">Banalo</option>
+                                            <option value="Sineguelasan">Sineguelasan</option>
+                                        </select>
                                         <label>House Number:</label>
                                         <input type="text" class="form-control" id="edit_house_number" name="house_number">
                                         <label>Street:</label>
                                         <input type="text" class="form-control" id="edit_street" name="street">
-                                        <label>Birth Place:</label>
+                                        <label>Birth Place:</label> 
                                         <input type="text" class="form-control" id="edit_birthplace" name="birthplace">
-                                        <label>Height:</label>
+                                        <label>Height(CM):</label>
                                         <input type="number" class="form-control" id="edit_height" name="height">
-                                        <label>Weight:</label>
+                                        <label>Weight(KG):</label>
                                         <input type="number" class="form-control" id="edit_weight" name="weight">
                                         <label>Blood Type:</label>
-                                        <input type="text" class="form-control" id="edit_blood_type" name="blood_type">
+                                        <select class="form-control" id="edit_blood_type" name="blood_type">
+                                            <option value="A+">A+</option>
+                                            <option value="A-">A-</option>
+                                            <option value="B+">B+</option>
+                                            <option value="B-">B-</option>
+                                            <option value="AB+">AB+</option>
+                                            <option value="AB-">AB-</option>
+                                            <option value="O+">O+</option>
+                                            <option value="O-">O-</option>
+                                            <option value="N/A">N/A</option>
+                                        </select>
                                         <label>Religion:</label>
-                                        <input type="text" class="form-control" id="edit_religion" name="religion">
+                                        <select class="form-control" id="edit_religion" name="religion">
+                                            <option value="Catholic">Catholic</option>
+                                            <option value="Iglesia ni Cristo">Iglesia ni Cristo</option>
+                                            <option value="Aglipayan">Aglipayan</option>
+                                            <option value="Seventh-Day Adventist">Seventh-Day Adventist</option>
+                                            <option value="Christian">Christian</option>
+                                            <option value="Islam">Islam</option>
+                                            <option value="N/A">N/A</option>
+                                        </select>
                                         <label>Nationality:</label>
                                         <input type="text" class="form-control" id="edit_nationality" name="nationality">
                                         <label>Registered Voters:</label>
-                                        <input type="text" class="form-control" id="edit_registered_voter" name="registered_voter">
+                                        <select class="form-control" id="edit_registered_voter" name="registered_voter">
+                                            <option value="Yes">Yes</option>
+                                            <option value="No">No</option>
+                                        </select>
                                         <label>Organization Member:</label>
                                         <div class="form-group">
                                             <div class="form-check">
@@ -309,17 +354,29 @@ $resident_result = $stmt->fetchAll();
                                             <h4>Additional Information</h4>
                                         </div>
                                         <label>Employment Status:</label>
-                                        <input type="text" class="form-control" id="edit_employment_status" name="employment_status">
+                                        <select class="form-control" id="edit_employment_status" name="employment_status">
+                                            <option value="Employed">Employed</option>
+                                            <option value="Unemployed">Unemployed</option>
+                                            <option value="Self-Employed">Self-Employed</option>
+                                            <option value="Student">Student</option>
+                                            <option value="Retired">Retired</option>
+                                            <option value="N/A">N/A</option>
+                                        </select>
                                         <label>Employment Field:</label>
                                         <input type="text" class="form-control" id="edit_employment_field" name="employment_field">
                                         <label>Occupation:</label>
                                         <input type="text" class="form-control" id="edit_occupation" name="occupation">
                                         <label>Monthly Income:</label>
                                         <input type="text" class="form-control" id="edit_monthly_income" name="monthly_income">
-                                        <label>Higher Education Attainment:</label>
+                                        <label>Highest Education Attainment:</label>
                                         <input type="text" class="form-control" id="edit_highest_education" name="highest_education">
                                         <label>Type Of School:</label>
-                                        <input type="text" class="form-control" id="edit_type_of_school" name="type_of_school">
+                                        <select class="form-control" id="edit_type_of_school" name="type_of_school">
+                                            <option value="Public School">Public School</option>
+                                            <option value="Private">Private</option>
+                                            <option value="Alternative">Alternative</option>
+                                            <option value="N/A">N/A</option>
+                                        </select>
                                         <h4 class="mt-2">Contact Information</h4>
                                         <label>Phone Number:</label>
                                         <input type="number" maxlength="11" class="form-control" id="edit_mobile_no" name="mobile_no">
@@ -556,6 +613,23 @@ $resident_result = $stmt->fetchAll();
             document.getElementById('edit_cso').checked = user.organization_member.includes('CSO');
             document.getElementById('edit_ngo').checked = user.organization_member.includes('NGO');
         }
+
+        function toggleEditMiddleName() {
+            const middleNameInput = document.getElementById('edit_middle_name');
+            const noMiddleNameCheckbox = document.getElementById('edit_no_middle_name');
+            if (noMiddleNameCheckbox.checked) {
+                middleNameInput.value = 'N/A';
+                middleNameInput.disabled = true;
+            } else {
+                middleNameInput.value = '';
+                middleNameInput.disabled = false;
+            }
+        }
+
+        // Initialize the middle name input state on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            toggleEditMiddleName();
+        });
     </script>
 </body>
 </html>
