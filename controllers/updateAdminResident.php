@@ -77,7 +77,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $stmt->execute();
 
     $sql1 = "UPDATE residents_personal_information SET 
-        birth_place = :birth_place,
         height = :height,
         weight = :weight,
         blood_type = :blood_type,
@@ -90,7 +89,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     $stmt1 = $conn->prepare($sql1);
     $stmt1->bindParam(':id', $id, PDO::PARAM_STR);
-    $stmt1->bindParam(':birth_place', $birth_place, PDO::PARAM_STR);
     $stmt1->bindParam(':height', $height, PDO::PARAM_STR);
     $stmt1->bindParam(':weight', $weight, PDO::PARAM_STR);
     $stmt1->bindParam(':blood_type', $blood_type, PDO::PARAM_STR);
