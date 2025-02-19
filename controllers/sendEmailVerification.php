@@ -20,7 +20,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $mail->Password   = 'sdvp eyuo lten uqej';                               //SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
     $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
+    if(checkIfEmailInDb($email)){
+        echo "<script>alert('Email not found')</script>";
+        header("Location: ../views/residents/registrationVerifyEmail.php?error=1");
+        return;
+    }
     //Recipients
     $mail->setFrom('macoroljamaica0702@gmail.com', 'Admin');
 
@@ -35,7 +39,20 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $mail->send();
     $_SESSION['email'] = $email;
     echo "<script>alert('Email sent successfully')</script>";
-    header('Location: ../views/residents/registrationVerifyEmail.php');
+    header('Location: ../views/residents/registrationVerifyEmail.php?succes=1');
     
+}
+function checkIfEmailInDb($email){
+    include_once '../database/databaseConnection.php';
+    $qry = "SELECT * FROM residents_information WHERE email = ?";
+    $stmt = $conn->prepare($qry);
+    $stmt->bindParam(1,$email);
+    $stmt->execute();
+    $result = $stmt->fetch();
+    if($result){
+        return true;
+    }else{
+        return false;
+    }
 }
 ?>

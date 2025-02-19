@@ -9,7 +9,7 @@ $mail = new PHPMailer(true);
 if($_SERVER['REQUEST_METHOD'] == "POST"){
    $email = $_POST['email'];
    if(!checkIfEmailInDb($email)){
-         echo "Email not found";    
+         header("Location: ../views/residents/residentLogin .php?error=1");    
          return;
    }
    $otp = rand(100000,999999);
@@ -35,7 +35,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $_SESSION['otp'] = $otp;
     $_SESSION['email'] = $email;
     $mail->send();
-    header("Location: ../views/residents/otpVerificationLogin.php");
+    header("Location: ../views/residents/otpVerificationLogin.php?success=1");
 }
 function checkIfEmailInDb($email){
     include_once '../database/databaseConnection.php';

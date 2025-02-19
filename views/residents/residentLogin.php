@@ -73,8 +73,21 @@
     // types of error
     const params = new URLSearchParams(window.location.search); 
     if(params.get('success') == 1){
-        alert("Registration Successful! Please login to continue.");
-        window.history.replaceState({}, document.title, "/" + "bms/views/residents/residentLogin.php");
+        Swal.fire({
+            title: 'Check your email!',
+            text: 'Verify your email through the link we ve send you. Please check your spam folder to ensure the message was not filtered.',
+            icon: 'success',
+            confirmButtonColor: '#3085d6'
+        }).then(() => {
+            const url = new URL(window.location);
+            url.searchParams.delete('success');
+            window.history.replaceState({}, document.title, url);
+        });
+        
+    }
+    if(params.get('error') == 1){
+      alert("Email not found");
+      
     }
 </script>
 </body>

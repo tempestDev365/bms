@@ -49,12 +49,25 @@
     
         const params = new URLSearchParams(window.location.search);
         const error = params.get('error');
-        if (error == 1) {
+        const success = params.get('success');
+        if (success == 1) {
             Swal.fire({
                 title: 'Check your email!',
                 text: 'Verify your email through the link we ve send you. Please check your spam folder to ensure the message was not filtered.',
                 icon: 'success',
                 confirmButtonColor: '#3085d6'
+            }).then(() => {
+                const url = new URL(window.location);
+                url.searchParams.delete('error');
+                window.history.replaceState({}, document.title, url);
+            });
+        }
+        if (error == 1) {
+            Swal.fire({
+                title: 'Email already in use!',
+                text: 'The email you entered is not registered in our system. Please try again.',
+                icon: 'error',
+                confirmButtonColor: '#d33'
             }).then(() => {
                 const url = new URL(window.location);
                 url.searchParams.delete('error');
