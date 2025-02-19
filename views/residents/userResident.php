@@ -209,82 +209,170 @@ $resident_information = getAllResidentInformation($_SESSION['user_id']);
                         <div class="info-section mt-3">
                             <div class="box bg-white shadow-sm border rounded-3 p-3">
                                 <div class="box-body row">
-                                    <div class="personal-info col-md-12 col-lg-4 d-flex flex-column" style="gap: 5px;">
+                                    <div class="personal-info col-md-12 col-lg-6 d-flex flex-column" style="gap: 5px;">
                                         <div class="box-header">
                                             <h4>Personal Information</h4>
                                         </div>
-                                                                   <label>First Name:</label>
+                                        <label>First Name:</label>
                                         <input type="text" class="form-control" id="first_name" name="first_name" value="<?php echo $resident_information['resident_information']['first_name'] ?? ''; ?>">
-                                        <label>Middle Name:</label>
-                                        <input type="text" class="form-control" id="middle_name" name="middle_name" value="<?php echo $resident_information['resident_information']['middle_name'] ?? ''; ?>">
+                                        <div class="">
+                                            <label>Middle Name:</label>
+                                            <input type="text" class="form-control" id="middle_name" name="middle_name" value="<?php echo $resident_information['resident_information']['middle_name'] ?? ''; ?>">
+                                            <div class="d-flex">
+                                                <input type="checkbox" class="form-check-input" id="no_middle_name" name="no_middle_name" value="N/A" onchange="toggleMiddleName()">
+                                                <label for="no_middle_name">No Middle Name</label>
+                                            </div>
+                                        </div>
                                         <label>Last Name:</label>
                                         <input type="text" class="form-control" id="last_name" name="last_name" value="<?php echo $resident_information['resident_information']['last_name'] ?? ''; ?>">
                                         <label>Suffix:</label>
-                                        <input type="text" class="form-control" id="suffix" name="suffix" value="<?php echo $resident_information['resident_information']['suffix'] ?? ''; ?>">
+                                        <select class="form-control" id="suffix" name="suffix">
+                                            <option value="Jr" <?php echo (isset($resident_information['resident_information']['suffix']) && $resident_information['resident_information']['suffix'] == 'Jr') ? 'selected' : ''; ?>>Jr</option>
+                                            <option value="Senior" <?php echo (isset($resident_information['resident_information']['suffix']) && $resident_information['resident_information']['suffix'] == 'Senior') ? 'selected' : ''; ?>>Senior</option>
+                                            <option value="II" <?php echo (isset($resident_information['resident_information']['suffix']) && $resident_information['resident_information']['suffix'] == 'II') ? 'selected' : ''; ?>>II</option>
+                                            <option value="III" <?php echo (isset($resident_information['resident_information']['suffix']) && $resident_information['resident_information']['suffix'] == 'III') ? 'selected' : ''; ?>>III</option>
+                                            <option value="IV" <?php echo (isset($resident_information['resident_information']['suffix']) && $resident_information['resident_information']['suffix'] == 'IV') ? 'selected' : ''; ?>>IV</option>
+                                            <option value="V" <?php echo (isset($resident_information['resident_information']['suffix']) && $resident_information['resident_information']['suffix'] == 'V') ? 'selected' : ''; ?>>V</option>
+                                            <option value="N/A" <?php echo (isset($resident_information['resident_information']['suffix']) && $resident_information['resident_information']['suffix'] == 'N/A') ? 'selected' : ''; ?>>N/A</option>
+                                        </select>
+                                        <label>Sex:</label>
+                                        <select class="form-control" id="sex" name="sex">
+                                            <option value="Male" <?php echo (isset($resident_information['resident_information']['sex']) && $resident_information['resident_information']['sex'] == 'Male') ? 'selected' : ''; ?>>Male</option>
+                                            <option value="Female" <?php echo (isset($resident_information['resident_information']['sex']) && $resident_information['resident_information']['sex'] == 'Female') ? 'selected' : ''; ?>>Female</option>
+                                        </select>
                                         <label>Age:</label>
                                         <input type="number" class="form-control" id="age" name="age" value="<?php echo $resident_information['resident_information']['age'] ?? ''; ?>">
                                         <label>Date Of Birth:</label>
                                         <input type="date" class="form-control" id="birthdate" name="birthdate" value="<?php echo $resident_information['resident_information']['birthday'] ?? ''; ?>">
                                         <label>Civil Status:</label>
-                                        <input type="text" class="form-control" id="civil_status" name="civil_status" value="<?php echo $resident_information['resident_information']['civil_status'] ?? ''; ?>">
+                                        <select class="form-control" id="civil_status" name="civil_status">
+                                            <option value="Single" <?php echo (isset($resident_information['resident_information']['civil_status']) && $resident_information['resident_information']['civil_status'] == 'Single') ? 'selected' : ''; ?>>Single</option>
+                                            <option value="Married" <?php echo (isset($resident_information['resident_information']['civil_status']) && $resident_information['resident_information']['civil_status'] == 'Married') ? 'selected' : ''; ?>>Married</option>
+                                            <option value="Divorced" <?php echo (isset($resident_information['resident_information']['civil_status']) && $resident_information['resident_information']['civil_status'] == 'Divorced') ? 'selected' : ''; ?>>Divorced</option>
+                                            <option value="Widowed" <?php echo (isset($resident_information['resident_information']['civil_status']) && $resident_information['resident_information']['civil_status'] == 'Widowed') ? 'selected' : ''; ?>>Widowed</option>
+                                        </select>
                                         <label>Purok:</label>
-                                        <input type="text" class="form-control" id="purok" name="purok" value="<?php echo $resident_information['resident_information']['purok'] ?? ''; ?>">
+                                        <select class="form-control" id="purok" name="purok">
+                                            <option value="Alima" <?php echo (isset($resident_information['resident_information']['purok']) && $resident_information['resident_information']['purok'] == 'Alima') ? 'selected' : ''; ?>>Alima</option>
+                                            <option value="Banalo" <?php echo (isset($resident_information['resident_information']['purok']) && $resident_information['resident_information']['purok'] == 'Banalo') ? 'selected' : ''; ?>>Banalo</option>
+                                            <option value="Sineguelasan" <?php echo (isset($resident_information['resident_information']['purok']) && $resident_information['resident_information']['purok'] == 'Sineguelasan') ? 'selected' : ''; ?>>Sineguelasan</option>
+                                        </select>
                                         <label>House Number:</label>
                                         <input type="text" class="form-control" id="house_number" name="house_number" value="<?php echo $resident_information['resident_information']['house_number'] ?? ''; ?>">
                                         <label>Street:</label>
                                         <input type="text" class="form-control" id="street" name="street" value="<?php echo $resident_information['resident_information']['street'] ?? ''; ?>">
                                         <label>Birth Place:</label>
                                         <input type="text" class="form-control" id="birthplace" name="birthplace" value="<?php echo $resident_information['personal_information']['birth_place'] ?? ''; ?>">
-                                        <label>Height:</label>
-                                        <input type="text" class="form-control" id="height" name="height" value="<?php echo $resident_information['personal_information']['height'] ?? ''; ?>">
-                                        <label>Weight:</label>
-                                        <input type="text" class="form-control" id="weight" name="weight" value="<?php echo $resident_information['personal_information']['weight'] ?? ''; ?>">
+                                        <label>Height(CM):</label>
+                                        <input type="number" class="form-control" id="height" name="height" value="<?php echo $resident_information['personal_information']['height'] ?? ''; ?>">
+                                        <label>Weight(KG):</label>
+                                        <input type="number" class="form-control" id="weight" name="weight" value="<?php echo $resident_information['personal_information']['weight'] ?? ''; ?>">
                                         <label>Blood Type:</label>
-                                        <input type="text" class="form-control" id="blood_type" name="blood_type" value="<?php echo $resident_information['personal_information']['blood_type'] ?? ''; ?>">
+                                        <select class="form-control" id="blood_type" name="blood_type">
+                                            <option value="A+" <?php echo (isset($resident_information['personal_information']['blood_type']) && $resident_information['personal_information']['blood_type'] == 'A+') ? 'selected' : ''; ?>>A+</option>
+                                            <option value="A-" <?php echo (isset($resident_information['personal_information']['blood_type']) && $resident_information['personal_information']['blood_type'] == 'A-') ? 'selected' : ''; ?>>A-</option>
+                                            <option value="B+" <?php echo (isset($resident_information['personal_information']['blood_type']) && $resident_information['personal_information']['blood_type'] == 'B+') ? 'selected' : ''; ?>>B+</option>
+                                            <option value="B-" <?php echo (isset($resident_information['personal_information']['blood_type']) && $resident_information['personal_information']['blood_type'] == 'B-') ? 'selected' : ''; ?>>B-</option>
+                                            <option value="AB+" <?php echo (isset($resident_information['personal_information']['blood_type']) && $resident_information['personal_information']['blood_type'] == 'AB+') ? 'selected' : ''; ?>>AB+</option>
+                                            <option value="AB-" <?php echo (isset($resident_information['personal_information']['blood_type']) && $resident_information['personal_information']['blood_type'] == 'AB-') ? 'selected' : ''; ?>>AB-</option>
+                                            <option value="O+" <?php echo (isset($resident_information['personal_information']['blood_type']) && $resident_information['personal_information']['blood_type'] == 'O+') ? 'selected' : ''; ?>>O+</option>
+                                            <option value="O-" <?php echo (isset($resident_information['personal_information']['blood_type']) && $resident_information['personal_information']['blood_type'] == 'O-') ? 'selected' : ''; ?>>O-</option>
+                                            <option value="N/A" <?php echo (isset($resident_information['personal_information']['blood_type']) && $resident_information['personal_information']['blood_type'] == 'N/A') ? 'selected' : ''; ?>>N/A</option>
+                                        </select>
                                         <label>Religion:</label>
-                                        <input type="text" class="form-control" id="religion" name="religion" value="<?php echo $resident_information['personal_information']['religion'] ?? ''; ?>">
+                                        <select class="form-control" id="religion" name="religion">
+                                            <option value="Catholic" <?php echo (isset($resident_information['personal_information']['religion']) && $resident_information['personal_information']['religion'] == 'Catholic') ? 'selected' : ''; ?>>Catholic</option>
+                                            <option value="Iglesia ni Cristo" <?php echo (isset($resident_information['personal_information']['religion']) && $resident_information['personal_information']['religion'] == 'Iglesia ni Cristo') ? 'selected' : ''; ?>>Iglesia ni Cristo</option>
+                                            <option value="Aglipayan" <?php echo (isset($resident_information['personal_information']['religion']) && $resident_information['personal_information']['religion'] == 'Aglipayan') ? 'selected' : ''; ?>>Aglipayan</option>
+                                            <option value="Seventh-Day Adventist" <?php echo (isset($resident_information['personal_information']['religion']) && $resident_information['personal_information']['religion'] == 'Seventh-Day Adventist') ? 'selected' : ''; ?>>Seventh-Day Adventist</option>
+                                            <option value="Christian" <?php echo (isset($resident_information['personal_information']['religion']) && $resident_information['personal_information']['religion'] == 'Christian') ? 'selected' : ''; ?>>Christian</option>
+                                            <option value="Islam" <?php echo (isset($resident_information['personal_information']['religion']) && $resident_information['personal_information']['religion'] == 'Islam') ? 'selected' : ''; ?>>Islam</option>
+                                            <option value="N/A" <?php echo (isset($resident_information['personal_information']['religion']) && $resident_information['personal_information']['religion'] == 'N/A') ? 'selected' : ''; ?>>N/A</option>
+                                        </select>
                                         <label>Nationality:</label>
                                         <input type="text" class="form-control" id="nationality" name="nationality" value="<?php echo $resident_information['personal_information']['nationality'] ?? ''; ?>">
-                                        <select class="form-select" id="registered_voter" name="registered_voter">
-                                            <option value="YES" <?php echo $resident_information['personal_information']['registered_voter'] == "Yes" ? "selected": ""?>>YES</option>
-                                            <option value="NO" <?php echo $resident_information['personal_information']['registered_voter'] == "No" ? "selected": ""?>>NO</option>
+                                        <label>Registered Voters:</label>
+                                        <select class="form-control" id="registered_voter" name="registered_voter">
+                                            <option value="Yes" <?php echo (isset($resident_information['personal_information']['registered_voter']) && $resident_information['personal_information']['registered_voter'] == 'Yes') ? 'selected' : ''; ?>>Yes</option>
+                                            <option value="No" <?php echo (isset($resident_information['personal_information']['registered_voter']) && $resident_information['personal_information']['registered_voter'] == 'No') ? 'selected' : ''; ?>>No</option>
                                         </select>
                                         <label>Organization Member:</label>
-                                        <input type="text" class="form-control" id="organization_member" name="organization_member" value="<?php echo $resident_information['personal_information']['organization_member'] ?? ''; ?>">
-                                        </div>
-                                        <div class="other-info col-md-12 col-lg-4 d-flex flex-column" style="gap: 5px;">
-                                            <div class="contact-header">
-                                                <h4>Additional Information</h4>
+                                        <div class="form-group">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="organization_member[]" value="4PS" id="4ps">
+                                                <label class="form-check-label" for="4ps">4PS</label>
                                             </div>
-                                            <label>Employment Status:</label>
-                                            <input type="text" class="form-control" id="employment_status" name="employment_status" value="<?php echo $resident_information['additional_information']['employment_status'] ?? ''; ?>">
-                                            <label>Employment Field:</label>
-                                            <input type="text" class="form-control" id="employment_field" name="employment_field" value="<?php echo $resident_information['additional_information']['employment_field'] ?? ''; ?>">
-                                            <label>Occupation:</label>
-                                            <input type="text" class="form-control" id="occupation" name="occupation" value="<?php echo $resident_information['additional_information']['occupation'] ?? ''; ?>">
-                                            <label>Monthly Income:</label>
-                                            <input type="text" class="form-control" id="monthly_income" name="monthly_income" value="<?php echo $resident_information['additional_information']['monthly_income'] ?? ''; ?>">
-                                            <label>Higher Education Attainment:</label>
-                                            <input type="text" class="form-control" id="highest_education" name="highest_education" value="<?php echo $resident_information['additional_information']['highest_educational_attainment'] ?? ''; ?>">
-                                            <label>Type Of School:</label>
-                                            <input type="text" class="form-control" id="type_of_school" name="type_of_school" value="<?php echo $resident_information['additional_information']['type_of_school'] ?? ''; ?>">
-                                            <h4 class="mt-2">Contact Information</h4>
-                                            <label>Phone Number:</label>
-                                            <input type="text" class="form-control" id="mobile_no" name="mobile_no" value="<?php echo $resident_information['contact_information']['phone_number'] ?? ''; ?>">
-                                            <label>Email:</label>
-                                            <input type="text" class="form-control" id="email" name="email" value="<?php echo $resident_information['contact_information']['email'] ?? ''; ?>">
-                                            <label>Tel No.:</label>
-                                            <input type="text" class="form-control" id="tel_no" name="tel_no" value="<?php echo $resident_information['contact_information']['tel_no'] ?? ''; ?>">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="organization_member[]" value="SENIOR CITIZEN" id="senior_citizen">
+                                                <label class="form-check-label" for="senior_citizen">SENIOR CITIZEN</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="organization_member[]" value="PWD" id="pwd">
+                                                <label class="form-check-label" for="pwd">PWD</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="organization_member[]" value="SOLO PARENT" id="solo_parent">
+                                                <label class="form-check-label" for="solo_parent">SOLO PARENT</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="organization_member[]" value="HOA" id="hoa">
+                                                <label class="form-check-label" for="hoa">HOA</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="organization_member[]" value="CSO" id="cso">
+                                                <label class="form-check-label" for="cso">CSO</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="organization_member[]" value="NGO" id="ngo">
+                                                <label class="form-check-label" for="ngo">NGO</label>
+                                            </div>
                                         </div>
-                    <div class="other-info-2 col-md-12 col-lg-4 d-flex flex-column" style="gap: 5px;">
-                        <div class="contact-header">
-                            <h4>Images</h4>
-                        </div>
-                        <label>Resident Picture:</label>
-                        <input type="file" class="form-control" id="picture" name="picture">
-                        <label>Valid ID:</label>
-                        <input type="file" class="form-control" id="valid_id" name="valid_id">
-                    </div>
+                                    </div>
+                                    <div class="other-info col-md-12 col-lg-6 d-flex flex-column" style="gap: 5px;">
+                                        <div class="contact-header">
+                                            <h4>Additional Information</h4>
+                                        </div>
+                                        <label>Employment Status:</label>
+                                        <select class="form-control" id="employment_status" name="employment_status">
+                                            <option value="Employed" <?php echo (isset($resident_information['additional_information']['employment_status']) && $resident_information['additional_information']['employment_status'] == 'Employed') ? 'selected' : ''; ?>>Employed</option>
+                                            <option value="Unemployed" <?php echo (isset($resident_information['additional_information']['employment_status']) && $resident_information['additional_information']['employment_status'] == 'Unemployed') ? 'selected' : ''; ?>>Unemployed</option>
+                                            <option value="Self-Employed" <?php echo (isset($resident_information['additional_information']['employment_status']) && $resident_information['additional_information']['employment_status'] == 'Self-Employed') ? 'selected' : ''; ?>>Self-Employed</option>
+                                            <option value="Student" <?php echo (isset($resident_information['additional_information']['employment_status']) && $resident_information['additional_information']['employment_status'] == 'Student') ? 'selected' : ''; ?>>Student</option>
+                                            <option value="Retired" <?php echo (isset($resident_information['additional_information']['employment_status']) && $resident_information['additional_information']['employment_status'] == 'Retired') ? 'selected' : ''; ?>>Retired</option>
+                                            <option value="N/A" <?php echo (isset($resident_information['additional_information']['employment_status']) && $resident_information['additional_information']['employment_status'] == 'N/A') ? 'selected' : ''; ?>>N/A</option>
+                                        </select>
+                                        <label>Employment Field:</label>
+                                        <input type="text" class="form-control" id="employment_field" name="employment_field" value="<?php echo $resident_information['additional_information']['employment_field'] ?? ''; ?>">
+                                        <label>Occupation:</label>
+                                        <input type="text" class="form-control" id="occupation" name="occupation" value="<?php echo $resident_information['additional_information']['occupation'] ?? ''; ?>">
+                                        <label>Monthly Income:</label>
+                                        <input type="text" class="form-control" id="monthly_income" name="monthly_income" value="<?php echo $resident_information['additional_information']['monthly_income'] ?? ''; ?>">
+                                        <label>Highest Education Attainment :</label>
+                                        <input type="text" class="form-control" id="highest_education" name="highest_education" value="<?php echo $resident_information['additional_information']['highest_educational_attainment'] ?? ''; ?>">
+                                        <label>Type Of School:</label>
+                                        <select class="form-control" id="type_of_school" name="type_of_school">
+                                            <option value="Public School" <?php echo (isset($resident_information['additional_information']['type_of_school']) && $resident_information['additional_information']['type_of_school'] == 'Public School') ? 'selected' : ''; ?>>Public School</option>
+                                            <option value="Private" <?php echo (isset($resident_information['additional_information']['type_of_school']) && $resident_information['additional_information']['type_of_school'] == 'Private') ? 'selected' : ''; ?>>Private</option>
+                                            <option value="Alternative" <?php echo (isset($resident_information['additional_information']['type_of_school']) && $resident_information['additional_information']['type_of_school'] == 'Alternative') ? 'selected' : ''; ?>>Alternative</option>
+                                            <option value="N/A" <?php echo (isset($resident_information['additional_information']['type_of_school']) && $resident_information['additional_information']['type_of_school'] == 'N/A') ? 'selected' : ''; ?>>N/A</option>
+                                        </select>
+                                        <h4 class="mt-2">Contact Information</h4>
+                                        <label>Phone Number:</label>
+                                        <input type="number" maxlength="11" class="form-control" id="mobile_no" name="mobile_no" value="<?php echo $resident_information['contact_information']['phone_number'] ?? ''; ?>">
+                                        <label>Email:</label>
+                                        <input type="text" class="form-control" id="email" name="email" value="<?php echo $resident_information['contact_information']['email'] ?? ''; ?>">
+                                        <label>Tel No.:</label>
+                                        <input type="text" class="form-control" id="tel_no" name="tel_no" value="<?php echo $resident_information['contact_information']['tel_no'] ?? ''; ?>">
+                                    </div>
+                                    <div class="other-info-2 col-md-12 col-lg-4 d-flex flex-column" style="gap: 5px;">
+                                        <div class="contact-header">
+                                            <h4>Images</h4>
+                                        </div>
+                                        <label>Resident Picture:</label>
+                                        <input type="file" class="form-control" id="picture" name="picture">
+                                        <label>Valid ID:</label>
+                                        <input type="file" class="form-control" id="valid_id" name="valid_id">
+                                    </div>
                                 </div>
                             </div>
                         </div>
