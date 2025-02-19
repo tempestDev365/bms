@@ -3,7 +3,7 @@ $id = $_GET['id'] ?? null;
 function getAllResidentInformation($id){
     include '../database/databaseConnection.php';   
     $conn = $GLOBALS['conn'];
-    $sql = "SELECT r.*, ri.*, rc.*
+    $sql = "SELECT r.*, r.id as 'user_id', ri.*, rc.*
     FROM residents_information r
     LEFT JOIN residents_personal_information ri ON r.id = ri.resident_id
     LEFT JOIN residents_contact_information rc ON r.id = rc.resident_id
@@ -13,6 +13,7 @@ function getAllResidentInformation($id){
     $stmt->execute();
     $result = $stmt->fetch();
     return [
+        'user_id'=>$result['user_id'],
         'resident_id'=>$result['id'],
         'resident_picture'=>$result['resident_picture'],
         'resident_fullname'=>$result['first_name'].' '.$result['middle_name'].' '.$result['last_name'],

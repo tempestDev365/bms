@@ -49,7 +49,18 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $religion = $_POST['religion'] ?? "";
     $nationality = $_POST['nationality'] ?? "";
     $registered_voter = $_POST['registered_voter'] ?? "";
-    $organization_member = $_POST['organization_member'] ?? "";
+    if (is_array($organization_member)) {
+        foreach ($organization_member as $org) {
+            $org_member .= $org . ", ";
+        }
+        // Remove the trailing comma and space
+        $org_member = rtrim($org_member, ", ");
+    }
+    
+    // If no organization members, set to an empty string
+    if (empty($org_member)) {
+        $org_member = "";
+    }
     $employment_status = $_POST['employment_status'] ?? "";
     $employment_field = $_POST['employment_field'] ?? "";
     $occupation = $_POST['occupation'] ?? "";
@@ -89,7 +100,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                 religion = '$religion',
                 nationality = '$nationality',
                 registered_voter = '$registered_voter',
-                organization_member = '$organization_member'
+                organization_member = '$org_member'
             WHERE resident_id = $id"; 
     $result1 = $conn->query($sql1);
 

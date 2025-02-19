@@ -228,7 +228,7 @@ $resident_result = $stmt->fetchAll();
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="editResidentForm">
+                    <form method="POST" action="../../controllers/updateAdminResident.php" id="editResidentForm">
                         <div class="info-section mt-3">
                             <div class="box bg-white shadow-sm border rounded-3 p-3">
                                 <div class="box-body row">
@@ -236,6 +236,7 @@ $resident_result = $stmt->fetchAll();
                                         <div class="box-header">
                                             <h4>Personal Information</h4>
                                         </div>
+                                        <input type="hidden" id="resident_id" name="id">
                                         <label>First Name:</label>
                                         <input type="text" class="form-control" id="edit_first_name" name="first_name">
                                         <label>Middle Name:</label>
@@ -577,6 +578,7 @@ $resident_result = $stmt->fetchAll();
         async function populateEditModal(id) {
             const api = await fetch(`../../controllers/getAllResidentInformationController.php?id=${id}&action=view`);
             const user = await api.json();
+            document.getElementById('resident_id').value = user.user_id;
             document.getElementById('edit_first_name').value = user.resident_first_name;
             document.getElementById('edit_middle_name').value = user.resident_middle_name;
             document.getElementById('edit_last_name').value = user.resident_last_name;
@@ -599,7 +601,7 @@ $resident_result = $stmt->fetchAll();
             document.getElementById('edit_employment_field').value = user.resident_employment_field;
             document.getElementById('edit_occupation').value = user.resident_occupation;
             document.getElementById('edit_monthly_income').value = user.resident_monthly_income;
-            document.getElementById('edit_highest_education').value = user.resident_highest_education;
+            document.getElementById('edit_highest_education').value = user.resident_highest_educational_attainment;
             document.getElementById('edit_type_of_school').value = user.resident_type_of_school;
             document.getElementById('edit_mobile_no').value = user.resident_mobile_no;
             document.getElementById('edit_tel_no').value = user.resident_tel_no;
