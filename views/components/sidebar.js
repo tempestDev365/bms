@@ -22,10 +22,6 @@ if (sidebar) {
 
                        
 
-                        <li class="nav-item">
-                            <div class="nav-link text-white" data-bs-toggle="collapse" data-bs-target="#residentNav" style="cursor: pointer;">Residents</div>
-                        </li>
-
                         
 
                             <li class="nav-item">
