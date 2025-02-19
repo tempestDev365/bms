@@ -134,7 +134,7 @@ $allConcerns = getAllConcerns($_SESSION['user_id']);
                         <a class="nav-link" href="./userDocument.php">Document Request</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./blotter.php">Blotter</a>
+                        <a class="nav-link" href="./residentBlotter.php">Blotter</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./userNotification.php">Notification</a>
