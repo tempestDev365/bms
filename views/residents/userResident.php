@@ -140,7 +140,7 @@ $resident_information = getAllResidentInformation($_SESSION['user_id']);
      
     <h4 class='mt-2'>Contact Information:</h4>
     <label>Phone Number: <?php echo $resident_information['contact_information']['phone_number'] ?? ''; ?></label>
-    <label>Email: <?php echo $resident_information['contact_information']['email'] ?? ''; ?></label>
+    <label>Email: <?php echo $resident_information['resident_information']['email'] ?? ''; ?></label>
     <label>Tel No.: <?php echo $resident_information['contact_information']['tel_no'] ?? ''; ?></label>
 </div>
                                
@@ -360,7 +360,7 @@ $resident_information = getAllResidentInformation($_SESSION['user_id']);
                                         <label>Phone Number:</label>
                                         <input type="number" maxlength="11" class="form-control" id="mobile_no" name="mobile_no" value="<?php echo $resident_information['contact_information']['phone_number'] ?? ''; ?>">
                                         <label>Email:</label>
-                                        <input type="text" class="form-control" id="email" name="email" value="<?php echo $resident_information['contact_information']['email'] ?? ''; ?>">
+                                        <input type="text" class="form-control" id="email" name="email" value="<?php echo $resident_information['resident_information']['email'] ?? ''; ?>">
                                         <label>Tel No.:</label>
                                         <input type="text" class="form-control" id="tel_no" name="tel_no" value="<?php echo $resident_information['contact_information']['tel_no'] ?? ''; ?>">
                                     </div>

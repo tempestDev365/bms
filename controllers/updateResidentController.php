@@ -50,6 +50,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $nationality = $_POST['nationality'] ?? "";
     $registered_voter = $_POST['registered_voter'] ?? "";
     $organization_member = $_POST['organization_member'] ?? [];
+    $org_member = "";
     if (is_array($organization_member)) {
         foreach ($organization_member as $org) {
             $org_member .= $org . ", ";
@@ -123,6 +124,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                 tel_no = '$tel_no'
             WHERE resident_id = $id";
     $result3 = $conn->query($sql3);
+    echo "<script>alert('Successfully updated resident information!')</script>";
+    echo "<script>window.location.href = '../views/resident/userResident.php'</script>";
      
 }
 ?>

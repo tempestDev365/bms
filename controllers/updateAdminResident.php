@@ -45,36 +45,35 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $monthly_income = $_POST['monthly_income'] ?? "";
     $occupation = $_POST['occupation'] ?? "";
 
-       $sql = "UPDATE residents_information SET 
-        first_name = :first_name,
-        middle_name = :middle_name,
-        last_name = :last_name,
-        suffix = :suffix,
-        age = :age,
-        sex = :sex,
-        birthday = :birthday,
-        civil_status = :civil_status,
-        purok = :purok,
-        house_number = :house_number,
-        street = :street,
-        email = :email
-        WHERE id = :id";
+       
+$sql = "UPDATE residents_information SET 
+    first_name = :first_name,
+    middle_name = :middle_name,
+    last_name = :last_name,
+    suffix = :suffix,
+    age = :age,
+    sex = :sex,
+    birthday = :birthday,
+    civil_status = :civil_status,
+    purok = :purok,
+    house_number = :house_number,
+    street = :street
+    WHERE id = :id";
 
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->bindParam(':first_name', $first_name, PDO::PARAM_STR);
-    $stmt->bindParam(':middle_name', $middle_name, PDO::PARAM_STR);
-    $stmt->bindParam(':last_name', $last_name, PDO::PARAM_STR);
-    $stmt->bindParam(':suffix', $suffix, PDO::PARAM_STR);
-    $stmt->bindParam(':age', $age, PDO::PARAM_INT);
-    $stmt->bindParam(':sex', $sex, PDO::PARAM_STR);
-    $stmt->bindParam(':birthday', $birthday, PDO::PARAM_STR);
-    $stmt->bindParam(':civil_status', $civil_status, PDO::PARAM_STR);
-    $stmt->bindParam(':purok', $purok, PDO::PARAM_STR);
-    $stmt->bindParam(':house_number', $house_number, PDO::PARAM_STR);
-    $stmt->bindParam(':street', $street, PDO::PARAM_STR);
-    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-    $stmt->execute();
+$stmt = $conn->prepare($sql);
+$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+$stmt->bindParam(':first_name', $first_name, PDO::PARAM_STR);
+$stmt->bindParam(':middle_name', $middle_name, PDO::PARAM_STR);
+$stmt->bindParam(':last_name', $last_name, PDO::PARAM_STR);
+$stmt->bindParam(':suffix', $suffix, PDO::PARAM_STR);
+$stmt->bindParam(':age', $age, PDO::PARAM_INT);
+$stmt->bindParam(':sex', $sex, PDO::PARAM_STR);
+$stmt->bindParam(':birthday', $birthday, PDO::PARAM_STR);
+$stmt->bindParam(':civil_status', $civil_status, PDO::PARAM_STR);
+$stmt->bindParam(':purok', $purok, PDO::PARAM_STR);
+$stmt->bindParam(':house_number', $house_number, PDO::PARAM_STR);
+$stmt->bindParam(':street', $street, PDO::PARAM_STR);
+$stmt->execute();
 
     $sql1 = "UPDATE residents_personal_information SET 
         height = :height,
@@ -133,7 +132,7 @@ $stmt3->bindParam(':type_of_school', $type_of_school, PDO::PARAM_STR);
 $stmt3->bindParam(':occupation', $occupation, PDO::PARAM_STR);
 $stmt3->bindParam(':time_Created', $time_Created, PDO::PARAM_STR);
 $stmt3->execute();
-    exit();
+echo "<script>alert('Successfully Updated!');window.location.href='../views/admin/residents.php';</script>";
 }
 
    
