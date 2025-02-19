@@ -32,6 +32,16 @@ function getAllConcernsReplies(){
     $stmt->execute();
     return $stmt->fetchAll();
 }
+function getBlotter(){
+    include_once "../../database/databaseConnection.php";
+    $conn = $GLOBALS['conn'];
+    $sql = "SELECT * FROM blotter_tbl WHERE resident_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $_SESSION['user_id']);
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+$blottters = getBlotter();
 $allDocumentRequested = getAllDocumentRequested($_SESSION['user_id']);
 $allOthersDocumentRequested = getOthersDocumentRequested($_SESSION['user_id']);
 $allConcernsReplies = getAllConcernsReplies();
@@ -169,6 +179,9 @@ $allConcernsReplies = getAllConcernsReplies();
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./userDocument.php">Document Request</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./blotter.php">Blotter</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./userNotification.php">Notification</a>

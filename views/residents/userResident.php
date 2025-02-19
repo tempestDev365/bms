@@ -166,7 +166,7 @@ $resident_information = getAllResidentInformation($_SESSION['user_id']);
         </div>
         <div class="offcanvas-body">
             <div class="sidebar">
-                <ul class="nav flex-column">
+               <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link" href="./userResident.php">Profile</a>
                     </li>
@@ -175,6 +175,9 @@ $resident_information = getAllResidentInformation($_SESSION['user_id']);
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./userDocument.php">Document Request</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./blotter.php">Blotter</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./userNotification.php">Notification</a>

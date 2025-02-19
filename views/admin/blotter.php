@@ -76,12 +76,11 @@ $blotter = getAllBlotter();
                     <tbody>
                         <?php
                           foreach($blotter as $row){
-                            echo"<tr>";
+                            echo"<tr style = 'display: ".($row['is_past_24_hours'] ? 'hidden' : '')."'>";
                             echo"<td>".$row['time_of_accident']."</td>";
                             echo"<td>".$row['place_of_accident']."</td>";
                             echo"<td>".$row['date_schedule']."</td>";
                             echo"<td>".$row['meeting_time']."</td>";
-                            echo"<td>".($row['is_past_24_hours'] ? 'expired' : 'active')."</td>";
                             echo"<td>".$row['description']."</td>";
                             echo"<td>";
                             echo"</tr>";
