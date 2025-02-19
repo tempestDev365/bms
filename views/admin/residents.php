@@ -56,8 +56,8 @@ $resident_result = $stmt->fetchAll();
 
                 <div class="container-fluid d-flex justify-content-end align-items-center mb-3" style="gap: 1rem; flex-wrap: wrap;">
                     <div class="filter">
+                        <label>Select Filter</label>
                         <select id="genderFilter" class="form-select">
-                            <option value="" selected>==SELECT FILTER==</option>
                             <option value="all">All</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
