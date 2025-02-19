@@ -70,6 +70,7 @@ $blotter = getAllBlotter();
                             <th>Meeting Time</th>
                             <th>Status</th>
                             <th>Description</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -82,6 +83,7 @@ $blotter = getAllBlotter();
                             echo"<td>".$row['meeting_time']."</td>";
                             echo"<td>".($row['is_past_24_hours'] ? 'expired' : 'active')."</td>";
                             echo"<td>".$row['description']."</td>";
+                            echo"<td>";
                             echo"</tr>";
 
                           }
@@ -90,9 +92,7 @@ $blotter = getAllBlotter();
                     
                 </table>
 
-                <div class="add-btn d-flex justify-content-end">
-                    <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#createReport">Create Report</button>
-                </div>
+               
             </div>
               
         </div>
@@ -138,12 +138,12 @@ $blotter = getAllBlotter();
                         <p>Witness 1: <span  id="first_witness"></span></p>
                         <p>Witness 2: <span id="second_witness"></span></p>
                         <p>Narrative: <span id="narrative"></span></p>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
 
     <!-- Create Report -->
      <div class="modal" id="createReport">

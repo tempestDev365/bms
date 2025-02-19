@@ -24,6 +24,9 @@ if (residentSidebar) {
                 <li class="nav-item">
                     <a href="./userDocument.php" class="nav-link text-white">Document Request</a>
                 </li>
+                  <li class="nav-item">
+                    <a href="./blotter.php" class="nav-link text-white">Blotter Schedule</a>
+                </li>
                 <li class="nav-item d-flex justify-content-start align-items-center">
                     <a href="./residentConcerns.php" class="nav-link text-white">Concerns</a>
                 </li>
