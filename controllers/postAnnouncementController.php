@@ -29,11 +29,16 @@ function resizeImage($file, $max_width, $max_height) {
 
     return $data;
 }
-if($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = htmlspecialchars($_POST['titleAnnouncement']);
     $content = htmlspecialchars($_POST['content']);
-    $image = isset($_FILES['upload-img']['tmp_name']) ? base64_encode(resizeImage($_FILES['upload-img']['tmp_name'],250,250)) : "";
-    $sql = "INSERT INTO announcement_tbl (title, content,image) VALUES (?, ?,?)";
+    $image = "";
+
+    if (isset($_FILES['upload-img']['tmp_name']) && !empty($_FILES['upload-img']['tmp_name'])) {
+        $image = base64_encode(resizeImage($_FILES['upload-img']['tmp_name'], 250, 250));
+    }
+
+    $sql = "INSERT INTO announcement_tbl (title, content, image) VALUES (?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(1, $title, PDO::PARAM_STR);
     $stmt->bindParam(2, $content, PDO::PARAM_STR);

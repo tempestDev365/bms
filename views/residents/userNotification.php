@@ -44,6 +44,15 @@ function getBlotter(){
     $stmt->execute();
     return $stmt->fetchAll();
 }
+function getAnnouncement(){
+    include_once "../../database/databaseConnection.php";
+    $conn = $GLOBALS['conn'];
+    $sql = "SELECT * FROM announcement_tbl";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+$announcements = getAnnouncement();
 $blotters = getBlotter();
 $allDocumentRequested = getAllDocumentRequested($_SESSION['user_id']);
 $allOthersDocumentRequested = getOthersDocumentRequested($_SESSION['user_id']);
@@ -167,6 +176,20 @@ $allConcernsReplies = getAllConcernsReplies();
                                     <p class="notification-message">With the schdule of: <?php echo $blotter['date_schedule']; ?> at <?php echo $blotter['meeting_time']; ?></p>
                                
                                 <p class="notification-date"><?php echo $blotter['time']; ?></p>
+                                <button id = "markAsReadBtn" data-id =  "<?php echo $count ?>">Mark As Read</button>
+                               </div>
+                            <?php  $count ++?>
+
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                     <?php foreach($announcements as $announcement): ?>
+                        <div class="notification">
+                            <div class="notification-content">
+                               <div class="notifContainer unread" id =  "<?php echo $count ?>">
+                                <h5 class="notification-title">NEW ANNOUNCEMENT</h5>
+                                <p class="notification-message">A new announcement has been posted</p>
+                               
                                 <button id = "markAsReadBtn" data-id =  "<?php echo $count ?>">Mark As Read</button>
                                </div>
                             <?php  $count ++?>
