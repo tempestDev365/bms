@@ -100,6 +100,7 @@ $resident_result = $stmt->fetchAll();
                                 <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#viewDetail" id="viewBtn" name="<?php echo $value['id']; ?>" onclick="viewDetail(<?php echo $value['id']; ?>)">View</button>
                                 <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#selectDocument" name="<?php echo $value['id']; ?>" id="issueBtn" onclick="setUrlId(<?php echo $value['id']; ?>)">Issue Certificate</button>
                                 <button class="btn btn-danger btn-sm" id="deleteBtn" onclick="deleteResident(<?php echo $value['id']; ?>)">Delete</button>
+                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editResidentModal" onclick="populateEditModal(<?php echo $value['id']; ?>)">Edit</button>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -219,9 +220,123 @@ $resident_result = $stmt->fetchAll();
         </div>
     </div>
 
-
-
-
+    <div class="modal fade" id="editResidentModal" tabindex="-1" aria-labelledby="editResidentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editResidentModalLabel">Edit Resident Information</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editResidentForm">
+                        <div class="info-section mt-3">
+                            <div class="box bg-white shadow-sm border rounded-3 p-3">
+                                <div class="box-body row">
+                                    <div class="personal-info col-md-12 col-lg-6 d-flex flex-column" style="gap: 5px;">
+                                        <div class="box-header">
+                                            <h4>Personal Information</h4>
+                                        </div>
+                                        <label>First Name:</label>
+                                        <input type="text" class="form-control" id="edit_first_name" name="first_name">
+                                        <label>Middle Name:</label>
+                                        <input type="text" class="form-control" id="edit_middle_name" name="middle_name">
+                                        <label>Last Name:</label>
+                                        <input type="text" class="form-control" id="edit_last_name" name="last_name">
+                                        <label>Suffix:</label>
+                                        <input type="text" class="form-control" id="edit_suffix" name="suffix">
+                                        <label>Sex:</label>
+                                        <input type="text" class="form-control" id="edit_sex" name="sex">
+                                        <label>Age:</label>
+                                        <input type="number" class="form-control" id="edit_age" name="age">
+                                        <label>Date Of Birth:</label>
+                                        <input type="date" class="form-control" id="edit_birthdate" name="birthdate">
+                                        <label>Civil Status:</label>
+                                        <input type="text" class="form-control" id="edit_civil_status" name="civil_status">
+                                        <label>Purok:</label>
+                                        <input type="text" class="form-control" id="edit_purok" name="purok">
+                                        <label>House Number:</label>
+                                        <input type="text" class="form-control" id="edit_house_number" name="house_number">
+                                        <label>Street:</label>
+                                        <input type="text" class="form-control" id="edit_street" name="street">
+                                        <label>Birth Place:</label>
+                                        <input type="text" class="form-control" id="edit_birthplace" name="birthplace">
+                                        <label>Height:</label>
+                                        <input type="number" class="form-control" id="edit_height" name="height">
+                                        <label>Weight:</label>
+                                        <input type="number" class="form-control" id="edit_weight" name="weight">
+                                        <label>Blood Type:</label>
+                                        <input type="text" class="form-control" id="edit_blood_type" name="blood_type">
+                                        <label>Religion:</label>
+                                        <input type="text" class="form-control" id="edit_religion" name="religion">
+                                        <label>Nationality:</label>
+                                        <input type="text" class="form-control" id="edit_nationality" name="nationality">
+                                        <label>Registered Voters:</label>
+                                        <input type="text" class="form-control" id="edit_registered_voter" name="registered_voter">
+                                        <label>Organization Member:</label>
+                                        <div class="form-group">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="organization_member[]" value="4PS" id="edit_4ps">
+                                                <label class="form-check-label" for="edit_4ps">4PS</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="organization_member[]" value="SENIOR CITIZEN" id="edit_senior_citizen">
+                                                <label class="form-check-label" for="edit_senior_citizen">SENIOR CITIZEN</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="organization_member[]" value="PWD" id="edit_pwd">
+                                                <label class="form-check-label" for="edit_pwd">PWD</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="organization_member[]" value="SOLO PARENT" id="edit_solo_parent">
+                                                <label class="form-check-label" for="edit_solo_parent">SOLO PARENT</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="organization_member[]" value="HOA" id="edit_hoa">
+                                                <label class="form-check-label" for="edit_hoa">HOA</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="organization_member[]" value="CSO" id="edit_cso">
+                                                <label class="form-check-label" for="edit_cso">CSO</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="organization_member[]" value="NGO" id="edit_ngo">
+                                                <label class="form-check-label" for="edit_ngo">NGO</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="other-info col-md-12 col-lg-6 d-flex flex-column" style="gap: 5px;">
+                                        <div class="contact-header">
+                                            <h4>Additional Information</h4>
+                                        </div>
+                                        <label>Employment Status:</label>
+                                        <input type="text" class="form-control" id="edit_employment_status" name="employment_status">
+                                        <label>Employment Field:</label>
+                                        <input type="text" class="form-control" id="edit_employment_field" name="employment_field">
+                                        <label>Occupation:</label>
+                                        <input type="text" class="form-control" id="edit_occupation" name="occupation">
+                                        <label>Monthly Income:</label>
+                                        <input type="text" class="form-control" id="edit_monthly_income" name="monthly_income">
+                                        <label>Higher Education Attainment:</label>
+                                        <input type="text" class="form-control" id="edit_highest_education" name="highest_education">
+                                        <label>Type Of School:</label>
+                                        <input type="text" class="form-control" id="edit_type_of_school" name="type_of_school">
+                                        <h4 class="mt-2">Contact Information</h4>
+                                        <label>Phone Number:</label>
+                                        <input type="number" maxlength="11" class="form-control" id="edit_mobile_no" name="mobile_no">
+                                        <label>Tel No.:</label>
+                                        <input type="number" maxlength="11" class="form-control" id="edit_tel_no" name="tel_no">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -359,6 +474,7 @@ $resident_result = $stmt->fetchAll();
                                 <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#viewDetail" id="viewBtn" name="${resident.resident_id}" onclick = "viewDetail(${resident.resident_id})">View</button>
                                 <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#selectDocument" name="${resident.resident_id}" id="issueBtn" onclick = "setUrlId(${resident.resident_id})">Issue Certificate</button>
                                 <button class="btn btn-danger btn-sm" id="deleteBtn" onclick="deleteResident(${resident.resident_id})">Delete</button>
+                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editResidentModal" onclick="populateEditModal(${resident.resident_id})">Edit</button>
                             </td>
                         </tr>
                     `;
@@ -399,6 +515,47 @@ $resident_result = $stmt->fetchAll();
                 ]
             });
         });
+
+        // Function to populate edit modal with user information
+        async function populateEditModal(id) {
+            const api = await fetch(`../../controllers/getAllResidentInformationController.php?id=${id}&action=view`);
+            const user = await api.json();
+            document.getElementById('edit_first_name').value = user.first_name;
+            document.getElementById('edit_middle_name').value = user.middle_name;
+            document.getElementById('edit_last_name').value = user.last_name;
+            document.getElementById('edit_suffix').value = user.suffix;
+            document.getElementById('edit_sex').value = user.sex;
+            document.getElementById('edit_age').value = user.age;
+            document.getElementById('edit_birthdate').value = user.birthdate;
+            document.getElementById('edit_civil_status').value = user.civil_status;
+            document.getElementById('edit_purok').value = user.purok;
+            document.getElementById('edit_house_number').value = user.house_number;
+            document.getElementById('edit_street').value = user.street;
+            document.getElementById('edit_birthplace').value = user.birthplace;
+            document.getElementById('edit_height').value = user.height;
+            document.getElementById('edit_weight').value = user.weight;
+            document.getElementById('edit_blood_type').value = user.blood_type;
+            document.getElementById('edit_religion').value = user.religion;
+            document.getElementById('edit_nationality').value = user.nationality;
+            document.getElementById('edit_registered_voter').value = user.registered_voter;
+            document.getElementById('edit_employment_status').value = user.employment_status;
+            document.getElementById('edit_employment_field').value = user.employment_field;
+            document.getElementById('edit_occupation').value = user.occupation;
+            document.getElementById('edit_monthly_income').value = user.monthly_income;
+            document.getElementById('edit_highest_education').value = user.highest_education;
+            document.getElementById('edit_type_of_school').value = user.type_of_school;
+            document.getElementById('edit_mobile_no').value = user.mobile_no;
+            document.getElementById('edit_tel_no').value = user.tel_no;
+
+            // Set checkboxes for organization membership
+            document.getElementById('edit_4ps').checked = user.organization_member.includes('4PS');
+            document.getElementById('edit_senior_citizen').checked = user.organization_member.includes('SENIOR CITIZEN');
+            document.getElementById('edit_pwd').checked = user.organization_member.includes('PWD');
+            document.getElementById('edit_solo_parent').checked = user.organization_member.includes('SOLO PARENT');
+            document.getElementById('edit_hoa').checked = user.organization_member.includes('HOA');
+            document.getElementById('edit_cso').checked = user.organization_member.includes('CSO');
+            document.getElementById('edit_ngo').checked = user.organization_member.includes('NGO');
+        }
     </script>
 </body>
 </html>
