@@ -21,7 +21,9 @@ if (sidebar) {
                         </li>
 
                        
-
+                            <li class="nav-item">
+                                <a href="./addResident.php" class="nav-link text-light">Add Residents</a>
+                            </li>
                         
 
                             <li class="nav-item">

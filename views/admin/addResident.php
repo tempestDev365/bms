@@ -36,373 +36,120 @@ if(!isset($_SESSION['admin'])) {
                     </div>  
                     <div class="register-body">
             
-                            <form action="../../controllers/adminRegisterController.php" method = "POST" enctype="multipart/form-data">
-
-                                <h5 class="text-center">Personal Information</h5>
-                                <hr>
-
-                                    <!--Uploading Ids-->
-                                    <div class="form-upload d-flex justify-content-evenly align-items-center" style="flex-wrap: wrap; gap: 1rem">
-                                        <div class="form-group d-flex flex-column align-items-center justify-content-center img-fluid" style="gap: 1rem;">
-                                            <div class="box border rounded-3 w-100 d-flex justify-content-center align-items-center" style="min-height: 200px; min-width: 200px;">
-                                                Picture
+                    <form action="../../controllers/residentRegisterController.php" method="POST" enctype="multipart/form-data">
+                        <div class="info-section mt-3">
+                            <div class="box bg-white shadow-sm border rounded-3 p-3">
+                                <div class="box-body row">
+                                    <div class="personal-info col-md-12 col-lg-4 d-flex flex-column" style="gap: 5px;">
+                                        <div class="box-header">
+                                            <h4>Personal Information</h4>
+                                        </div>
+                                                                   <label>First Name:</label>
+                                        <input type="text" class="form-control" id="first_name" name="first_name" value="<?php echo $resident_information['resident_information']['first_name'] ?? ''; ?>">
+                                        <label>Middle Name:</label>
+                                        <input type="text" class="form-control" id="middle_name" name="middle_name" value="<?php echo $resident_information['resident_information']['middle_name'] ?? ''; ?>">
+                                        <label>Last Name:</label>
+                                        <input type="text" class="form-control" id="last_name" name="last_name" value="<?php echo $resident_information['resident_information']['last_name'] ?? ''; ?>">
+                                        <label>Suffix:</label>
+                                        <input type="text" class="form-control" id="suffix" name="suffix" value="<?php echo $resident_information['resident_information']['suffix'] ?? ''; ?>">
+                                        <label>Age:</label>
+                                        <input type="number" class="form-control" id="age" name="age" value="<?php echo $resident_information['resident_information']['age'] ?? ''; ?>">
+                                        <label>Date Of Birth:</label>
+                                        <input type="date" class="form-control" id="birthdate" name="birthdate" value="<?php echo $resident_information['resident_information']['birthday'] ?? ''; ?>">
+                                        <label>Civil Status:</label>
+                                        <input type="text" class="form-control" id="civil_status" name="civil_status" value="<?php echo $resident_information['resident_information']['civil_status'] ?? ''; ?>">
+                                        <label>Purok:</label>
+                                        <input type="text" class="form-control" id="purok" name="purok" value="<?php echo $resident_information['resident_information']['purok'] ?? ''; ?>">
+                                        <label>House Number:</label>
+                                        <input type="text" class="form-control" id="house_number" name="house_number" value="<?php echo $resident_information['resident_information']['house_number'] ?? ''; ?>">
+                                        <label>Street:</label>
+                                        <input type="text" class="form-control" id="street" name="street" value="<?php echo $resident_information['resident_information']['street'] ?? ''; ?>">
+                                        <label>Birth Place:</label>
+                                        <input type="text" class="form-control" id="birthplace" name="birthplace" value="<?php echo $resident_information['personal_information']['birth_place'] ?? ''; ?>">
+                                        <label>Height:</label>
+                                        <input type="text" class="form-control" id="height" name="height" value="<?php echo $resident_information['personal_information']['height'] ?? ''; ?>">
+                                        <label>Weight:</label>
+                                        <input type="text" class="form-control" id="weight" name="weight" value="<?php echo $resident_information['personal_information']['weight'] ?? ''; ?>">
+                                        <label>Blood Type:</label>
+                                        <input type="text" class="form-control" id="blood_type" name="blood_type" value="<?php echo $resident_information['personal_information']['blood_type'] ?? ''; ?>">
+                                        <label>Religion:</label>
+                                        <input type="text" class="form-control" id="religion" name="religion" value="<?php echo $resident_information['personal_information']['religion'] ?? ''; ?>">
+                                        <label>Nationality:</label>
+                                        <input type="text" class="form-control" id="nationality" name="nationality" value="<?php echo $resident_information['personal_information']['nationality'] ?? ''; ?>">
+                                        <label>Registered Voters:</label>
+                                        <input type="text" class="form-control" id="registered_voter" name="registered_voter" value="<?php echo $resident_information['personal_information']['registered_voter'] ?? ''; ?>">
+                                        <label>Organization Member:</label>
+                                        <div class="form-group">
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="organization_member[]" value="4PS" id="4ps">
+        <label class="form-check-label" for="4ps">4PS</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="organization_member[]" value="SENIOR CITIZEN" id="senior_citizen">
+        <label class="form-check-label" for="senior_citizen">SENIOR CITIZEN</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="organization_member[]" value="PWD" id="pwd">
+        <label class="form-check-label" for="pwd">PWD</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="organization_member[]" value="SOLO PARENT" id="solo_parent">
+        <label class="form-check-label" for="solo_parent">SOLO PARENT</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="organization_member[]" value="HOA" id="hoa">
+        <label class="form-check-label" for="hoa">HOA</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="organization_member[]" value="CSO" id="cso">
+        <label class="form-check-label" for="cso">CSO</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="organization_member[]" value="NGO" id="ngo">
+        <label class="form-check-label" for="ngo">NGO</label>
+    </div>
+</div>
+                                        </div>
+                                        <div class="other-info col-md-12 col-lg-4 d-flex flex-column" style="gap: 5px;">
+                                            <div class="contact-header">
+                                                <h4>Additional Information</h4>
                                             </div>
-                                            <input type="file" name="picture" id="picture" class="form-control" accept="image/.jpg" >
+                                            <label>Employment Status:</label>
+                                            <input type="text" class="form-control" id="employment_status" name="employment_status" value="<?php echo $resident_information['additional_information']['employment_status'] ?? ''; ?>">
+                                            <label>Employment Field:</label>
+                                            <input type="text" class="form-control" id="employment_field" name="employment_field" value="<?php echo $resident_information['additional_information']['employment_field'] ?? ''; ?>">
+                                            <label>Occupation:</label>
+                                            <input type="text" class="form-control" id="occupation" name="occupation" value="<?php echo $resident_information['additional_information']['occupation'] ?? ''; ?>">
+                                            <label>Monthly Income:</label>
+                                            <input type="text" class="form-control" id="monthly_income" name="monthly_income" value="<?php echo $resident_information['additional_information']['monthly_income'] ?? ''; ?>">
+                                            <label>Higher Education Attainment:</label>
+                                            <input type="text" class="form-control" id="highest_education" name="highest_education" value="<?php echo $resident_information['additional_information']['highest_educational_attainment'] ?? ''; ?>">
+                                            <label>Type Of School:</label>
+                                            <input type="text" class="form-control" id="type_of_school" name="type_of_school" value="<?php echo $resident_information['additional_information']['type_of_school'] ?? ''; ?>">
+                                            <h4 class="mt-2">Contact Information</h4>
+                                            <label>Phone Number:</label>
+                                            <input type="text" class="form-control" id="mobile_no" name="mobile_no" value="<?php echo $resident_information['contact_information']['phone_number'] ?? ''; ?>">
+                                            <label>Email:</label>
+                                            <input type="text" class="form-control" id="email" name="email" value="<?php echo $resident_information['contact_information']['email'] ?? ''; ?>">
+                                            <label>Tel No.:</label>
+                                            <input type="text" class="form-control" id="tel_no" name="tel_no" value="<?php echo $resident_information['contact_information']['tel_no'] ?? ''; ?>">
                                         </div>
-
-                                        <div class="form-group d-flex flex-column align-items-center justify-content-center img-fluid" style="gap: 1rem;">
-                                            <div class="box border rounded-3 w-100 d-flex justify-content-center align-items-center" style="min-height: 200px; min-width: 200px;">
-                                                Signature
-                                            </div>
-                                            <input type="file" name="signature" id="signature" class="form-control" accept="image/.jpg" >
-                                        </div>
-
-                                        <div class="form-group d-flex flex-column align-items-center justify-content-center img-fluid" style="gap: 1rem;">
-                                            <div class="box border rounded-3 w-100 d-flex justify-content-center align-items-center" style="min-height: 200px; min-width: 200px;">
-                                                Valid ID
-                                            </div>
-                                            <input type="file" name="validId" id="validId" class="form-control" accept="image/.jpg" >
-                                        </div>
-                                    </div>
-                                    <!--Login Information-->
-                                <h5 class="text-center">Login Information</h5>
-                                <div class="form-personal-info row mt-3">
-                                    <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="Username">Username</label>
-                                            <input type="text" name="Username" id="Username" class="form-control">
-                                        </div>
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="Password">Password</label>
-                                            <input type="password" name="Password" id="Password" class="form-control">
-                                        </div>
+                    <div class="other-info-2 col-md-12 col-lg-4 d-flex flex-column" style="gap: 5px;">
+                        <div class="contact-header">
+                            <h4>Images</h4>
+                        </div>
+                        <label>Resident Picture:</label>
+                        <input type="file" class="form-control" id="picture" name="picture">
+                        <label>Valid ID:</label>
+                        <input type="file" class="form-control" id="valid_id" name="valid_id">
+                    </div>
                                 </div>
-                                <hr>
-                                    <!--Personal Information-->
-                                    <div class="form-personal-info row mt-3">
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="firsName">First Name</label>
-                                            <input type="text" name="firstName" id="firstName" class="form-control" required>
-                                        </div>
-
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="middleName">Middle Name</label>
-                                            <input type="text" name="middleName" id="middleName" class="form-control">
-                                        </div>
-                                        
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="lastName">Last Name</label>
-                                            <input type="text" name="lastName" id="lastName" class="form-control" >
-                                        </div>
-
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="suffix">Suffix</label>
-                                            <input type="text" name="suffix" id="suffix" class="form-control" >
-                                        </div>
-
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="alias">Alias</label>
-                                            <input type="text" name="alias" id="alias" class="form-control" >
-                                        </div>
-
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="salutation">Salutation</label>
-                                            <input type="text" name="salutation" id="salutation" class="form-control" >
-                                        </div>
-
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="male">Male</label>
-                                            <input type="radio" name="sex" id="male" value="male" required >
-                                            <label for="female">Female</label>
-                                            <input type="radio" name="sex" id="female" value="female" required  >
-
-                                        </div>
-
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="birthdate">Birthdate</label>
-                                            <input type="date" name="birthdate" id="birthdate" class="form-control" >
-                                        </div>
-
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="birthplace">Birthplace</label>
-                                            <input type="text" name="birthplace" id="birthplace" class="form-control" >
-                                        </div>
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="age">Age</label>
-                                            <input type="text" name="age" id="age" class="form-control" >
-                                        </div>
-                                        
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="civil">Civil Status</label>
-                                            <select name="civil" id="civil" class="form-control" >
-                                                <option value="single">Single</option>
-                                                <option value="married">Married</option>
-                                                <option value="widowed">Widowed</option>
-                                                <option value="divorced">Divorced</option>
-                                                <option value="separated">Separated</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="height">Height</label>
-                                            <input type="number" name="height" id="height" class="form-control" >
-                                        </div>
-
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="weight">Weight</label>
-                                            <input type="number" name="weight" id="weight" class="form-control" >
-                                        </div>
-
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="bloodType">Blood Type</label>
-                                            <select name="bloodType" id="bloodType" class="form-control" >
-                                                <option value="A+">A+</option>
-                                                <option value="A-">A-</option>
-                                                <option value="B+">B+</option>
-                                                <option value="B-">B-</option>
-                                                <option value="AB+">AB+</option>
-                                                <option value="AB-">AB-</option>
-                                                <option value="O+">O+</option>
-                                                <option value="O-">O-</option>
-                                            </select>
-                                        </div>
-                                        
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="religion">Religion</label>
-                                            <input type="text" name="religion" id="religion" class="form-control" >
-                                        </div>
-
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="ethnic">Ethnic Origin</label>
-                                            <input type="text" name="ethnic" id="ethnic" class="form-control" >
-                                        </div>
-
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="nationality">Nationality</label>
-                                            <input type="text" name="nationality" id="nationality" class="form-control" >
-                                        </div>
-
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="precint">Precinct Number</label>
-                                            <input type="text" name="precint" id="precint" class="form-control" >
-                                        </div>
-                                        
-
-                                        <div class="form-group mt-2 d-flex justify-content-start align-items-center col-sm-12 col-md-4" style="gap:5px;">
-                                            <label for="voter">Registered Voter</label>
-                                            <input type="checkbox" name="voter"  id="voter" >
-                                        </div>
-
-                                        <div class="form-group mt-2 col-sm-12 col-md-2">
-                                            <label for="organizationMember">Organization Members:</label>
-                                        </div>
-
-
-                                        <div class="form-group mt-2 col-md-12 col-lg-1 d-flex justfy-content-center align-items-center" style="gap: 5px;">
-                                            <input type="checkbox" name="orgMember[]" value = "4p" id="4p">
-                                            <label for="4p">4P's</label>
-                                        </div>
-
-                                        <div class="form-group mt-2 col-md-12 col-lg-1 d-flex justfy-content-center align-items-center" style="gap: 5px;">
-                                            <input type="checkbox" name="orgMember[]" value="pwd" id="pwd">
-                                            <label for="pwd">PWD</label>
-                                        </div>
-
-                                        <div class="form-group mt-2 col-md-12 col-lg-1 d-flex justfy-content-center align-items-center" style="gap: 5px;">
-                                            <input type="checkbox" name="orgMember[]" value="senior" id="senior">
-                                            <label for="senior">Senior</label>
-                                        </div>
-
-                                        <div class="form-group mt-2 col-md-12 col-lg-2 d-flex justfy-content-center align-items-center" style="gap: 5px;">
-                                            <input type="checkbox" name="orgMember[]" value="solo_parent" id="soloParent">
-                                            <label for="soloParent">Solo Parent</label>
-                                        </div>
-
-                                        <div class="form-group mt-2 col-md-12 col-lg-1 d-flex justfy-content-center align-items-center" style="gap: 5px;">
-                                            <input type="checkbox" name="orgMember[]" value="parent" id="hoa">
-                                            <label for="hoa">HOA</label>
-                                        </div>
-
-                                        <div class="form-group mt-2 col-md-12 col-lg-1 d-flex justfy-content-center align-items-center" style="gap: 5px;">
-                                            <input type="checkbox" name="orgMember[]" value="cso" id="cso">
-                                            <label for="cso">CSO</label>
-                                        </div>
-
-                                        <div class="form-group mt-2 col-md-12 col-lg-1 d-flex justfy-content-center align-items-center" style="gap: 5px;">
-                                            <input type="checkbox" name="orgMember[]" value="ngo" id="ngo">
-                                            <label for="ngo">NGO</label>
-                                        </div>
-                                        
-                                    </div>
-
-                                    <h5 class="text-center mt-5">Contact Information</h5>
-                                    <hr>
-
-                                    <!--Contact Information-->
-                                    <div class="form-contact-info row">
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="email">Email</label>
-                                            <input type="email" name="email" id="email" class="form-control" >
-                                        </div>
-
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="mobile">Mobile Number</label>
-                                            <input type="number" name="mobile" id="mobile" class="form-control" >
-                                        </div>
-
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="tel">Tel No.</label>
-                                            <input type="number" name="tel" id="tel" class="form-control" >
-                                        </div>
-                                    </div>
-
-
-                                    <h5 class="text-center mt-5">Incase of Emergency</h5>
-                                    <hr>
-
-                                    <!--Contact Information-->
-                                    <div class="form-contact-info row">
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="incaseFullname">Fullname</label>
-                                            <input type="text" name="incaseFullname" id="incaseFullname" class="form-control" >
-                                        </div>
-
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="incaseContact">Contact Number</label>
-                                            <input type="number" name="incaseContact" id="incaseContact" class="form-control" >
-                                        </div>
-
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="incaseAddress">Address</label>
-                                            <input type="text" name="incaseAddress" id="incaseAddress" class="form-control" >
-                                        </div>
-                                    </div>
-                                    
-
-                                    <h5 class="text-center mt-5">Family Information</h5>
-                                    <hr>
-
-                                    <!--Family Information-->
-                                    <div class="form-contact-info row">
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="mother">Mother</label>
-                                            <input type="text" name="mother" id="mother" class="form-control" >
-                                        </div>
-
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="father">Father</label>
-                                            <input type="text" name="father" id="father" class="form-control" >
-                                        </div>
-
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="spouse">Spouse</label>
-                                            <input type="text" name="spouse" id="spouse" class="form-control" >
-                                        </div>
-                                    </div>
-
-                                    <!--Address Information-->
-                                    <h5 class="text-center mt-5">Address Information</h5>
-                                    <hr>
-
-                                    <div class="form-contact-info row">
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="houseNo">House Number</label>
-                                            <input type="number" name="houseNo" id="houseNo" class="form-control" >
-                                        </div>
-
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="purok">Purok</label>
-                                            <input type="text" name="purok" id="purok" class="form-control" >
-                                        </div>
-
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="fullAddress">Full Address</label>
-                                            <input type="text" name="fullAddress" id="fullAddress" class="form-control" >
-                                        </div>
-
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="street">Street</label>
-                                            <input type="text" name="street" id="street" class="form-control" >
-                                        </div>
-
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="familyHoa">HOA</label>
-                                            <input type="text" name="familyHoa" id="familyHoa" class="form-control" >
-                                        </div>
-
-
-                                    </div>
-
-                                    
-                                    <h5 class="text-center mt-5">Employment Information</h5>
-                                    <hr>
-
-                                    <!--Employment Information-->
-                                    <div class="form-contact-info row">
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="eStatus">Employment Status</label>
-                                            <select name="eStatus" id="eStatus" class="form-control" >
-                                                <option value="employed">Employed</option>
-                                                <option value="unemployed">Unemployed</option>
-                                                <option value="self-employed">Self-Employed</option>
-                                                <option value="student">Student</option>
-                                                <option value="retired">Retired</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="eField">Employment Field</label>
-                                            <input type="text" name="eField" id="eField" class="form-control " >
-                                        </div>
-
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="occupation">Occupation</label>
-                                            <input type="text" name="occupation" id="occupation" class="form-control" >
-                                        </div>
-
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="mIncome">Monthly Income</label>
-                                            <input type="number" name="mIncome" id="mIncome" class="form-control" >
-                                        </div>
-
-
-
-                                    </div>
-
-                                    <h5 class="text-center mt-5">Education Information</h5>
-                                    <hr>
-
-                                    <!--Education Information-->
-                                    <div class="form-contact-info row">
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="higherEducAttain">Higher Education Attainment</label>
-                                            <select name="higherEducAttain" id="higherEducAttain" class="form-control" >
-                                                <option value="none">None</option>
-                                                <option value="high_school">High School</option>
-                                                <option value="associate">Associate Degree</option>
-                                                <option value="bachelor">Bachelor's Degree</option>
-                                                <option value="master">Master's Degree</option>
-                                                <option value="doctorate">Doctorate</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group mt-2 col-sm-12 col-md-4">
-                                            <label for="tSchool">Type of School</label>
-                                            <select name="tSchool" id="tSchool" class="form-control" >
-                                                <option value="public">Public</option>
-                                                <option value="private">Private</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <!--Submit Button-->
-                                    <div class="form-group mt-3">
-                                        <button type="submit" class="btn btn-primary">Register</button>
-                                        <a href="./residentLogin.php" class="btn btn-danger">Cancel</a>
-                                    </div>
-
-
-
-                            </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Save</button>
+                        </div>
+                    </form>
             </div>
         </div>
               
