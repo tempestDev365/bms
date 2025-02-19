@@ -15,6 +15,13 @@ $email = $_GET['email'];
         #form2, #form3, #form4, #form5, #form6, #form7 {
             display: none;
         }
+        /* Arrow design for pagination */
+        .pagination .page-link::after {
+            content: '';
+        }
+        .pagination .page-item.active .page-link::after {
+            content: ' ➔';
+        }
     </style>
 </head>
 <body>
@@ -23,11 +30,10 @@ $email = $_GET['email'];
 
         <!-- Pagination -->
         <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#" id="page1">1</a></li>
-            <li class="page-item"><a class="page-link" href="#" id="page2">2</a></li>
-            <li class="page-item"><a class="page-link" href="#" id="page4">3</a></li>
-            <li class="page-item"><a class="page-link" href="#" id="page5">4</a></li>
-            
+            <li class="page-item active"><a class="page-link" href="#" id="page1">1</a></li>
+            <li class="page-item disabled"><a class="page-link" href="#" id="page2">2</a></li>
+            <li class="page-item disabled"><a class="page-link" href="#" id="page4">3</a></li>
+            <li class="page-item disabled"><a class="page-link" href="#" id="page5">4</a></li>
         </ul>
 
         <!-- Form 1 -->
@@ -51,7 +57,7 @@ $email = $_GET['email'];
                         <label for="no_middle_name_checkbox">I have no middle name</label>
                     </div>
                     <div class="form-group mt-2 d-flex">
-                        <input type="text" placeholder="Last Name" class="form-control me-2" name = "last_name">
+                        <input type="text" placeholder="Last Name" class="form-control me-2" name = "last_name" required>
                         <select name="suffix" id="suffix">
                             <option value="Suffix" disabled selected>Suffix</option>
                             <option value="Jr">JR</option>
@@ -64,7 +70,7 @@ $email = $_GET['email'];
                         </select>
                     </div>
                     <div class="form-group mt-2 d-flex justify-content-between" style="gap: 5px">
-                        <select name="sex" id="suffix" class="form-control">
+                        <select name="sex" id="suffix" class="form-control" required>
                             <option value="Suffix" disabled selected>Sex</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
@@ -75,6 +81,9 @@ $email = $_GET['email'];
                         <label for="birthday">Date of Birth</label>
                         <input type="date" class="form-control" name="birthday" id="birthday" required 
                                onchange="calculateAge()" max="<?php echo date('Y-m-d'); ?>">
+                    </div>
+                    <div class="form-group mt-2 d-flex justify-content-end">
+                        <button type="button" class="btn btn-primary" id="next1" disabled>Next</button>
                     </div>
                     
               
@@ -98,14 +107,14 @@ $email = $_GET['email'];
                         </select>
                           <select name="employment_status" id="employment_status" class="form-select" required>
                             <option value="employment_status" disabled selected>Employment Status</option>
-                            <option value="">Employed</option>
-                            <option value="">Unemployed</option>
-                            <option value="">Self-Employed</option>
-                            <option value="">Student</option>
-                            <option value="">Retired</option>
+                            <option value="Employed">Employed</option>
+                            <option value="Unemployed">Unemployed</option>
+                            <option value="Self-Employed">Self-Employed</option>
+                            <option value="Student">Student</option>
+                            <option value="Retired">Retired</option>
 
                         </select>
-                        <select name="purok" id="purok" class="form-select">
+                        <select name="purok" id="purok" class="form-select" required>
                             <option value="purok" disabled selected required>Purok</option>
                             <option value="Alma">ALMA</option>
                             <option value="Banalo">BANALO</option>
@@ -118,6 +127,9 @@ $email = $_GET['email'];
                     </div>
                     <div class="form-group mt-2">
                         <input type="text" placeholder="Name of the house Owner (Optional)" class="form-control" name = "house_owner">
+                    </div>
+                    <div class="form-group mt-2 d-flex justify-content-end">
+                        <button type="button" class="btn btn-primary" id="next2" disabled>Next</button>
                     </div>
                     
               
@@ -160,14 +172,14 @@ $email = $_GET['email'];
                     </div>
                     <div class="bottom-card mt-3 border d-flex">
                         <div class="form-group" style="flex-grow: 1;">
-                            <input type="file" name="frontID" hidden id="frontID" onchange="previewImage(this, 'frontPreview')">
+                            <input type="file" name="frontID" hidden id="frontID" onchange="previewImage(this, 'frontPreview'); validateImageUploads();">
                             <label class="d-flex justify-content-center align-items-center" for="frontID" style="width: 100%; border: 1px dotted black; height: 200px; cursor: pointer;">
                                 <img id="frontPreview" src="#" alt="Front ID Preview" style="display: none; max-width: 100%; max-height: 100%; object-fit: contain;">
                                 <span id="frontUploadText">Upload Front</span>
                             </label>
                         </div>
                         <div class="form-group" style="flex-grow: 1;">
-                            <input type="file" name="backID" hidden id="backID" onchange="previewImage(this, 'backPreview')">
+                            <input type="file" name="backID" hidden id="backID" onchange="previewImage(this, 'backPreview'); validateImageUploads();">
                             <label class="d-flex justify-content-center align-items-center" for="backID" style="width: 100%; border: 1px dotted black; height: 200px; cursor: pointer;">
                                 <img id="backPreview" src="#" alt="Back ID Preview" style="display: none; max-width: 100%; max-height: 100%; object-fit: contain;">
                                 <span id="backUploadText">Upload Back</span>
@@ -181,6 +193,9 @@ $email = $_GET['email'];
                         <canvas id="canvas" style="display: none;"></canvas>
                         <button id="captureBtn" class="btn btn-success w-100 mt-2" style="display: none;" onclick="captureImage()">Capture</button>
                     </div> 
+                </div>
+                <div class="form-group mt-2 d-flex justify-content-end">
+                    <button type="button" class="btn btn-primary" id="next4" disabled>Next</button>
                 </div>
             </div>
         </div>
@@ -251,6 +266,7 @@ $email = $_GET['email'];
             document.getElementById('form2').style.display = 'none';
             document.getElementById('form4').style.display = 'none';
             document.getElementById('form5').style.display = 'none';
+            updatePaginationActiveState('page1');
         });
 
         document.getElementById('page2').addEventListener('click', function(event) {
@@ -259,6 +275,7 @@ $email = $_GET['email'];
             document.getElementById('form2').style.display = 'block';
             document.getElementById('form4').style.display = 'none';
             document.getElementById('form5').style.display = 'none';
+            updatePaginationActiveState('page2');
         });
 
        
@@ -269,6 +286,7 @@ $email = $_GET['email'];
             document.getElementById('form2').style.display = 'none';
             document.getElementById('form4').style.display = 'block';
             document.getElementById('form5').style.display = 'none';
+            updatePaginationActiveState('page4');
         });
 
         document.getElementById('page5').addEventListener('click', function(event) {
@@ -277,7 +295,82 @@ $email = $_GET['email'];
             document.getElementById('form2').style.display = 'none';
             document.getElementById('form4').style.display = 'none';
             document.getElementById('form5').style.display = 'block';
+            updatePaginationActiveState('page5');
         });
+
+        // Function to enable the next page
+        function enableNextPage(currentPage, nextPage) {
+            document.getElementById(currentPage).classList.remove('disabled');
+            document.getElementById(nextPage).classList.remove('disabled');
+        }
+
+        // Function to validate form fields
+        function validateForm(formId, nextButtonId) {
+            const form = document.getElementById(formId);
+            const nextButton = document.getElementById(nextButtonId);
+            const inputs = form.querySelectorAll('input[required], select[required]');
+            let isValid = true;
+
+            inputs.forEach(input => {
+                if (!input.value) {
+                    isValid = false;
+                }
+            });
+
+            nextButton.disabled = !isValid;
+        }
+
+        // Function to update pagination active state
+        function updatePaginationActiveState(activePageId) {
+            document.querySelectorAll('.pagination .page-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.getElementById(activePageId).parentElement.classList.add('active');
+        }
+
+        // Function to validate image uploads for Form 4
+        function validateImageUploads() {
+            const frontID = document.getElementById('frontID').files.length > 0;
+            const backID = document.getElementById('backID').files.length > 0;
+            document.getElementById('next4').disabled = !(frontID && backID);
+        }
+
+        // Event listeners for form validation
+        document.querySelectorAll('#form1 input[required], #form1 select[required]').forEach(input => {
+            input.addEventListener('input', () => validateForm('form1', 'next1'));
+        });
+
+        document.querySelectorAll('#form2 input[required], #form2 select[required]').forEach(input => {
+            input.addEventListener('input', () => validateForm('form2', 'next2'));
+        });
+
+        document.querySelectorAll('#form4 input[required], #form4 select[required]').forEach(input => {
+            input.addEventListener('input', () => validateForm('form4', 'next4'));
+        });
+
+        // Event listeners for image uploads in Form 4
+        document.getElementById('frontID').addEventListener('change', validateImageUploads);
+        document.getElementById('backID').addEventListener('change', validateImageUploads);
+
+        // Event listeners for "Next" buttons
+        document.getElementById('next1').addEventListener('click', function() {
+            enableNextPage('page1', 'page2');
+            document.getElementById('page2').click();
+            updatePaginationActiveState('page2');
+        });
+
+        document.getElementById('next2').addEventListener('click', function() {
+            enableNextPage('page2', 'page4');
+            document.getElementById('page4').click();
+            updatePaginationActiveState('page4');
+        });
+
+        document.getElementById('next4').addEventListener('click', function() {
+            enableNextPage('page4', 'page5');
+            document.getElementById('page5').click();
+            updatePaginationActiveState('page5');
+        });
+
         const inputs = {}
     const input = document.querySelectorAll('input');
    input.forEach(input => {
@@ -380,6 +473,9 @@ document.querySelector('.home_owner').textContent = `Name of the house owner: ${
                 stream.getTracks().forEach(track => track.stop());
                 stream = null;
             }
+
+            // Validate image uploads
+            validateImageUploads();
         }, 'image/jpeg');
     }
 
