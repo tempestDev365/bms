@@ -44,11 +44,11 @@ $email = $_GET['email'];
                         <input type="text" placeholder="First Name" class="form-control" name="first_name" required>
                     </div>
                     <div class="form-group mt-2">
-                        <input type="text" placeholder="Middle Name" class="form-control" name = "middle_name">
+                        <input type="text" placeholder="Middle Name" class="form-control" name="middle_name" id="middle_name">
                     </div>
                     <div class="form-group mt-2 d-flex justify-content-end">
-                        <input type="checkbox"> &nbsp;
-                        <label for="">I have no middle name</label>
+                        <input type="checkbox" id="no_middle_name_checkbox"> &nbsp;
+                        <label for="no_middle_name_checkbox">I have no middle name</label>
                     </div>
                     <div class="form-group mt-2 d-flex">
                         <input type="text" placeholder="Last Name" class="form-control me-2" name = "last_name">
@@ -379,6 +379,16 @@ document.querySelector('.home_owner').textContent = `Name of the house owner: ${
             }
         }, 'image/jpeg');
     }
+
+    document.getElementById('no_middle_name_checkbox').addEventListener('change', function() {
+        const middleNameInput = document.getElementById('middle_name');
+        if (this.checked) {
+            middleNameInput.value = '';
+            middleNameInput.disabled = true;
+        } else {
+            middleNameInput.disabled = false;
+        }
+    });
     </script>
 </body>
 </html>
