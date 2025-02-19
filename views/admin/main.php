@@ -6,31 +6,36 @@ if(!isset($_SESSION['admin'])) {
 function getAllDemographic(){
     include '../../database/databaseConnection.php';
     $resident_count_qry = "SELECT COUNT(*) as resident_count FROM residents_information";
-    $stmt = $conn->prepare($qry);
+    $stmt = $conn->prepare($resident_count_qry);
     $stmt->execute();
     $resident_count = $stmt->fetch();
-    $female_count_qry = "SELECT COUNT('sex') as female_count FROM residents_information WHERE sex = `Female`";
-    $stmt = $conn->prepare($qry);
+    $female_count_qry = "SELECT COUNT('sex') as female_count FROM residents_information WHERE sex = 'Female'";
+    $stmt = $conn->prepare($female_count_qry);
     $stmt->execute();
     $female_count = $stmt->fetch();
-    $male_count_qry = "SELECT COUNT('sex') as male_count FROM residents_information WHERE sex = `Male`";
-    $stmt = $conn->prepare($qry);
+    $male_count_qry = "SELECT COUNT('sex') as male_count FROM residents_information WHERE sex = 'Male'";
+    $stmt = $conn->prepare($male_count_qry);
     $stmt->execute();
     $male_count = $stmt->fetch();
-    $voter_count_qry = "SELECT COUNT('voter_status') as voter_count FROM resident_personal_information WHERE registered_voter = 1";
-    $stmt = $conn->prepare($qry);
+    $voter_count_qry = "SELECT COUNT('voter_status') as voter_count FROM residents_personal_information WHERE registered_voter = 1";
+    $stmt = $conn->prepare($voter_count_qry);
     $stmt->execute();
     $voter_count = $stmt->fetch();
     $household_count_qry = "SELECT COUNT(DISTINCT 'house_number') as household_count FROM residents_information";
-    $stmt = $conn->prepare($qry);
+    $stmt = $conn->prepare($household_count_qry);
     $stmt->execute();
     $household_count = $stmt->fetch();
+    $age_count_qry = "SELECT COUNT(age) as age_count FROM residents_information";
+    $stmt = $conn->prepare($age_count_qry);
+    $stmt->execute();
+    $age_count = $stmt->fetch();
     return [
         'resident_count' => $resident_count['resident_count'],
         'female_count' => $female_count['female_count'],
         'male_count' => $male_count['male_count'],
         'voter_count' => $voter_count['voter_count'],
-        'household_count' => $household_count['household_count']
+        'household_count' => $household_count['household_count'],
+        'age_count' => $age_count['age_count']
     ];
 
 
@@ -128,7 +133,7 @@ $demographic = getAllDemographic();
                  
 
                  <!--Household Card-->
-                 <a href="./household.php">
+               
                     <div class="card" style="max-width: 350px; width: 350px;">
                     <div class="card-body d-flex justify-content-between align-items-center flex-column">
                         <div class="card-content">
@@ -140,10 +145,9 @@ $demographic = getAllDemographic();
                         </div>
                     </div>
                 </div>
-                 </a>
+                 
 
                <!--Resident Card-->
-               <a href="./residents.php">
                     <div class="card" style="max-width: 350px; width: 350px;">
                         <div class="card-body d-flex justify-content-between align-items-center flex-column">
                             <div class="card-content">
@@ -156,7 +160,6 @@ $demographic = getAllDemographic();
                         </div>
                     </div>
                 </a>
-            </div>
 
             <div class="container-fluid">
                   <!-- Age Distribution Chart -->

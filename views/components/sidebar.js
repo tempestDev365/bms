@@ -30,25 +30,15 @@ if (sidebar) {
                         <div class="collapse show px-3" id="residentNav">
 
                             <li class="nav-item">
-                                <a href="./addResident.php" class="nav-link text-light">Add Resident</a>
-                            </li>
-
-                            <li class="nav-item">
                                 <a href="./residents.php" class="nav-link text-light">Registered Residents</a>
                             </li>
 
-                            <li class="nav-item">
-                                <a href="./pendingAccounts.php" class="nav-link text-light">Pending Accounts</a>
-                            </li>
 
 
 
                         </div>
 
-                          <li class="nav-item">
-                            <a href="./household.php" class="nav-link text-light">Household</a>
-                        </li>
-
+                       
 
                        
                         <li class="nav-item">

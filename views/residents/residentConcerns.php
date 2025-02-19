@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['resident_id'])) {
+if(!isset($_SESSION['user_id'])) {
     header('Location: ./residentLogin.php');
 }
 function getAllConcerns($id){
@@ -21,7 +21,7 @@ function getAllReplies($id){
     $stmt->execute();
     return $stmt->fetchAll();
 }
-$allConcerns = getAllConcerns($_SESSION['resident_id']);
+$allConcerns = getAllConcerns($_SESSION['user_id']);
 ?>
 <!DOCTYPE html>
 <html lang="en">

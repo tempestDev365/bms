@@ -3,12 +3,7 @@ require_once '../../database/databaseConnection.php';
 include '../../controllers/getAllResidentInformationController.php';
 session_start();
 
-$qry = "SELECT * FROM residents_tbl WHERE id = ?";
-$stmt = $conn->prepare($qry);
-$stmt->bindParam(1, $_SESSION['resident_id']);
-$stmt->execute();
-$resident_information = $stmt->fetch(PDO::FETCH_ASSOC);
-$resident_fullname = $resident_information['first_name'] . " " . $resident_information['middle_name'] . " " . $resident_information['last_name'];
+
 function getAllAnnouncement(){
     $conn = $GLOBALS['conn'];
     $qry = "SELECT * FROM announcement_tbl";
@@ -18,20 +13,7 @@ function getAllAnnouncement(){
     return $announcement;
 }
 
-function getComments( $announcement_id){
-    $conn = $GLOBALS['conn'];
-    $qry = "SELECT c.*,r.first_name, r.middle_name, r.last_name
-       
-     FROM comments_tbl c
-     JOIN residents_tbl r ON c.resident_id = r.id
 
-     WHERE announcement_id = ?";
-    $stmt = $conn->prepare($qry);
-    $stmt->bindParam(1, $announcement_id);
-    $stmt->execute();
-    $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return $comments;
-}
 $announcements = getAllAnnouncement();
 
 ?>

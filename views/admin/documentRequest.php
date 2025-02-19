@@ -9,7 +9,7 @@ function getAllDocumentRequest(){
     $qry = "SELECT d.*, ri.first_name,ri.middle_name,ri.last_name
            
      FROM document_requested d
-     LEFT JOIN residents_tbl ri
+     LEFT JOIN residents_information ri
         ON d.resident_id = ri.id
      ";
     $result = $conn->prepare($qry);
@@ -232,11 +232,8 @@ $document_request = getAllDocumentRequest();
            }
         });
         const viewBtn = document.querySelectorAll('#viewBtn');
-        viewBtn.forEach(btn => {
-            btn.addEventListener('click', async function(e) {
-                const resident_id = e.target.getAttribute('name');
-                const document_request = e.target.getAttribute('data-document');
-                const api = await fetch(`../../controllers/getDocumentRequestInformation.php?resident_id=${resident_id}&document=${document_request}&action=view`);
+       function view(id,resident_id){
+        const api = await fetch(`../../controllers/getDocumentRequestInformation.php?resident_id=${resident_id}&id=${id}&action=view`);
                 const response = await api.json();
                document.querySelector('#picture').src = `data:image/gif;base64,${response.resident_picture}`;
                document.querySelector('#name').textContent = `Name: ${response.resident_name}`;
@@ -249,9 +246,7 @@ $document_request = getAllDocumentRequest();
                document.querySelector('#approve').setAttribute('name', resident_id  );
                 document.querySelector('#reject').setAttribute('data-document', response.document_request);
                 document.querySelector('#reject').setAttribute('name', resident_id);      
-            });
-        });
-     
+       }
 
       
         print.forEach(btn => {

@@ -11,7 +11,7 @@ function getDocumentRequested($id){
     $document_requested = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $document_requested;
 }
-$document_requested = getDocumentRequested($_SESSION['resident_id']);
+$document_requested = getDocumentRequested($_SESSION['user_id']);
 ?>
 
 <!DOCTYPE html>
@@ -182,9 +182,10 @@ $document_requested = getDocumentRequested($_SESSION['resident_id']);
                 </div>
                 <div class="modal-body">
                     <div class="form">
+                        <form action="../../controllers/documentRequestOthers.php" method="POST">
                         <div class="form-group">
                             <label for="">Name:</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" name = "name">
                         </div>
                         <div class="form-group mt-3" >
                             <label>SELECT TYPE OF DOCUMENT</label>
@@ -212,9 +213,10 @@ $document_requested = getDocumentRequested($_SESSION['resident_id']);
 
                         <div class="form-group mt-3">
                             <label>PROOF OF REQUEST</label>
-                            <input type="file" class="form-control">
+                            <input type="file" name = "proof" class="form-control">
                         </div>
-
+                        <button type="submit" class="btn btn-primary mt-3">Submit Request</button>
+                 </form>    
                     </div>
                 </div>
             </div>

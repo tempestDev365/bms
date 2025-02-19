@@ -32,9 +32,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $images = $conn->prepare($qry);
     $images->execute();
     $images = $images->fetch(PDO::FETCH_ASSOC);
-
-
-   
     $first_name = $_POST['first_name'];
     $middle_name = $_POST['middle_name'];
     $last_name = $_POST['last_name'];
@@ -62,8 +59,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $mobile_no = $_POST['mobile_no'] ?? "";
     $email = $_POST['email'] ?? "";
     $tel_no = $_POST['tel_no'] ?? "";
-    $picture = isset($_FILES['picture']) && $_FILES['picture']['tmp_name']  ? base64_encode(resizeImage($_FILES['picture']['tmp_name'],250,250)) : $images['resident_picture'];
-    $valid_id = isset($_FILES['valid_id'])  && $_FILES['valid_id']['tmp_name']  ? base64_encode(resizeImage($_FILES['valid_id']['tmp_name'],250,250)) : $images['valid_id'];
+    $picture = isset($_FILES['picture']) && $_FILES['picture']['tmp_name']  ? base64_encode(resizeImage($_FILES['picture']['tmp_name'],250,250)) : $images['resident_picture'] ?? "";
+    $valid_id = isset($_FILES['valid_id'])  && $_FILES['valid_id']['tmp_name']  ? base64_encode(resizeImage($_FILES['valid_id']['tmp_name'],250,250)) : $images['valid_id'] ?? "";
     $resident_id = $id; 
 
     $sql = "UPDATE residents_information SET 
@@ -114,7 +111,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                 tel_no = '$tel_no'
             WHERE resident_id = $id";
     $result3 = $conn->query($sql3);
-    echo "<script>window.location.href = '../views/residents/userResident.php'</script>";
      
 }
 ?>
