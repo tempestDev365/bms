@@ -98,9 +98,12 @@ $email = $_GET['email'];
                         </select>
                           <select name="employment_status" id="employment_status" class="form-select" required>
                             <option value="employment_status" disabled selected>Employment Status</option>
-                            <option value="student">Student</option>
-                            <option value="pwd">PWD</option>
-                            <option value="senior">Senior</option>
+                            <option value="">Employed</option>
+                            <option value="">Unemployed</option>
+                            <option value="">Self-Employed</option>
+                            <option value="">Student</option>
+                            <option value="">Retired</option>
+
                         </select>
                         <select name="purok" id="purok" class="form-select">
                             <option value="purok" disabled selected required>Purok</option>
