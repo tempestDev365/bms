@@ -5,8 +5,19 @@ session_start();
 if(!isset($_SESSION['admin'])) {
     header('Location: adminLogin.php');
 }
-   $conn = $GLOBALS['conn'];
-$resident_qry = "SELECT * FROM residents_information";
+$conn = $GLOBALS['conn'];
+$filter = isset($_GET['filter']) ? $_GET['filter'] : 'all';
+
+if ($filter === 'male') {
+    $resident_qry = "SELECT * FROM residents_information WHERE sex = 'Male'";
+} elseif ($filter === 'female') {
+    $resident_qry = "SELECT * FROM residents_information WHERE sex = 'Female'";
+} elseif ($filter === 'voter') {
+    $resident_qry = "SELECT * FROM residents_information WHERE is_voter = 1";
+} else {
+    $resident_qry = "SELECT * FROM residents_information";
+}
+
 $stmt = $conn->prepare($resident_qry);
 $stmt->execute();
 $resident_result = $stmt->fetchAll();
@@ -227,184 +238,180 @@ $resident_result = $stmt->fetchAll();
     <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.colVis.min.js"></script>
     <script src="../components/sidebar.js?v=<?php echo time(); ?>" defer></script>
     <script>
-       
-
-      const issueCertificate = document.querySelectorAll('#issueBtn');
-      const print = document.querySelector('#printBtn');
-      // view the resident details
-     async  function viewDetail(id){
-        const api = await fetch(`../../controllers/getAllResidentInformationController.php?id=${id}&action=view`);
-        const response = await api.json();
-        populateModal(response.resident_picture, response.resident_signature, response.resident_valid_id, response.resident_fullname, response.resident_sex, response.resident_birthdate,
-            response.resident_birthplace, response.resident_civil_status, response.resident_height, response.resident_weight, response.resident_blood_type, response.resident_religion, response.resident_ethnic_origin, response.resident_nationality, response.resident_precinct_number, response.resident_is_voter, response.resident_org_member,
-            response.resident_email, response.resident_mobile_number, response.resident_tel_no, response.resident_ICOE_name, response.resident_ICOE_contact_number, response.resident_ICOE_address, response.resident_mother_name, response.resident_father_name, response.resident_spouse_name, response.resident_highest_educational_attainment, response.resident_type_of_school,
-            response.resident_house_number, response.resident_purok, response.resident_full_address, response.resident_street, response.resident_hoa, response.resident_employment_status, response.resident_employment_field, response.resident_occupation, response.resident_monthly_income);
-       }
- 
-     function setUrlId(id){
-    const currentURL  = new URL(window.location.href);
-    currentURL.searchParams.delete('resident_id');
-    currentURL.searchParams.set('resident_id', id);
-    window.history.pushState({}, '', currentURL);
-}
-function populateModal(picture, signature, valid_id, fullName, sex, birthdate, birthplace, civilStatus, height, weight, bloodType, religion, ethnicOrigin, nationality, precinctNumber, registeredVoter, organizationMember, email, mobileNumber, telNo, emergencyFullName, emergencyContactNumber, emergencyAddress, mother, father, spouse, highestEducation, typeOfSchool, houseNumber, purok, fullAddress, street, hoa, employmentStatus, employmentField, occupation, monthlyIncome) {
-    document.querySelector('.picture').src = "data:image/gif;base64," + picture;
-    document.querySelector('.signature').src = "data:image/gif;base64," + signature;
-    document.querySelector('.valid_id').src = "data:image/gif;base64," + valid_id;
-    document.getElementById('fullName').textContent = `Full Name: ${fullName}`;
-    document.getElementById('sex').textContent = `Sex: ${sex}`;
-    document.getElementById('birthdate').textContent = `Birthdate: ${birthdate}`;
-    document.getElementById('birthplace').textContent = `Birthplace: ${birthplace}`;
-    document.getElementById('civilStatus').textContent = `Civil Status: ${civilStatus}`;
-    document.getElementById('height').textContent = `Height: ${height}`;
-    document.getElementById('weight').textContent = `Weight: ${weight}`;
-    document.getElementById('bloodType').textContent = `Blood Type: ${bloodType}`;
-    document.getElementById('religion').textContent = `Religion: ${religion}`;
-    document.getElementById('ethnicOrigin').textContent = `Ethnic Origin: ${ethnicOrigin}`;
-    document.getElementById('nationality').textContent = `Nationality: ${nationality}`;
-    document.getElementById('precinctNumber').textContent = `Precinct Number: ${precinctNumber}`;
-    document.getElementById('registeredVoter').textContent = `Registered Voter: ${registeredVoter}`;
-    document.getElementById('organizationMember').textContent = `Organization Member: ${organizationMember}`;
-    document.getElementById('email').textContent = `Email: ${email}`;
-    document.getElementById('mobileNumber').textContent = `Mobile Number: ${mobileNumber}`;
-    document.getElementById('telNo').textContent = `Tel No: ${telNo}`;
-    document.getElementById('emergencyFullName').textContent = `Fullname: ${emergencyFullName}`;
-    document.getElementById('emergencyContactNumber').textContent = `Contact Number: ${emergencyContactNumber}`;
-    document.getElementById('emergencyAddress').textContent = `Address: ${emergencyAddress}`;
-    document.getElementById('mother').textContent = `Mother: ${mother}`;
-    document.getElementById('father').textContent = `Father: ${father}`;
-    document.getElementById('spouse').textContent = `Spouse: ${spouse}`;
-    document.getElementById('highestEducation').textContent = `Highest Education Attainment: ${highestEducation}`;
-    document.getElementById('typeOfSchool').textContent = `Type of School: ${typeOfSchool}`;
-    document.getElementById('houseNumber').textContent = `House Number: ${houseNumber}`;
-    document.getElementById('purok').textContent = `Purok: ${purok}`;
-    document.getElementById('fullAddress').textContent = `Full Address: ${fullAddress}`;
-    document.getElementById('street').textContent = `Street: ${street}`;
-    document.getElementById('hoa').textContent = `Hoa: ${hoa}`;
-    document.getElementById('employmentStatus').textContent = `Employment Status: ${employmentStatus}`;
-    document.getElementById('employmentField').textContent = `Employment Field: ${employmentField}`;
-    document.getElementById('occupation').textContent = `Occupation: ${occupation}`;
-    document.getElementById('monthlyIncome').textContent = `Monthly Income: ${monthlyIncome}`;
-}
-// ssets thee url to the resident id for the document printing
-
-//goes to the document to print
-const printDocu = () => {
-    const documentSelected = document.getElementById('documentOption').value;
-     console.log(documentSelected);
-        const params = new URLSearchParams(window.location.search);
-        const resident_id = params.get('resident_id');
-        const baseURL = "../documents/";
-        switch(documentSelected){
-            case 'BARANGAYCLEARANCE':
-                window.location.href = `${baseURL}barangayClearance.php?resident_id=${resident_id}`;
-                break;
-            case 'CERTIFICATE':
-                window.location.href = `${baseURL}barangayCertificate.php?resident_id=${resident_id}`;
-                break;
-            case 'INDIGENCY':
-                window.location.href = `${baseURL}barangayIndigency.php?resident_id=${resident_id}`;
-                break;
-            case 'D.CERTIFICATE':
-                window.location.href = `${baseURL}certificateDeath.php?resident_id=${resident_id}`;
-                break;
-            case 'RESIDENT':
-                window.location.href = `${baseURL}certificateResident.php?resident_id=${resident_id}`;
-                break;
-            case 'NON-RESIDENT':
-                window.location.href = `${baseURL}certificateNonResident.php?resident_id=${resident_id}`;
-                break;
-            case 'B.PERMIT':
-                window.location.href = `${baseURL}businessPermit.php?resident_id=${resident_id}`;
-                break;
-            case 'GUARDIANSHIP':
-                window.location.href = `${baseURL}certificateGuardian.php?resident_id=${resident_id}`;
-                break;
-            case 'DISASTER':
-                window.location.href = `${baseURL}certificateDisaster.php?resident_id=${resident_id}`;
-                break;
-            case 'RELATIONSHIP':
-                window.location.href = `${baseURL}certificateRelationship.php?resident_id=${resident_id}`;
-                break;
-            case 'J.SEEKER':
-                window.location.href = `${baseURL}firstTimeJob.php?resident_id=${resident_id}`;
-                break;
-            case 'N.INCOME':
-                window.location.href = `${baseURL}noSourceIncome.php?resident_id=${resident_id}`;
-                break;
-            case 'S,P.CERTIFICATE':
-                window.location.href = `${baseURL}singleParent.php?resident_id=${resident_id}`;
-                break;
+        const issueCertificate = document.querySelectorAll('#issueBtn');
+        const print = document.querySelector('#printBtn');
+        // view the resident details
+        async function viewDetail(id){
+            const api = await fetch(`../../controllers/getAllResidentInformationController.php?id=${id}&action=view`);
+            const response = await api.json();
+            populateModal(response.resident_picture, response.resident_signature, response.resident_valid_id, response.resident_fullname, response.resident_sex, response.resident_birthdate,
+                response.resident_birthplace, response.resident_civil_status, response.resident_height, response.resident_weight, response.resident_blood_type, response.resident_religion, response.resident_ethnic_origin, response.resident_nationality, response.resident_precinct_number, response.resident_is_voter, response.resident_org_member,
+                response.resident_email, response.resident_mobile_number, response.resident_tel_no, response.resident_ICOE_name, response.resident_ICOE_contact_number, response.resident_ICOE_address, response.resident_mother_name, response.resident_father_name, response.resident_spouse_name, response.resident_highest_educational_attainment, response.resident_type_of_school,
+                response.resident_house_number, response.resident_purok, response.resident_full_address, response.resident_street, response.resident_hoa, response.resident_employment_status, response.resident_employment_field, response.resident_occupation, response.resident_monthly_income);
         }
-    }
-// deletes the resident from the database
-const deleteResident = (id) => {
-   const confirmDelete = confirm('Are you sure you want to delete this resident?');
-    if(confirmDelete){
-         const api = fetch(`../../controllers/deleteResidentController.php?id=${id}&action=delete`);
-         window.location.reload();
-    }
-}
-// renders the filtered resident
-const params = new URLSearchParams(window.location.search);
-const filter = params.get('filter');
-const tableBody = document.querySelector('.tBody');
-if (filter) {
-    filterResident(filter).then(filtered => {
-        tableBody.innerHTML = '';
-        filtered.forEach((resident) => {
-            tableBody.innerHTML += `
-                <tr>
-                    <td>${resident.id}</td>
-                    <td>${resident.first_name} ${resident.middle_name} ${resident.last_name}</td>
-                    <td>${resident.sex}</td>
-                    <td>${resident.age}</td>
-                    <td>
-                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#viewDetail" id="viewBtn" name="${resident.resident_id}" onclick = "viewDetail(${resident.resident_id})">View</button>
-                        <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#selectDocument" name="${resident.resident_id}" id="issueBtn" onclick = "setUrlId(${resident.resident_id})">Issue Certificate</button>
-                        <button class="btn btn-danger btn-sm" id="deleteBtn" onclick="deleteResident(${resident.resident_id})">Delete</button>
-                    </td>
-                </tr>
-            `;
-        });
-    }).catch(error => console.error('Error:', error));
-}
 
-//function to get the filter 
-async function filterResident(filter) {     
-        const api = await fetch(`../../controllers/filterResidentController.php?filter=${filter}`);
-        const response = await api.json();
-        return response;
-}
-// set the filter
-document.getElementById('genderFilter').value = filter;
-document.getElementById('genderFilter').addEventListener('change', (e) => {
-    const filter = e.target.value;
-    const currentURL = new URL(window.location.href);
-    currentURL.searchParams.delete('filter');
-    currentURL.searchParams.set('filter', filter);
-    window.location.href = currentURL;
-    
-});
-$(document).ready(function() {
-    $('#example').DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-            {
-                extend: 'print',
-                exportOptions: {
-                    columns: ':not(.action-column)'
-                }
-            },
-            {
-                extend: 'pdf',
-                exportOptions: {
-                    columns: ':not(.action-column)'
-                }
+        function setUrlId(id){
+            const currentURL  = new URL(window.location.href);
+            currentURL.searchParams.delete('resident_id');
+            currentURL.searchParams.set('resident_id', id);
+            window.history.pushState({}, '', currentURL);
+        }
+        function populateModal(picture, signature, valid_id, fullName, sex, birthdate, birthplace, civilStatus, height, weight, bloodType, religion, ethnicOrigin, nationality, precinctNumber, registeredVoter, organizationMember, email, mobileNumber, telNo, emergencyFullName, emergencyContactNumber, emergencyAddress, mother, father, spouse, highestEducation, typeOfSchool, houseNumber, purok, fullAddress, street, hoa, employmentStatus, employmentField, occupation, monthlyIncome) {
+            document.querySelector('.picture').src = "data:image/gif;base64," + picture;
+            document.querySelector('.signature').src = "data:image/gif;base64," + signature;
+            document.querySelector('.valid_id').src = "data:image/gif;base64," + valid_id;
+            document.getElementById('fullName').textContent = `Full Name: ${fullName}`;
+            document.getElementById('sex').textContent = `Sex: ${sex}`;
+            document.getElementById('birthdate').textContent = `Birthdate: ${birthdate}`;
+            document.getElementById('birthplace').textContent = `Birthplace: ${birthplace}`;
+            document.getElementById('civilStatus').textContent = `Civil Status: ${civilStatus}`;
+            document.getElementById('height').textContent = `Height: ${height}`;
+            document.getElementById('weight').textContent = `Weight: ${weight}`;
+            document.getElementById('bloodType').textContent = `Blood Type: ${bloodType}`;
+            document.getElementById('religion').textContent = `Religion: ${religion}`;
+            document.getElementById('ethnicOrigin').textContent = `Ethnic Origin: ${ethnicOrigin}`;
+            document.getElementById('nationality').textContent = `Nationality: ${nationality}`;
+            document.getElementById('precinctNumber').textContent = `Precinct Number: ${precinctNumber}`;
+            document.getElementById('registeredVoter').textContent = `Registered Voter: ${registeredVoter}`;
+            document.getElementById('organizationMember').textContent = `Organization Member: ${organizationMember}`;
+            document.getElementById('email').textContent = `Email: ${email}`;
+            document.getElementById('mobileNumber').textContent = `Mobile Number: ${mobileNumber}`;
+            document.getElementById('telNo').textContent = `Tel No: ${telNo}`;
+            document.getElementById('emergencyFullName').textContent = `Fullname: ${emergencyFullName}`;
+            document.getElementById('emergencyContactNumber').textContent = `Contact Number: ${emergencyContactNumber}`;
+            document.getElementById('emergencyAddress').textContent = `Address: ${emergencyAddress}`;
+            document.getElementById('mother').textContent = `Mother: ${mother}`;
+            document.getElementById('father').textContent = `Father: ${father}`;
+            document.getElementById('spouse').textContent = `Spouse: ${spouse}`;
+            document.getElementById('highestEducation').textContent = `Highest Education Attainment: ${highestEducation}`;
+            document.getElementById('typeOfSchool').textContent = `Type of School: ${typeOfSchool}`;
+            document.getElementById('houseNumber').textContent = `House Number: ${houseNumber}`;
+            document.getElementById('purok').textContent = `Purok: ${purok}`;
+            document.getElementById('fullAddress').textContent = `Full Address: ${fullAddress}`;
+            document.getElementById('street').textContent = `Street: ${street}`;
+            document.getElementById('hoa').textContent = `Hoa: ${hoa}`;
+            document.getElementById('employmentStatus').textContent = `Employment Status: ${employmentStatus}`;
+            document.getElementById('employmentField').textContent = `Employment Field: ${employmentField}`;
+            document.getElementById('occupation').textContent = `Occupation: ${occupation}`;
+            document.getElementById('monthlyIncome').textContent = `Monthly Income: ${monthlyIncome}`;
+        }
+        // ssets thee url to the resident id for the document printing
+
+        //goes to the document to print
+        const printDocu = () => {
+            const documentSelected = document.getElementById('documentOption').value;
+            console.log(documentSelected);
+            const params = new URLSearchParams(window.location.search);
+            const resident_id = params.get('resident_id');
+            const baseURL = "../documents/";
+            switch(documentSelected){
+                case 'BARANGAYCLEARANCE':
+                    window.location.href = `${baseURL}barangayClearance.php?resident_id=${resident_id}`;
+                    break;
+                case 'CERTIFICATE':
+                    window.location.href = `${baseURL}barangayCertificate.php?resident_id=${resident_id}`;
+                    break;
+                case 'INDIGENCY':
+                    window.location.href = `${baseURL}barangayIndigency.php?resident_id=${resident_id}`;
+                    break;
+                case 'D.CERTIFICATE':
+                    window.location.href = `${baseURL}certificateDeath.php?resident_id=${resident_id}`;
+                    break;
+                case 'RESIDENT':
+                    window.location.href = `${baseURL}certificateResident.php?resident_id=${resident_id}`;
+                    break;
+                case 'NON-RESIDENT':
+                    window.location.href = `${baseURL}certificateNonResident.php?resident_id=${resident_id}`;
+                    break;
+                case 'B.PERMIT':
+                    window.location.href = `${baseURL}businessPermit.php?resident_id=${resident_id}`;
+                    break;
+                case 'GUARDIANSHIP':
+                    window.location.href = `${baseURL}certificateGuardian.php?resident_id=${resident_id}`;
+                    break;
+                case 'DISASTER':
+                    window.location.href = `${baseURL}certificateDisaster.php?resident_id=${resident_id}`;
+                    break;
+                case 'RELATIONSHIP':
+                    window.location.href = `${baseURL}certificateRelationship.php?resident_id=${resident_id}`;
+                    break;
+                case 'J.SEEKER':
+                    window.location.href = `${baseURL}firstTimeJob.php?resident_id=${resident_id}`;
+                    break;
+                case 'N.INCOME':
+                    window.location.href = `${baseURL}noSourceIncome.php?resident_id=${resident_id}`;
+                    break;
+                case 'S,P.CERTIFICATE':
+                    window.location.href = `${baseURL}singleParent.php?resident_id=${resident_id}`;
+                    break;
             }
-        ]
-    });
-});
+        }
+        // deletes the resident from the database
+        const deleteResident = (id) => {
+            const confirmDelete = confirm('Are you sure you want to delete this resident?');
+            if(confirmDelete){
+                const api = fetch(`../../controllers/deleteResidentController.php?id=${id}&action=delete`);
+                window.location.reload();
+            }
+        }
+        // renders the filtered resident
+        const params = new URLSearchParams(window.location.search);
+        const filter = params.get('filter');
+        const tableBody = document.querySelector('.tBody');
+        if (filter) {
+            filterResident(filter).then(filtered => {
+                tableBody.innerHTML = '';
+                filtered.forEach((resident) => {
+                    tableBody.innerHTML += `
+                        <tr>
+                            <td>${resident.id}</td>
+                            <td>${resident.first_name} ${resident.middle_name} ${resident.last_name}</td>
+                            <td>${resident.sex}</td>
+                            <td>${resident.age}</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#viewDetail" id="viewBtn" name="${resident.resident_id}" onclick = "viewDetail(${resident.resident_id})">View</button>
+                                <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#selectDocument" name="${resident.resident_id}" id="issueBtn" onclick = "setUrlId(${resident.resident_id})">Issue Certificate</button>
+                                <button class="btn btn-danger btn-sm" id="deleteBtn" onclick="deleteResident(${resident.resident_id})">Delete</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            }).catch(error => console.error('Error:', error));
+        }
+
+        //function to get the filter 
+        async function filterResident(filter) {     
+            const api = await fetch(`../../controllers/filterResidentController.php?filter=${filter}`);
+            const response = await api.json();
+            return response;
+        }
+        // set the filter
+        document.getElementById('genderFilter').value = filter || 'all';
+        document.getElementById('genderFilter').addEventListener('change', (e) => {
+            const filter = e.target.value;
+            const currentURL = new URL(window.location.href);
+            currentURL.searchParams.set('filter', filter);
+            window.location.href = currentURL;
+        });
+        $(document).ready(function() {
+            $('#example').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: ':not(.action-column)'
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        exportOptions: {
+                            columns: ':not(.action-column)'
+                        }
+                    }
+                ]
+            });
+        });
     </script>
 </body>
 </html>
