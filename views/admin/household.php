@@ -1,10 +1,10 @@
 <?php
 include_once "../../database/databaseConnection.php";
     $conn = $GLOBALS['conn'];
-    $qry = "SELECT ra.house_number, ra.purok, ra.street, COUNT(*) as total_household
-        FROM approved_tbl a
-        LEFT JOIN residents_address ra ON a.resident_id = ra.resident_id
-        GROUP BY ra.house_number, ra.purok, ra.street";
+    $qry = "SELECT house_number, purok, street, COUNT(*) as total_household
+        FROM residents_information 
+       
+        GROUP BY house_number, purok, street";
     $result = $conn->prepare($qry);
     $result->execute();
     $household = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -69,6 +69,22 @@ include_once "../../database/databaseConnection.php";
             </div>
 
         </div>
+    <div class="modal fade" id="householdModal" tabindex="-1" aria-labelledby="householdModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="householdModalLabel">Household Members</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modalContent">
+            
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
         
     </div>
 
@@ -123,7 +139,7 @@ include_once "../../database/databaseConnection.php";
                 </div>
             `;
         });
-        document.getElementById('modal').innerHTML = modalContent;
+        document.getElementById('modalContent').innerHTML = modalContent;
     }
     </script>
 

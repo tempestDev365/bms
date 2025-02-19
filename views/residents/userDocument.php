@@ -1,7 +1,9 @@
 <?php
 include '../../database/databaseConnection.php';
 session_start();
-
+if(!isset($_SESSION['user_id'])) {
+    header('Location: ./residentLogin.php');
+}
 function getDocumentRequested($id){
     $conn = $GLOBALS['conn'];
     $qry = "SELECT * FROM document_requested WHERE resident_id = ?";

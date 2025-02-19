@@ -419,8 +419,8 @@ $resident_result = $stmt->fetchAll();
         async function viewDetail(id){
             const api = await fetch(`../../controllers/getAllResidentInformationController.php?id=${id}&action=view`);
             const response = await api.json();
-            document.querySelector('.picture').src = `../../assets/img/${response.resident_picture}`;
-            document.querySelector('.valid_id').src = `../../assets/img/${response.valid_id}`;
+            document.querySelector('.picture').src = `data:image/jpeg;base64,${response.resident_picture}`;
+            document.querySelector('.valid_id').src = `data:image/jpeg;base64,${response.valid_id}`;
             document.querySelector('#fullName').textContent = `Full Name: ${response.resident_fullname}`;
             document.querySelector('#sex').textContent = `Sex: ${response.resident_sex}`
             document.querySelector('#birthdate').textContent = `Birthdate: ${response.resident_birthdate}`;
@@ -580,6 +580,7 @@ $resident_result = $stmt->fetchAll();
             const api = await fetch(`../../controllers/getAllResidentInformationController.php?id=${id}&action=view`);
             const user = await api.json();
             document.getElementById('resident_id').value = user.user_id;
+
             document.getElementById('edit_first_name').value = user.resident_first_name;
             document.getElementById('edit_middle_name').value = user.resident_middle_name;
             document.getElementById('edit_last_name').value = user.resident_last_name;

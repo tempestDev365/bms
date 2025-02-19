@@ -3,6 +3,9 @@ require_once '../../database/databaseConnection.php';
 include '../../controllers/getAllResidentInformationController.php';
 session_start();
 
+if(!isset($_SESSION['user_id'])) {
+    header('Location: ./residentLogin.php');
+}
 
 function getAllAnnouncement(){
     $conn = $GLOBALS['conn'];
