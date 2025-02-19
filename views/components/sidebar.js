@@ -2,7 +2,7 @@ let sidebar = document.querySelector(".admin-sidebar");
 
 if (sidebar) {
   const logoPath = "../../assets/img/logo-125.png";
-  
+
   sidebar.innerHTML = `
          <div class="navbar navbar-expand-sm navbar-light shadow-sm  flex-column  p-3 align-items-start" style="min-height: 100%; min-width: 300px; background-color: #2D3187;">
                 <div class="navbar-brand">
@@ -29,15 +29,9 @@ if (sidebar) {
                             <li class="nav-item">
                                 <a href="./residents.php" class="nav-link text-light">Registered Residents</a>
                             </li>
-
-
-
-
-                      
-
-                       
-
-                       
+                            <li class="nav-item">
+                                <a href="./household.php" class="nav-link text-light">Household</a>
+                            </li> 
                         <li class="nav-item">
                             <a href="./blotter.php" class="nav-link text-light">Blotter Schedule</a>
                         </li>
@@ -61,7 +55,7 @@ if (sidebar) {
     `;
 
   // Add hover and active styles
-  const style = document.createElement('style');
+  const style = document.createElement("style");
   style.innerHTML = `
     .nav-link:hover {
       background-color: #1a1d6b;
@@ -74,11 +68,11 @@ if (sidebar) {
   document.head.appendChild(style);
 
   // Set active link
-  const currentPath = window.location.pathname.split('/').pop();
-  const navLinks = sidebar.querySelectorAll('.nav-link');
-  navLinks.forEach(link => {
-    if (link.getAttribute('href') === `./${currentPath}`) {
-      link.classList.add('active');
+  const currentPath = window.location.pathname.split("/").pop();
+  const navLinks = sidebar.querySelectorAll(".nav-link");
+  navLinks.forEach((link) => {
+    if (link.getAttribute("href") === `./${currentPath}`) {
+      link.classList.add("active");
     }
   });
 }

@@ -1,14 +1,15 @@
 <?php
 $house_number = $_GET['house_number'] ?? " ";
-function getMembers($house_number){
+$purok = $_GET['purok'] ?? " ";
+function getMembers($house_number, $purok){
     
     include_once "../database/databaseConnection.php";
     $conn = $GLOBALS['conn'];
     $qry = "SELECT first_name, last_name, middle_name, sex,age
         FROM residents_information 
-        WHERE house_number = ?";
+        WHERE house_number = '$house_number' AND purok = '$purok'";
     $result = $conn->prepare($qry);
-    $result->bindParam(1, $house_number);
+    
     $result->execute();
     $household = $result->fetchAll(PDO::FETCH_ASSOC);
     return $household;
@@ -16,6 +17,6 @@ function getMembers($house_number){
 $action = $_GET['action'];
 if($action == "view"){
     header('Content-Type: application/json');
-    echo json_encode(getMembers($house_number));
+    echo json_encode(getMembers($house_number, $purok));
 }
 ?>

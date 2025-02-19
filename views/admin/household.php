@@ -56,7 +56,7 @@ include_once "../../database/databaseConnection.php";
                         </thead>
                         <tbody>
                             <?php foreach($household as $house): ?>
-                                <tr onclick="viewMembers(<?php echo $house['house_number']; ?>)">
+                                <tr onclick="viewMembers(<?php echo $house['house_number']; ?>, '<?php echo $house['purok']; ?>')">
                                     <td><?php echo $house['house_number']; ?></td>
                                     <td><?php echo $house['total_household']; ?></td>
                                     <td><?php echo $house['purok']; ?></td>
@@ -69,25 +69,27 @@ include_once "../../database/databaseConnection.php";
             </div>
 
         </div>
-    <div class="modal fade" id="householdModal" tabindex="-1" aria-labelledby="householdModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="householdModalLabel">Household Members</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="modalContent">
-            
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
+   
         
     </div>
 
+    <!-- Modal Structure -->
+    <div class="modal fade" id="householdModal" tabindex="-1" aria-labelledby="householdModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="householdModalLabel">Household Members</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalContent">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -122,28 +124,43 @@ include_once "../../database/databaseConnection.php";
         
     }
 
-    async function viewMembers(house_number) {
-        const api = await fetch(`../../controllers/viewHouseholdMembers.php?house_number=${house_number ?? " "}&action=view`);
+    async function viewMembers(house_number,purok) {
+        const api = await fetch(`../../controllers/viewHouseholdMembers.php?house_number=${house_number}&purok=${purok}&action=view`);
         const response = await api.json();
         populateModal(response);
     }
 
     function populateModal(data) {
-        let modalContent = '';
+        let modalContent = `
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Sex</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
         data.forEach(member => {
             modalContent += `
-                <div>
-                    <p>Name: ${member.first_name} ${member.middle_name} ${member.last_name}</p>
-                    <p>Age: ${member.age}</p>
-                    <p>Sex: ${member.sex}</p>
-                </div>
+                <tr>
+                    <td>${member.first_name} ${member.middle_name} ${member.last_name}</td>
+                    <td>${member.age}</td>
+                    <td>${member.sex}</td>
+                </tr>
             `;
         });
+        modalContent += `
+                </tbody>
+            </table>
+        `;
         document.getElementById('modalContent').innerHTML = modalContent;
-    }
-    </script>
+        // Show the modal
+        var myModal = new bootstrap.Modal(document.getElementById('householdModal'));
+        myModal.show();
+    }    </script>
 
     
 </body>
 </html>
-
