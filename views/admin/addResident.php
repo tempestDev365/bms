@@ -139,9 +139,11 @@ if(!isset($_SESSION['admin'])) {
                             <h4>Images</h4>
                         </div>
                         <label>Resident Picture:</label>
-                        <input type="file" class="form-control" id="picture" name="picture">
+                        <input type="file" class="form-control" id="picture" name="picture" onchange="previewImage(event, 'picturePreview')">
+                        <img id="picturePreview" src="#" alt="Resident Picture Preview" style="display:none; max-width: 100px; max-height: 100px;">
                         <label>Valid ID:</label>
-                        <input type="file" class="form-control" id="valid_id" name="valid_id">
+                        <input type="file" class="form-control" id="valid_id" name="valid_id" onchange="previewImage(event, 'validIdPreview')">
+                        <img id="validIdPreview" src="#" alt="Valid ID Preview" style="display:none; max-width: 100px; max-height: 100px;">
                     </div>
                                 </div>
                             </div>
@@ -164,15 +166,11 @@ if(!isset($_SESSION['admin'])) {
     <script src="../components/sidebar.js?v=<?php echo time(); ?>" defer></script>
     <script>
       document.getElementById('picture').addEventListener('change', function(event) {
-            previewImage(event, 'picture');
+            previewImage(event, 'picturePreview');
         });
 
-        document.getElementById('signature').addEventListener('change', function(event) {
-            previewImage(event, 'signature');
-        });
-
-        document.getElementById('validId').addEventListener('change', function(event) {
-            previewImage(event, 'validId');
+        document.getElementById('valid_id').addEventListener('change', function(event) {
+            previewImage(event, 'validIdPreview');
         });
 
         function previewImage(event, elementId) {
@@ -180,11 +178,9 @@ if(!isset($_SESSION['admin'])) {
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    const box = document.querySelector(`input[name="${elementId}"]`).previousElementSibling;
-                    box.style.backgroundImage = `url(${e.target.result})`;
-                    box.style.backgroundSize = 'cover';
-                    box.style.backgroundPosition = 'center';
-                    box.textContent = '';
+                    const img = document.getElementById(elementId);
+                    img.src = e.target.result;
+                    img.style.display = 'block';
                 };
                 reader.readAsDataURL(file);
             }
