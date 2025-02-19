@@ -14,7 +14,7 @@ function approved($id, $document_id){
 
 function cancelDocument($id, $document_id){
     include '../database/databaseConnection.php';
-    $sql = "UPDATE documents_requested_for_others SET status = 'cancelled' WHERE id = :id AND document_type = :document_id";
+    $sql = "UPDATE documents_requested_for_others SET status = 'pending' WHERE id = :id AND document_type = :document_id";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->bindParam(':document_id', $document_id, PDO::PARAM_STR);

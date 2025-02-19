@@ -39,7 +39,7 @@ if ($stmt->rowCount() > 0) {
 }
 function cancelDocument($id, $document_requested){
     $conn = $GLOBALS['conn']; 
-    $qry = "UPDATE document_requested SET status = 'cancelled' WHERE resident_id = :id AND document = :document_requested";
+    $qry = "UPDATE document_requested SET status = 'pending' WHERE resident_id = :id AND document = :document_requested";
 $stmt = $conn->prepare($qry);
 $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 $stmt->bindParam(':document_requested', $document_requested, PDO::PARAM_STR);

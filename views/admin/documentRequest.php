@@ -274,9 +274,7 @@ $document_request = getAllDocumentRequest();
             const document_request = e.target.getAttribute('data-document');
             const api = await fetch(`../../controllers/updateDocumentRequest.php?resident_id=${resident_id}&document=${document_request}&action=cancel`);
             const response = await api.json();
-            if(response){
-                window.location.reload();
-            }
+            window.location.reload();
 
         });
         const cancel2 = document.getElementById('cancel2');
@@ -285,9 +283,8 @@ $document_request = getAllDocumentRequest();
             const document_request = e.target.getAttribute('other-document');
             const api = await fetch(`../../controllers/updateDocumentOthers.php?resident_id=${resident_id}&document=${document_request}&action=cancel`);
             const response = await api.json();
-            if(response){
                 window.location.reload();
-            }
+            
          
         });
         const approve = document.getElementById('approve');
@@ -296,11 +293,9 @@ $document_request = getAllDocumentRequest();
             const document_request = e.target.getAttribute('data-document');
             const api = await fetch(`../../controllers/updateDocumentRequest.php?resident_id=${resident_id}&document=${document_request}&action=approve`);
             const response = await api.json();
-            if(response == 'success'){
                 alert('Document has been approved');
               window.location.reload();
-            }
-           alert(response.error);
+            
 
         });
         const approve2 = document.getElementById('approve2');
@@ -309,11 +304,9 @@ $document_request = getAllDocumentRequest();
             const document_request = e.target.getAttribute('other-document');
             const api = await fetch(`../../controllers/updateDocumentOthers.php?resident_id=${resident_id}&document=${document_request}&action=approve`);
             const response = await api.json();
-            if(response == 'success'){
                 alert('Document has been approved');
               window.location.reload();
-            }
-           alert(response.error);
+            
 
         });
         const reject = document.getElementById('reject');
@@ -322,13 +315,8 @@ $document_request = getAllDocumentRequest();
             const document_request = e.target.getAttribute('data-document');
             const api = await fetch(`../../controllers/updateDocumentRequest.php?resident_id=${resident_id}&document=${document_request}&action=reject`);
             const response = await api.json();
-            if(response){
-                alert('Document has been rejected');
                 window.location.reload();
-            }
-           if(response.error){
-               alert(response.error);
-           }
+         
         });
         const reject2 = document.getElementById('reject2');
         reject2.addEventListener("click", async function(e) {
@@ -336,13 +324,10 @@ $document_request = getAllDocumentRequest();
             const document_request = e.target.getAttribute('other-document');
             const api = await fetch(`../../controllers/updateDocumentOthers.php?resident_id=${resident_id}&document=${document_request}&action=reject`);
             const response = await api.json();
-            if(response.message){
                 alert('Document has been rejected');
                 window.location.reload();
-            }
-           if(response.error){
-               alert(response.error);
-           }
+            
+         
         });
 
         const viewBtn = document.querySelectorAll('#viewBtn');
@@ -363,10 +348,9 @@ $document_request = getAllDocumentRequest();
             document.querySelector('#cancel').setAttribute('data-document', response.document_request);
             document.querySelector('#cancel').setAttribute('name', resident_id);
             
-            if(response.status == 'approved' || response.status == 'rejected' || response.status == 'cancelled'){
+            if(response.status == 'approved' || response.status == 'rejected' ){
                 document.querySelector('#approve').setAttribute('disabled', true);
                 document.querySelector('#reject').setAttribute('disabled', true);
-                document.querySelector('#cancel').setAttribute('disabled', true);
                
             }
        }
@@ -386,10 +370,10 @@ $document_request = getAllDocumentRequest();
             document.querySelector('#reject2').setAttribute('data-id', response.id);    
             document.querySelector('#cancel2').setAttribute('other-document', response.resident_document);
             document.querySelector('#cancel2').setAttribute('data-id',response.id);
-            if(response.status == 'approved' || response.status == 'rejected' || response.status == 'cancelled'){
+            if(response.status == 'approved' || response.status == 'rejected'){
                 document.querySelector('#approve2').setAttribute('disabled', true);
                 document.querySelector('#reject2').setAttribute('disabled', true);
-                document.querySelector('#cancel2').setAttribute('disabled', true);
+                
                
             }
        }
