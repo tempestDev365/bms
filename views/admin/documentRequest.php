@@ -17,6 +17,16 @@ function getAllDocumentRequest(){
     $document_request = $result->fetchAll(PDO::FETCH_ASSOC);
     return $document_request;
 }
+function getAllDocumentRequestedFromOthers(){
+    $conn = $GLOBALS['conn'];
+    $qry = " SELECT * FROM  documents_requested_for_others";
+    $result = $conn->prepare($qry);
+
+    $result->execute();
+    $document_request = $result->fetchAll(PDO::FETCH_ASSOC);
+    return $document_request;
+}
+$document_request_others = getAllDocumentRequestedFromOthers();
 $document_request = getAllDocumentRequest();
 ?>
 <!DOCTYPE html>
@@ -90,8 +100,24 @@ $document_request = getAllDocumentRequest();
                                 <td id = 'status'>{$request['status']}</td>
                                 <td>{$request['time_Created']}</td>
                                 <td>
-                                    <button class='btn btn-primary btn-sm' data-bs-toggle='modal' data-bs-target='#viewProfile' name = '{$request['resident_id']}' data-document = {$request['document']} id = 'viewBtn'>View</button>
+                                    <button class='btn btn-primary btn-sm' data-bs-toggle='modal' data-bs-target='#viewProfile' onclick = 'view({$request['id']},{$request['resident_id']})' id = 'viewBtn'>View</button>
                                     <button class='btn btn-success btn-sm' data-bs-toggle='modal' data-bs-target='#selectDocument' name = '{$request['resident_id']}' id = 'printBtn'  $status >Print</button>
+                                </td>
+                            </tr>
+                            ";
+                        }
+                        foreach($document_request_others as $others){
+                            $status = $others['status'] == "approved" ? '' : "disabled";
+                            echo "
+                            <tr>
+                              <td>{$others['id']}</td>
+                                <td>{$others['name']}</td>
+                                <td>{$others['document_type']}</td>
+                                <td id = 'status'>{$others['status']}</td>
+                                <td>{$others['time_Created']}</td>
+                                <td>
+<button class='btn btn-primary btn-sm' data-bs-toggle='modal' data-bs-target='#viewProfile2' onclick='viewOthers(\"{$others['name']}\")' id='viewBtn'>View</button>                                   
+ <button class='btn btn-success btn-sm' data-bs-toggle='modal' data-bs-target='#selectDocument' onclick='setName(\"{$others['id']}\")''{$others['id']}' $status >Print</button>
                                 </td>
                             </tr>
                             ";
@@ -132,6 +158,39 @@ $document_request = getAllDocumentRequest();
                       <div class="profile-btn mt-3 d-flex justify-content-end" style="gap: 10px">
                         <button class="btn btn-success" name = "" id = "approve" data-document="">Approve</button>
                         <button class="btn btn-danger" name = "" id = "reject" data-document = "">Reject</button>
+                      </div>
+                      
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="viewProfile2">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Profile Information</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                      <div class="profile-header d-flex justify-content-start align-items-center" style="gap: 20px">
+                        <img src="" class="img-fluid" style="width: 150px" alt="" id = "picture2">
+                        <div class="profile-detail">
+                            <p id = "name2">Name:</p>
+                            <p id = "age2">Age:</p>
+                            <p id = "birthDate2">Birth Date:</p>
+                            <p id = "contactNo2">Contact No:</p>
+                        </div>
+                      </div>
+                      <div class="profile-body border p-3">
+                        <label id = "document2">Document Request:</label>
+                        <p class="mt-3" id = "purpose2">Purpose:</p>
+                      </div>
+                      <div class="profile-btn mt-3 d-flex justify-content-end" style="gap: 10px">
+                        <button class="btn btn-success" name = "" data-id id = "approve2" other-document ="">Approve</button>
+                        <button class="btn btn-danger" name = "" data-id id = "reject2" other-document = "">Reject</button>
                       </div>
                       
                     </div>
@@ -217,10 +276,37 @@ $document_request = getAllDocumentRequest();
            alert(response.error);
 
         });
+        const approve2 = document.getElementById('approve2');
+        approve2.addEventListener('click', async function(e) {
+            const resident_id = e.target.getAttribute('data-id');
+            const document_request = e.target.getAttribute('other-document');
+            const api = await fetch(`../../controllers/updateDocumentOthers.php?resident_id=${resident_id}&document=${document_request}&action=approve`);
+            const response = await api.json();
+            if(response == 'success'){
+                alert('Document has been approved');
+              window.location.reload();
+            }
+           alert(response.error);
+
+        });
         const reject = document.getElementById('reject');
         reject.addEventListener("click", async function(e) {
             const resident_id = e.target.getAttribute('name');
             const document_request = e.target.getAttribute('data-document');
+            const api = await fetch(`../../controllers/updateDocumentRequestOthers.php?resident_id=${resident_id}&document=${document_request}&action=reject`);
+            const response = await api.json();
+            if(response.message){
+                alert('Document has been rejected');
+                window.location.reload();
+            }
+           if(response.error){
+               alert(response.error);
+           }
+        });
+        const reject2 = document.getElementById('reject2');
+        reject2.addEventListener("click", async function(e) {
+            const resident_id = e.target.getAttribute('data-id');
+            const document_request = e.target.getAttribute('other-document');
             const api = await fetch(`../../controllers/updateDocumentRequest.php?resident_id=${resident_id}&document=${document_request}&action=reject`);
             const response = await api.json();
             if(response.message){
@@ -232,7 +318,7 @@ $document_request = getAllDocumentRequest();
            }
         });
         const viewBtn = document.querySelectorAll('#viewBtn');
-       function view(id,resident_id){
+      async function view(id,resident_id){
         const api = await fetch(`../../controllers/getDocumentRequestInformation.php?resident_id=${resident_id}&id=${id}&action=view`);
                 const response = await api.json();
                document.querySelector('#picture').src = `data:image/gif;base64,${response.resident_picture}`;
@@ -247,6 +333,22 @@ $document_request = getAllDocumentRequest();
                 document.querySelector('#reject').setAttribute('data-document', response.document_request);
                 document.querySelector('#reject').setAttribute('name', resident_id);      
        }
+       async function viewOthers(name){
+        const api = await fetch(`../../controllers/getOthersInformation.php?name=${name}&action=view`);
+                const response = await api.json();
+               document.querySelector('#picture2').src = `data:image/jpeg;base64,${response.resident_proof}`;
+               document.querySelector('#name2').textContent = `Name: ${response.resident_name}`;
+               document.querySelector('#age2').textContent = `Age: ${response.resident_age}`;
+               document.querySelector('#birthDate2').textContent = `Birth Date: ${response.resident_birthdate}`;
+               document.querySelector('#contactNo2').textContent = `Contact No: ${response.resident_mobile_number}`;    ;
+               document.querySelector('#document2').textContent = `Document Request: ${response.resident_document}`;
+               document.querySelector('#purpose2').textContent = `Purpose: ${response.resident_purpose}`;
+               document.querySelector('#approve2').setAttribute('other-document', response.resident_document);
+               document.querySelector('#approve2').setAttribute('data-id', response.id );
+                document.querySelector('#reject2').setAttribute('other-document', response.resident_document);
+                document.querySelector('#reject2').setAttribute('data-id',response.id);      
+       }
+
 
       
         print.forEach(btn => {
@@ -260,17 +362,25 @@ $document_request = getAllDocumentRequest();
 
             });
         })
+        function setName(name){
+                const currentURL  = new URL(window.location.href);
+                currentURL.searchParams.delete('id');
+                currentURL.searchParams.set('id', name);
+                window.history.pushState({}, '', currentURL);
+        }
      modalPrintbtn.addEventListener('click', function(e) {
         const documentSelected = document.getElementById('documentOption').value;
         const params = new URLSearchParams(window.location.search);
-        const resident_id = params.get('resident_id');
+        const resident_id = params.get('resident_id') ? params.get('resident_id') : params.get('id');
+        const search = params.get('resident_id') ? 'resident_id' : 'id';
+
         const baseURL = "../documents/";
             switch(documentSelected){
                 case 'BARANGAYCLEARANCE':
-                window.location.href = `${baseURL}barangayClearance.php?resident_id=${resident_id}`;
+                window.location.href = `${baseURL}barangayClearance.php?${search}=${resident_id}`;
                  break;
                 case 'CERTIFICATE':
-                window.location.href = `${baseURL}barangayCertificate.php?resident_id=${resident_id}`;
+                window.location.href = `${baseURL}barangayCertificate.php?${search}=${resident_id}`;
                 break;
                 case 'INDIGENCY':
                 window.location.href = `${baseURL}barangayIndigency.php?resident_id=${resident_id}`;

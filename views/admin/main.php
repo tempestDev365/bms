@@ -29,13 +29,17 @@ function getAllDemographic(){
     $stmt = $conn->prepare($age_count_qry);
     $stmt->execute();
     $age_count = $stmt->fetch();
+    $revenue_count_qry = "SELECT SUM(amount) as revenue_count FROM revenue_tbl";
+    $stmt = $conn->prepare($revenue_count_qry);
+    $stmt->execute();
     return [
         'resident_count' => $resident_count['resident_count'],
         'female_count' => $female_count['female_count'],
         'male_count' => $male_count['male_count'],
         'voter_count' => $voter_count['voter_count'],
         'household_count' => $household_count['household_count'],
-        'age_count' => $age_count['age_count']
+        'age_count' => $age_count['age_count'],
+        'revenue_count' => $revenue_count['revenue_count'],
     ];
 
 
@@ -155,7 +159,7 @@ $demographic = getAllDemographic();
                             </div>
                             <div class="card-title d-flex justify-content-between align-items-center" style="gap: 10px">
                                 <h5>Total Revenue:</h5>
-                                <h3><?php echo $demographic['resident_count'] ?></h3>
+                                <h3><?php echo $demographic['revenue_count'] ?></h3>
                             </div>
                         </div>
                     </div>

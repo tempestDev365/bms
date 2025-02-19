@@ -1,3 +1,131 @@
+<?php
+$id = $_GET['resident_id'] ?? null;
+$other_id = $_GET['id'] ?? null;
+function insertIntoRevenue(){
+    include '../../database/databaseConnection.php';
+    $conn = $GLOBALS['conn'];
+    $sql = "INSERT INTO revenue_tbl (amount, time_Created) VALUES (20,NOW())";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+}
+function getAllResidentInformation($id){
+    include '../../database/databaseConnection.php';
+    $conn = $GLOBALS['conn'];
+    $sql = "SELECT r.*,ri.*,rc.*,ra.*
+            FROM residents_information r
+            LEFT JOIN residents_personal_information ri ON r.id = ri.id
+            LEFT JOIN residents_contact_information rc ON r.id = rc.resident_id
+            LEFT JOIN residents_additional_information ra ON r.id = ra.id
+            WHERE r.id = :id";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch();
+    $purpose = $conn->query("SELECT purpose FROM documents_requested_for_others WHERE resident_id = $id")->fetch();
+    if($result['employment_status'] != "Student" && $result['employment_status'] != "Senior" && $result['employment_status'] != "pwd"){
+        insertIntoRevenue();
+    }
+    return [
+        'resident_id'=>$result['id'],
+        'resident_picture'=>$result['resident_picture'],
+        'resident_fullname'=>$result['first_name'].' '.$result['middle_name'].' '.$result['last_name'],
+        'resident_age'=>$result['age'] ?? "",
+        'resident_sex'=>$result['sex'] ?? "",
+        'resident_birthdate'=>$result['birthday'] ?? "",
+        'resident_civil_status'=>$result['civil_status'] ?? "",
+        'resident_height'=>$result['height'] ?? "",
+        'resident_weight'=>$result['weight'] ?? "",
+        'resident_blood_type'=>$result['blood_type'] ?? "",
+        'resident_religion'=>$result['religion'] ?? "",
+        'resident_is_voter'=>$result['registered_voter'] ?? "",
+        'resident_org_membership'=>$result['organization_member'] ?? "",
+        'mobile_no'=>$result['phone_number'] ?? "",
+        'email'=>$result['email']?? "",
+        'resident_tel_no'=>$result['tel_no'] ?? "",
+        'resident_highest_educational_attainment'=>$result['highest_educational_attainment'] ?? "",
+        'resident_type_of_school'=>$result['type_of_school'] ?? "",
+        'resident_house_number'=>$result['house_number'] ?? "",
+        'resident_purok'=>$result['purok'] ?? "",
+        'resident_street'=>$result['street'] ?? "",
+        'resident_employment_status'=>$result['employment_status'] ?? "",
+        'resident_employment_field'=>$result['employment_field'] ?? "",
+         'resident_monthly_income'=>$result['monthly_income'] ?? "",
+        'resident_occupation'=>$result['occupation'] ?? "",
+        'resident_full_address'=>$result['house_number'].' '.$result['purok'].' '.$result['street'],
+        'purpose'=>$purpose['purpose']
+        
+
+    ];
+
+   
+}
+function getOthersInfo($id){
+    include '../../database/databaseConnection.php';
+    $conn = $GLOBALS['conn'];
+    $sql = "SELECT name, purpose FROM documents_requested_for_others WHERE id = :id";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $others = $stmt->fetch();
+    $conn = $GLOBALS['conn'];
+    $sql = "SELECT r.*,ri.*,rc.*,ra.*
+            FROM residents_information r
+            LEFT JOIN residents_personal_information ri ON r.id = ri.id
+            LEFT JOIN residents_additional_information ra ON r.id = ra.id
+            LEFT JOIN residents_contact_information rc ON r.id = rc.resident_id
+            WHERE CONCAT(first_name, ' ', last_name) = :full_name";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':full_name', $others['name'], PDO::PARAM_STR);
+    $stmt->execute();
+    $result = $stmt->fetch();
+    if($result['employment_status'] != "Student" && $result['employment_status'] != "Senior" && $result['employment_status'] != "pwd"){
+        insertIntoRevenue();
+    }
+    $purpose = $conn->query("SELECT purpose FROM documents_requested_for_others WHERE resident_id = $id")->fetch();
+    return [
+        'resident_id'=>$result['id'],
+        'resident_picture'=>$result['resident_picture'],
+        'resident_fullname'=>$result['first_name'].' '.$result['middle_name'].' '.$result['last_name'],
+        'resident_age'=>$result['age'] ?? "",
+        'resident_sex'=>$result['sex'] ?? "",
+        'resident_birthdate'=>$result['birthday'] ?? "",
+        'resident_civil_status'=>$result['civil_status'] ?? "",
+        'resident_height'=>$result['height'] ?? "",
+        'resident_weight'=>$result['weight'] ?? "",
+        'resident_blood_type'=>$result['blood_type'] ?? "",
+        'resident_religion'=>$result['religion'] ?? "",
+        'resident_is_voter'=>$result['registered_voter'] ?? "",
+        'resident_org_membership'=>$result['organization_member'] ?? "",
+        'mobile_no'=>$result['phone_number'] ?? "",
+        'email'=>$result['email']?? "",
+        'resident_tel_no'=>$result['tel_no'] ?? "",
+        'resident_highest_educational_attainment'=>$result['highest_educational_attainment'] ?? "",
+        'resident_type_of_school'=>$result['type_of_school'] ?? "",
+        'resident_house_number'=>$result['house_number'] ?? "",
+        'resident_purok'=>$result['purok'] ?? "",
+        'resident_street'=>$result['street'] ?? "",
+        'resident_employment_status'=>$result['employment_status'] ?? "",
+        'resident_employment_field'=>$result['employment_field'] ?? "",
+         'resident_monthly_income'=>$result['monthly_income'] ?? "",
+        'resident_occupation'=>$result['occupation'] ?? "",
+        'resident_full_address'=>$result['house_number'].' '.$result['purok'].' '.$result['street'],
+        'purpose'=>$others['purpose']
+        
+
+    ];
+   
+
+}
+$action = $_GET['action'] ?? null;
+if(isset($id)){
+    $resident_information = getAllResidentInformation($id);
+}
+if(isset($other_id)){
+    $resident_information = getOthersInfo($other_id);
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,14 +196,11 @@
             <div class="card-mid p-3 d-flex justify-content-start align-items-center" style="flex-grow: 1; gap: 5px;">
                 <img src="https://placehold.co/300x200" class="img-fluid" style="width:200px; height: 150px;" alt="Sample Image">
                 <div class="card-info d-flex flex-column" style="font-size: .7rem;">
-                    <label>ID NO.</label>
-                    <label>NAME:</label>
-                    <label>BIRTHDAY:</label>
-                    <label>GENDER:</label>
-                    <label>CIVIL STATUS:</label>
-                    <label>NATIONALITY:</label>
-                    <label>PRECINCT:</label>
-                    <label>ADDRESS:</label>
+                <label>Name: <?php echo $resident_information['resident_fullname']  ?></label>
+                            <label>Birthday: <?php echo $resident_information['resident_birthdate']  ?></label>
+                            <label>Gender:  <?php echo $resident_information['resident_sex']  ?></label>
+                            <label>Civil Status: <?php echo $resident_information['resident_civil_status']  ?></label>
+                    
                 </div>
             </div>
             <div class="card-bot px-2 d-flex justify-content-center align-items-center">

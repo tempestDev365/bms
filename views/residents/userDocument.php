@@ -11,6 +11,17 @@ function getDocumentRequested($id){
     $document_requested = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $document_requested;
 }
+function getOthersDocumentRequested($id){
+    $conn = $GLOBALS['conn'];
+    $qry = "SELECT * FROM documents_requested_for_others WHERE resident_id = ?";
+    $stmt = $conn->prepare($qry);
+    $stmt->bindParam(1, $id);
+    $stmt->execute();
+    $document_requested = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $document_requested;
+}
+
+$others = getOthersDocumentRequested($_SESSION['user_id']);
 $document_requested = getDocumentRequested($_SESSION['user_id']);
 ?>
 
@@ -130,6 +141,14 @@ $document_requested = getDocumentRequested($_SESSION['user_id']);
                                         echo '<td>'.$document['status'].'</td>';
                                         echo '</tr>';
                                     }
+                                    foreach($others as $document){
+                                        echo '<tr>';
+                                        echo '<td>'.$document['id'].'</td>';
+                                        echo '<td>'.$document['document_type'].'</td>';
+                                        echo '<td>'.$document['time_Created'].'</td>';
+                                        echo '<td>'.$document['status'].'</td>';
+                                        echo '</tr>';
+                                    }
                                 ?>
                             </tbody>
                         </table>
@@ -182,7 +201,7 @@ $document_requested = getDocumentRequested($_SESSION['user_id']);
                 </div>
                 <div class="modal-body">
                     <div class="form">
-                        <form action="../../controllers/documentRequestOthers.php" method="POST">
+                        <form action="../../controllers/documentRequestOthers.php" method="POST" enctype="multipart/form-data"> 
                         <div class="form-group">
                             <label for="">Name:</label>
                             <input type="text" class="form-control" name = "name">
@@ -274,6 +293,15 @@ unread.forEach(notification => {
         count++;
     }
 });
+const params = new URLSearchParams(window.location.search);
+if(params.get('error') == 1){
+    Swal.fire({
+        title: 'Error',
+        text: 'User does not exist',
+        icon: 'error',
+        confirmButtonText: 'OK'
+    });
+}
 
 notificationCount(count);
 

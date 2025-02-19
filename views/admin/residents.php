@@ -5,22 +5,11 @@ session_start();
 if(!isset($_SESSION['admin'])) {
     header('Location: adminLogin.php');
 }
-//    $conn = $GLOBALS['conn'];
-// $resident_qry = "
-//     SELECT 
-//         r.id, r.first_name, r.middle_name, r.last_name, 
-//         ri.sex, ri.age,ri.resident_id, 
-//         a.*
-//     FROM 
-//         approved_tbl a
-//     LEFT JOIN 
-//         residents_tbl r ON a.resident_id = r.id
-//     LEFT JOIN 
-//         resident_information ri ON r.id = ri.resident_id
-// ";
-// $stmt = $conn->prepare($resident_qry);
-// $stmt->execute();
-// $resident_result = $stmt->fetchAll();
+   $conn = $GLOBALS['conn'];
+$resident_qry = "SELECT * FROM residents_information";
+$stmt = $conn->prepare($resident_qry);
+$stmt->execute();
+$resident_result = $stmt->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,9 +84,9 @@ if(!isset($_SESSION['admin'])) {
                             <td><?php echo $value['sex']; ?></td>
                             <td><?php echo $value['age']; ?></td>
                             <td class="action-column">
-                                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#viewDetail" id="viewBtn" name="<?php echo $value['resident_id']; ?>" onclick="viewDetail(<?php echo $value['resident_id']; ?>)">View</button>
-                                <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#selectDocument" name="<?php echo $value['resident_id']; ?>" id="issueBtn" onclick="setUrlId(<?php echo $value['resident_id']; ?>)">Issue Certificate</button>
-                                <button class="btn btn-danger btn-sm" id="deleteBtn" onclick="deleteResident(<?php echo $value['resident_id']; ?>)">Delete</button>
+                                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#viewDetail" id="viewBtn" name="<?php echo $value['id']; ?>" onclick="viewDetail(<?php echo $value['id']; ?>)">View</button>
+                                <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#selectDocument" name="<?php echo $value['id']; ?>" id="issueBtn" onclick="setUrlId(<?php echo $value['id']; ?>)">Issue Certificate</button>
+                                <button class="btn btn-danger btn-sm" id="deleteBtn" onclick="deleteResident(<?php echo $value['id']; ?>)">Delete</button>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -134,15 +123,11 @@ if(!isset($_SESSION['admin'])) {
                             <label id="fullName">Full Name:</label>
                             <label id="sex">Sex:</label>
                             <label id="birthdate">Birthdate:</label>
-                            <label id="birthplace">Birthplace:</label>
                             <label id="civilStatus">Civil Status:</label>
                             <label id="height">Height:</label>
                             <label id="weight">Weight:</label>
                             <label id="bloodType">Blood Type:</label>
                             <label id="religion">Religion:</label>
-                            <label id="ethnicOrigin">Ethnic Origin:</label>
-                            <label id="nationality">Nationality:</label>
-                            <label id="precinctNumber">Precinct Number:</label>
                             <label id="registeredVoter">Registered Voter:</label>
                             <label id="organizationMember">Organization Member:</label>
                         </div>
@@ -153,18 +138,7 @@ if(!isset($_SESSION['admin'])) {
                             <label id="email">Email:</label>
                             <label id="mobileNumber">Mobile Number:</label>
                             <label id="telNo">Tel No:</label>
-                            <div class="contact-header">
-                                <h4>Incase of Emergency</h4>
-                            </div>
-                            <label id="emergencyFullName">Fullname</label>
-                            <label id="emergencyContactNumber">Contact Number:</label>
-                            <label id="emergencyAddress">Address:</label>
-                            <div class="contact-header">
-                                <h4>Family Information</h4>
-                            </div>
-                            <label id="mother">Mother:</label>
-                            <label id="father">Father:</label>
-                            <label id="spouse">Spouse:</label>
+
                             <div class="contact-header">
                                 <h4>Educational Information:</h4>
                             </div>
@@ -177,9 +151,7 @@ if(!isset($_SESSION['admin'])) {
                             </div>
                             <label id="houseNumber">House Number:</label>
                             <label id="purok">Purok:</label>
-                            <label id="fullAddress">Full Address:</label>
                             <label id="street">Street:</label>
-                            <label id="hoa">Hoa:</label>
                             <div class="contact-header">
                                 <h4>Employment Information:</h4>
                             </div>

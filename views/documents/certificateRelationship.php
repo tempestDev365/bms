@@ -1,89 +1,128 @@
 <?php
-include '../../database/databaseConnection.php';
 $id = $_GET['resident_id'] ?? null;
-function getAllResidentInformation($id){
+$other_id = $_GET['id'] ?? null;
+function insertIntoRevenue(){
+    include '../../database/databaseConnection.php';
     $conn = $GLOBALS['conn'];
-
-    $resident_tbl_qry = "SELECT * FROM residents_tbl WHERE id = ?";
-    $stmt = $conn->prepare($resident_tbl_qry);
-    $stmt->bindParam(1, $id);
+    $sql = "INSERT INTO revenue_tbl (amount, time_Created) VALUES (20,NOW())";
+    $stmt = $conn->prepare($sql);
     $stmt->execute();
-    $resident_tbl_result = $stmt->fetch();
-
-    $resident_address_qry = "SELECT * FROM residents_address WHERE resident_id = ?";
-    $stmt = $conn->prepare($resident_address_qry);
-    $stmt->bindParam(1, $id);
-    $stmt->execute();
-    $resident_address_result = $stmt->fetch();
-
-    $resident_contact_qry = "SELECT * FROM residents_contacts WHERE residents_id = ?";
-    $stmt = $conn->prepare($resident_contact_qry);
-    $stmt->bindParam(1, $id);
-    $stmt->execute();
-    $resident_contact_result = $stmt->fetch();
-
-    $resident_family_qry = "SELECT * FROM residents_family WHERE resident_id = ?";
-    $stmt = $conn->prepare($resident_family_qry);
-    $stmt->bindParam(1, $id);
-    $stmt->execute();
-    $resident_family_result = $stmt->fetch();
-
-    $resident_information_qry = "SELECT * FROM resident_information WHERE resident_id = ?";
-    $stmt = $conn->prepare($resident_information_qry);
-    $stmt->bindParam(1, $id);
-    $stmt->execute();
-    $resident_information_result = $stmt->fetch();
-
-    $resident_employment_qry = "SELECT * FROM residents_employment WHERE resident_id = ?";
-    $stmt = $conn->prepare($resident_employment_qry);
-    $stmt->bindParam(1, $id);
-    $stmt->execute();
-    $resident_employment_result = $stmt->fetch();
-   return [
-        'resident_picture'=>$resident_tbl_result['picture'],
-        'resident_signature'=>$resident_tbl_result['signature'],
-        'resident_valid_id'=>$resident_tbl_result['valid_id'],
-        'resident_fullname'=>$resident_tbl_result['first_name'].' '.$resident_tbl_result['middle_name'].' '.$resident_tbl_result['last_name'],
-        'resident_sex'=>$resident_information_result['sex'],
-        'resident_birthdate'=>$resident_information_result['birthdate'],
-        'resident_birthplace'=>$resident_information_result['birthplace'],
-        'resident_civil_status'=>$resident_information_result['civil_status'],
-        'resident_height'=>$resident_information_result['height'],
-        'resident_weight'=>$resident_information_result['weight'],
-        'resident_blood_type'=>$resident_information_result['blood_type'],
-        'resident_religion'=>$resident_information_result['religion'],
-        'resident_nationality'=>$resident_information_result['nationality'],
-        'resident_ethnic_origin'=>$resident_information_result['ethnic_origin'],
-        'resident_precint_number'=>$resident_information_result['precint_number'],
-        'resident_is_voter' => $resident_information_result['registered_voter'] ? 'Yes' : 'No',
-        'resident_org_member' => $resident_information_result['organization_member'],
-        'resident_email'=>$resident_contact_result['email'],
-        'resident_mobile_number'=>$resident_contact_result['mobile_no'],
-        'resident_tel_number'=>$resident_contact_result['tel_no'],
-        'resident_ICOE_name'=>$resident_contact_result['ICOE_fullname'],
-        'resident_ICOE_contact_number'=>$resident_contact_result['ICOE_contact'],
-        'resident_ICOE_address'=>$resident_contact_result['ICOE_address'],
-        'resident_father_name'=>$resident_family_result['father_fullname'],
-        'resident_mother_name'=>$resident_family_result['mother_fullname'],
-        'resident_spouse_name'=>$resident_family_result['spouse_fullname'],
-        'resident_highest_educational_attainment'=>$resident_employment_result['highest_education'],
-        'resident_type_of_school'=>$resident_employment_result['type_of_school'],
-        'resident_house_number'=>$resident_address_result['house_number'],
-        'resident_street'=>$resident_address_result['street'],
-        'resident_purok'=>$resident_address_result['purok'],
-        'resident_full_address' => $resident_address_result['house_number'].' '.$resident_address_result['street'],
-        'resident_hoa'=>$resident_address_result['HOA'],
-        'resident_employment_status'=>$resident_employment_result['employment_status'],
-        'resident_employment_field'=>$resident_employment_result['employment_field'],
-        'resident_occupation'=>$resident_employment_result['occupation'],
-        'resident_monthly_income'=>$resident_employment_result['monthly_income'],
-   ];
 }
-$resident_information = getAllResidentInformation($id);
-$get_purpose_qry = "SELECT purpose FROM document_requested WHERE resident_id = $id";
-$stmt = $conn->prepare($get_purpose_qry);
-$stmt->execute();
-$purpose = $stmt->fetch(PDO::FETCH_ASSOC);
+function getAllResidentInformation($id){
+    include '../../database/databaseConnection.php';
+    $conn = $GLOBALS['conn'];
+    $sql = "SELECT r.*,ri.*,rc.*,ra.*
+            FROM residents_information r
+            LEFT JOIN residents_personal_information ri ON r.id = ri.id
+            LEFT JOIN residents_contact_information rc ON r.id = rc.resident_id
+            LEFT JOIN residents_additional_information ra ON r.id = ra.id
+            WHERE r.id = :id";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch();
+    $purpose = $conn->query("SELECT purpose FROM documents_requested_for_others WHERE resident_id = $id")->fetch();
+    if($result['employment_status'] != "Student" && $result['employment_status'] != "Senior" && $result['employment_status'] != "pwd"){
+        insertIntoRevenue();
+    }
+    return [
+        'resident_id'=>$result['id'],
+        'resident_picture'=>$result['resident_picture'],
+        'resident_fullname'=>$result['first_name'].' '.$result['middle_name'].' '.$result['last_name'],
+        'resident_age'=>$result['age'] ?? "",
+        'resident_sex'=>$result['sex'] ?? "",
+        'resident_birthdate'=>$result['birthday'] ?? "",
+        'resident_civil_status'=>$result['civil_status'] ?? "",
+        'resident_height'=>$result['height'] ?? "",
+        'resident_weight'=>$result['weight'] ?? "",
+        'resident_blood_type'=>$result['blood_type'] ?? "",
+        'resident_religion'=>$result['religion'] ?? "",
+        'resident_is_voter'=>$result['registered_voter'] ?? "",
+        'resident_org_membership'=>$result['organization_member'] ?? "",
+        'mobile_no'=>$result['phone_number'] ?? "",
+        'email'=>$result['email']?? "",
+        'resident_tel_no'=>$result['tel_no'] ?? "",
+        'resident_highest_educational_attainment'=>$result['highest_educational_attainment'] ?? "",
+        'resident_type_of_school'=>$result['type_of_school'] ?? "",
+        'resident_house_number'=>$result['house_number'] ?? "",
+        'resident_purok'=>$result['purok'] ?? "",
+        'resident_street'=>$result['street'] ?? "",
+        'resident_employment_status'=>$result['employment_status'] ?? "",
+        'resident_employment_field'=>$result['employment_field'] ?? "",
+         'resident_monthly_income'=>$result['monthly_income'] ?? "",
+        'resident_occupation'=>$result['occupation'] ?? "",
+        'resident_full_address'=>$result['house_number'].' '.$result['purok'].' '.$result['street'],
+        'purpose'=>$purpose['purpose']
+        
+
+    ];
+
+   
+}
+function getOthersInfo($id){
+    include '../../database/databaseConnection.php';
+    $conn = $GLOBALS['conn'];
+    $sql = "SELECT name, purpose FROM documents_requested_for_others WHERE id = :id";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $others = $stmt->fetch();
+    $conn = $GLOBALS['conn'];
+    $sql = "SELECT r.*,ri.*,rc.*,ra.*
+            FROM residents_information r
+            LEFT JOIN residents_personal_information ri ON r.id = ri.id
+            LEFT JOIN residents_additional_information ra ON r.id = ra.id
+            LEFT JOIN residents_contact_information rc ON r.id = rc.resident_id
+            WHERE CONCAT(first_name, ' ', last_name) = :full_name";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':full_name', $others['name'], PDO::PARAM_STR);
+    $stmt->execute();
+    $result = $stmt->fetch();
+    if($result['employment_status'] != "Student" && $result['employment_status'] != "Senior" && $result['employment_status'] != "pwd"){
+        insertIntoRevenue();
+    }
+    $purpose = $conn->query("SELECT purpose FROM documents_requested_for_others WHERE resident_id = $id")->fetch();
+    return [
+        'resident_id'=>$result['id'],
+        'resident_picture'=>$result['resident_picture'],
+        'resident_fullname'=>$result['first_name'].' '.$result['middle_name'].' '.$result['last_name'],
+        'resident_age'=>$result['age'] ?? "",
+        'resident_sex'=>$result['sex'] ?? "",
+        'resident_birthdate'=>$result['birthday'] ?? "",
+        'resident_civil_status'=>$result['civil_status'] ?? "",
+        'resident_height'=>$result['height'] ?? "",
+        'resident_weight'=>$result['weight'] ?? "",
+        'resident_blood_type'=>$result['blood_type'] ?? "",
+        'resident_religion'=>$result['religion'] ?? "",
+        'resident_is_voter'=>$result['registered_voter'] ?? "",
+        'resident_org_membership'=>$result['organization_member'] ?? "",
+        'mobile_no'=>$result['phone_number'] ?? "",
+        'email'=>$result['email']?? "",
+        'resident_tel_no'=>$result['tel_no'] ?? "",
+        'resident_highest_educational_attainment'=>$result['highest_educational_attainment'] ?? "",
+        'resident_type_of_school'=>$result['type_of_school'] ?? "",
+        'resident_house_number'=>$result['house_number'] ?? "",
+        'resident_purok'=>$result['purok'] ?? "",
+        'resident_street'=>$result['street'] ?? "",
+        'resident_employment_status'=>$result['employment_status'] ?? "",
+        'resident_employment_field'=>$result['employment_field'] ?? "",
+         'resident_monthly_income'=>$result['monthly_income'] ?? "",
+        'resident_occupation'=>$result['occupation'] ?? "",
+        'resident_full_address'=>$result['house_number'].' '.$result['purok'].' '.$result['street'],
+        'purpose'=>$others['purpose']
+        
+
+    ];
+   
+
+}
+$action = $_GET['action'] ?? null;
+if(isset($id)){
+    $resident_information = getAllResidentInformation($id);
+}
+if(isset($other_id)){
+    $resident_information = getOthersInfo($other_id);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -186,8 +225,7 @@ $purpose = $stmt->fetch(PDO::FETCH_ASSOC);
                             <label>Birthday: <?php echo $resident_information['resident_birthdate']  ?></label>
                             <label>Gender:  <?php echo $resident_information['resident_sex']  ?></label>
                             <label>Civil Status: <?php echo $resident_information['resident_civil_status']  ?></label>
-                            <label>Nationality:  <?php echo $resident_information['resident_nationality']  ?></label>
-                            <label>Precinct:  <?php echo $resident_information['resident_precint_number']  ?></label>
+                           
                         </div>
                     </div>
 
@@ -201,7 +239,7 @@ $purpose = $stmt->fetch(PDO::FETCH_ASSOC);
 
                     </label>
                     <label class="m-2">
-                        This Barangay Certificate is issued upon request for <?php echo $purpose['purpose'] ?><span style="text-decoration: underline; font-weight: bold;"></span>.
+                        This Barangay Certificate is issued upon request for <?php echo $resident_information['purpose'] ?><span style="text-decoration: underline; font-weight: bold;"></span>.
                     </label>
                     
                     <label style="text-align: left; font-weight: bold;" class="mx-2">Given this day, <!--ADD THE ELEMENT TO AUTOMATE--> <span><?php echo date('m/d/Y') ?></span></label>
