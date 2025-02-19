@@ -284,8 +284,7 @@ $resident_result = $stmt->fetchAll();
                                         <input type="text" class="form-control" id="edit_house_number" name="house_number">
                                         <label>Street:</label>
                                         <input type="text" class="form-control" id="edit_street" name="street">
-                                        <label>Birth Place:</label> 
-                                        <input type="text" class="form-control" id="edit_birthplace" name="birthplace">
+                              
                                         <label>Height(CM):</label>
                                         <input type="number" class="form-control" id="edit_height" name="height">
                                         <label>Weight(KG):</label>
