@@ -78,8 +78,14 @@ if(!isset($_SESSION['admin'])) {
                                         </div>
                                                                    <label>First Name:</label>
                                         <input type="text" class="form-control" id="first_name" name="first_name" value="<?php echo $resident_information['resident_information']['first_name'] ?? ''; ?>">
+                                        <div class="">
                                         <label>Middle Name:</label>
                                         <input type="text" class="form-control" id="middle_name" name="middle_name" value="<?php echo $resident_information['resident_information']['middle_name'] ?? ''; ?>">
+                                        <div class="d-flex">
+                                            <input type="checkbox" class="form-check-input" id="no_middle_name" name="no_middle_name" value="N/A" onchange="toggleMiddleName()">
+                                            <label for="no_middle_name">No Middle Name</label>
+                                        </div>
+                                        </div>
                                         <label>Last Name:</label>
                                         <input type="text" class="form-control" id="last_name" name="last_name" value="<?php echo $resident_information['resident_information']['last_name'] ?? ''; ?>">
                                         <label>Suffix:</label>
@@ -257,6 +263,23 @@ if(!isset($_SESSION['admin'])) {
             input.addEventListener('input', function(event) {
                 this.value = this.value.replace(/[^a-zA-Z0-9\s]/g, '');
             });
+        });
+
+        function toggleMiddleName() {
+            const middleNameInput = document.getElementById('middle_name');
+            const noMiddleNameCheckbox = document.getElementById('no_middle_name');
+            if (noMiddleNameCheckbox.checked) {
+                middleNameInput.disabled = true;
+                middleNameInput.value = 'N/A';
+            } else {
+                middleNameInput.disabled = false;
+                middleNameInput.value = '';
+            }
+        }
+
+        // Initialize the middle name input state on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            toggleMiddleName();
         });
     </script>
 
