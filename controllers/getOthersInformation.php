@@ -10,7 +10,7 @@ function getInfo($name){
     $stmt->execute();
     $result = $stmt->fetch();
 
-    $qry = "SELECT proof, purpose,id, document_type FROM documents_requested_for_others WHERE name = :name";
+    $qry = "SELECT proof, purpose,id, document_type,status FROM documents_requested_for_others WHERE name = :name";
     $stmt = $conn->prepare($qry);
     $stmt->bindParam(':name', $name, PDO::PARAM_STR);
     $stmt->execute();
@@ -30,7 +30,8 @@ function getInfo($name){
         'resident_proof' => $proof['proof'],
         'resident_purpose' => $proof['purpose'],
         'resident_document' => $proof['document_type'],
-        'id' => $proof['id']
+        'id' => $proof['id'],
+        'status' => $proof['status']
     ];
 }
 

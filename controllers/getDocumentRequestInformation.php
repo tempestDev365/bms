@@ -26,6 +26,7 @@ function getDocumentRequestInformation($resident_id, $id){
         'document_purpose'=>$result['purpose'],
         'document_status'=>$result['status'],
         'document_date_requested'=>$result['time_Created'],
+        'status'=>$result['status']
     ];
 }
 $action = $_GET['action'] ?? null;

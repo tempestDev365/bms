@@ -158,6 +158,9 @@ $document_request = getAllDocumentRequest();
                       <div class="profile-btn mt-3 d-flex justify-content-end" style="gap: 10px">
                         <button class="btn btn-success" name = "" id = "approve" data-document="">Approve</button>
                         <button class="btn btn-danger" name = "" id = "reject" data-document = "">Reject</button>
+                        <button class="btn btn-danger" name = "" id = "cancel" data-document = "">Cancel Request</button>
+
+                        
                       </div>
                       
                     </div>
@@ -191,6 +194,8 @@ $document_request = getAllDocumentRequest();
                       <div class="profile-btn mt-3 d-flex justify-content-end" style="gap: 10px">
                         <button class="btn btn-success" name = "" data-id id = "approve2" other-document ="">Approve</button>
                         <button class="btn btn-danger" name = "" data-id id = "reject2" other-document = "">Reject</button>
+                        <button class="btn btn-danger" name = "" data-id id = "cancel2" other-document = "">Cancel Request</button>
+
                       </div>
                       
                     </div>
@@ -263,6 +268,28 @@ $document_request = getAllDocumentRequest();
             var table = $('#example').DataTable();
             table.column(3).search(filterValue === 'all' ? '' : filterValue, true, false).draw();
         });
+        const cancel = document.getElementById('cancel');
+        cancel.addEventListener('click', async function(e) {
+            const resident_id = e.target.getAttribute('name');
+            const document_request = e.target.getAttribute('data-document');
+            const api = await fetch(`../../controllers/updateDocumentRequest.php?resident_id=${resident_id}&document=${document_request}&action=cancel`);
+            const response = await api.json();
+            if(response){
+                window.location.reload();
+            }
+
+        });
+        const cancel2 = document.getElementById('cancel2');
+        cancel2.addEventListener("click", async function(e) {
+            const resident_id = e.target.getAttribute('data-id');
+            const document_request = e.target.getAttribute('other-document');
+            const api = await fetch(`../../controllers/updateDocumentOthers.php?resident_id=${resident_id}&document=${document_request}&action=cancel`);
+            const response = await api.json();
+            if(response){
+                window.location.reload();
+            }
+         
+        });
         const approve = document.getElementById('approve');
         approve.addEventListener('click', async function(e) {
             const resident_id = e.target.getAttribute('name');
@@ -293,9 +320,9 @@ $document_request = getAllDocumentRequest();
         reject.addEventListener("click", async function(e) {
             const resident_id = e.target.getAttribute('name');
             const document_request = e.target.getAttribute('data-document');
-            const api = await fetch(`../../controllers/updateDocumentRequestOthers.php?resident_id=${resident_id}&document=${document_request}&action=reject`);
+            const api = await fetch(`../../controllers/updateDocumentRequest.php?resident_id=${resident_id}&document=${document_request}&action=reject`);
             const response = await api.json();
-            if(response.message){
+            if(response){
                 alert('Document has been rejected');
                 window.location.reload();
             }
@@ -307,7 +334,7 @@ $document_request = getAllDocumentRequest();
         reject2.addEventListener("click", async function(e) {
             const resident_id = e.target.getAttribute('data-id');
             const document_request = e.target.getAttribute('other-document');
-            const api = await fetch(`../../controllers/updateDocumentRequest.php?resident_id=${resident_id}&document=${document_request}&action=reject`);
+            const api = await fetch(`../../controllers/updateDocumentOthers.php?resident_id=${resident_id}&document=${document_request}&action=reject`);
             const response = await api.json();
             if(response.message){
                 alert('Document has been rejected');
@@ -317,36 +344,54 @@ $document_request = getAllDocumentRequest();
                alert(response.error);
            }
         });
+
         const viewBtn = document.querySelectorAll('#viewBtn');
       async function view(id,resident_id){
         const api = await fetch(`../../controllers/getDocumentRequestInformation.php?resident_id=${resident_id}&id=${id}&action=view`);
                 const response = await api.json();
                document.querySelector('#picture').src = `data:image/gif;base64,${response.resident_picture}`;
-               document.querySelector('#name').textContent = `Name: ${response.resident_name}`;
-               document.querySelector('#age').textContent = `Age: ${response.resident_age}`;
-               document.querySelector('#birthDate').textContent = `Birth Date: ${response.resident_birthdate}`;
-               document.querySelector('#contactNo').textContent = `Contact No: ${response.mobile_no}`;
-               document.querySelector('#document').textContent = `Document Request: ${response.document_request}`;
-               document.querySelector('#purpose').textContent = `Purpose: ${response.document_purpose}`;
-               document.querySelector('#approve').setAttribute('data-document', response.document_request);
-               document.querySelector('#approve').setAttribute('name', resident_id  );
-                document.querySelector('#reject').setAttribute('data-document', response.document_request);
-                document.querySelector('#reject').setAttribute('name', resident_id);      
+                          document.querySelector('#name').textContent = `Name: ${response.resident_name || "N/A"}`;
+            document.querySelector('#age').textContent = `Age: ${response.resident_age || "N/A"}`;
+            document.querySelector('#birthDate').textContent = `Birth Date: ${response.resident_birthdate || "N/A"}`;
+            document.querySelector('#contactNo').textContent = `Contact No: ${response.mobile_no || "N/A"}`;
+            document.querySelector('#document').textContent = `Document Request: ${response.document_request || "N/A"}`;
+            document.querySelector('#purpose').textContent = `Purpose: ${response.document_purpose || "N/A"}`;
+            document.querySelector('#approve').setAttribute('data-document', response.document_request);
+            document.querySelector('#approve').setAttribute('name', resident_id);
+            document.querySelector('#reject').setAttribute('data-document', response.document_request);
+            document.querySelector('#reject').setAttribute('name', resident_id);
+            document.querySelector('#cancel').setAttribute('data-document', response.document_request);
+            document.querySelector('#cancel').setAttribute('name', resident_id);
+            
+            if(response.status == 'approved' || response.status == 'rejected' || response.status == 'cancelled'){
+                document.querySelector('#approve').setAttribute('disabled', true);
+                document.querySelector('#reject').setAttribute('disabled', true);
+                document.querySelector('#cancel').setAttribute('disabled', true);
+               
+            }
        }
        async function viewOthers(name){
         const api = await fetch(`../../controllers/getOthersInformation.php?name=${name}&action=view`);
                 const response = await api.json();
-               document.querySelector('#picture2').src = `data:image/jpeg;base64,${response.resident_proof}`;
-               document.querySelector('#name2').textContent = `Name: ${response.resident_name}`;
-               document.querySelector('#age2').textContent = `Age: ${response.resident_age}`;
-               document.querySelector('#birthDate2').textContent = `Birth Date: ${response.resident_birthdate}`;
-               document.querySelector('#contactNo2').textContent = `Contact No: ${response.resident_mobile_number}`;    ;
-               document.querySelector('#document2').textContent = `Document Request: ${response.resident_document}`;
-               document.querySelector('#purpose2').textContent = `Purpose: ${response.resident_purpose}`;
-               document.querySelector('#approve2').setAttribute('other-document', response.resident_document);
-               document.querySelector('#approve2').setAttribute('data-id', response.id );
-                document.querySelector('#reject2').setAttribute('other-document', response.resident_document);
-                document.querySelector('#reject2').setAttribute('data-id',response.id);      
+                           document.querySelector('#picture2').src = `data:image/jpeg;base64,${response.resident_proof}`;
+            document.querySelector('#name2').textContent = `Name: ${response.resident_name || "N/A"}`;
+            document.querySelector('#age2').textContent = `Age: ${response.resident_age || "N/A"}`;
+            document.querySelector('#birthDate2').textContent = `Birth Date: ${response.resident_birthdate || "N/A"}`;
+            document.querySelector('#contactNo2').textContent = `Contact No: ${response.resident_mobile_number || "N/A"}`;
+            document.querySelector('#document2').textContent = `Document Request: ${response.resident_document || "N/A"}`;
+            document.querySelector('#purpose2').textContent = `Purpose: ${response.resident_purpose || "N/A"}`;
+            document.querySelector('#approve2').setAttribute('other-document', response.resident_document);
+            document.querySelector('#approve2').setAttribute('data-id', response.id);
+            document.querySelector('#reject2').setAttribute('other-document', response.resident_document);
+            document.querySelector('#reject2').setAttribute('data-id', response.id);    
+            document.querySelector('#cancel2').setAttribute('other-document', response.resident_document);
+            document.querySelector('#cancel2').setAttribute('data-id',response.id);
+            if(response.status == 'approved' || response.status == 'rejected' || response.status == 'cancelled'){
+                document.querySelector('#approve2').setAttribute('disabled', true);
+                document.querySelector('#reject2').setAttribute('disabled', true);
+                document.querySelector('#cancel2').setAttribute('disabled', true);
+               
+            }
        }
 
 
@@ -416,6 +461,7 @@ $document_request = getAllDocumentRequest();
                 window.location.href = `${baseURL}singleParent.php?${search}=${resident_id}`;
                 break;
         }
+    });
      const filter = document.getElementById('statusFilter');
     </script>
 </body>
