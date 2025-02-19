@@ -27,7 +27,6 @@ if (sidebar) {
                         </li>
 
                         
-                        <div class="collapse show px-3" id="residentNav">
 
                             <li class="nav-item">
                                 <a href="./residents.php" class="nav-link text-light">Registered Residents</a>
@@ -36,7 +35,7 @@ if (sidebar) {
 
 
 
-                        </div>
+                      
 
                        
 
