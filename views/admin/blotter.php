@@ -30,6 +30,7 @@ $blotter = getAllBlotter();
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.bootstrap5.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.bootstrap5.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <style>
 [contenteditable="true"] {
@@ -203,17 +204,40 @@ $blotter = getAllBlotter();
         table.column(2).search(filterValue === 'all' ? '' : filterValue, true, false).draw();
     });
   function approveBlotter(id){
-    const api = fetch(`../../controllers/blotterOptions.php?id=${id}&action=approve`);
-    location.reload();
+    fetch(`../../controllers/blotterOptions.php?id=${id}&action=approve`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Approved!',
+                    text: 'Blotter has been approved.',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    location.reload();
+                });
+            }
+        });
+}
 
-  }
-    function disapproveBlotter(id){
-    const api = fetch(`../../controllers/blotterOptions.php?id=${id}&action=disapprove`);
- 
-            location.reload();
-    
-   
-    }
+function disapproveBlotter(id){
+    fetch(`../../controllers/blotterOptions.php?id=${id}&action=disapprove`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Rejected!',
+                    text: 'Blotter has been rejected.',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    location.reload();
+                });
+            }
+        });
+}
     function setUrl(id){
        document.getElementById('id').value = id;
        
