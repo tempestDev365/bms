@@ -41,11 +41,11 @@ if(!isset($_SESSION['admin'])) {
                     <div class=" d-flex justify-content-center align-items-center" style="gap: 10px;">
                         
                     <div class="form-group d-flex flex-column justify-content-center align-items-center"> 
-                    <div class="border rounded-3 shadow-sm" id="picturePreview" style="max-width: 500px; max-height: 400px; height: 400px; width: 500px; display: flex; justify-content: center; align-items: center;">
+                    <div class="border rounded-3 shadow-sm" id="picturePreview" style="max-width: 500px; max-height: 400px; height: 400px; width: 500px; display: flex; justify-content: center; align-items: center;">                            
+                                <label>Resident Picture:</label>
                                 <img id="picturePreviewImg" style="max-width: 100%; max-height: 100%; display: none;">
                             </div>
                         <div>
-                            <label>Resident Picture:</label>
                             <input type="file" class="form-control" id="picture" name="picture" onchange="previewImage(event, 'picturePreviewImg')">
                         </div>
                     </div>
@@ -53,10 +53,11 @@ if(!isset($_SESSION['admin'])) {
                         
                     <div class="form-group d-flex flex-column justify-content-center align-items-center"> 
                     <div class="border rounded-3 shadow-sm" id="validIdPreview" style="max-width: 500px; max-height: 400px; height: 400px; width: 500px; display: flex; justify-content: center; align-items: center;">
+                    <label>Valid ID:</label>
+
                                 <img id="validIdPreviewImg" style="max-width: 100%; max-height: 100%; display: none;">
                             </div>
                         <div>
-                            <label>Valid ID:</label>
                             <input type="file" class="form-control" id="valid_id" name="valid_id" onchange="previewImage(event, 'validIdPreviewImg')">
                         </div>
                     </div>
@@ -202,6 +203,7 @@ if(!isset($_SESSION['admin'])) {
                     const img = document.getElementById(elementId);
                     img.src = e.target.result;
                     img.style.display = 'block';
+                    img.previousElementSibling.style.display = 'none'; // Hide the label
                 };
                 reader.readAsDataURL(file);
             }
