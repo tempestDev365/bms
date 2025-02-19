@@ -41,7 +41,7 @@ if (sidebar) {
 
                        
                         <li class="nav-item">
-                            <a href="./blotter.php" class="nav-link text-light">Blotter Case</a>
+                            <a href="./blotter.php" class="nav-link text-light">Blotter Schedule</a>
                         </li>
                         <li class="nav-item">
                             <a href="./documentRequest.php" class="nav-link text-light">Document Requests</a>
