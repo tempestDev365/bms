@@ -83,8 +83,10 @@ $blotter = getAllBlotter();
                             echo"<td>".$row['meeting_time']."</td>";
                             echo"<td>".$row['description']."</td>";
                             echo"<td>";
+                            echo"<button class='btn btn-success btn-sm'>Approve</button>";
+                            echo"<button class='btn btn-warning btn-sm' data-bs-toggle='modal' data-bs-target='#rescheduleModal' data-id='".$row['id']."'>Reschedule</button>";
+                            echo"</td>";
                             echo"</tr>";
-
                           }
                         ?>
                     </tbody>
@@ -192,8 +194,35 @@ $blotter = getAllBlotter();
         </div>
      </div>
 
-
-
+    <!-- Reschedule Modal -->
+    <div class="modal" id="rescheduleModal">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Reschedule Meeting</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid p-3">
+                        <form action="../../controllers/rescheduleBlotterController.php" method="POST">
+                            <input type="hidden" name="blotter_id" id="blotter_id">
+                            <div class="form-group">
+                                <label>Select New Date</label>
+                                <input type="date" name="new_date" class="form-control" required>
+                            </div>
+                            <div class="form-group mt-2">
+                                <label>Select New Time</label>
+                                <input type="time" name="new_time" class="form-control" required>
+                            </div>
+                            <div class="form-group mt-2 d-flex justify-content-end">
+                                <button class="btn btn-sm btn-warning">Reschedule</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -256,6 +285,12 @@ $blotter = getAllBlotter();
         table.column(2).search(filterValue === 'all' ? '' : filterValue, true, false).draw();
     });
 
+    $('#rescheduleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var blotterId = button.data('id');
+        var modal = $(this);
+        modal.find('#blotter_id').val(blotterId);
+    });
 
     </script>
 
