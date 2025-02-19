@@ -30,17 +30,45 @@ if(!isset($_SESSION['admin'])) {
                 </ol>
               </nav>
 
+              
+
             <div class="container-fluid p-4 border shadow-sm rounded-3  bg-white">
                     <div class="register-header d-flex align-items-center">
                         <h1>Add New Resident</h1>
                     </div>  
+
+                    <div class="upload-img p-4">
+                    <div class=" d-flex justify-content-center align-items-center" style="gap: 10px;">
+                        
+                    <div class="form-group d-flex flex-column justify-content-center align-items-center"> 
+                        <img id="picturePreview" src="#" alt="Resident Picture Preview" style="display:none; max-width: 400px; max-height: 400px;" class="img-fluid border shadow-sm rounded-3">
+
+                        <div>
+                            <label>Resident Picture:</label>
+                            <input type="file" class="form-control" id="picture" name="picture" onchange="previewImage(event, 'picturePreview')">
+                        </div>
+                    </div>
+
+                        
+                    <div class="form-group d-flex flex-column justify-content-center align-items-center">  
+                       <img id="validIdPreview" src="#" alt="Valid ID Preview" style="display:none; max-width: 400px; max-height: 400px;" class="img-fluid border shadow-sm rounded-3">
+                        <div>
+                            <label>Valid ID:</label>
+                            <input type="file" class="form-control" id="valid_id" name="valid_id" onchange="previewImage(event, 'validIdPreview')">
+                        </div>
+                    </div>
+                        
+                       
+                    </div>
+                    </div>
+
                     <div class="register-body">
             
                     <form action="../../controllers/residentRegisterController.php" method="POST" enctype="multipart/form-data">
                         <div class="info-section mt-3">
                             <div class="box bg-white shadow-sm border rounded-3 p-3">
                                 <div class="box-body row">
-                                    <div class="personal-info col-md-12 col-lg-4 d-flex flex-column" style="gap: 5px;">
+                                    <div class="personal-info col-md-12 col-lg-6 d-flex flex-column" style="gap: 5px;">
                                         <div class="box-header">
                                             <h4>Personal Information</h4>
                                         </div>
@@ -110,7 +138,7 @@ if(!isset($_SESSION['admin'])) {
     </div>
 </div>
                                         </div>
-                                        <div class="other-info col-md-12 col-lg-4 d-flex flex-column" style="gap: 5px;">
+                                        <div class="other-info col-md-12 col-lg-6 d-flex flex-column" style="gap: 5px;">
                                             <div class="contact-header">
                                                 <h4>Additional Information</h4>
                                             </div>
@@ -134,17 +162,7 @@ if(!isset($_SESSION['admin'])) {
                                             <label>Tel No.:</label>
                                             <input type="text" class="form-control" id="tel_no" name="tel_no" value="<?php echo $resident_information['contact_information']['tel_no'] ?? ''; ?>">
                                         </div>
-                    <div class="other-info-2 col-md-12 col-lg-4 d-flex flex-column" style="gap: 5px;">
-                        <div class="contact-header">
-                            <h4>Images</h4>
-                        </div>
-                        <label>Resident Picture:</label>
-                        <input type="file" class="form-control" id="picture" name="picture" onchange="previewImage(event, 'picturePreview')">
-                        <img id="picturePreview" src="#" alt="Resident Picture Preview" style="display:none; max-width: 100px; max-height: 100px;">
-                        <label>Valid ID:</label>
-                        <input type="file" class="form-control" id="valid_id" name="valid_id" onchange="previewImage(event, 'validIdPreview')">
-                        <img id="validIdPreview" src="#" alt="Valid ID Preview" style="display:none; max-width: 100px; max-height: 100px;">
-                    </div>
+                  
                                 </div>
                             </div>
                         </div>
