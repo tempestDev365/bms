@@ -247,6 +247,9 @@ if(!isset($_SESSION['admin'])) {
                 this.value = this.value.slice(0, 5);
             }
         });
+
+        // Set max date for birthdate to today
+        document.getElementById('birthdate').setAttribute('max', new Date().toISOString().split('T')[0]);
     </script>
 
     
