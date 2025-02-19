@@ -1,6 +1,6 @@
 <?php
 session_start();
-$email = $_SESSION['email'];
+$email = $_GET['email'];
 ?>
 
 <!DOCTYPE html>
@@ -280,17 +280,17 @@ $email = $_SESSION['email'];
    input.forEach(input => {
        input.addEventListener('input', function(e) {
            inputs[e.target.name] = e.target.value
-           document.querySelector('.first_name').textContent = `First name: ${inputs.first_name}`
-           document.querySelector('.middle_name').textContent = `Middle name: ${inputs.middle_name}`
-           document.querySelector('.last_name').textContent = `Last name: ${inputs.last_name}`
-           document.querySelector('.suffix').textContent = `Suffix: ${inputs.suffix}`
-           document.querySelector('.sex').textContent = `Sex: ${inputs.sex}`
-           document.querySelector('.age').textContent = `Age: ${inputs.age}` 
-            document.querySelector('.birthday').textContent = `Date of birth: ${inputs.birthday}`
-            document.querySelector('.civil_status').textContent = `Civil Status: ${inputs.civil_status}`
-            document.querySelector('.purok').textContent = `Purok: ${inputs.purok}`
-            document.querySelector('.address').textContent = `House no./Bldg./Street name: ${inputs.house_number} ${inputs.street}`
-            document.querySelector('.home_owner').textContent = `Name of the house owner: ${inputs.house_owner}` 
+           document.querySelector('.first_name').textContent = `First name: ${inputs.first_name || 'N/A'}`;
+document.querySelector('.middle_name').textContent = `Middle name: ${inputs.middle_name || 'N/A'}`;
+document.querySelector('.last_name').textContent = `Last name: ${inputs.last_name || 'N/A'}`;
+document.querySelector('.suffix').textContent = `Suffix: ${inputs.suffix || 'N/A'}`;
+document.querySelector('.sex').textContent = `Sex: ${inputs.sex || 'N/A'}`;
+document.querySelector('.age').textContent = `Age: ${inputs.age || 'N/A'}`;
+document.querySelector('.birthday').textContent = `Date of birth: ${inputs.birthday || 'N/A'}`;
+document.querySelector('.civil_status').textContent = `Civil Status: ${inputs.civil_status || 'N/A'}`;
+document.querySelector('.purok').textContent = `Purok: ${inputs.purok || 'N/A'}`;
+document.querySelector('.address').textContent = `House no./Bldg./Street name: ${inputs.house_number || 'N/A'} ${inputs.street || 'N/A'}`;
+document.querySelector('.home_owner').textContent = `Name of the house owner: ${inputs.house_owner || 'N/A'}`;
        })
     })
     const select = document.querySelectorAll('select');
