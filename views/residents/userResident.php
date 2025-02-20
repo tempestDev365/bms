@@ -433,5 +433,18 @@ function populateModal(){
 }
 populateModal()
     </script>
+    <script>
+    function toggleMiddleName() {
+        const middleNameInput = document.getElementById('middle_name');
+        const noMiddleNameCheckbox = document.getElementById('no_middle_name');
+        if (noMiddleNameCheckbox.checked) {
+            middleNameInput.disabled = true;
+            middleNameInput.value = 'N/A';
+        } else {
+            middleNameInput.disabled = false;
+            middleNameInput.value = '';
+        }
+    }
+</script>
 </body>
 </html>
