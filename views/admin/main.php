@@ -114,7 +114,7 @@ $demographic = getAllDemographic();
                             <img src="../../assets/img/dashboard/male.png" class="img-fluid" style="width: 80px" alt="male">
                         </div>
                         <div class="card-title d-flex justify-content-between align-items-center" style="gap: 10px">
-                            <h5>Total Male:</h5>
+                            <h5>Total male:</h5>
                             <h3><?php echo $demographic['male_count'] ?></h5>
                         </div>
                     </div>
@@ -126,10 +126,10 @@ $demographic = getAllDemographic();
                     <div class="card" style="max-width: 350px; width: 350px;">
                     <div class="card-body d-flex justify-content-between align-items-center flex-column">
                         <div class="card-content">
-                            <img src="../../assets/img/dashboard/male.png" class="img-fluid" style="width: 80px" alt="male">
+                            <img src="../../assets/img/dashboard/voters.png" class="img-fluid" style="width: 80px" alt="male">
                         </div>
                         <div class="card-title d-flex justify-content-between align-items-center" style="gap: 10px">
-                            <h5>Total Male:</h5>
+                            <h5>Total Voter:</h5>
                             <h3><?php echo $demographic['voter_count'] ?></h5>
                         </div>
                     </div>

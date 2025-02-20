@@ -68,7 +68,7 @@ if(!isset($_SESSION['admin'])) {
 
                     <div class="register-body">
             
-                    <form action="../../controllers/residentRegisterController.php" method="POST" enctype="multipart/form-data">
+                    <form action="../../controllers/adminAddResident.php" method="POST" enctype="multipart/form-data">
                         <div class="info-section mt-3">
                             <div class="box bg-white shadow-sm border rounded-3 p-3">
                                 <div class="box-body row">
@@ -84,6 +84,8 @@ if(!isset($_SESSION['admin'])) {
                                         <input type="text" class="form-control" id="last_name" name="last_name" value="<?php echo $resident_information['resident_information']['last_name'] ?? ''; ?>">
                                         <label>Suffix:</label>
                                         <input type="text" class="form-control" id="suffix" name="suffix" value="<?php echo $resident_information['resident_information']['suffix'] ?? ''; ?>">
+                                        <label>Sex:</label>
+                                        <input type="text" class="form-control" id="sex" name="sex" value="<?php echo $resident_information['resident_information']['suffix'] ?? ''; ?>">
                                         <label>Age:</label>
                                         <input type="number" class="form-control" id="age" name="age" value="<?php echo $resident_information['resident_information']['age'] ?? ''; ?>">
                                         <label>Date Of Birth:</label>
@@ -160,9 +162,7 @@ if(!isset($_SESSION['admin'])) {
                                             <input type="text" class="form-control" id="type_of_school" name="type_of_school" value="<?php echo $resident_information['additional_information']['type_of_school'] ?? ''; ?>">
                                             <h4 class="mt-2">Contact Information</h4>
                                             <label>Phone Number:</label>
-                                            <input type="text" class="form-control" id="mobile_no" name="mobile_no" value="<?php echo $resident_information['contact_information']['phone_number'] ?? ''; ?>">
-                                            <label>Email:</label>
-                                            <input type="text" class="form-control" id="email" name="email" value="<?php echo $resident_information['contact_information']['email'] ?? ''; ?>">
+                                            <input type="text" class="form-control" id="mobile_no" name="mobile_no" value="<?php echo $resident_information['contact_information']['phone_number'] ?? ''; ?>"
                                             <label>Tel No.:</label>
                                             <input type="text" class="form-control" id="tel_no" name="tel_no" value="<?php echo $resident_information['contact_information']['tel_no'] ?? ''; ?>">
                                         </div>

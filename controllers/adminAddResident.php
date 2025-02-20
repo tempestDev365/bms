@@ -35,30 +35,43 @@ function resizeImage($file, $max_width, $max_height) {
 // Check if form was submitted
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Validate and sanitize input
-    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $firstName = htmlspecialchars($_POST['first_name']);
     $lastName = htmlspecialchars($_POST['last_name']);
     $middleName = htmlspecialchars($_POST['middle_name']);
     $suffix = $_POST['suffix'] ?? "";
     $sex = $_POST['sex'];
-    $birthDate = $_POST['birthday'];
+    $birthDate = $_POST['birthdate'];
     $age = isset($_POST['age']) ? (int)$_POST['age'] : 0;  // Explicit integer conversion
     $civil_status = $_POST['civil_status'];
     $purok = $_POST['purok'];
     $house_number = $_POST['house_number'];
     $street = $_POST['street'];
-    $house_owner = $_POST['house_owner'];
-    $employment_status = $_POST['employment_status'];
+    $birthplace = $_POST['birthplace'];
+    $height = $_POST['height'] ?? "";
+    $weight = $_POST['weight'] ?? "";
+    $blood_type = $_POST['blood_type'] ?? "";
+    $religion = $_POST['religion'] ?? "";
+    $nationality = $_POST['national'] ?? "";
+    $registered_voter = $_POST['registered_voter'] ?? "";
+    $organization_member = $_POST['organization_member'] ?? "";
+    $employment_status = $_POST['employment_status'] ?? "";
+    $employment_field = $_POST['employment_field'] ?? "";
+    $monthly_income = $_POST['monthly_income'] ?? "";
+    $highest_educational_attainment = $_POST['highest_educational_attainment'] ?? "";
+    $type_of_school = $_POST['type_of_school'] ?? "";
+    $occupation = $_POST['occupation'] ?? "";
+    $phone_number = $_POST['phone_number'] ?? "";
+    $tel_no = $_POST['tel_no'] ?? "";
 
     // Handle file uploads safely
-    $front_id = "";
-    if (isset($_FILES['frontID']['tmp_name']) && file_exists($_FILES['frontID']['tmp_name'])) {
-        $front_id = base64_encode(resizeImage($_FILES['frontID']['tmp_name'], 250, 250));
+    $picture = "";
+    if (isset($_FILES['picture']['tmp_name']) && file_exists($_FILES['picture']['tmp_name'])) {
+        $picture = base64_encode(resizeImage($_FILES['picture']['tmp_name'], 250, 250));
     }
 
-    $back_id = "";
-    if (isset($_FILES['backID']['tmp_name']) && file_exists($_FILES['backID']['tmp_name'])) {
-        $back_id = base64_encode(resizeImage($_FILES['backID']['tmp_name'], 250, 250));
+    $valid_id = "";
+    if (isset($_FILES['valid__id']['tmp_name']) && file_exists($_FILES['valid__id']['tmp_name'])) {
+        $valid_id = base64_encode(resizeImage($_FILES['valid__id']['tmp_name'], 250, 250));
     }
 
     try {
@@ -66,36 +79,33 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $conn->beginTransaction();
 
         // Insert into `residents_information`
-        $qry = "INSERT INTO residents_information (first_name, middle_name, last_name, email, suffix, sex, age, birthday, civil_status, purok, house_number, street, house_owner, id_front, id_back, time_Created) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+        $qry = "INSERT INTO residents_information (first_name, middle_name, last_name,suffix, sex, age, birthday, civil_status, purok, house_number, street,  time_Created) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  NOW())";
         $stmt = $conn->prepare($qry);
         $stmt->execute([
-            $firstName, $middleName, $lastName, $email, $suffix, $sex, $age, $birthDate,
-            $civil_status, $purok, $house_number, $street, $house_owner, $front_id, $back_id
+            $firstName, $middleName, $lastName, $suffix, $sex, $age, $birthDate,
+            $civil_status, $purok, $house_number, $street
         ]);
         $id = $conn->lastInsertId();
 
         // Insert into `residents_personal_information`
         $insert_into_personal = "INSERT INTO residents_personal_information 
             (resident_id, birth_place, resident_picture, valid_id, height, weight, blood_type, religion, nationality, registered_voter, organization_member, time_Created) 
-            VALUES (?, '', '', '', ?, ?, '', '', '', ?, '', NOW())";
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
         $stmt = $conn->prepare($insert_into_personal);
-        $height = 0;  // Default to 0 if not provided
-        $weight = 0;  // Default to 0 if not provided
-        $registered_voter = isset($_POST['registered_voter']) ? (int)$_POST['registered_voter'] : 0;
-        $stmt->execute([$id, $height, $weight, $registered_voter]);
+        $stmt->execute([$id, $birthplace, $picture, $valid_id, $height, $weight, $blood_type, $religion, $nationality, $registered_voter, $organization_member]);
 
         // Insert into `residents_contact_information`
-        $insert_into_contact = "INSERT INTO residents_contact_information (resident_id, phone_number, email, tel_no, time_Created) 
-            VALUES (?, '', ?, '', NOW())";
+        $insert_into_contact = "INSERT INTO residents_contact_information (resident_id, phone_number, tel_no, time_Created) 
+            VALUES (?, ?, ?, NOW())";
         $stmt = $conn->prepare($insert_into_contact);
-        $stmt->execute([$id, $email]);
+        $stmt->execute([$id, $phone_number, $tel_no]);
 
         // Insert into `residents_additional_information`
         $insert_into_additional = "INSERT INTO residents_additional_information (resident_id, employment_status, employment_field, monthly_income, highest_educational_attainment, type_of_school, occupation, time_Created) 
-            VALUES (?, ?, '', '', '', '', '', NOW())";
+            VALUES (?, ?, ?, ?, ?, ?, ?, NOW())";
         $stmt = $conn->prepare($insert_into_additional);
-        $stmt->execute([$id, $employment_status]);
+        $stmt->execute([$id, $employment_status, $employment_field, $monthly_income, $highest_educational_attainment, $type_of_school, $occupation]);
 
         // Commit transaction
         $conn->commit();

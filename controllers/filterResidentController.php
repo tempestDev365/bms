@@ -4,58 +4,26 @@ function filterResident($filter){
     include_once "../database/databaseConnection.php";
     $conn = $GLOBALS['conn'];
     if($filter == 'female'){
-        $qry = "SELECT 
-            r.id, r.first_name, r.middle_name, r.last_name, 
-            ri.sex, ri.age,ri.resident_id, 
-            a.*
-        FROM 
-            approved_tbl a
-        LEFT JOIN 
-            residents_tbl r ON a.resident_id = r.id
-        LEFT JOIN 
-            resident_information ri ON r.id = ri.resident_id
-        WHERE 
-            ri.sex = 'female'
-        ";
+        $qry = "SELECT * FROM residents_information WHERE sex = 'Female'";
     } else if($filter == 'male'){
-        $qry = "SELECT 
-            r.id, r.first_name, r.middle_name, r.last_name, 
-            ri.sex, ri.age,ri.resident_id, 
-            a.*
-        FROM 
-            approved_tbl a
-        LEFT JOIN 
-            residents_tbl r ON a.resident_id = r.id
-        LEFT JOIN 
-            resident_information ri ON r.id = ri.resident_id
-        WHERE 
-            ri.sex = 'male'
-        ";
+        $qry = "SELECT * FROM residents_information WHERE sex = 'Male'";
+
     } else if($filter == 'voter'){
-        $qry = "SELECT 
-            r.id, r.first_name, r.middle_name, r.last_name, 
-            ri.sex, ri.age,ri.resident_id, 
-            a.*
-        FROM 
-            approved_tbl a
-        LEFT JOIN 
-            residents_tbl r ON a.resident_id = r.id
-        LEFT JOIN 
-            resident_information ri ON r.id = ri.resident_id
-        WHERE 
-            ri.registered_voter = 1
-        ";
+        $qry = "SELECT ri.* FROM residents_information 
+        LEFT JOIN residents_personal_information ra ON ri.id = ra.resident_id
+        WHERE ra.registered_voter = 1";
+        
+        
+
     }else if($filter == 'all'){
          $qry = "SELECT 
             r.id, r.first_name, r.middle_name, r.last_name, 
             ri.sex, ri.age,ri.resident_id, 
             a.*
         FROM 
-            approved_tbl a
-        LEFT JOIN 
-            residents_tbl r ON a.resident_id = r.id
-        LEFT JOIN 
-            resident_information ri ON r.id = ri.resident_id";
+            residents_information ri
+             LEFT JOIN residents_personal_information ra ON ri.id = ra.resident_id";
+
     }
     
                       

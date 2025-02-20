@@ -13,7 +13,9 @@ if ($filter === 'male') {
 } elseif ($filter === 'female') {
     $resident_qry = "SELECT * FROM residents_information WHERE sex = 'Female'";
 } elseif ($filter === 'voter') {
-    $resident_qry = "SELECT * FROM residents_information WHERE is_voter = 1";
+    $resident_qry = "SELECT ri.* FROM residents_information ri
+        LEFT JOIN residents_personal_information ra ON ri.id = ra.resident_id
+        WHERE ra.registered_voter = 'Yes'";
 } else {
     $resident_qry = "SELECT * FROM residents_information";
 }
@@ -244,7 +246,7 @@ $resident_result = $stmt->fetchAll();
         async function viewDetail(id){
             const api = await fetch(`../../controllers/getAllResidentInformationController.php?id=${id}&action=view`);
             const response = await api.json();
-            populateModal(response.resident_picture, response.resident_signature, response.resident_valid_id, response.resident_fullname, response.resident_sex, response.resident_birthdate,
+            populateModal(response.resident_picture, response.resident_valid_id, response.resident_fullname, response.resident_sex, response.resident_birthdate,
                 response.resident_birthplace, response.resident_civil_status, response.resident_height, response.resident_weight, response.resident_blood_type, response.resident_religion, response.resident_ethnic_origin, response.resident_nationality, response.resident_precinct_number, response.resident_is_voter, response.resident_org_member,
                 response.resident_email, response.resident_mobile_number, response.resident_tel_no, response.resident_ICOE_name, response.resident_ICOE_contact_number, response.resident_ICOE_address, response.resident_mother_name, response.resident_father_name, response.resident_spouse_name, response.resident_highest_educational_attainment, response.resident_type_of_school,
                 response.resident_house_number, response.resident_purok, response.resident_full_address, response.resident_street, response.resident_hoa, response.resident_employment_status, response.resident_employment_field, response.resident_occupation, response.resident_monthly_income);
