@@ -37,7 +37,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $images->execute();
     $images = $images->fetch(PDO::FETCH_ASSOC);
     $first_name = $_POST['first_name'];
-    $middle_name = $_POST['middle_name'];
+    $middle_name = $_POST['middle_name'] ?? "";
     $last_name = $_POST['last_name'];
     $suffix = $_POST['suffix'];
     $age = $_POST['age'];
@@ -129,7 +129,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             WHERE resident_id = $id";
     $result3 = $conn->query($sql3);
     echo "<script>alert('Successfully updated resident information!')</script>";
-    echo "<script>window.location.href = '../views/resident/userResident.php'</script>";
+    echo "<script>window.location.href = '../views/residents/userResident.php'</script>";
      
 }
 ?>
