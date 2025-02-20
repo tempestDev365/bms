@@ -246,8 +246,35 @@ $resident_result = $stmt->fetchAll();
         async function viewDetail(id){
             const api = await fetch(`../../controllers/getAllResidentInformationController.php?id=${id}&action=view`);
             const response = await api.json();
-            populateModal(response.resident_picture, response.valid_id, response.resident_fullname, response.resisdent_birthdate, 
-            response.resident_height,response.resident_weight,response.resident_blood_type,response.resident_religion,response.resident_is_voter,response.resident_org_membership,response.email,response.mobile_no,response.tel_no,response.resident_highest_educational_attainment,response.resident_type_of_school,response.resident_house_number,response.resident_purok,response.resident_street,response.resident_employment_status,response.resident_employment_field,response.resident_occupation,response.resident_monthly_income);
+            populateModal(
+    response.resident_picture, 
+    response.valid_id, 
+    response.resident_fullname, 
+    response.resident_sex, 
+    response.resident_birthdate, 
+    response.resident_birthplace, 
+    response.resident_civil_status, 
+    response.resident_height, 
+    response.resident_weight, 
+    response.resident_blood_type, 
+    response.resident_religion, 
+    response.resident_nationality, 
+    response.resident_is_voter, 
+    response.resident_org_membership, 
+    response.email, 
+    response.mobile_no, 
+    response.resident_tel_no, 
+    response.resident_highest_educational_attainment, 
+    response.resident_type_of_school, 
+    response.resident_house_number, 
+    response.resident_purok, 
+    response.resident_full_address, 
+    response.resident_street, 
+    response.resident_employment_status, 
+    response.resident_employment_field, 
+    response.resident_occupation, 
+    response.resident_monthly_income
+);
         }
 
         function setUrlId(id){

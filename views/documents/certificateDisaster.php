@@ -53,7 +53,7 @@ function getAllResidentInformation($id){
          'resident_monthly_income'=>$result['monthly_income'] ?? "",
         'resident_occupation'=>$result['occupation'] ?? "",
         'resident_full_address'=>$result['house_number'].' '.$result['purok'].' '.$result['street'],
-        'purpose'=>$purpose['purpose']
+        'purpose'=>$purpose['purpose'] ?? ""
         
 
     ];
