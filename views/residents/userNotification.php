@@ -156,7 +156,7 @@ $allConcernsReplies = getAllConcernsReplies();
                                     <p class="notification-message">Your request for <strong><?php echo $document['document']; ?></strong> has been <?php echo $status?>.</p>
                                     <p class="notification-date"><?php echo $document['time_Created']; ?></p>
                                 </div>
-                                <button id = "markAsReadBtn" data-id = "<?php echo $count ?>">Mark As Read</button>
+                                <button class="btn btn-sm btn-success" id="markAsReadBtn" data-id="<?php echo $count ?>">Mark As Read</button>
                             </div>
                             <?php $count ++?>
                         </div>
@@ -170,7 +170,7 @@ $allConcernsReplies = getAllConcernsReplies();
                                     <p class="notification-message">The admin has replied to your concern:</p>
                                     <p class="notification-date"><?php echo $replies['message']; ?></p>
                                 </div>
-                                <button id = "markAsReadBtn" data-id =  "<?php echo $count ?>">Mark As Read</button>
+                                <button class="btn btn-sm btn-success" id="markAsReadBtn" data-id="<?php echo $count ?>">Mark As Read</button>
                             </div>
                             <?php  $count ++?>
                         </div>
@@ -183,7 +183,7 @@ $allConcernsReplies = getAllConcernsReplies();
                                     <p class="notification-message">Your request for <strong><?php echo $document['document_type']; ?></strong> has been <?php echo $status?>.</p>
                                     <p class="notification-date"><?php echo $document['time_Created']; ?></p>
                                 </div>
-                                <button id = "markAsReadBtn" data-id =  "<?php echo $count ?>">Mark As Read</button>
+                                <button class="btn btn-sm btn-success" id="markAsReadBtn" data-id="<?php echo $count ?>">Mark As Read</button>
                             </div>
                             <?php  $count ++?>
                         </div>
@@ -200,7 +200,7 @@ $allConcernsReplies = getAllConcernsReplies();
                                     <?php endif; ?>
                                     <p class="notification-date"><?php echo $blotter['time']; ?></p>
                                 </div>
-                                <button id = "markAsReadBtn" data-id =  "<?php echo $count ?>">Mark As Read</button>
+                                <button class="btn btn-sm btn-success" id="markAsReadBtn" data-id="<?php echo $count ?>">Mark As Read</button>
                             </div>
                             <?php  $count ++?>
                         </div>
@@ -212,7 +212,7 @@ $allConcernsReplies = getAllConcernsReplies();
                                     <h5 class="notification-title">NEW ANNOUNCEMENT</h5>
                                     <p class="notification-message">A new announcement has been posted</p>
                                 </div>
-                                <button class="btn btn-sm btn-success" id = "markAsReadBtn" data-id =  "<?php echo $count ?>">Mark As Read</button>
+                                <button class="btn btn-sm btn-success" id="markAsReadBtn" data-id="<?php echo $count ?>">Mark As Read</button>
                             </div>
                             <?php  $count ++?>
                         </div>
