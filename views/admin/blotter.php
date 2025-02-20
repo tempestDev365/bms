@@ -205,38 +205,18 @@ $blotter = getAllBlotter();
     });
   function approveBlotter(id){
     fetch(`../../controllers/blotterOptions.php?id=${id}&action=approve`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Approved!',
-                    text: 'Blotter has been approved.',
-                    showConfirmButton: false,
-                    timer: 1500
-                }).then(() => {
-                    location.reload();
-                });
-            }
-        });
+    alert('Blotter approved')
+    location.reload()
+    
+      
+   
 }
 
 function disapproveBlotter(id){
     fetch(`../../controllers/blotterOptions.php?id=${id}&action=disapprove`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Rejected!',
-                    text: 'Blotter has been rejected.',
-                    showConfirmButton: false,
-                    timer: 1500
-                }).then(() => {
-                    location.reload();
-                });
-            }
-        });
+    alert('Blotter Rejected')
+    location.reload()
+    
 }
     function setUrl(id){
        document.getElementById('id').value = id;
