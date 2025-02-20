@@ -117,7 +117,7 @@ $blotter = getAllBlotter();
                             <input type="hidden" name = "id" id = "id"> 
                          <div class="form-group mt-2">
                                 <label>Select Date Schedule</label>
-                                <input type="date" name = "date_schedule" class="form-control" required>
+                                <input type="date" name="date_schedule" class="form-control" required min="<?php echo date('Y-m-d'); ?>">
                             </div>
 
                             <div class="form-group mt-2">
