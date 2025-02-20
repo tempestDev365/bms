@@ -1,4 +1,4 @@
-    <?php
+<?php
     session_start();
     if(!isset($_SESSION['user_id'])) {
         header('Location: ./residentLogin.php');
@@ -55,7 +55,7 @@
 
                             <div class="form-group mt-2">
                                 <label>Select Date Schedule</label>
-                                <input type="date" name = "date_schedule" class="form-control" required>
+                                <input type="date" name="date_schedule" class="form-control" required min="<?php echo date('Y-m-d'); ?>">
                             </div>
 
                             <div class="form-group mt-2">
