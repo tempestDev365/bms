@@ -55,7 +55,7 @@
 
                             <div class="form-group mt-2">
                                 <label>Select Date Schedule</label>
-                                <input type="date" name="date_schedule" class="form-control" required min="<?php echo date('Y-m-d'); ?>">
+                                <input type="date" name="date_schedule" class="form-control" required min="<?php echo date('Y-m-d'); ?>" id="date_schedule">
                             </div>
 
                             <div class="form-group mt-2">
@@ -212,6 +212,24 @@ function setExpiry() {
 }
 
 document.querySelector('form').addEventListener('submit', setExpiry);
+
+document.getElementById('date_schedule').addEventListener('blur', function() {
+    if (this.value) {
+        const selectedDate = new Date(this.value);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        if (selectedDate < today) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Invalid Date',
+                text: 'Please select a future date.',
+                showConfirmButton: true
+            });
+            this.value = '';
+        }
+    }
+});
 </script>
 </body>
 </html>
