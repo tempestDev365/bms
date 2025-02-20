@@ -141,6 +141,8 @@ if(isset($other_id)){
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
         }
+          h1, .title-class { display: none !important; }
+
 
         .card-container {
             display: flex;
@@ -177,6 +179,14 @@ if(isset($other_id)){
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
+             title, header, footer {
+        display: none !important;
+    }
+
+    /* Hide specific elements if needed */
+    .top-right-text, .bottom-text {
+        display: none !important;
+    }
         }
     </style>
 </head>
@@ -230,6 +240,7 @@ if(isset($other_id)){
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
+        
         window.onload = function() {
             window.print();
         };
@@ -241,6 +252,7 @@ if(isset($other_id)){
         document.querySelector('.btn-close').addEventListener('click', function() {
             window.history.back();
         });
+        
     </script>
 </body>
 </html>

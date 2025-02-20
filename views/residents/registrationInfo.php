@@ -232,163 +232,162 @@ $email = $_GET['email'];
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
-    function calculateAge() {
-        const birthdayInput = document.getElementById('birthday');
-        const ageInput = document.getElementById('age');
-        
-        const birthday = new Date(birthdayInput.value);
-        const today = new Date();
-        
-        // Check if selected date is in the future
-        if (birthday > today) {
-            alert("Birthday cannot be in the future!");
-            birthdayInput.value = ''; // Clear the input
-            ageInput.value = ''; // Clear the age
-            return;
-        }
-        
-        let age = today.getFullYear() - birthday.getFullYear();
-        const monthDiff = today.getMonth() - birthday.getMonth();
-        
-        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthday.getDate())) {
-            age--;
-        }
-        
-        ageInput.value = age;
-        inputs['age'] = age;
-        document.querySelector('.age').textContent = `Age: ${age}`;
-    }
-    
-    // JavaScript to handle pagination
-    document.getElementById('page1').addEventListener('click', function(event) {
-        event.preventDefault();
-        document.getElementById('form1').style.display = 'block';
-        document.getElementById('form2').style.display = 'none';
-        document.getElementById('form4').style.display = 'none';
-        document.getElementById('form5').style.display = 'none';
-        updatePaginationActiveState('page1');
-    });
-
-    document.getElementById('page2').addEventListener('click', function(event) {
-        event.preventDefault();
-        document.getElementById('form1').style.display = 'none';
-        document.getElementById('form2').style.display = 'block';
-        document.getElementById('form4').style.display = 'none';
-        document.getElementById('form5').style.display = 'none';
-        updatePaginationActiveState('page2');
-    });
-
-    document.getElementById('page4').addEventListener('click', function(event) {
-        event.preventDefault();
-        document.getElementById('form1').style.display = 'none';
-        document.getElementById('form2').style.display = 'none';
-        document.getElementById('form4').style.display = 'block';
-        document.getElementById('form5').style.display = 'none';
-        updatePaginationActiveState('page4');
-    });
-
-    document.getElementById('page5').addEventListener('click', function(event) {
-        event.preventDefault();
-        document.getElementById('form1').style.display = 'none';
-        document.getElementById('form2').style.display = 'none';
-        document.getElementById('form4').style.display = 'none';
-        document.getElementById('form5').style.display = 'block';
-        updatePaginationActiveState('page5');
-    });
-
-    // Function to enable the next page
-    function enableNextPage(currentPage, nextPage) {
-        document.getElementById(currentPage).classList.remove('disabled');
-        document.getElementById(nextPage).classList.remove('disabled');
-    }
-
-    // Function to validate form fields
-    function validateForm(formId, nextButtonId) {
-        const form = document.getElementById(formId);
-        const nextButton = document.getElementById(nextButtonId);
-        const inputs = form.querySelectorAll('input[required], select[required]');
-        let isValid = true;
-
-        inputs.forEach(input => {
-            if (input.name !== 'suffix' && input.name !== 'middle_name' && !input.value) {
-                isValid = false;
+        function calculateAge() {
+            const birthdayInput = document.getElementById('birthday');
+            const ageInput = document.getElementById('age');
+            
+            const birthday = new Date(birthdayInput.value);
+            const today = new Date();
+            
+            // Check if selected date is in the future
+            if (birthday > today) {
+                alert("Birthday cannot be in the future!");
+                birthdayInput.value = ''; // Clear the input
+                ageInput.value = ''; // Clear the age
+                return;
             }
+            
+            let age = today.getFullYear() - birthday.getFullYear();
+            const monthDiff = today.getMonth() - birthday.getMonth();
+            
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthday.getDate())) {
+                age--;
+            }
+            
+            ageInput.value = age;
+            inputs['age'] = age;
+            document.querySelector('.age').textContent = `Age: ${age}`;
+        }
+        
+        // JavaScript to handle pagination
+        document.getElementById('page1').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('form1').style.display = 'block';
+            document.getElementById('form2').style.display = 'none';
+            document.getElementById('form4').style.display = 'none';
+            document.getElementById('form5').style.display = 'none';
+            updatePaginationActiveState('page1');
         });
 
-        nextButton.disabled = !isValid;
-    }
-
-    // Function to update pagination active state
-    function updatePaginationActiveState(activePageId) {
-        document.querySelectorAll('.pagination .page-item').forEach(item => {
-            item.classList.remove('active');
+        document.getElementById('page2').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('form1').style.display = 'none';
+            document.getElementById('form2').style.display = 'block';
+            document.getElementById('form4').style.display = 'none';
+            document.getElementById('form5').style.display = 'none';
+            updatePaginationActiveState('page2');
         });
-        document.getElementById(activePageId).parentElement.classList.add('active');
-    }
 
-    // Function to validate image uploads for Form 4
-    function validateImageUploads() {
-        const frontID = document.getElementById('frontID').files.length > 0;
-        const backID = document.getElementById('backID').files.length > 0;
-        document.getElementById('next4').disabled = !(frontID && backID);
-    }
+       
 
-    // Event listeners for form validation
-    document.querySelectorAll('#form1 input[required], #form1 select[required]').forEach(input => {
-        input.addEventListener('input', () => validateForm('form1', 'next1'));
-        input.addEventListener('change', () => validateForm('form1', 'next1'));
-    });
+        document.getElementById('page4').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('form1').style.display = 'none';
+            document.getElementById('form2').style.display = 'none';
+            document.getElementById('form4').style.display = 'block';
+            document.getElementById('form5').style.display = 'none';
+            updatePaginationActiveState('page4');
+        });
 
-    document.querySelectorAll('#form2 input[required], #form2 select[required]').forEach(input => {
-        input.addEventListener('input', () => validateForm('form2', 'next2'));
-        input.addEventListener('change', () => validateForm('form2', 'next2'));
-    });
+        document.getElementById('page5').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('form1').style.display = 'none';
+            document.getElementById('form2').style.display = 'none';
+            document.getElementById('form4').style.display = 'none';
+            document.getElementById('form5').style.display = 'block';
+            updatePaginationActiveState('page5');
+        });
 
-    document.querySelectorAll('#form4 input[required], #form4 select[required]').forEach(input => {
-        input.addEventListener('input', () => validateForm('form4', 'next4'));
-        input.addEventListener('change', () => validateForm('form4', 'next4'));
-    });
+        // Function to enable the next page
+        function enableNextPage(currentPage, nextPage) {
+            document.getElementById(currentPage).classList.remove('disabled');
+            document.getElementById(nextPage).classList.remove('disabled');
+        }
 
-    // Event listeners for image uploads in Form 4
-    document.getElementById('frontID').addEventListener('change', validateImageUploads);
-    document.getElementById('backID').addEventListener('change', validateImageUploads);
+        // Function to validate form fields
+        function validateForm(formId, nextButtonId) {
+            const form = document.getElementById(formId);
+            const nextButton = document.getElementById(nextButtonId);
+            const inputs = form.querySelectorAll('input[required], select[required]');
+            let isValid = true;
 
-    // Event listeners for "Next" buttons
-    document.getElementById('next1').addEventListener('click', function() {
-        enableNextPage('page1', 'page2');
-        document.getElementById('page2').click();
-        updatePaginationActiveState('page2');
-    });
+            inputs.forEach(input => {
+                if (!input.value) {
+                    isValid = false;
+                }
+            });
 
-    document.getElementById('next2').addEventListener('click', function() {
-        enableNextPage('page2', 'page4');
-        document.getElementById('page4').click();
-        updatePaginationActiveState('page4');
-    });
+            nextButton.disabled = !isValid;
+        }
 
-    document.getElementById('next4').addEventListener('click', function() {
-        enableNextPage('page4', 'page5');
-        document.getElementById('page5').click();
-        updatePaginationActiveState('page5');
-    });
+        // Function to update pagination active state
+        function updatePaginationActiveState(activePageId) {
+            document.querySelectorAll('.pagination .page-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.getElementById(activePageId).parentElement.classList.add('active');
+        }
 
-    const inputs = {}
+        // Function to validate image uploads for Form 4
+        function validateImageUploads() {
+            const frontID = document.getElementById('frontID').files.length > 0;
+            const backID = document.getElementById('backID').files.length > 0;
+            document.getElementById('next4').disabled = !(frontID && backID);
+        }
+
+        // Event listeners for form validation
+        document.querySelectorAll('#form1 input[required], #form1 select[required]').forEach(input => {
+            input.addEventListener('input', () => validateForm('form1', 'next1'));
+        });
+
+        document.querySelectorAll('#form2 input[required], #form2 select[required]').forEach(input => {
+            input.addEventListener('input', () => validateForm('form2', 'next2'));
+        });
+
+        document.querySelectorAll('#form4 input[required], #form4 select[required]').forEach(input => {
+            input.addEventListener('input', () => validateForm('form4', 'next4'));
+        });
+
+        // Event listeners for image uploads in Form 4
+        document.getElementById('frontID').addEventListener('change', validateImageUploads);
+        document.getElementById('backID').addEventListener('change', validateImageUploads);
+
+        // Event listeners for "Next" buttons
+        document.getElementById('next1').addEventListener('click', function() {
+            enableNextPage('page1', 'page2');
+            document.getElementById('page2').click();
+            updatePaginationActiveState('page2');
+        });
+
+        document.getElementById('next2').addEventListener('click', function() {
+            enableNextPage('page2', 'page4');
+            document.getElementById('page4').click();
+            updatePaginationActiveState('page4');
+        });
+
+        document.getElementById('next4').addEventListener('click', function() {
+            enableNextPage('page4', 'page5');
+            document.getElementById('page5').click();
+            updatePaginationActiveState('page5');
+        });
+
+        const inputs = {}
     const input = document.querySelectorAll('input');
-    input.forEach(input => {
-        input.addEventListener('input', function(e) {
-            inputs[e.target.name] = e.target.value
-            document.querySelector('.first_name').textContent = `First name: ${inputs.first_name || 'N/A'}`;
-            document.querySelector('.middle_name').textContent = `Middle name: ${inputs.middle_name || 'N/A'}`;
-            document.querySelector('.last_name').textContent = `Last name: ${inputs.last_name || 'N/A'}`;
-            document.querySelector('.suffix').textContent = `Suffix: ${inputs.suffix || 'N/A'}`;
-            document.querySelector('.sex').textContent = `Sex: ${inputs.sex || 'N/A'}`;
-            document.querySelector('.age').textContent = `Age: ${inputs.age || 'N/A'}`;
-            document.querySelector('.birthday').textContent = `Date of birth: ${inputs.birthday || 'N/A'}`;
-            document.querySelector('.civil_status').textContent = `Civil Status: ${inputs.civil_status || 'N/A'}`;
-            document.querySelector('.purok').textContent = `Purok: ${inputs.purok || 'N/A'}`;
-            document.querySelector('.address').textContent = `House no./Bldg./Street name: ${inputs.house_number || 'N/A'} ${inputs.street || 'N/A'}`;
-            document.querySelector('.home_owner').textContent = `Name of the house owner: ${inputs.house_owner || 'N/A'}`;
-        })
+   input.forEach(input => {
+       input.addEventListener('input', function(e) {
+           inputs[e.target.name] = e.target.value
+           document.querySelector('.first_name').textContent = `First name: ${inputs.first_name || 'N/A'}`;
+document.querySelector('.middle_name').textContent = `Middle name: ${inputs.middle_name || 'N/A'}`;
+document.querySelector('.last_name').textContent = `Last name: ${inputs.last_name || 'N/A'}`;
+document.querySelector('.suffix').textContent = `Suffix: ${inputs.suffix || 'N/A'}`;
+document.querySelector('.sex').textContent = `Sex: ${inputs.sex || 'N/A'}`;
+document.querySelector('.age').textContent = `Age: ${inputs.age || 'N/A'}`;
+document.querySelector('.birthday').textContent = `Date of birth: ${inputs.birthday || 'N/A'}`;
+document.querySelector('.civil_status').textContent = `Civil Status: ${inputs.civil_status || 'N/A'}`;
+document.querySelector('.purok').textContent = `Purok: ${inputs.purok || 'N/A'}`;
+document.querySelector('.address').textContent = `House no./Bldg./Street name: ${inputs.house_number || 'N/A'} ${inputs.street || 'N/A'}`;
+document.querySelector('.home_owner').textContent = `Name of the house owner: ${inputs.house_owner || 'N/A'}`;
+       })
     })
     const select = document.querySelectorAll('select');
     select.forEach(select => {
@@ -489,6 +488,6 @@ $email = $_GET['email'];
             middleNameInput.disabled = false;
         }
     });
-</script>
+    </script>
 </body>
 </html>

@@ -158,7 +158,7 @@ $document_request = getAllDocumentRequest();
                       <div class="profile-btn mt-3 d-flex justify-content-end" style="gap: 10px">
                         <button class="btn btn-success" name = "" id = "approve" data-document="">Approve</button>
                         <button class="btn btn-danger" name = "" id = "reject" data-document = "">Reject</button>
-                        <button class="btn btn-danger" name = "" id = "cancel" data-document = "">Cancel Request</button>
+                        <button class="btn btn-danger" name = "" id = "cancel" data-document = "" hidden>Cancel Request</button>
 
                         
                       </div>
@@ -194,7 +194,7 @@ $document_request = getAllDocumentRequest();
                       <div class="profile-btn mt-3 d-flex justify-content-end" style="gap: 10px">
                         <button class="btn btn-success" name = "" data-id id = "approve2" other-document ="">Approve</button>
                         <button class="btn btn-danger" name = "" data-id id = "reject2" other-document = "">Reject</button>
-                        <button class="btn btn-danger" name = "" data-id id = "cancel2" other-document = "">Cancel Request</button>
+                        <button class="btn btn-danger" name = "" data-id id = "cancel2" other-document = "" hidden>Cancel Request</button>
 
                       </div>
                       
@@ -275,8 +275,9 @@ $document_request = getAllDocumentRequest();
             const resident_id = e.target.getAttribute('name');
             const document_request = e.target.getAttribute('data-document');
             const api = await fetch(`../../controllers/updateDocumentRequest.php?resident_id=${resident_id}&document=${document_request}&action=cancel`);
-            const response = await api.json();
-            window.location.reload();
+            alert('Document has been cancelled');
+
+            location.reload();
 
         });
         const cancel2 = document.getElementById('cancel2');
@@ -284,9 +285,9 @@ $document_request = getAllDocumentRequest();
             const resident_id = e.target.getAttribute('data-id');
             const document_request = e.target.getAttribute('other-document');
             const api = await fetch(`../../controllers/updateDocumentOthers.php?resident_id=${resident_id}&document=${document_request}&action=cancel`);
-            const response = await api.json();
-                window.location.reload();
-            
+            alert('Document has been cancelled');
+                location.reload();
+
          
         });
         const approve = document.getElementById('approve');
@@ -294,10 +295,9 @@ $document_request = getAllDocumentRequest();
             const resident_id = e.target.getAttribute('name');
             const document_request = e.target.getAttribute('data-document');
             const api = await fetch(`../../controllers/updateDocumentRequest.php?resident_id=${resident_id}&document=${document_request}&action=approve`);
-            const response = await api.json();
                 alert('Document has been approved');
               window.location.reload();
-            
+
 
         });
         const approve2 = document.getElementById('approve2');
@@ -305,8 +305,7 @@ $document_request = getAllDocumentRequest();
             const resident_id = e.target.getAttribute('data-id');
             const document_request = e.target.getAttribute('other-document');
             const api = await fetch(`../../controllers/updateDocumentOthers.php?resident_id=${resident_id}&document=${document_request}&action=approve`);
-            const response = await api.json();
-                alert('Document has been approved');
+            alert('Document has been approved');
               window.location.reload();
             
 
@@ -316,7 +315,8 @@ $document_request = getAllDocumentRequest();
             const resident_id = e.target.getAttribute('name');
             const document_request = e.target.getAttribute('data-document');
             const api = await fetch(`../../controllers/updateDocumentRequest.php?resident_id=${resident_id}&document=${document_request}&action=reject`);
-            const response = await api.json();
+            alert('Document has been rejected');
+
                 window.location.reload();
          
         });
@@ -325,7 +325,6 @@ $document_request = getAllDocumentRequest();
             const resident_id = e.target.getAttribute('data-id');
             const document_request = e.target.getAttribute('other-document');
             const api = await fetch(`../../controllers/updateDocumentOthers.php?resident_id=${resident_id}&document=${document_request}&action=reject`);
-            const response = await api.json();
                 alert('Document has been rejected');
                 window.location.reload();
             
@@ -353,6 +352,7 @@ $document_request = getAllDocumentRequest();
             if(response.status == 'approved' || response.status == 'rejected' ){
                 document.querySelector('#approve').setAttribute('disabled', true);
                 document.querySelector('#reject').setAttribute('disabled', true);
+document.querySelector('#cancel').removeAttribute('hidden');
                
             }
        }
@@ -375,7 +375,7 @@ $document_request = getAllDocumentRequest();
             if(response.status == 'approved' || response.status == 'rejected'){
                 document.querySelector('#approve2').setAttribute('disabled', true);
                 document.querySelector('#reject2').setAttribute('disabled', true);
-                
+                document.querySelector('#cancel2').removeAttribute('hidden');
                
             }
        }
