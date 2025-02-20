@@ -70,7 +70,7 @@
 
                            
                             <div class="form-group mt-2 d-flex justify-content-end">
-                                <button class="btn btn-sm btn-success">Report</button>
+                                <button class="btn btn-sm btn-success" id="reportBtn">Report</button>
                             </div>
                         </form>
                     </div>
@@ -137,7 +137,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="../components/residentSidebar.js?v=<?php echo time(); ?>" defer type = "module"></script>
-     <script type = "module">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type = "module">
      import { notificationCount} from '../components/residentSidebar.js';
     const unread = document.querySelectorAll('.unread');
 let count = localStorage.getItem('notificationCount') || 0;
@@ -191,7 +192,26 @@ editButtons.forEach(button => {
     });
 });
 
+document.getElementById('reportBtn').addEventListener('click', function(event) {
+    event.preventDefault();
+    Swal.fire({
+        icon: 'success',
+        title: 'Submission Successful!',
+        text: 'Your blotter report has been submitted successfully and expired within 24 hours.',
+        showConfirmButton: false,
+        timer: 1500
+    }).then(() => {
+        document.querySelector('form').submit();
+    });
+});
+
+function setExpiry() {
+    const now = new Date();
+    const expiryDate = new Date(now.getTime() + 24 * 60 * 60 * 1000); // 24 hours from now
+    document.cookie = `blotterExpiry=true; expires=${expiryDate.toUTCString()}; path=/`;
+}
+
+document.querySelector('form').addEventListener('submit', setExpiry);
 </script>
-    </script>
 </body>
 </html>
