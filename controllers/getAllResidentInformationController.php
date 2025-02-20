@@ -15,7 +15,8 @@ function getAllResidentInformation($id){
     return [
         'user_id'=>$result['user_id'],
         'resident_id'=>$result['id'],
-        'resident_picture'=>$result['resident_picture'],
+        'resident_valid_id'=>$result['valid_id'] ?? "",
+        'resident_picture'=>$result['resident_picture'] ?? "",
         'resident_fullname'=>$result['first_name'].' '.$result['middle_name'].' '.$result['last_name'],
         'resident_first_name'=>$result['first_name'] ?? "",
         'resident_middle_name'=>$result['middle_name'] ?? "",
