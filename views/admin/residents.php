@@ -246,10 +246,8 @@ $resident_result = $stmt->fetchAll();
         async function viewDetail(id){
             const api = await fetch(`../../controllers/getAllResidentInformationController.php?id=${id}&action=view`);
             const response = await api.json();
-            populateModal(response.resident_picture, response.resident_valid_id, response.resident_fullname, response.resident_sex, response.resident_birthdate,
-                response.resident_birthplace, response.resident_civil_status, response.resident_height, response.resident_weight, response.resident_blood_type, response.resident_religion, response.resident_ethnic_origin, response.resident_nationality, response.resident_precinct_number, response.resident_is_voter, response.resident_org_member,
-                response.resident_email, response.resident_mobile_number, response.resident_tel_no, response.resident_ICOE_name, response.resident_ICOE_contact_number, response.resident_ICOE_address, response.resident_mother_name, response.resident_father_name, response.resident_spouse_name, response.resident_highest_educational_attainment, response.resident_type_of_school,
-                response.resident_house_number, response.resident_purok, response.resident_full_address, response.resident_street, response.resident_hoa, response.resident_employment_status, response.resident_employment_field, response.resident_occupation, response.resident_monthly_income);
+            populateModal(response.resident_picture, response.valid_id, response.resident_fullname, response.resisdent_birthdate, 
+            response.resident_height,response.resident_weight,response.resident_blood_type,response.resident_religion,response.resident_is_voter,response.resident_org_membership,response.email,response.mobile_no,response.tel_no,response.resident_highest_educational_attainment,response.resident_type_of_school,response.resident_house_number,response.resident_purok,response.resident_street,response.resident_employment_status,response.resident_employment_field,response.resident_occupation,response.resident_monthly_income);
         }
 
         function setUrlId(id){
@@ -258,48 +256,34 @@ $resident_result = $stmt->fetchAll();
             currentURL.searchParams.set('resident_id', id);
             window.history.pushState({}, '', currentURL);
         }
-        function populateModal(picture, signature, valid_id, fullName, sex, birthdate, birthplace, civilStatus, height, weight, bloodType, religion, ethnicOrigin, nationality, precinctNumber, registeredVoter, organizationMember, email, mobileNumber, telNo, emergencyFullName, emergencyContactNumber, emergencyAddress, mother, father, spouse, highestEducation, typeOfSchool, houseNumber, purok, fullAddress, street, hoa, employmentStatus, employmentField, occupation, monthlyIncome) {
-            document.querySelector('.picture').src = "data:image/gif;base64," + picture;
-            document.querySelector('.signature').src = "data:image/gif;base64," + signature;
-            document.querySelector('.valid_id').src = "data:image/gif;base64," + valid_id;
+        function populateModal(picture,  valid_id, fullName, sex, birthdate, birthplace, civilStatus, height, weight, bloodType, religion,  nationality, registeredVoter, organizationMember, email, mobileNumber, highestEducation, typeOfSchool, houseNumber, purok, fullAddress, street,  employmentStatus, employmentField, occupation, monthlyIncome) {
+            document.querySelector('.picture').src = "data:image/jpeg;base64," + picture;
+            document.querySelector('.valid_id').src = "data:image/jpeg;base64," + valid_id;
             document.getElementById('fullName').textContent = `Full Name: ${fullName}`;
             document.getElementById('sex').textContent = `Sex: ${sex}`;
             document.getElementById('birthdate').textContent = `Birthdate: ${birthdate}`;
-            document.getElementById('birthplace').textContent = `Birthplace: ${birthplace}`;
             document.getElementById('civilStatus').textContent = `Civil Status: ${civilStatus}`;
             document.getElementById('height').textContent = `Height: ${height}`;
             document.getElementById('weight').textContent = `Weight: ${weight}`;
             document.getElementById('bloodType').textContent = `Blood Type: ${bloodType}`;
             document.getElementById('religion').textContent = `Religion: ${religion}`;
-            document.getElementById('ethnicOrigin').textContent = `Ethnic Origin: ${ethnicOrigin}`;
-            document.getElementById('nationality').textContent = `Nationality: ${nationality}`;
-            document.getElementById('precinctNumber').textContent = `Precinct Number: ${precinctNumber}`;
             document.getElementById('registeredVoter').textContent = `Registered Voter: ${registeredVoter}`;
             document.getElementById('organizationMember').textContent = `Organization Member: ${organizationMember}`;
             document.getElementById('email').textContent = `Email: ${email}`;
             document.getElementById('mobileNumber').textContent = `Mobile Number: ${mobileNumber}`;
             document.getElementById('telNo').textContent = `Tel No: ${telNo}`;
-            document.getElementById('emergencyFullName').textContent = `Fullname: ${emergencyFullName}`;
-            document.getElementById('emergencyContactNumber').textContent = `Contact Number: ${emergencyContactNumber}`;
-            document.getElementById('emergencyAddress').textContent = `Address: ${emergencyAddress}`;
-            document.getElementById('mother').textContent = `Mother: ${mother}`;
-            document.getElementById('father').textContent = `Father: ${father}`;
-            document.getElementById('spouse').textContent = `Spouse: ${spouse}`;
+        
             document.getElementById('highestEducation').textContent = `Highest Education Attainment: ${highestEducation}`;
             document.getElementById('typeOfSchool').textContent = `Type of School: ${typeOfSchool}`;
             document.getElementById('houseNumber').textContent = `House Number: ${houseNumber}`;
             document.getElementById('purok').textContent = `Purok: ${purok}`;
-            document.getElementById('fullAddress').textContent = `Full Address: ${fullAddress}`;
             document.getElementById('street').textContent = `Street: ${street}`;
-            document.getElementById('hoa').textContent = `Hoa: ${hoa}`;
             document.getElementById('employmentStatus').textContent = `Employment Status: ${employmentStatus}`;
             document.getElementById('employmentField').textContent = `Employment Field: ${employmentField}`;
             document.getElementById('occupation').textContent = `Occupation: ${occupation}`;
             document.getElementById('monthlyIncome').textContent = `Monthly Income: ${monthlyIncome}`;
         }
-        // ssets thee url to the resident id for the document printing
-
-        //goes to the document to print
+        
         const printDocu = () => {
             const documentSelected = document.getElementById('documentOption').value;
             console.log(documentSelected);
