@@ -187,13 +187,13 @@ $allConcernsReplies = getAllConcernsReplies();
                         </div>
                     <?php endforeach; ?>
                      <?php foreach($announcements as $announcement): ?>
-                        <div class="notification">
+                        <div class="notification border mt-3 p-2 rounded-3 shadow-sm">
                             <div class="notification-content">
                                <div class="notifContainer unread" id =  "<?php echo $count ?>">
                                 <h5 class="notification-title">NEW ANNOUNCEMENT</h5>
                                 <p class="notification-message">A new announcement has been posted</p>
                                
-                                <button id = "markAsReadBtn" data-id =  "<?php echo $count ?>">Mark As Read</button>
+                                <button class="btn btn-sm btn-success" id = "markAsReadBtn" data-id =  "<?php echo $count ?>">Mark As Read</button>
                                </div>
                             <?php  $count ++?>
 
