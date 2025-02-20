@@ -6,7 +6,7 @@ if(!isset($_SESSION['admin'])) {
 }
 function getAllAnnouncement(){
     $conn = $GLOBALS['conn'];
-    $qry = "SELECT * FROM announcement_tbl";
+    $qry = "SELECT * FROM announcement_tbl ORDER BY id ASC";
     $result = $conn->prepare($qry);
     $result->execute();
     $announcement = $result->fetchAll(PDO::FETCH_ASSOC);
