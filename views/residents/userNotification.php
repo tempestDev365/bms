@@ -92,6 +92,28 @@ $allConcernsReplies = getAllConcernsReplies();
         background-color: #f0f0f0; /* Light gray background */
         color: #888; /* Gray text color */
     }
+    .notification {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: #fff;
+    }
+    .notification-title {
+        font-weight: bold;
+    }
+    .notification-message {
+        margin: 5px 0;
+    }
+    .notification-date {
+        font-size: 0.9em;
+        color: #666;
+    }
+    .notifContainer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 </style>
 <body>
 
@@ -127,14 +149,14 @@ $allConcernsReplies = getAllConcernsReplies();
                         $status = $document['status'] == "approved" ? "approved" : "rejected";    
                         ?>
                         <div class="notification">
-                            <div class="notification-content">
-                               <div class="notifContainer unread" id = "<?php echo $count ?>"   >
+                            <div class="notifContainer unread" id = "<?php echo $count ?>"   >
                                 <input type="text" value = "<?php echo $_SESSION['user_id']; ?>" hidden>
-                                <h5 class="notification-title">Document Request</h5>
-                                <p class="notification-message">Your request for <strong><?php echo $document['document']; ?></strong> has been <?php echo $status?>.</p>
-                                <p class="notification-date"><?php echo $document['time_Created']; ?></p>
+                                <div>
+                                    <h5 class="notification-title">Document Request</h5>
+                                    <p class="notification-message">Your request for <strong><?php echo $document['document']; ?></strong> has been <?php echo $status?>.</p>
+                                    <p class="notification-date"><?php echo $document['time_Created']; ?></p>
+                                </div>
                                 <button id = "markAsReadBtn" data-id = "<?php echo $count ?>">Mark As Read</button>
-                            </div>
                             </div>
                             <?php $count ++?>
                         </div>
@@ -142,62 +164,57 @@ $allConcernsReplies = getAllConcernsReplies();
                     
                     <?php foreach($allConcernsReplies as $replies): ?>
                         <div class="notification">
-                            <div class="notification-content">
-                               <div class="notifContainer unread" id =  "<?php echo $count ?>">
-                                <h5 class="notification-title">Concern reply</h5>
-                                <p class="notification-message">The admin has replied to your concern:</p>
-                                <p class="notification-date"><?php echo $replies['message']; ?></p>
+                            <div class="notifContainer unread" id =  "<?php echo $count ?>">
+                                <div>
+                                    <h5 class="notification-title">Concern reply</h5>
+                                    <p class="notification-message">The admin has replied to your concern:</p>
+                                    <p class="notification-date"><?php echo $replies['message']; ?></p>
+                                </div>
                                 <button id = "markAsReadBtn" data-id =  "<?php echo $count ?>">Mark As Read</button>
-                               </div>
-                            <?php  $count ++?>
-
                             </div>
+                            <?php  $count ++?>
                         </div>
                     <?php endforeach; ?>
                     <?php foreach($allOthersDocumentRequested as $document): ?>
                         <div class="notification">
-                            <div class="notification-content">
-                               <div class="notifContainer unread" id =  "<?php echo $count ?>">
-                                <h5 class="notification-title">Document request for <?php echo $document['name']; ?></h5>
-                                <p class="notification-message">Your request for <strong><?php echo $document['document_type']; ?></strong> has been <?php echo $status?>.</p>
-                                <p class="notification-date"><?php echo $document['time_Created']; ?></p>
+                            <div class="notifContainer unread" id =  "<?php echo $count ?>">
+                                <div>
+                                    <h5 class="notification-title">Document request for <?php echo $document['name']; ?></h5>
+                                    <p class="notification-message">Your request for <strong><?php echo $document['document_type']; ?></strong> has been <?php echo $status?>.</p>
+                                    <p class="notification-date"><?php echo $document['time_Created']; ?></p>
+                                </div>
                                 <button id = "markAsReadBtn" data-id =  "<?php echo $count ?>">Mark As Read</button>
-                               </div>
-                            <?php  $count ++?>
-
                             </div>
+                            <?php  $count ++?>
                         </div>
                     <?php endforeach; ?>
                     <?php foreach($blotters as $blotter): ?>
                         <div class="notification">
-                            <div class="notification-content">
-                               <div class="notifContainer unread" id =  "<?php echo $count ?>">
-                                <h5 class="notification-title">Your scheduled blotter has been <?php echo $blotter['status']; ?></h5>
-                                <?php if($blotter['status'] == "rescheduled"): ?>
-                                    <p class="notification-message">Your scheduled blotter has been rescheduled to <?php echo $blotter['date_schedule']; ?> at <?php echo $blotter['meeting_time']; ?></p>
-                                <?php endif; ?>
-                                    <p class="notification-message">With the schdule of: <?php echo $blotter['date_schedule']; ?> at <?php echo $blotter['meeting_time']; ?></p>
-                               
-                                <p class="notification-date"><?php echo $blotter['time']; ?></p>
+                            <div class="notifContainer unread" id =  "<?php echo $count ?>">
+                                <div>
+                                    <h5 class="notification-title">Your scheduled blotter has been <?php echo $blotter['status']; ?></h5>
+                                    <?php if($blotter['status'] == "rescheduled"): ?>
+                                        <p class="notification-message">Your scheduled blotter has been rescheduled to <?php echo $blotter['date_schedule']; ?> at <?php echo $blotter['meeting_time']; ?></p>
+                                    <?php else: ?>
+                                        <p class="notification-message">With the schdule of: <?php echo $blotter['date_schedule']; ?> at <?php echo $blotter['meeting_time']; ?></p>
+                                    <?php endif; ?>
+                                    <p class="notification-date"><?php echo $blotter['time']; ?></p>
+                                </div>
                                 <button id = "markAsReadBtn" data-id =  "<?php echo $count ?>">Mark As Read</button>
-                               </div>
-                            <?php  $count ++?>
-
                             </div>
+                            <?php  $count ++?>
                         </div>
                     <?php endforeach; ?>
                      <?php foreach($announcements as $announcement): ?>
-                        <div class="notification border mt-3 p-2 rounded-3 shadow-sm">
-                            <div class="notification-content">
-                               <div class="notifContainer unread" id =  "<?php echo $count ?>">
-                                <h5 class="notification-title">NEW ANNOUNCEMENT</h5>
-                                <p class="notification-message">A new announcement has been posted</p>
-                               
+                        <div class="notification">
+                            <div class="notifContainer unread" id =  "<?php echo $count ?>">
+                                <div>
+                                    <h5 class="notification-title">NEW ANNOUNCEMENT</h5>
+                                    <p class="notification-message">A new announcement has been posted</p>
+                                </div>
                                 <button class="btn btn-sm btn-success" id = "markAsReadBtn" data-id =  "<?php echo $count ?>">Mark As Read</button>
-                               </div>
-                            <?php  $count ++?>
-
                             </div>
+                            <?php  $count ++?>
                         </div>
                     <?php endforeach; ?>
                 </div>
