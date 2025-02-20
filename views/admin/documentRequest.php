@@ -158,7 +158,7 @@ $document_request = getAllDocumentRequest();
                       <div class="profile-btn mt-3 d-flex justify-content-end" style="gap: 10px">
                         <button class="btn btn-success" name = "" id = "approve" data-document="">Approve</button>
                         <button class="btn btn-danger" name = "" id = "reject" data-document = "">Reject</button>
-                        <button class="btn btn-danger" name = "" id = "cancel" data-document = "" hidden>Cancel Request</button>
+                        <button class="btn btn-danger" name = "" id = "cancel" data-document = "" hidden>Cancel</button>
 
                         
                       </div>
@@ -194,7 +194,7 @@ $document_request = getAllDocumentRequest();
                       <div class="profile-btn mt-3 d-flex justify-content-end" style="gap: 10px">
                         <button class="btn btn-success" name = "" data-id id = "approve2" other-document ="">Approve</button>
                         <button class="btn btn-danger" name = "" data-id id = "reject2" other-document = "">Reject</button>
-                        <button class="btn btn-danger" name = "" data-id id = "cancel2" other-document = "" hidden>Cancel Request</button>
+                        <button class="btn btn-danger" name = "" data-id id = "cancel2" other-document = "" hidden>Cancel</button>
 
                       </div>
                       
