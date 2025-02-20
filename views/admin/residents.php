@@ -357,6 +357,9 @@ $resident_result = $stmt->fetchAll();
                 case 'S,P.CERTIFICATE':
                     window.location.href = `${baseURL}singleParent.php?resident_id=${resident_id}`;
                     break;
+                case "BARANGAYID":
+                    window.location.href = `${baseURL}barangayID.php?resident_id=${resident_id}`;
+                    break;
             }
         }
         // deletes the resident from the database

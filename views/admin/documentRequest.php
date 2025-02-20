@@ -217,6 +217,8 @@ $document_request = getAllDocumentRequest();
                 <div class="modal-body">
                     <label for="selectDocument">Select type of documents</label>
                     <select name="selectDocument" id="documentOption" class="form-control">
+                    <option value="BARANGAYID">BARANGAY ID</option>
+
                         <option value="BARANGAYCLEARANCE">BARANGAY CLEARANCE</option>
                         <option value="CERTIFICATE">BARANGAY CERTIFICATE</option>
                         <option value="INDIGENCY">BARANGAY INDIGENCY</option>
@@ -443,6 +445,9 @@ $document_request = getAllDocumentRequest();
                 break;
             case 'S,P.CERTIFICATE':
                 window.location.href = `${baseURL}singleParent.php?${search}=${resident_id}`;
+                break;
+            case 'BARANGAYID':
+                window.location.href = `${baseURL}barangayID.php?${search}=${resident_id}`;
                 break;
         }
     });
