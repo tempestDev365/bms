@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $firstName = htmlspecialchars($_POST['first_name']);
     $lastName = htmlspecialchars($_POST['last_name']);
-    $middleName = htmlspecialchars($_POST['middle_name']);
+    $middleName = htmlspecialchars($_POST['middle_name']) ?? "";
     $suffix = $_POST['suffix'] ?? "";
     $sex = $_POST['sex'];
     $birthDate = $_POST['birthday'];
