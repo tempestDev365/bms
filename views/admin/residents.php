@@ -123,61 +123,47 @@ $resident_result = $stmt->fetchAll();
                 </div>
 
                 <div class="modal-body">
-                
                     <div class="container-id p-3 d-flex justify-content-center" style="gap: 1rem; flex-wrap: wrap;">
-                         <div class="card shadow-sm" style="flex: 1 1 300px; min-height: 300px"><img src="" alt="" class= "picture"></div>
-                        <div class="card shadow-sm" style="flex: 1 1 300px; min-height: 300px"><img src="" alt="" class = "valid_id"></div>
+                        <img src="data:image/gif;base64,<?php echo $resident_information['personal_information']['resident_picture']; ?>" class="img-fluid" style="width:300px; height:200px" alt="Resident Picture">
+                        <img src="data:image/gif;base64,<?php echo $resident_information['personal_information']['valid_id']; ?>" class="img-fluid" style="width:300px; height:200px" alt="Resident Picture">
                     </div>
-                   <div class="box-body row">
+                    <div class="box-body row">
                         <div class="personal-info col-md-12 col-lg-4 d-flex flex-column" style="gap: 5px;">
                             <div class="box-header">
                                 <h4>Personal Information</h4>
                             </div>
-                            <label id="fullName">Full Name:</label>
-                            <label for="age">Age:</label>
-                            <label id="sex">Sex:</label>
-                            <label id="birthdate">Birthdate:</label>
-                            <label id="civilStatus">Civil Status:</label>
-                            <label id="height">Height:</label>
-                            <label id="weight">Weight:</label>
-                            <label id="bloodType">Blood Type:</label>
-                            <label id="religion">Religion:</label>
-                            <label id="registeredVoter">Registered Voter:</label>
-                            <label id="organizationMember">Organization Member:</label>
+                            <label class='first_name'>First Name: <?php echo $resident_information['resident_information']['first_name'] ?? ''; ?></label>
+                            <label>Middle Name: <?php echo $resident_information['resident_information']['middle_name'] ?? ''; ?></label>
+                            <label>Last Name: <?php echo $resident_information['resident_information']['last_name'] ?? ''; ?></label>
+                            <label>Suffix: <?php echo $resident_information['resident_information']['suffix'] ?? ''; ?></label>
+                            <label>Age: <?php echo $resident_information['resident_information']['age'] ?? ''; ?></label>
+                            <label>Date Of Birth: <?php echo $resident_information['resident_information']['birthday'] ?? ''; ?></label>
+                            <label>Civil Status: <?php echo $resident_information['resident_information']['civil_status'] ?? ''; ?></label>
+                            <label>Purok: <?php echo $resident_information['resident_information']['purok'] ?? ''; ?></label>
+                            <label>House Number: <?php echo $resident_information['resident_information']['house_number'] ?? ''; ?></label>
+                            <label>Street: <?php echo $resident_information['resident_information']['street'] ?? ''; ?></label>
+                            <label>Birth Place: <?php echo $resident_information['personal_information']['birth_place'] ?? ''; ?></label>
+                            <label>Height: <?php echo $resident_information['personal_information']['height'] ?? ''; ?></label>
+                            <label>Weight: <?php echo $resident_information['personal_information']['weight'] ?? ''; ?></label>
+                            <label>Blood Type: <?php echo $resident_information['personal_information']['blood_type'] ?? ''; ?></label>
+                            <label>Religion: <?php echo $resident_information['personal_information']['religion'] ?? ''; ?></label>
+                            <label>Nationality: <?php echo $resident_information['personal_information']['nationality'] ?? ''; ?></label>
+                            <label>Registered Voter: <?php echo $resident_information['personal_information']['registered_voter'] ?? ''; ?></label>
+                            <label>Organization Member: <?php echo $resident_information['personal_information']['organization_member'] ?? ''; ?></label>
                         </div>
-                        <div class="other-info col-md-12 col-lg-4 d-flex flex-column" style="gap: 5px;">
-                            <div class="contact-header">
-                                <h4>Contact Information</h4>
-                            </div>
-                            <label id="email">Email:</label>
-                            <label id="mobileNumber">Mobile Number:</label>
-                            <label id="telNo">Tel No:</label>
-
-                            <div class="contact-header">
-                                <h4>Educational Information:</h4>
-                            </div>
-                            <label id="highestEducation">Highest Education Attainment:</label>
-                            <label id="typeOfSchool">Type of School:</label>
+                        <div class='contact-header col-md-12 col-lg-4 d-flex flex-column' style='gap: 5px;'>
+                            <h4>Additional Information:</h4>
+                            <label>Employment Status: <?php echo $resident_information['additional_information']['employment_status'] ?? ''; ?></label>
+                            <label>Employment Field: <?php echo $resident_information['additional_information']['employment_field'] ?? ''; ?></label>
+                            <label>Occupation: <?php echo $resident_information['additional_information']['occupation'] ?? ''; ?></label>
+                            <label>Monthly Income: <?php echo $resident_information['additional_information']['monthly_income'] ?? ''; ?></label>
+                            <label>Higher Education Attainment: <?php echo $resident_information['additional_information']['highest_educational_attainment'] ?? ''; ?></label>
+                            <label>Type Of School: <?php echo $resident_information['additional_information']['type_of_school'] ?? ''; ?></label>
+                            <h4 class='mt-2'>Contact Information:</h4>
+                            <label>Phone Number: <?php echo $resident_information['contact_information']['phone_number'] ?? ''; ?></label>
+                            <label>Email: <?php echo $resident_information['resident_information']['email'] ?? ''; ?></label>
+                            <label>Tel No.: <?php echo $resident_information['contact_information']['tel_no'] ?? ''; ?></label>
                         </div>
-                        <div class="other-info-2 col-md-12 col-lg-4 d-flex flex-column" style="gap: 5px;">
-                            <div class="contact-header">
-                                <h4>Address Information</h4>
-                            </div>
-                            <label id="houseNumber">House Number:</label>
-                            <label id="purok">Purok:</label>
-                            <label id="street">Street:</label>
-                            <div class="contact-header">
-                                <h4>Employment Information:</h4>
-                            </div>
-                            <label id="employmentStatus">Employment Status:</label>
-                            <label id="employmentField">Employment Field:</label>
-                            <label id="occupation">Occupation:</label>
-                            <label id="monthlyIncome">Monthly Income:</label>
-                        </div>
-                    </div>
-
-                    <div class="modal-actions d-flex justify-content-end p-3" style="gap: 5px;">
-                        
                     </div>
                 </div>
         </div>
