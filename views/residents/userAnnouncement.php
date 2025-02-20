@@ -16,7 +16,6 @@ function getAllAnnouncement(){
     return $announcement;
 }
 
-
 $announcements = getAllAnnouncement();
 
 ?>
@@ -77,7 +76,7 @@ $announcements = getAllAnnouncement();
                 <h2>Announcements</h2>
 
                 <!--ANNOUNCEMENT DISPLAYED-->
-                <?php foreach($announcements as $announcement): ?>
+                <?php foreach(array_reverse($announcements) as $announcement): // Reverse the array to display the latest first ?>
                     <div class="card mt-3" style="margin-top: 20px;">
                         <div class='card-header'>
                             <h3>Title: <?php echo $announcement['title']; ?></h3>
