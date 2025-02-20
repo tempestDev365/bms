@@ -124,8 +124,7 @@ $resident_result = $stmt->fetchAll();
                 <div class="modal-body">
                 
                     <div class="container-id p-3 d-flex justify-content-center" style="gap: 1rem; flex-wrap: wrap;">
-                         <div class="card shadow-sm" style="flex: 1 1 300px; min-height: 300px"><img src="" alt="" class="picture"></div>
-                        <div class="card shadow-sm" style="flex: 1 1 300px; min-height: 300px"><img src="" alt="" class = "signature"></div>
+                         <div class="card shadow-sm" style="flex: 1 1 300px; min-height: 300px"><img src="" alt="" class= "picture"></div>
                         <div class="card shadow-sm" style="flex: 1 1 300px; min-height: 300px"><img src="" alt="" class = "valid_id"></div>
                     </div>
                    <div class="box-body row">
@@ -246,35 +245,34 @@ $resident_result = $stmt->fetchAll();
         async function viewDetail(id){
             const api = await fetch(`../../controllers/getAllResidentInformationController.php?id=${id}&action=view`);
             const response = await api.json();
-            populateModal(
-    response.resident_picture, 
-    response.valid_id, 
-    response.resident_fullname, 
-    response.resident_sex, 
-    response.resident_birthdate, 
-    response.resident_birthplace, 
-    response.resident_civil_status, 
-    response.resident_height, 
-    response.resident_weight, 
-    response.resident_blood_type, 
-    response.resident_religion, 
-    response.resident_nationality, 
-    response.resident_is_voter, 
-    response.resident_org_membership, 
-    response.email, 
-    response.mobile_no, 
-    response.resident_tel_no, 
-    response.resident_highest_educational_attainment, 
-    response.resident_type_of_school, 
-    response.resident_house_number, 
-    response.resident_purok, 
-    response.resident_full_address, 
-    response.resident_street, 
-    response.resident_employment_status, 
-    response.resident_employment_field, 
-    response.resident_occupation, 
-    response.resident_monthly_income
-);
+            document.querySelector('.picture').src = `../../assets/img/${response.resident_picture}`;
+            document.querySelector('.valid_id').src = `../../assets/img/${response.valid_id}`;
+            document.querySelector('#fullName').textContent = `Full Name: ${response.resident_fullname}`;
+            document.querySelector('#sex').textContent = `Sex: ${response.resident_sex}`
+            document.querySelector('#birthdate').textContent = `Birthdate: ${response.resident_birthdate}`;
+            document.querySelector('#civilStatus').textContent = `Civil Status: ${response.resident_civil_status}`;
+            document.querySelector('#height').textContent = `Height: ${response.resident_height}`;
+            document.querySelector('#weight').textContent = `Weight: ${response.resident_weight}`;
+            document.querySelector('#bloodType').textContent = `Blood Type: ${response.resident_blood_type}`;
+            document.querySelector('#religion').textContent = `Religion: ${response.resident_religion}`;
+            document.querySelector('#registeredVoter').textContent = `Registered Voter: ${response.resident_is_voter}`;
+            document.querySelector('#organizationMember').textContent = `Organization Member: ${response.resident_org_membership}`;
+            document.querySelector('#email').textContent = `Email: ${response.email}`;
+            document.querySelector('#mobileNumber').textContent = `Mobile Number: ${response.mobile_no}`;
+            document.querySelector('#telNo').textContent = `Tel No: ${response.resident_tel_no}`;
+            document.querySelector('#highestEducation').textContent = `Highest Education Attainment: ${response.resident_highest_educational_attainment}`;
+            document.querySelector('#typeOfSchool').textContent = `Type of School: ${response.resident_type_of_school}`;
+            document.querySelector('#houseNumber').textContent = `House Number: ${response.resident_house_number}`;
+            document.querySelector('#purok').textContent = `Purok: ${response.resident_purok}`;
+            document.querySelector('#street').textContent = `Street: ${response.resident_street}`;
+            document.querySelector('#employmentStatus').textContent = `Employment Status: ${response.resident_employment_status}`;
+            document.querySelector('#employmentField').textContent = `Employment Field: ${response.resident_employment_field}`;
+            document.querySelector('#occupation').textContent = `Occupation: ${response.resident_occupation}`;
+            document.querySelector('#monthlyIncome').textContent = `Monthly Income: ${response.resident_monthly_income}`;
+
+
+          
+ 
         }
 
         function setUrlId(id){
@@ -283,34 +281,7 @@ $resident_result = $stmt->fetchAll();
             currentURL.searchParams.set('resident_id', id);
             window.history.pushState({}, '', currentURL);
         }
-        function populateModal(picture,  valid_id, fullName, sex, birthdate, birthplace, civilStatus, height, weight, bloodType, religion,  nationality, registeredVoter, organizationMember, email, mobileNumber, highestEducation, typeOfSchool, houseNumber, purok, fullAddress, street,  employmentStatus, employmentField, occupation, monthlyIncome) {
-            document.querySelector('.picture').src = "data:image/jpeg;base64," + picture;
-            document.querySelector('.valid_id').src = "data:image/jpeg;base64," + valid_id;
-            document.getElementById('fullName').textContent = `Full Name: ${fullName}`;
-            document.getElementById('sex').textContent = `Sex: ${sex}`;
-            document.getElementById('birthdate').textContent = `Birthdate: ${birthdate}`;
-            document.getElementById('civilStatus').textContent = `Civil Status: ${civilStatus}`;
-            document.getElementById('height').textContent = `Height: ${height}`;
-            document.getElementById('weight').textContent = `Weight: ${weight}`;
-            document.getElementById('bloodType').textContent = `Blood Type: ${bloodType}`;
-            document.getElementById('religion').textContent = `Religion: ${religion}`;
-            document.getElementById('registeredVoter').textContent = `Registered Voter: ${registeredVoter}`;
-            document.getElementById('organizationMember').textContent = `Organization Member: ${organizationMember}`;
-            document.getElementById('email').textContent = `Email: ${email}`;
-            document.getElementById('mobileNumber').textContent = `Mobile Number: ${mobileNumber}`;
-            document.getElementById('telNo').textContent = `Tel No: ${telNo}`;
-        
-            document.getElementById('highestEducation').textContent = `Highest Education Attainment: ${highestEducation}`;
-            document.getElementById('typeOfSchool').textContent = `Type of School: ${typeOfSchool}`;
-            document.getElementById('houseNumber').textContent = `House Number: ${houseNumber}`;
-            document.getElementById('purok').textContent = `Purok: ${purok}`;
-            document.getElementById('street').textContent = `Street: ${street}`;
-            document.getElementById('employmentStatus').textContent = `Employment Status: ${employmentStatus}`;
-            document.getElementById('employmentField').textContent = `Employment Field: ${employmentField}`;
-            document.getElementById('occupation').textContent = `Occupation: ${occupation}`;
-            document.getElementById('monthlyIncome').textContent = `Monthly Income: ${monthlyIncome}`;
-        }
-        
+       
         const printDocu = () => {
             const documentSelected = document.getElementById('documentOption').value;
             console.log(documentSelected);

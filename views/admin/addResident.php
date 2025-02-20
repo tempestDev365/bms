@@ -110,8 +110,11 @@ if(!isset($_SESSION['admin'])) {
                                         <input type="text" class="form-control" id="religion" name="religion" value="<?php echo $resident_information['personal_information']['religion'] ?? ''; ?>">
                                         <label>Nationality:</label>
                                         <input type="text" class="form-control" id="nationality" name="nationality" value="<?php echo $resident_information['personal_information']['nationality'] ?? ''; ?>">
-                                        <label>Registered Voters:</label>
-                                        <input type="text" class="form-control" id="registered_voter" name="registered_voter" value="<?php echo $resident_information['personal_information']['registered_voter'] ?? ''; ?>">
+                                        <label>Registered Voters:</label>   
+                                        <select class="form-select" id="registered_voter" name="registered_voter">
+                                            <option value="YES">YES</option>
+                                            <option value="NO" >NO</option>
+                                        </select>
                                         <label>Organization Member:</label>
                                         <div class="form-group">
     <div class="form-check">

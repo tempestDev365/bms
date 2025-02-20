@@ -30,7 +30,6 @@ function getAllResidentInformation($id){
     ];
 }
 $resident_information = getAllResidentInformation($_SESSION['user_id']);
-$is_registered = isset($resident_information['personal_information']['registered_voter']) ? "Yes": "No";
 
 
 ?>
@@ -122,7 +121,7 @@ $is_registered = isset($resident_information['personal_information']['registered
 <label>Blood Type: <?php echo $resident_information['personal_information']['blood_type'] ?? ''; ?></label>
 <label>Religion: <?php echo $resident_information['personal_information']['religion'] ?? ''; ?></label>
 <label>Nationality: <?php echo $resident_information['personal_information']['nationality'] ?? ''; ?></label>
-<label>Registered Voters: <?php echo $is_registered ?? ''; ?></label>
+<label>Registered Voter: <?php echo $resident_information['personal_information']['registered_voter'] ?? ''; ?></label>
 <label>Organization Member: <?php echo $resident_information['personal_information']['organization_member'] ?? ''; ?></label>
 </div>
 
@@ -134,7 +133,7 @@ $is_registered = isset($resident_information['personal_information']['registered
     <label>Monthly Income: <?php echo $resident_information['additional_information']['monthly_income'] ?? ''; ?></label>
     <label>Higher Education Attainment: <?php echo $resident_information['additional_information']['highest_educational_attainment'] ?? ''; ?></label>
     <label>Type Of School: <?php echo $resident_information['additional_information']['type_of_school'] ?? ''; ?></label>
-
+     
     <h4 class='mt-2'>Contact Information:</h4>
     <label>Phone Number: <?php echo $resident_information['contact_information']['phone_number'] ?? ''; ?></label>
     <label>Email: <?php echo $resident_information['contact_information']['email'] ?? ''; ?></label>
@@ -239,8 +238,10 @@ $is_registered = isset($resident_information['personal_information']['registered
                                         <input type="text" class="form-control" id="religion" name="religion" value="<?php echo $resident_information['personal_information']['religion'] ?? ''; ?>">
                                         <label>Nationality:</label>
                                         <input type="text" class="form-control" id="nationality" name="nationality" value="<?php echo $resident_information['personal_information']['nationality'] ?? ''; ?>">
-                                        <label>Registered Voters:</label>
-                                        <input type="text" class="form-control" id="registered_voter" name="registered_voter" value="<?php echo $resident_information['personal_information']['registered_voter'] ?? ''; ?>">
+                                        <select class="form-select" id="registered_voter" name="registered_voter">
+                                            <option value="YES" <?php echo $resident_information['personal_information']['registered_voter'] == "Yes" ? "selected": ""?>>YES</option>
+                                            <option value="NO" <?php echo $resident_information['personal_information']['registered_voter'] == "No" ? "selected": ""?>>NO</option>
+                                        </select>
                                         <label>Organization Member:</label>
                                         <input type="text" class="form-control" id="organization_member" name="organization_member" value="<?php echo $resident_information['personal_information']['organization_member'] ?? ''; ?>">
                                         </div>

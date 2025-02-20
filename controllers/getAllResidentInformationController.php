@@ -3,11 +3,11 @@ $id = $_GET['id'] ?? null;
 function getAllResidentInformation($id){
     include '../database/databaseConnection.php';   
     $conn = $GLOBALS['conn'];
-    $sql = "SELECT r.*,ri.*,rc.*
-            FROM residents_information r
-            LEFT JOIN residents_personal_information ri ON r.id = ri.id
-            LEFT JOIN residents_contact_information rc ON r.id = rc.resident_id
-            WHERE r.id = :id";
+    $sql = "SELECT r.*, ri.*, rc.*
+    FROM residents_information r
+    LEFT JOIN residents_personal_information ri ON r.id = ri.resident_id
+    LEFT JOIN residents_contact_information rc ON r.id = rc.resident_id
+    WHERE r.id = :id";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();

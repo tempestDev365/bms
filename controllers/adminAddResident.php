@@ -53,7 +53,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $religion = $_POST['religion'] ?? "";
     $nationality = $_POST['national'] ?? "";
     $registered_voter = $_POST['registered_voter'] ?? "";
-    $organization_member = $_POST['organization_member'] ?? "";
+    $organization_member = $_POST['organization_member'] ?? [];
+    $org_member = "";
+
+    if (is_array($organization_member)) {
+        foreach ($organization_member as $org) {
+            $org_member .= $org . ", ";
+        }
+        // Remove the trailing comma and space
+        $org_member = rtrim($org_member, ", ");
+    }
+    
+    // If no organization members, set to an empty string
+    if (empty($org_member)) {
+        $org_member = "";
+    }
     $employment_status = $_POST['employment_status'] ?? "";
     $employment_field = $_POST['employment_field'] ?? "";
     $monthly_income = $_POST['monthly_income'] ?? "";
@@ -93,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             (resident_id, birth_place, resident_picture, valid_id, height, weight, blood_type, religion, nationality, registered_voter, organization_member, time_Created) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
         $stmt = $conn->prepare($insert_into_personal);
-        $stmt->execute([$id, $birthplace, $picture, $valid_id, $height, $weight, $blood_type, $religion, $nationality, $registered_voter, $organization_member]);
+        $stmt->execute([$id, $birthplace, $picture, $valid_id, $height, $weight, $blood_type, $religion, $nationality, $registered_voter, $org_member]);
 
         // Insert into `residents_contact_information`
         $insert_into_contact = "INSERT INTO residents_contact_information (resident_id, phone_number, tel_no, time_Created) 
@@ -112,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         // Unset session and redirect
         unset($_SESSION['email']);
-        header("Location: ../views/residents/residentLogin.php?success=1");
+        header("Location: ../views/admin/addResident.php?status=success");
         exit();
 
     } catch (PDOException $e) {
