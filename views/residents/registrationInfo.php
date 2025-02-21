@@ -104,7 +104,7 @@ $email = $_GET['email'];
                     </select>
                     <select name="purok" id="purok" class="form-select" required>
                         <option value="" disabled selected>Purok</option>
-                        <option value="Alma">ALMA</option>
+                        <option value="Alma">ALIMA</option>
                         <option value="Banalo">BANALO</option>
                         <option value="Sineguelasan">SINEGUELASAN</option>
                     </select>
