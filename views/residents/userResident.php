@@ -246,7 +246,7 @@ $resident_information = getAllResidentInformation($_SESSION['user_id']);
                                         <label>Age:</label>
                                         <input type="number" class="form-control" id="age" name="age" value="<?php echo $resident_information['resident_information']['age'] ?? ''; ?>">
                                         <label>Date Of Birth:</label>
-                                        <input type="date" class="form-control" id="birthdate" name="birthdate" value="<?php echo $resident_information['resident_information']['birthday'] ?? ''; ?>">
+                                        <input type="date" class="form-control" max="<?php echo date('Y-m-d'); ?>" id="birthdate" name="birthdate" value="<?php echo $resident_information['resident_information']['birthday'] ?? ''; ?>">
                                         <label>Civil Status:</label>
                                         <select class="form-control" id="civil_status" name="civil_status">
                                             <option value="Single" <?php echo (isset($resident_information['resident_information']['civil_status']) && $resident_information['resident_information']['civil_status'] == 'Single') ? 'selected' : ''; ?>>Single</option>

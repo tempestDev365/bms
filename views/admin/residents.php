@@ -255,8 +255,8 @@ $resident_result = $stmt->fetchAll();
                                         <label>Age:</label>
                                         <input type="number" class="form-control" id="edit_age" name="age">
                                         <label>Date Of Birth:</label>
-                                        <input type="date" class="form-control" id="edit_birthdate" name="birthdate">
-                                        <label>Civil Status:</label>
+    
+                                        <input type="date" class="form-control" id="edit_birthdate" name="birthdate" max="<?php echo date('Y-m-d'); ?>">                                        <label>Civil Status:</label>
                                         <select class="form-control" id="edit_civil_status" name="civil_status">
                                             <option value="Single">Single</option>
                                             <option value="Married">Married</option>
