@@ -59,6 +59,16 @@ $email = $_GET['email'];
                     </div>
                     <div class="form-group mt-2 d-flex">
                         <input type="text" placeholder="Last Name" class="form-control me-2" name="last_name" required>
+                        <select name="suffix" class="form-control">
+                             <option value=""  disabled selected>Suffix</option>
+                            <option value="Jr">Jr</option>
+                            <option value="Sr">Sr</option>
+                            <option value="I">I</option>
+                            <option value="II">II</option>
+                            <option value="III">III</option>
+                            <option value="IV">IV</option>
+                            <option value="V">V</option>
+                        </select>
                     </div>
                     <div class="form-group mt-2 d-flex justify-content-between" style="gap: 5px">
                         <select name="sex" id="sex" class="form-control" required>
