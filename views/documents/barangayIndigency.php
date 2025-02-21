@@ -183,7 +183,6 @@ if(isset($other_id)){
                     <label style="font-size: 0.8rem; font-weight: bold;" class="text-secondary">CARIDAD J. SANCHEZ</label>
                     <label style="font-size: 0.8rem; font-weight: bold;" class="text-warning">PUNONG BARANGAY</label>
                     
-                    <label style="font-size: 0.8rem; font-weight: bold;" class="text-warning mt-4">PUNONG BARANGAY</label>
                     
                     <label style="font-size: 0.8rem; font-weight: bold;" class="mt-2 text-secondary">Nieves M. Dela Cruz</label>                   
                     <label style="font-size: 0.8rem; font-weight: bold;" class="mt-2 text-secondary">Ronald F. Marquez</label>
@@ -223,8 +222,7 @@ if(isset($other_id)){
                             <label>Birthday: <?php echo $resident_information['resident_birthdate']  ?></label>
                             <label>Gender:  <?php echo $resident_information['resident_sex']  ?></label>
                             <label>Civil Status: <?php echo $resident_information['resident_civil_status']  ?></label>
-                            <label>Nationality:  <?php echo $resident_information['resident_nationality']  ?></label>
-                            <label>Precinct:  <?php echo $resident_information['resident_precint_number']  ?></label>
+                           
                         </div>
                     </div>
 

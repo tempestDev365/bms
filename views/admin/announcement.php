@@ -6,24 +6,13 @@ if(!isset($_SESSION['admin'])) {
 }
 function getAllAnnouncement(){
     $conn = $GLOBALS['conn'];
-    $qry = "SELECT * FROM announcement_tbl";
+    $qry = "SELECT * FROM announcement_tbl ORDER BY id ASC";
     $result = $conn->prepare($qry);
     $result->execute();
     $announcement = $result->fetchAll(PDO::FETCH_ASSOC);
     return $announcement;
 }
-function getComments( $announcement_id){
-    $conn = $GLOBALS['conn'];
-    $qry = "SELECT c.*, r.first_name,r.middle_name,r.last_name 
-    FROM comments_tbl c
-    JOIN residents_tbl r ON r.id = c.resident_id
-    WHERE announcement_id = ?";
-    $stmt = $conn->prepare($qry);
-    $stmt->bindParam(1, $announcement_id);
-    $stmt->execute();
-    $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return $comments;
-}
+
 $announcements = getAllAnnouncement();
 
 ?>

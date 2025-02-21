@@ -145,7 +145,7 @@ $demographic = getAllDemographic();
                     <div class="card" style="max-width: 350px; width: 350px;">
                     <div class="card-body d-flex justify-content-between align-items-center flex-column">
                         <div class="card-content">
-                            <img src="../../assets/img/dashboard/voters.png" class="img-fluid" style="width: 80px" alt="residents">
+                            <img src="../../assets/img/dashboard/home.png" class="img-fluid" style="width: 80px" alt="residents">
                         </div>
                         <div class="card-title d-flex justify-content-between align-items-center" style="gap: 10px">
                             <h5>Total household:</h5>

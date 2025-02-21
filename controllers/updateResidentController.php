@@ -30,14 +30,15 @@ function resizeImage($file, $max_width, $max_height) {
     return $data;
 }
 if($_SERVER['REQUEST_METHOD'] == "POST"){
-    include "../database/databaseConnection.php";
+    try{
+        include "../database/databaseConnection.php";
     $id = $_SESSION['user_id'];
     $qry = "SELECT resident_picture,valid_id FROM  residents_personal_information WHERE resident_id = $id";
     $images = $conn->prepare($qry);
     $images->execute();
     $images = $images->fetch(PDO::FETCH_ASSOC);
     $first_name = $_POST['first_name'];
-    $middle_name = $_POST['middle_name'];
+    $middle_name = $_POST['middle_name'] ?? "";
     $last_name = $_POST['last_name'];
     $suffix = $_POST['suffix'];
     $age = $_POST['age'];
@@ -129,7 +130,10 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             WHERE resident_id = $id";
     $result3 = $conn->query($sql3);
     echo "<script>alert('Successfully updated resident information!')</script>";
-    echo "<script>window.location.href = '../views/resident/userResident.php'</script>";
+    echo "<script>window.location.href = '../views/residents/userResident.php'</script>";
+    }catch(PDOException $e){
+        echo "Error: " . $e->getMessage();
+    }
      
 }
 ?>
