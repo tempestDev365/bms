@@ -16,6 +16,7 @@ function getAllResidentInformation($id){
     $stmt->bindParam(1, $id);
     $stmt->execute();
     $personal_information = $stmt->fetch();
+    $personal_information['registered_voter'] = $personal_information['registered_voter'] == '0' ? 'No' : 'Yes';
     $additional_information_qry = "SELECT * FROM residents_additional_information WHERE resident_id = ?";
     $stmt = $conn->prepare($additional_information_qry);
     $stmt->bindParam(1, $id);
