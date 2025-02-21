@@ -43,12 +43,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $sex = $_POST['sex'];
     $birthDate = $_POST['birthday'];
     $age = isset($_POST['age']) ? (int)$_POST['age'] : 0;  // Explicit integer conversion
-    $civil_status = $_POST['civil_status'];
-    $purok = $_POST['purok'];
-    $house_number = $_POST['house_number'];
-    $street = $_POST['street'];
-    $house_owner = $_POST['house_owner'];
-    $employment_status = $_POST['employment_status'];
+
+    // Ensure required fields are set
+    $middle_name = isset($_POST['middle_name']) ? htmlspecialchars($_POST['middle_name']) : '';
+    $civil_status = isset($_POST['civil_status']) ? htmlspecialchars($_POST['civil_status']) : '';
+    $purok = isset($_POST['purok']) ? htmlspecialchars($_POST['purok']) : '';
+    $house_number = isset($_POST['house_number']) ? htmlspecialchars($_POST['house_number']) : '';
+    $street = isset($_POST['street']) ? htmlspecialchars($_POST['street']) : '';
+    $house_owner = isset($_POST['house_owner']) ? htmlspecialchars($_POST['house_owner']) : '';
+    $employment_status = isset($_POST['employment_status']) ? htmlspecialchars($_POST['employment_status']) : '';
 
     // Handle file uploads safely
     $front_id = "";
