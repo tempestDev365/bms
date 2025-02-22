@@ -17,7 +17,7 @@ function getAllDemographic(){
     $stmt = $conn->prepare($male_count_qry);
     $stmt->execute();
     $male_count = $stmt->fetch();
-    $voter_count_qry = "SELECT COUNT('voter_status') as voter_count FROM residents_personal_information WHERE registered_voter = 1";
+    $voter_count_qry = "SELECT COUNT('voter_status') as voter_count FROM residents_personal_information WHERE registered_voter = 'Yes'";
     $stmt = $conn->prepare($voter_count_qry);
     $stmt->execute();
     $voter_count = $stmt->fetch();
