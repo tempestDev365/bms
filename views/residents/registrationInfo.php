@@ -33,8 +33,9 @@ $email = $_GET['email'];
         <ul class="pagination">
             <li class="page-item active"><a class="page-link" href="#" id="page1">1</a></li>
             <li class="page-item"><a class="page-link" href="#" id="page2">2</a></li>
-            <li class="page-item"><a class="page-link" href="#" id="page4">3</a></li>
-            <li class="page-item"><a class="page-link" href="#" id="page5">4</a></li>
+            <li class="page-item"><a class="page-link" href="#" id="page3">3</a></li>
+            <li class="page-item"><a class="page-link" href="#" id="page4">4</a></li>
+            <li class="page-item"><a class="page-link" href="#" id="page5">5</a></li>
         </ul>
 
         <!-- Form 1 -->
@@ -47,9 +48,7 @@ $email = $_GET['email'];
                 <div class="form-group">
                         <input type="email" placeholder="Email" class="form-control" value="<?php echo $email; ?>" name="email" required>   
                     </div>
-                    <div class="form-group">
-                        <input type="file"  class="form-control"  name="profile" required>   
-                    </div>
+                    
                     <div class="form-group mt-2">
                         <input type="text" placeholder="First Name" class="form-control" name="first_name" required>
                     </div>
@@ -131,7 +130,7 @@ $email = $_GET['email'];
             </div>
         </div>
 
-        <!-- Form 4 -->
+        <!-- Form 4-->
         <div class="card p-3" id="form4" style="min-width: 600px; min-height: 600px; width: 600px;">
             <div class="card-title">
                 <h2>IDENTITY VERIFICATION!</h2>
@@ -191,9 +190,42 @@ $email = $_GET['email'];
                 <div class="form-group mt-2 d-flex justify-content-end">
                     <button type="button" class="btn btn-primary" id="next4">Next</button>
                 </div>
-            </form>
             </div>
         </div>
+
+    <!--Form 3-->
+<div class="card p-3" id="form3" style="max-width: 600px; min-height: 600px; width: 600px;">
+    <div class="card-title">
+        <h2>PROFILE PHOTO</h2>
+        <label>Please upload a clear photo of yourself</label>
+    </div>
+    <div class="card-body">
+        <div class="profile-preview-container d-flex justify-content-center align-items-center    text-center mb-3">
+            <img id="profilePreview" src="#" alt="Profile Preview" 
+                 style="display: none; max-width: 350px; max-height: 400px; object-fit: cover; border-radius: 50%;">
+        </div>
+        <div class="form-group mb-3">
+            <input type="file" class="form-control" name="profile" id="profileInput" 
+                   accept="image/*" onchange="previewProfileImage(this);"  required>
+            
+            </label>
+        </div>
+        <div class="camera-controls">
+            <button type="button" class="btn btn-primary w-100 mb-2" onclick="openProfileCamera()">
+                USE CAMERA
+            </button>
+            <video id="profileCamera" style="display: none; width: 100%; margin-top: 10px;" autoplay></video>
+            <button id="profileCaptureBtn" class="btn btn-success w-100 mt-2" 
+                    style="display: none;" onclick="captureProfileImage()">
+                Capture Photo
+            </button>
+        </div>
+        <div class="form-group mt-3 d-flex justify-content-between">
+            <button type="button" class="btn btn-secondary" id="prev3">Previous</button>
+            <button type="button" class="btn btn-primary" id="next3">Next</button>
+        </div>
+    </div>
+</div>
 
         <!-- Form 5 -->
         <div class="card p-3" id="form5" style="max-width: 600px; min-height: 600px; width: 600px;">
@@ -216,6 +248,8 @@ $email = $_GET['email'];
                 <button class="btn btn-primary w-100 p-3" style="border-radius: 20px;" id="confirmBtn">CONFIRM</button>
             </div>
         </div>
+        </form>
+
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -226,6 +260,7 @@ $email = $_GET['email'];
             event.preventDefault();
             document.getElementById('form1').style.display = 'block';
             document.getElementById('form2').style.display = 'none';
+            document.getElementById('form3').style.display = 'none';
             document.getElementById('form4').style.display = 'none';
             document.getElementById('form5').style.display = 'none';
             updatePaginationActiveState('page1');
@@ -235,15 +270,27 @@ $email = $_GET['email'];
             event.preventDefault();
             document.getElementById('form1').style.display = 'none';
             document.getElementById('form2').style.display = 'block';
+            document.getElementById('form3').style.display = 'none';
             document.getElementById('form4').style.display = 'none';
             document.getElementById('form5').style.display = 'none';
             updatePaginationActiveState('page2');
+        });
+
+        document.getElementById('page3').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('form1').style.display = 'none';
+            document.getElementById('form2').style.display = 'none';
+            document.getElementById('form3').style.display = 'block';
+            document.getElementById('form4').style.display = 'none';
+            document.getElementById('form5').style.display = 'none';
+            updatePaginationActiveState('page3');
         });
 
         document.getElementById('page4').addEventListener('click', function(event) {
             event.preventDefault();
             document.getElementById('form1').style.display = 'none';
             document.getElementById('form2').style.display = 'none';
+            document.getElementById('form3').style.display = 'none';
             document.getElementById('form4').style.display = 'block';
             document.getElementById('form5').style.display = 'none';
             updatePaginationActiveState('page4');
@@ -253,6 +300,7 @@ $email = $_GET['email'];
             event.preventDefault();
             document.getElementById('form1').style.display = 'none';
             document.getElementById('form2').style.display = 'none';
+            document.getElementById('form3').style.display = 'none';
             document.getElementById('form4').style.display = 'none';
             document.getElementById('form5').style.display = 'block';
             updatePaginationActiveState('page5');
@@ -272,6 +320,10 @@ $email = $_GET['email'];
         });
 
         document.getElementById('next2').addEventListener('click', function() {
+            document.getElementById('page3').click();
+        });
+
+        document.getElementById('next3').addEventListener('click', function() {
             document.getElementById('page4').click();
         });
 
@@ -446,6 +498,75 @@ $email = $_GET['email'];
                 middleNameInput.disabled = false;
             }
         });
+
+        // Function to preview profile image
+        function previewProfileImage(input) {
+            const preview = document.getElementById('profilePreview');
+            const uploadText = document.getElementById('profileUploadText');
+            
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    uploadText.style.display = 'none';
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        let profileStream = null;
+
+        async function openProfileCamera() {
+            const video = document.getElementById('profileCamera');
+            const captureBtn = document.getElementById('profileCaptureBtn');
+            
+            try {
+                if (profileStream) {
+                    profileStream.getTracks().forEach(track => track.stop());
+                }
+                
+                profileStream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = profileStream;
+                video.style.display = 'block';
+                captureBtn.style.display = 'block';
+            } catch (err) {
+                console.error('Error accessing camera:', err);
+                alert('Error accessing camera');
+            }
+        }
+
+        function captureProfileImage() {
+            const video = document.getElementById('profileCamera');
+            const canvas = document.createElement('canvas');
+            const preview = document.getElementById('profilePreview');
+            const uploadText = document.getElementById('profileUploadText');
+            
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            canvas.getContext('2d').drawImage(video, 0, 0);
+            
+            canvas.toBlob((blob) => {
+                const file = new File([blob], 'profile.jpg', { type: 'image/jpeg' });
+                const input = document.getElementById('profileInput');
+                
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                input.files = dataTransfer.files;
+                
+                preview.src = canvas.toDataURL('image/jpeg');
+                preview.style.display = 'block';
+                uploadText.style.display = 'none';
+                
+                video.style.display = 'none';
+                document.getElementById('profileCaptureBtn').style.display = 'none';
+                
+                if (profileStream) {
+                    profileStream.getTracks().forEach(track => track.stop());
+                    profileStream = null;
+                }
+            }, 'image/jpeg');
+        }
     </script>
 </body>
 </html>
