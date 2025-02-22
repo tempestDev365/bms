@@ -41,7 +41,7 @@
 
 
         <div class="container-fluid p-3">
-                        <h3>New Cases</h3>
+                        <h3>Blotter Schedule</h3>
                         <form action="../../controllers/addBlotterController.php" method="POST">
                             <div class="form-group">
                                 <label>Time Of Accident</label>
