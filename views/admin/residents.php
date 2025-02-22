@@ -133,6 +133,7 @@ $resident_result = $stmt->fetchAll();
                                 <h4>Personal Information</h4>
                             </div>
                             <label id="fullName">First Name:</label>
+                            <label id="firstName">First Name:</label>
                             <label id="middleName">Middle Name:</label>
                             <label id="lastName">Last Name:</label>
                             <label id="sex">Sex:</label>
@@ -273,6 +274,8 @@ $resident_result = $stmt->fetchAll();
                                         <input type="text" class="form-control" id="edit_house_number" name="house_number">
                                         <label>Street:</label>
                                         <input type="text" class="form-control" id="edit_street" name="street">
+                                        <label>Birth Place:</label>
+                                        <input type="text" class="form-control" id="edit_birthplace" name="birthplace">
                               
                                         <label>Height(CM):</label>
                                         <input type="number" class="form-control" id="edit_height" name="height">
@@ -408,8 +411,11 @@ $resident_result = $stmt->fetchAll();
             const api = await fetch(`../../controllers/getAllResidentInformationController.php?id=${id}&action=view`);
             const response = await api.json();
             document.querySelector('.picture').src = `data:image/jpeg;base64,${response.resident_picture}`;
-            document.querySelector('.valid_id').src = `data:image/jpeg;base64,${response.valid_id}`;
+            document.querySelector('.valid_id').src = `data:image/jpeg;base64,${response.resident_valid_id}`;
             document.querySelector('#fullName').textContent = `Full Name: ${response.resident_fullname}`;
+            document.querySelector('#firstName').textContent = `First Name: ${response.resident_first_name}`;
+            document.querySelector('#middleName').textContent = `Middle Name: ${response.resident_middle_name}`;
+            document.querySelector('#lastName').textContent = `Last Name: ${response.resident_last_name}`;
             document.querySelector('#sex').textContent = `Sex: ${response.resident_sex}`
             document.querySelector('#birthdate').textContent = `Birthdate: ${response.resident_birthdate}`;
             document.querySelector('#civilStatus').textContent = `Civil Status: ${response.resident_civil_status}`;
@@ -420,7 +426,7 @@ $resident_result = $stmt->fetchAll();
             document.querySelector('#registeredVoter').textContent = `Registered Voter: ${response.resident_is_voter}`;
             document.querySelector('#organizationMember').textContent = `Organization Member: ${response.resident_org_membership}`;
             document.querySelector('#email').textContent = `Email: ${response.email}`;
-            document.querySelector('#mobileNumber').textContent = `Mobile Number: ${response.mobile_no}`;
+            document.querySelector('#phoneNumber').textContent = `Mobile Number: ${response.mobile_no}`;
             document.querySelector('#telNo').textContent = `Tel No: ${response.resident_tel_no}`;
             document.querySelector('#highestEducation').textContent = `Highest Education Attainment: ${response.resident_highest_educational_attainment}`;
             document.querySelector('#typeOfSchool').textContent = `Type of School: ${response.resident_type_of_school}`;
@@ -431,6 +437,7 @@ $resident_result = $stmt->fetchAll();
             document.querySelector('#employmentField').textContent = `Employment Field: ${response.resident_employment_field}`;
             document.querySelector('#occupation').textContent = `Occupation: ${response.resident_occupation}`;
             document.querySelector('#monthlyIncome').textContent = `Monthly Income: ${response.resident_monthly_income}`;
+            document.querySelector('#birthPlace').textContent = `Birth Place: ${response.resident_birthplace}`;
 
 
           
@@ -580,30 +587,30 @@ $resident_result = $stmt->fetchAll();
             document.getElementById('edit_purok').value = user.resident_purok;
             document.getElementById('edit_house_number').value = user.resident_house_number;
             document.getElementById('edit_street').value = user.resident_street;
-            document.getElementById('edit_birthplace').value = user.resident_birthplace;
             document.getElementById('edit_height').value = user.resident_height;
             document.getElementById('edit_weight').value = user.resident_weight;
             document.getElementById('edit_blood_type').value = user.resident_blood_type;
             document.getElementById('edit_religion').value = user.resident_religion;
             document.getElementById('edit_nationality').value = user.resident_nationality;
-            document.getElementById('edit_registered_voter').value = user.resident_registered_voter;
+            document.getElementById('edit_registered_voter').value = user.resident_is_voter;
             document.getElementById('edit_employment_status').value = user.resident_employment_status;
             document.getElementById('edit_employment_field').value = user.resident_employment_field;
             document.getElementById('edit_occupation').value = user.resident_occupation;
             document.getElementById('edit_monthly_income').value = user.resident_monthly_income;
             document.getElementById('edit_highest_education').value = user.resident_highest_educational_attainment;
             document.getElementById('edit_type_of_school').value = user.resident_type_of_school;
-            document.getElementById('edit_mobile_no').value = user.resident_mobile_no;
+            document.getElementById('edit_mobile_no').value = user.mobile_no;
             document.getElementById('edit_tel_no').value = user.resident_tel_no;
+            document.getElementById('edit_birthplace').value = user.resident_birthplace;
 
             // Set checkboxes for organization membership
-            document.getElementById('edit_4ps').checked = user.organization_member.includes('4PS');
-            document.getElementById('edit_senior_citizen').checked = user.organization_member.includes('SENIOR CITIZEN');
-            document.getElementById('edit_pwd').checked = user.organization_member.includes('PWD');
-            document.getElementById('edit_solo_parent').checked = user.organization_member.includes('SOLO PARENT');
-            document.getElementById('edit_hoa').checked = user.organization_member.includes('HOA');
-            document.getElementById('edit_cso').checked = user.organization_member.includes('CSO');
-            document.getElementById('edit_ngo').checked = user.organization_member.includes('NGO');
+            document.getElementById('edit_4ps').checked = user.resident_org_membership.includes('4PS');
+            document.getElementById('edit_senior_citizen').checked = user.resident_org_membership.includes('SENIOR CITIZEN');
+            document.getElementById('edit_pwd').checked = user.resident_org_membership.includes('PWD');
+            document.getElementById('edit_solo_parent').checked = user.resident_org_membership.includes('SOLO PARENT');
+            document.getElementById('edit_hoa').checked = user.resident_org_membership.includes('HOA');
+            document.getElementById('edit_cso').checked = user.resident_org_membership.includes('CSO');
+            document.getElementById('edit_ngo').checked = user.resident_org_membership.includes('NGO');
         }
 
         function toggleEditMiddleName() {

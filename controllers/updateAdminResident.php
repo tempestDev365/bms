@@ -1,6 +1,5 @@
 <?php
-  ini_set("display_errors", "1");
-  error_reporting(E_ALL);
+ 
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     include '../database/databaseConnection.php';
@@ -14,12 +13,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $suffix = $_POST['suffix'] ?? "";
     $sex = $_POST['sex'] ?? "";
     $birthday = $_POST['birthdate'] ?? "";
+    $birthplace  = $_POST['birthplace'] ?? "";
     $civil_status = $_POST['civil_status'] ?? "";
+    $nationality = $_POST['nationality'] ?? "";
     $height = $_POST['height'] ?? "";
     $weight = $_POST['weight'] ?? "";
     $blood_type = $_POST['blood_type'] ?? "";
     $religion = $_POST['religion'] ?? "";
-    $registered_voter = $_POST['registered_voter'] ?? "";
+    $registered_voter = $_POST['registered_voter'];
     $org_member = "";
    
     $organization_member = $_POST['organization_member'] ?? [];
@@ -35,10 +36,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if (empty($org_member)) {
         $org_member = "";
     }
-    $phone_number = $_POST['phone_number'] ?? "";
+    $phone_number = $_POST['mobile_no'] ?? "";
     $email = $_POST['email'] ?? "";
     $tel_no = $_POST['tel_no'] ?? "";
-    $highest_educational_attainment = $_POST['highest_educational_attainment'] ?? "";
+    $highest_educational_attainment = $_POST['highest_education'] ?? "";
     $type_of_school = $_POST['type_of_school'] ?? "";
     $house_number = $_POST['house_number'] ?? "";
     $purok = $_POST['purok'] ?? "";
@@ -47,6 +48,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $employment_field = $_POST['employment_field'] ?? "";
     $monthly_income = $_POST['monthly_income'] ?? "";
     $occupation = $_POST['occupation'] ?? "";
+    
 
        
 $sql = "UPDATE residents_information SET 
@@ -56,6 +58,7 @@ $sql = "UPDATE residents_information SET
     suffix = :suffix,
     age = :age,
     sex = :sex,
+    email = :email,
     birthday = :birthday,
     civil_status = :civil_status,
     purok = :purok,
@@ -76,6 +79,7 @@ $stmt->bindParam(':civil_status', $civil_status, PDO::PARAM_STR);
 $stmt->bindParam(':purok', $purok, PDO::PARAM_STR);
 $stmt->bindParam(':house_number', $house_number, PDO::PARAM_STR);
 $stmt->bindParam(':street', $street, PDO::PARAM_STR);
+$stmt->bindParam(':email', $email, PDO::PARAM_STR);
 $stmt->execute();
 
     $sql1 = "UPDATE residents_personal_information SET 
@@ -83,6 +87,7 @@ $stmt->execute();
         weight = :weight,
         blood_type = :blood_type,
         religion = :religion,
+        birth_place = :birthplace,
         nationality = :nationality,
         registered_voter = :registered_voter,
         organization_member = :organization_member,
@@ -96,6 +101,7 @@ $stmt->execute();
     $stmt1->bindParam(':blood_type', $blood_type, PDO::PARAM_STR);
     $stmt1->bindParam(':religion', $religion, PDO::PARAM_STR);
     $stmt1->bindParam(':nationality', $nationality, PDO::PARAM_STR);
+     $stmt1->bindParam(':birthplace', $birthplace, PDO::PARAM_STR);
     $stmt1->bindParam(':registered_voter', $registered_voter, PDO::PARAM_STR);
     $stmt1->bindParam(':organization_member', $org_member, PDO::PARAM_STR);
     $stmt1->bindParam(':time_Created', $time_Created, PDO::PARAM_STR);
@@ -103,7 +109,6 @@ $stmt->execute();
 
     $sql2 = "UPDATE residents_contact_information SET 
     phone_number = :phone_number,
-    email = :email,
     tel_no = :tel_no,
     time_Created = :time_Created
     WHERE resident_id = :id";
@@ -111,7 +116,6 @@ $stmt->execute();
 $stmt2 = $conn->prepare($sql2);
 $stmt2->bindParam(':id', $id, PDO::PARAM_INT);
 $stmt2->bindParam(':phone_number', $phone_number, PDO::PARAM_STR);
-$stmt2->bindParam(':email', $email, PDO::PARAM_STR);
 $stmt2->bindParam(':tel_no', $tel_no, PDO::PARAM_STR);
 $stmt2->bindParam(':time_Created', $time_Created, PDO::PARAM_STR);
 $stmt2->execute();
@@ -135,7 +139,7 @@ $stmt3->bindParam(':type_of_school', $type_of_school, PDO::PARAM_STR);
 $stmt3->bindParam(':occupation', $occupation, PDO::PARAM_STR);
 $stmt3->bindParam(':time_Created', $time_Created, PDO::PARAM_STR);
 $stmt3->execute();
-echo "<script>alert('Successfully Updated!');window.location.href='../views/admin/residents.php';</script>";
+echo  "<script>alert('Successfully Updated!');window.location.href='../views/admin/residents.php';</script>";
 }
 
    

@@ -84,8 +84,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 
     $valid_id = "";
-    if (isset($_FILES['valid__id']['tmp_name']) && file_exists($_FILES['valid__id']['tmp_name'])) {
-        $valid_id = base64_encode(resizeImage($_FILES['valid__id']['tmp_name'], 250, 250));
+    if (isset($_FILES['valid_id']['tmp_name']) && file_exists($_FILES['valid_id']['tmp_name'])) {
+        $valid_id = base64_encode(resizeImage($_FILES['valid_id']['tmp_name'], 250, 250));
     }
 
     try {

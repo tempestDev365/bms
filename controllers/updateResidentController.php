@@ -103,6 +103,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                 valid_id = '$valid_id',
                 height = '$height',
                 weight = '$weight',
+                birth_place = '$birthplace',
                 blood_type = '$blood_type',
                 religion = '$religion',
                 nationality = '$nationality',
@@ -125,7 +126,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $sql3 = "UPDATE residents_contact_information SET 
                 resident_id = '$resident_id',
                 phone_number = '$mobile_no',
-                email = '$email',
                 tel_no = '$tel_no'
             WHERE resident_id = $id";
     $result3 = $conn->query($sql3);

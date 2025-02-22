@@ -293,37 +293,41 @@ $resident_information = getAllResidentInformation($_SESSION['user_id']);
                                             <option value="Yes" <?php echo (isset($resident_information['personal_information']['registered_voter']) && $resident_information['personal_information']['registered_voter'] == 'Yes') ? 'selected' : ''; ?>>Yes</option>
                                             <option value="No" <?php echo (isset($resident_information['personal_information']['registered_voter']) && $resident_information['personal_information']['registered_voter'] == 'No') ? 'selected' : ''; ?>>No</option>
                                         </select>
-                                        <label>Organization Member:</label>
-                                        <div class="form-group">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="organization_member[]" value="4PS" id="4ps">
-                                                <label class="form-check-label" for="4ps">4PS</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="organization_member[]" value="SENIOR CITIZEN" id="senior_citizen">
-                                                <label class="form-check-label" for="senior_citizen">SENIOR CITIZEN</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="organization_member[]" value="PWD" id="pwd">
-                                                <label class="form-check-label" for="pwd">PWD</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="organization_member[]" value="SOLO PARENT" id="solo_parent">
-                                                <label class="form-check-label" for="solo_parent">SOLO PARENT</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="organization_member[]" value="HOA" id="hoa">
-                                                <label class="form-check-label" for="hoa">HOA</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="organization_member[]" value="CSO" id="cso">
-                                                <label class="form-check-label" for="cso">CSO</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="organization_member[]" value="NGO" id="ngo">
-                                                <label class="form-check-label" for="ngo">NGO</label>
-                                            </div>
-                                        </div>
+                                       <?php
+$organization_members = explode(', ', $resident_information['personal_information']['organization_member'] ?? '');
+?>
+
+<label>Organization Member:</label>
+<div class="form-group">
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="organization_member[]" value="4PS" id="4ps" <?php echo in_array('4PS', $organization_members) ? 'checked' : ''; ?>>
+        <label class="form-check-label" for="4ps">4PS</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="organization_member[]" value="SENIOR CITIZEN" id="senior_citizen" <?php echo in_array('SENIOR CITIZEN', $organization_members) ? 'checked' : ''; ?>>
+        <label class="form-check-label" for="senior_citizen">SENIOR CITIZEN</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="organization_member[]" value="PWD" id="pwd" <?php echo in_array('PWD', $organization_members) ? 'checked' : ''; ?>>
+        <label class="form-check-label" for="pwd">PWD</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="organization_member[]" value="SOLO PARENT" id="solo_parent" <?php echo in_array('SOLO PARENT', $organization_members) ? 'checked' : ''; ?>>
+        <label class="form-check-label" for="solo_parent">SOLO PARENT</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="organization_member[]" value="HOA" id="hoa" <?php echo in_array('HOA', $organization_members) ? 'checked' : ''; ?>>
+        <label class="form-check-label" for="hoa">HOA</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="organization_member[]" value="CSO" id="cso" <?php echo in_array('CSO', $organization_members) ? 'checked' : ''; ?>>
+        <label class="form-check-label" for="cso">CSO</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="organization_member[]" value="NGO" id="ngo" <?php echo in_array('NGO', $organization_members) ? 'checked' : ''; ?>>
+        <label class="form-check-label" for="ngo">NGO</label>
+    </div>
+</div>
                                     </div>
                                     <div class="other-info col-md-12 col-lg-6 d-flex flex-column" style="gap: 5px;">
                                         <div class="contact-header">

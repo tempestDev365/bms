@@ -37,6 +37,14 @@ if(!isset($_SESSION['admin'])) {
                         <h1>Add New Resident</h1>
                     </div>  
 
+
+                    <div class="register-body">
+            
+                    <form action="../../controllers/adminAddResident.php" method="POST" enctype="multipart/form-data">
+                        <div class="info-section mt-3">
+                            <div class="box bg-white shadow-sm border rounded-3 p-3">
+                                <div class="box-body row">
+                                    
                     <div class="upload-img p-4">
                     <div class=" d-flex justify-content-center align-items-center" style="gap: 10px;">
                         
@@ -65,29 +73,22 @@ if(!isset($_SESSION['admin'])) {
                        
                     </div>
                     </div>
-
-                    <div class="register-body">
-            
-                    <form action="../../controllers/adminAddResident.php" method="POST" enctype="multipart/form-data">
-                        <div class="info-section mt-3">
-                            <div class="box bg-white shadow-sm border rounded-3 p-3">
-                                <div class="box-body row">
                                     <div class="personal-info col-md-12 col-lg-6 d-flex flex-column" style="gap: 5px;">
                                         <div class="box-header">
                                             <h4>Personal Information</h4>
                                         </div>
                                                                    <label>First Name:</label>
-                                        <input type="text" class="form-control" id="first_name" name="first_name" value="<?php echo $resident_information['resident_information']['first_name'] ?? ''; ?>">
+                                        <input type="text" class="form-control"  required id="first_name" name="first_name" value="<?php echo $resident_information['resident_information']['first_name'] ?? ''; ?>">
                                         <div class="">
                                         <label>Middle Name:</label>
-                                        <input type="text" class="form-control" id="middle_name" name="middle_name" value="<?php echo $resident_information['resident_information']['middle_name'] ?? ''; ?>">
+                                        <input type="text" class="form-control"   id="middle_name" name="middle_name" value="<?php echo $resident_information['resident_information']['middle_name'] ?? ''; ?>">
                                         <div class="d-flex">
                                             <input type="checkbox" class="form-check-input" id="no_middle_name" name="no_middle_name" value="N/A" onchange="toggleMiddleName()">
                                             <label for="no_middle_name">No Middle Name</label>
                                         </div>
                                         </div>
                                         <label>Last Name:</label>
-                                        <input type="text" class="form-control" id="last_name" name="last_name" value="<?php echo $resident_information['resident_information']['last_name'] ?? ''; ?>">
+                                        <input type="text" class="form-control"  required id="last_name" name="last_name" value="<?php echo $resident_information['resident_information']['last_name'] ?? ''; ?>">
                                         <label>Suffix:</label>
                                         <select class="form-control" id="suffix" name="suffix">
                                             <option value="Jr" <?php echo (isset($resident_information['resident_information']['suffix']) && $resident_information['resident_information']['suffix'] == 'Jr') ? 'selected' : ''; ?>>Jr</option>
