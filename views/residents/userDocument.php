@@ -240,6 +240,7 @@ $document_requested = getDocumentRequested($_SESSION['user_id']);
                         <div class="form-group mt-3">
                             <label>PROOF OF REQUEST</label>
                             <input type="file" name = "proof" required class="form-control">
+                            <label class="text-secondary mt-2" style="font-size: 0.8rem">Please upload proof of the other person making the request, such as an ID picture or a letter with a signature</label>
                         </div>
                         <button type="submit" class="btn btn-primary mt-3">Submit Request</button>
                  </form>    
