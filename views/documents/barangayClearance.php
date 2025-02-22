@@ -1,6 +1,19 @@
 <?php
 $id = $_GET['resident_id'] ?? null;
 $other_id = $_GET['id'] ?? null;
+function checkIfForFree($id){
+    include '../../database/databaseConnection.php';
+    $conn = $GLOBALS['conn'];
+    $get_org_member = $conn->query("SELECT * FROM residents_personal_information WHERE id = $id")->fetch();
+    $checkIfStudent = $conn->query("SELECT employment_status FROM residents_additional_information WHERE resident_id = $id")->fetch();
+
+        if($get_org_member == "SENIOR CITIZEN" || $checkIfStudent == "Student" || $get_org_member == "PWD"){
+            return true;
+        }
+   
+
+
+}
 function insertIntoRevenue(){
     include '../../database/databaseConnection.php';
     $conn = $GLOBALS['conn'];
@@ -22,7 +35,7 @@ function getAllResidentInformation($id){
     $stmt->execute();
     $result = $stmt->fetch();
     $purpose = $conn->query("SELECT purpose FROM documents_requested_for_others WHERE resident_id = $id")->fetch();
-    if($result['employment_status'] != "Student" && $result['employment_status'] != "Senior" && $result['employment_status'] != "pwd"){
+     if(checkIfForFree($id)){
         insertIntoRevenue();
     }
     return [
@@ -78,10 +91,12 @@ function getOthersInfo($id){
     $stmt->bindParam(':full_name', $others['name'], PDO::PARAM_STR);
     $stmt->execute();
     $result = $stmt->fetch();
-    if($result['employment_status'] != "Student" && $result['employment_status'] != "Senior" && $result['employment_status'] != "pwd"){
+    
+    
+    $purpose = $conn->query("SELECT purpose FROM documents_requested_for_others WHERE id = $id")->fetch();
+     if(checkIfForFree($id)){
         insertIntoRevenue();
     }
-    $purpose = $conn->query("SELECT purpose FROM documents_requested_for_others WHERE resident_id = $id")->fetch();
     return [
         'resident_id'=>$result['id'],
         'resident_picture'=>$result['resident_picture'],
@@ -109,13 +124,14 @@ function getOthersInfo($id){
          'resident_monthly_income'=>$result['monthly_income'] ?? "",
         'resident_occupation'=>$result['occupation'] ?? "",
         'resident_full_address'=>$result['house_number'].' '.$result['purok'].' '.$result['street'],
-        'purpose'=>$others['purpose']
+        'purpose'=>$purpose['purpose']
         
 
     ];
    
 
 }
+
 $action = $_GET['action'] ?? null;
 if(isset($id)){
     $resident_information = getAllResidentInformation($id);
@@ -126,6 +142,9 @@ if(isset($other_id)){
 
 
 ?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -234,7 +253,10 @@ if(isset($other_id)){
                     <hr>
                     
                     <label style="text-align: left;" class="mx-2">
-                        This is to certify that the above-mentioned individual is a bona fide resident / voter of this barangay. According to the records kept in this office, the individual has no pending cases. The resident is known to me to possess GOOD MORAL CHARACTER and is a law-abiding citizen of this community. This Barangay Certificate is issued upon request for
+                        This is to certify that the above-mentioned individual is a bona fide resident / voter of this barangay.
+                         According to the records kept in this office, the individual has no pending cases. 
+                         The resident is known to me to possess GOOD MORAL CHARACTER and is a law-abiding citizen of this community. 
+                         This Barangay Certificate is issued upon request for <?php echo $resident_information['resident_fullname']  ?>
 
 
                     </label>

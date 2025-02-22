@@ -4,6 +4,7 @@ if(!isset($_SESSION['user_id'])) {
     header('Location: ./residentLogin.php');
 }
 
+
 function getAllResidentInformation($id){
     include '../../database/databaseConnection.php';
     $qry = "SELECT * FROM residents_information WHERE id = ?";

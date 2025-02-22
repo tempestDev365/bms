@@ -219,7 +219,7 @@ $resident_result = $stmt->fetchAll();
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="../../controllers/updateAdminResident.php" id="editResidentForm">
+                    <form method="POST" action="../../controllers/updateAdminResident.php" id="editResidentForm" enctype="multipart/form-data">
                         <div class="info-section mt-3">
                             <div class="box bg-white shadow-sm border rounded-3 p-3">
                                 <div class="box-body row">
@@ -238,6 +238,8 @@ $resident_result = $stmt->fetchAll();
                                         </div>
                                         <label>Last Name:</label>
                                         <input type="text" class="form-control" id="edit_last_name" name="last_name">
+                                        <label for="">Email:</label>
+                                        <input type="email" class="form-control" id="edit_email" name="email">
                                         <label>Suffix:</label>
                                         <select class="form-control" id="edit_suffix" name="suffix">
                                             <option value="Jr">Jr</option>
@@ -375,6 +377,10 @@ $resident_result = $stmt->fetchAll();
                                         <input type="number" maxlength="11" class="form-control" id="edit_mobile_no" name="mobile_no">
                                         <label>Tel No.:</label>
                                         <input type="number" maxlength="11" class="form-control" id="edit_tel_no" name="tel_no">
+                                        <label>Resident Picture:</label>
+                                        <input type="file" class="form-control" id="picture" name="picture">
+                                        <label>Valid ID:</label>
+                                        <input type="file" class="form-control" id="valid_id" name="valid_id">
                                     </div>
                                 </div>
                             </div>
@@ -579,6 +585,7 @@ $resident_result = $stmt->fetchAll();
             document.getElementById('edit_first_name').value = user.resident_first_name;
             document.getElementById('edit_middle_name').value = user.resident_middle_name;
             document.getElementById('edit_last_name').value = user.resident_last_name;
+            document.getElementById('edit_email').value = user.email;
             document.getElementById('edit_suffix').value = user.resident_suffix
             document.getElementById('edit_sex').value = user.resident_sex;
             document.getElementById('edit_age').value = user.resident_age;
