@@ -43,6 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $sex = $_POST['sex'];
     $birthDate = $_POST['birthday'];
     $age = isset($_POST['age']) ? (int)$_POST['age'] : 0;  // Explicit integer conversion
+    $registered_voter = "No";  // Default to "No" if not provided
+
 
     // Ensure required fields are set
     $middle_name = isset($_POST['middle_name']) ? htmlspecialchars($_POST['middle_name']) : '';
@@ -81,7 +83,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $stmt = $conn->prepare($insert_into_personal);
         $height = 0;  // Default to 0 if not provided
         $weight = 0;  // Default to 0 if not provided
-        $registered_voter = isset($_POST['registered_voter']) ? (int)$_POST['registered_voter'] : 0;
         $stmt->execute([$id, $height, $weight, $registered_voter]);
 
         // Insert into `residents_contact_information`
