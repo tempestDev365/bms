@@ -194,6 +194,23 @@ editButtons.forEach(button => {
 
 document.getElementById('reportBtn').addEventListener('click', function(event) {
     event.preventDefault();
+    
+    const timeOfAccident = document.querySelector('input[name="time_of_accident"]').value;
+    const placeOfAccident = document.querySelector('input[name="place_of_accident"]').value;
+    const dateSchedule = document.querySelector('input[name="date_schedule"]').value;
+    const meetingTime = document.querySelector('input[name="meeting_time"]').value;
+    const description = document.querySelector('textarea[name="description"]').value;
+
+    if (!timeOfAccident || !placeOfAccident || !dateSchedule || !meetingTime || !description) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Incomplete Form',
+            text: 'Please fill in all fields before submitting.',
+            showConfirmButton: true
+        });
+        return;
+    }
+
     Swal.fire({
         icon: 'success',
         title: 'Submission Successful!',
