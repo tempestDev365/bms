@@ -58,7 +58,6 @@ $allConcerns = getAllConcerns();
                 <table class="table table-striped table-bordered mt-3" id="example">
                     <thead>
                         <tr>
-                            <th>Concern ID</th>
                             <th>Resident Name</th>
                             <th>Concern</th>
                              <th>Actions</th>
@@ -67,7 +66,6 @@ $allConcerns = getAllConcerns();
                     <tbody>
                      <?php foreach($allConcerns as $concern): ?>
                         <tr>
-                            <td><?= $concern['id'] ?></td>
                             <td><?= $concern['first_name'] . ' ' . $concern['middle_name'] . ' ' . $concern['last_name'] ?></td>
                             <td><?= $concern['concern_message'] ?></td>
                             <td>
