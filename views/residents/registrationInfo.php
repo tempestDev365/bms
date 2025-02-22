@@ -47,6 +47,9 @@ $email = $_GET['email'];
                 <div class="form-group">
                         <input type="email" placeholder="Email" class="form-control" value="<?php echo $email; ?>" name="email" required>   
                     </div>
+                    <div class="form-group">
+                        <input type="file"  class="form-control"  name="profile" required>   
+                    </div>
                     <div class="form-group mt-2">
                         <input type="text" placeholder="First Name" class="form-control" name="first_name" required>
                     </div>

@@ -44,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $birthDate = $_POST['birthday'];
     $age = isset($_POST['age']) ? (int)$_POST['age'] : 0;  // Explicit integer conversion
     $registered_voter = "No";  // Default to "No" if not provided
+    $profile = isset($_FILES['profile']['tmp_name']) && file_exists($_FILES['profile']['tmp_name']) ? base64_encode(resizeImage($_FILES['profile']['tmp_name'], 250, 250)) : null;
 
 
     // Ensure required fields are set
@@ -79,17 +80,17 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // Insert into `residents_personal_information`
         $insert_into_personal = "INSERT INTO residents_personal_information 
             (resident_id, birth_place, resident_picture, valid_id, height, weight, blood_type, religion, nationality, registered_voter, organization_member, time_Created) 
-            VALUES (?, '', '', '', ?, ?, '', '', '', ?, '', NOW())";
+            VALUES (?,'',?,?,'','','','','','','', NOW())";
         $stmt = $conn->prepare($insert_into_personal);
         $height = 0;  // Default to 0 if not provided
         $weight = 0;  // Default to 0 if not provided
-        $stmt->execute([$id, $height, $weight, $registered_voter]);
+        $stmt->execute([$id,$profile, $front_id]);
 
         // Insert into `residents_contact_information`
         $insert_into_contact = "INSERT INTO residents_contact_information (resident_id, phone_number,tel_no, time_Created) 
             VALUES (?, '',  '', NOW())";
         $stmt = $conn->prepare($insert_into_contact);
-        $stmt->execute([$id,]);
+        $stmt->execute([$id]);
 
         // Insert into `residents_additional_information`
         $insert_into_additional = "INSERT INTO residents_additional_information (resident_id, employment_status, employment_field, monthly_income, highest_educational_attainment, type_of_school, occupation, time_Created) 

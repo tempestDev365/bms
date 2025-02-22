@@ -239,7 +239,7 @@ $document_requested = getDocumentRequested($_SESSION['user_id']);
 
                         <div class="form-group mt-3">
                             <label>PROOF OF REQUEST</label>
-                            <input type="file" name = "proof" class="form-control">
+                            <input type="file" name = "proof" required class="form-control">
                         </div>
                         <button type="submit" class="btn btn-primary mt-3">Submit Request</button>
                  </form>    
