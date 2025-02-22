@@ -79,18 +79,18 @@ $announcements = getAllAnnouncement();
                 <?php foreach(array_reverse($announcements) as $announcement): // Reverse the array to display the latest first ?>
                     <div class="card mt-3" style="margin-top: 20px;">
                         <div class='card-header'>
-                            <h3>Title: <?php echo $announcement['title']; ?></h3>
+                            <h3><?php echo $announcement['title']; ?></h3>
                         </div>
                         <div class='card-body'>
-                            <div class="container border d-flex justify-content-center align-items-center rounded-3 shadow-sm p-3">
-                                <?php if(!empty($announcement['image'])): ?>
+                            <?php if(!empty($announcement['image'])): ?>
+                                <div class="container border d-flex justify-content-center align-items-center rounded-3 shadow-sm p-3">
                                     <img src="data:image/jpeg;base64,<?php echo $announcement['image']; ?>" 
                                          alt="Announcement Image"
                                          class="img-fluid"
                                          style="max-height: 500PX; width:100%; object-fit: contain;">
-                                <?php endif; ?>
-                            </div>
-                            <h5 class="mt-2">Content: <?php echo $announcement['content']; ?></h5>
+                                </div>
+                            <?php endif; ?>
+                            <h5 class="mt-2"><?php echo $announcement['content']; ?></h5>
                         </div>
                     </div>
                 <?php endforeach; ?>

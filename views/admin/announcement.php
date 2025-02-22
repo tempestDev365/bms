@@ -59,7 +59,7 @@ $announcements = getAllAnnouncement();
 
                     <div class="form-group mt-3">
                         <label for="upload-img">Upload Image</label>
-                        <input type="file" class="form-control" name="upload-img"  onchange="previewImage(event)">
+                        <input type="file" class="form-control" name="upload-img" accept=".jpg, .jpeg, .png" onchange="previewImage(event)">
                         <img id="img-preview" src="#" alt="Image Preview" style="display: none; max-width: 100%; margin-top: 10px;">
                     </div>
 
@@ -83,7 +83,9 @@ $announcements = getAllAnnouncement();
                             <div class="card-body">
                                 <div class="card-content d-flex flex-column">
                                     <?php echo $announcement['content']; ?>
-                                    <img src="data:image/jpeg;base64, <?php echo $announcement['image'] ;?>" alt="">
+                                    <?php if (!empty($announcement['image'])): ?>
+                                        <img src="data:image/jpeg;base64, <?php echo $announcement['image']; ?>" alt="">
+                                    <?php endif; ?>
                                 </div>
                                 
                                 <!-- Comments Section -->
@@ -165,8 +167,10 @@ $announcements = getAllAnnouncement();
         function previewImage(event) {
             const input = event.target;
             const preview = document.getElementById('img-preview');
-            
-            if (input.files && input.files[0]) {
+            const file = input.files[0];
+            const validImageTypes = ['image/jpeg', 'image/png'];
+
+            if (file && validImageTypes.includes(file.type)) {
                 const reader = new FileReader();
                 
                 reader.onload = function(e) {
@@ -174,10 +178,11 @@ $announcements = getAllAnnouncement();
                     preview.style.display = 'block';
                 }
                 
-                reader.readAsDataURL(input.files[0]);
+                reader.readAsDataURL(file);
             } else {
                 preview.src = '#';
                 preview.style.display = 'none';
+                alert('Please upload a valid image file (JPG or PNG).');
             }
         }
     </script>
