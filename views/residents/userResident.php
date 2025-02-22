@@ -16,6 +16,7 @@ function getAllResidentInformation($id){
     $stmt->bindParam(1, $id);
     $stmt->execute();
     $personal_information = $stmt->fetch();
+    $personal_information['registered_voter'] = $personal_information['registered_voter'] == '0' ? 'No' : 'Yes';
     $additional_information_qry = "SELECT * FROM residents_additional_information WHERE resident_id = ?";
     $stmt = $conn->prepare($additional_information_qry);
     $stmt->bindParam(1, $id);
@@ -109,6 +110,7 @@ $resident_information = getAllResidentInformation($_SESSION['user_id']);
                                 <label class='first_name'>First Name: <?php echo $resident_information['resident_information']['first_name'] ?? ''; ?></label>
                                 <label>Middle Name: <?php echo $resident_information['resident_information']['middle_name'] ?? ''; ?></label>
                                 <label>Last Name: <?php echo $resident_information['resident_information']['last_name'] ?? ''; ?></label>
+                                <label>Sex: <?php echo $resident_information['resident_information']['sex'] ?? ''; ?></label>
                                 <label>Suffix: <?php echo $resident_information['resident_information']['suffix'] ?? ''; ?></label>
                                 <label>Age: <?php echo $resident_information['resident_information']['age'] ?? ''; ?></label>
                                 <label>Date Of Birth: <?php echo $resident_information['resident_information']['birthday'] ?? ''; ?></label>
@@ -132,7 +134,7 @@ $resident_information = getAllResidentInformation($_SESSION['user_id']);
                                     <label>Employment Field: <?php echo $resident_information['additional_information']['employment_field'] ?? ''; ?></label>
                                     <label>Occupation: <?php echo $resident_information['additional_information']['occupation'] ?? ''; ?></label>
                                     <label>Monthly Income: <?php echo $resident_information['additional_information']['monthly_income'] ?? ''; ?></label>
-                                    <label>Higher Education Attainment: <?php echo $resident_information['additional_information']['highest_educational_attainment'] ?? ''; ?></label>
+                                    <label>Highest Education Attainment: <?php echo $resident_information['additional_information']['highest_educational_attainment'] ?? ''; ?></label>
                                     <label>Type Of School: <?php echo $resident_information['additional_information']['type_of_school'] ?? ''; ?></label>
                                     
                                     <h4 class='mt-2'>Contact Information:</h4>
@@ -222,6 +224,11 @@ $resident_information = getAllResidentInformation($_SESSION['user_id']);
                                         </div>
                                         <label>Last Name:</label>
                                         <input type="text" class="form-control" id="last_name" name="last_name" value="<?php echo $resident_information['resident_information']['last_name'] ?? ''; ?>">
+                                        <label>Sex:</label>
+                                        <select class="form-control" id="sex" name="sex">
+                                            <option value="Male" <?php echo (isset($resident_information['resident_information']['sex']) && $resident_information['resident_information']['sex'] == 'Male') ? 'selected' : ''; ?>>Male</option>
+                                            <option value="Female" <?php echo (isset($resident_information['resident_information']['sex']) && $resident_information['resident_information']['sex'] == 'Female') ? 'selected' : ''; ?>>Female</option>
+                                        </select>
                                         <label>Suffix:</label>
                                         <select class="form-control" id="suffix" name="suffix">
                                             <option value="Jr" <?php echo (isset($resident_information['resident_information']['suffix']) && $resident_information['resident_information']['suffix'] == 'Jr') ? 'selected' : ''; ?>>Jr</option>
@@ -240,7 +247,7 @@ $resident_information = getAllResidentInformation($_SESSION['user_id']);
                                         <label>Age:</label>
                                         <input type="number" class="form-control" id="age" name="age" value="<?php echo $resident_information['resident_information']['age'] ?? ''; ?>">
                                         <label>Date Of Birth:</label>
-                                        <input type="date" class="form-control" id="birthdate" name="birthdate" value="<?php echo $resident_information['resident_information']['birthday'] ?? ''; ?>">
+                                        <input type="date" class="form-control" max="<?php echo date('Y-m-d'); ?>" id="birthdate" name="birthdate" value="<?php echo $resident_information['resident_information']['birthday'] ?? ''; ?>">
                                         <label>Civil Status:</label>
                                         <select class="form-control" id="civil_status" name="civil_status">
                                             <option value="Single" <?php echo (isset($resident_information['resident_information']['civil_status']) && $resident_information['resident_information']['civil_status'] == 'Single') ? 'selected' : ''; ?>>Single</option>
