@@ -96,7 +96,7 @@ $resident_information = getAllResidentInformation($_SESSION['user_id']);
             <div class="id-section mt-3">
                 <div class="container-id border bg-white p-3 d-flex justify-content-center" style="gap: 1rem; flex-wrap: wrap;">
                      <img src="data:image/gif;base64,<?php echo $resident_information['personal_information']['resident_picture']; ?>" class="img-fluid" style="width:300px; height:200px" alt="Resident Picture">
-                    <img src="data:image/gif;base64,<?php echo $resident_information['personal_information']['valid_id']; ?>" class="img-fluid" style="width:300px; height:200px" alt="Resident Picture">
+                    <img src="data:image/gif;base64,<?php echo $resident_information['resident_information']['id_front']; ?>" class="img-fluid" style="width:300px; height:200px" alt="Resident Picture">
                 </div>
             </div>
 

@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $firstName = htmlspecialchars($_POST['first_name']);
     $lastName = htmlspecialchars($_POST['last_name']);
-    $middleName = htmlspecialchars($_POST['middle_name']) ?? "";
+    $middleName = $_POST['middle_name'] ?? "";
     $suffix = $_POST['suffix'] ?? "";
     $sex = $_POST['sex'];
     $birthDate = $_POST['birthday'];
@@ -54,15 +54,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $employment_status = isset($_POST['employment_status']) ? htmlspecialchars($_POST['employment_status']) : '';
 
     // Handle file uploads safely
-    $front_id = "";
-    if (isset($_FILES['frontID']['tmp_name']) && file_exists($_FILES['frontID']['tmp_name'])) {
-        $front_id = base64_encode(resizeImage($_FILES['frontID']['tmp_name'], 250, 250));
-    }
+    $front_id = isset($_FILES['frontID']['tmp_name']) && file_exists($_FILES['backID']['tmp_name']) ? base64_encode(resizeImage($_FILES['backID']['tmp_name'], 250, 250)) : null;
+    
 
-    $back_id = "";
-    if (isset($_FILES['backID']['tmp_name']) && file_exists($_FILES['backID']['tmp_name'])) {
-        $back_id = base64_encode(resizeImage($_FILES['backID']['tmp_name'], 250, 250));
-    }
+    $back_id = isset($_FILES['backID']['tmp_name']) && file_exists($_FILES['backID']['tmp_name']) ? base64_encode(resizeImage($_FILES['backID']['tmp_name'], 250, 250)) : null;
+    
 
     try {
         // Start transaction
@@ -89,10 +85,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $stmt->execute([$id, $height, $weight, $registered_voter]);
 
         // Insert into `residents_contact_information`
-        $insert_into_contact = "INSERT INTO residents_contact_information (resident_id, phone_number, email, tel_no, time_Created) 
-            VALUES (?, '', ?, '', NOW())";
+        $insert_into_contact = "INSERT INTO residents_contact_information (resident_id, phone_number,tel_no, time_Created) 
+            VALUES (?, '',  '', NOW())";
         $stmt = $conn->prepare($insert_into_contact);
-        $stmt->execute([$id, $email]);
+        $stmt->execute([$id,]);
 
         // Insert into `residents_additional_information`
         $insert_into_additional = "INSERT INTO residents_additional_information (resident_id, employment_status, employment_field, monthly_income, highest_educational_attainment, type_of_school, occupation, time_Created) 

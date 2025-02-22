@@ -86,13 +86,12 @@ $email = $_GET['email'];
                     <div class="form-group mt-2 d-flex justify-content-end">
                         <button type="button" class="btn btn-primary" id="next1">Next</button>
                     </div>
-              </form>
+                </div>
             </div>
-        </div>
-
-        <!-- Form 2 -->
-        <div class="card p-3" id="form2" style="max-width: 500px; max-height: 500px; width: 500px; height: 500px;">
-            <div class="card-title">
+            
+            <!-- Form 2 -->
+            <div class="card p-3" id="form2" style="max-width: 500px; max-height: 500px; width: 500px; height: 500px;">
+                <div class="card-title">
                 <h2>Register!</h2>
             </div>
             <div class="card-body">
@@ -189,6 +188,7 @@ $email = $_GET['email'];
                 <div class="form-group mt-2 d-flex justify-content-end">
                     <button type="button" class="btn btn-primary" id="next4">Next</button>
                 </div>
+            </form>
             </div>
         </div>
 
