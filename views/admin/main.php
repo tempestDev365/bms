@@ -25,10 +25,28 @@ function getAllDemographic(){
     $stmt = $conn->prepare($household_count_qry);
     $stmt->execute();
     $household_count = $stmt->fetch();
-    $age_count_qry = "SELECT COUNT(age) as age_count FROM residents_information";
+    $age_count_qry = "
+        SELECT 
+            CASE 
+                WHEN age BETWEEN 0 AND 10 THEN '0-10'
+                WHEN age BETWEEN 11 AND 20 THEN '11-20'
+                WHEN age BETWEEN 21 AND 30 THEN '21-30'
+                WHEN age BETWEEN 31 AND 40 THEN '31-40'
+                WHEN age BETWEEN 41 AND 50 THEN '41-50'
+                WHEN age BETWEEN 51 AND 60 THEN '51-60'
+                WHEN age BETWEEN 61 AND 70 THEN '61-70'
+                WHEN age BETWEEN 71 AND 80 THEN '71-80'
+                ELSE '81+' 
+            END as age_range, 
+            COUNT(*) as count 
+        FROM residents_information 
+        GROUP BY age_range
+        ORDER BY age_range
+    ";
     $stmt = $conn->prepare($age_count_qry);
     $stmt->execute();
-    $age_count = $stmt->fetch();
+    $age_counts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
     $revenue_count_qry = "SELECT SUM(amount) as revenue_count FROM revenue_tbl";
     $stmt = $conn->prepare($revenue_count_qry);
     $stmt->execute();
@@ -40,7 +58,7 @@ function getAllDemographic(){
         'male_count' => $male_count['male_count'],
         'voter_count' => $voter_count['voter_count'],
         'household_count' => $household_count['household_count'],
-        'age_count' => $age_count['age_count'],
+        'age_counts' => $age_counts,
         'revenue_count' => $revenue_count['revenue_count'],
     ];
 
@@ -48,6 +66,7 @@ function getAllDemographic(){
 }
 
 $demographic = getAllDemographic();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -196,30 +215,34 @@ $demographic = getAllDemographic();
    
     <script src="../components/sidebar.js?v=<?php echo time(); ?>" defer></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var ctx = document.getElementById('ageDistributionChart').getContext('2d');
-            var ageDistributionChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['0-10', '11-20', '21-30', '31-40', '41-50', '51-60', '61-70', '71-80', '81+'],
-                    datasets: [{
-                        label: 'Age Distribution',
-                        data: [<?=$demographic['age_count']?>], // Example data
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
+       document.addEventListener('DOMContentLoaded', function () {
+        var ctx = document.getElementById('ageDistributionChart').getContext('2d');
+        var ageCounts = <?php echo json_encode($demographic['age_counts']); ?>;
+        var labels = ageCounts.map(function(item) { return item.age_range; });
+        var data = ageCounts.map(function(item) { return item.count; });
+
+        var ageDistributionChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Age Distribution',
+                    data: data,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
                     }
                 }
-            });
+            }
         });
+    });
         let session = <?= json_encode($_SESSION['admin']) ?>;
         console.log(session);
     </script>

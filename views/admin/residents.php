@@ -444,6 +444,8 @@ $resident_result = $stmt->fetchAll();
             document.querySelector('#occupation').textContent = `Occupation: ${response.resident_occupation}`;
             document.querySelector('#monthlyIncome').textContent = `Monthly Income: ${response.resident_monthly_income}`;
             document.querySelector('#birthPlace').textContent = `Birth Place: ${response.resident_birthplace}`;
+            document.querySelector('#age').textContent = `Age: ${response.resident_age}`;
+            document.querySelector('#nationality').textContent = `Nationality: ${response.resident_nationality}`;
 
 
           
@@ -513,8 +515,13 @@ $resident_result = $stmt->fetchAll();
             const confirmDelete = confirm('Are you sure you want to delete this resident?');
             if(confirmDelete){
                 const api = fetch(`../../controllers/deleteResidentController.php?id=${id}&action=delete`);
-                window.location.reload();
+                if(api){
+                    alert('Resident has been deleted');
+                    location.reload();
+                }
+               
             }
+
         }
         // renders the filtered resident
         const params = new URLSearchParams(window.location.search);

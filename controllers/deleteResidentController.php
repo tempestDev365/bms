@@ -16,9 +16,8 @@ function deleteResident($id){
     $qry3 = "DELETE FROM residents_additional_information WHERE resident_id = $id";
     $result3 = $conn->query($qry3);
 
+    
 
-
-   
 }
 if($_GET['action'] == 'delete'){
     deleteResident($id);
