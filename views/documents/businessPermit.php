@@ -1,19 +1,7 @@
 <?php
 $id = $_GET['resident_id'] ?? null;
 $other_id = $_GET['id'] ?? null;
-function checkIfForFree($id){
-    include '../../database/databaseConnection.php';
-    $conn = $GLOBALS['conn'];
-    $get_org_member = $conn->query("SELECT * FROM residents_personal_information WHERE id = $id")->fetch();
-    $checkIfStudent = $conn->query("SELECT employment_status FROM residents_additional_information WHERE resident_id = $id")->fetch();
 
-        if($get_org_member == "SENIOR CITIZEN" || $checkIfStudent == "Student" || $get_org_member == "PWD"){
-            return true;
-        }
-   
-
-
-}
 function insertIntoRevenue(){
     include '../../database/databaseConnection.php';
     $conn = $GLOBALS['conn'];
@@ -26,17 +14,25 @@ function getAllResidentInformation($id){
     $conn = $GLOBALS['conn'];
     $sql = "SELECT r.*,ri.*,rc.*,ra.*
             FROM residents_information r
-            LEFT JOIN residents_personal_information ri ON r.id = ri.id
+            LEFT JOIN residents_personal_information ri ON r.id = ri.resident_id    
             LEFT JOIN residents_contact_information rc ON r.id = rc.resident_id
-            LEFT JOIN residents_additional_information ra ON r.id = ra.id
+            LEFT JOIN residents_additional_information ra ON r.id = ra.resident_id
             WHERE r.id = :id";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
     $result = $stmt->fetch();
     $purpose = $conn->query("SELECT purpose FROM documents_requested_for_others WHERE resident_id = $id")->fetch();
-     if(checkIfForFree($id)){
-        insertIntoRevenue();
+    $organization_member = str_replace(' ', '', $result['organization_member']);
+    $employment_status = str_replace(' ', '', $result['employment_status']); 
+       if(str_contains($organization_member, 'SENIORCITIZEN')){
+        $insert_to_revenue = $conn->query("INSERT INTO revenue_tbl (amount, time_Created) VALUES (0,NOW())");
+       }elseif(str_contains($organization_member, 'PWD')){
+        $insert_to_revenue = $conn->query("INSERT INTO revenue_tbl (amount, time_Created) VALUES (0,NOW())");
+         }elseif($employment_status == "Student"){
+        $insert_to_revenue = $conn->query("INSERT INTO revenue_tbl (amount, time_Created) VALUES (0,NOW())");
+    }else{
+        $insert_to_revenue = $conn->query("INSERT INTO revenue_tbl (amount, time_Created) VALUES (20,NOW())");
     }
     return [
         'resident_id'=>$result['id'],
@@ -83,8 +79,8 @@ function getOthersInfo($id){
     $conn = $GLOBALS['conn'];
     $sql = "SELECT r.*,ri.*,rc.*,ra.*
             FROM residents_information r
-            LEFT JOIN residents_personal_information ri ON r.id = ri.id
-            LEFT JOIN residents_additional_information ra ON r.id = ra.id
+            LEFT JOIN residents_personal_information ri ON r.id = ri.resident_id
+            LEFT JOIN residents_additional_information ra ON r.id = ra.resident_id
             LEFT JOIN residents_contact_information rc ON r.id = rc.resident_id
             WHERE CONCAT(first_name, ' ', last_name) = :full_name";
     $stmt = $conn->prepare($sql);
@@ -94,8 +90,17 @@ function getOthersInfo($id){
     
     
     $purpose = $conn->query("SELECT purpose FROM documents_requested_for_others WHERE id = $id")->fetch();
-     if(checkIfForFree($id)){
-        insertIntoRevenue();
+ $organization_member = str_replace(' ', '', $result['organization_member']);
+    $employment_status = str_replace(' ', '', $result['employment_status']); 
+
+      if(str_contains($organization_member, 'SENIORCITIZEN')){
+        $insert_to_revenue = $conn->query("INSERT INTO revenue_tbl (amount, time_Created) VALUES (0,NOW())");
+       }elseif(str_contains($organization_member, 'PWD')){
+        $insert_to_revenue = $conn->query("INSERT INTO revenue_tbl (amount, time_Created) VALUES (0,NOW())");
+         }elseif($employment_status == "Student"){
+        $insert_to_revenue = $conn->query("INSERT INTO revenue_tbl (amount, time_Created) VALUES (0,NOW())");
+    }else{
+        $insert_to_revenue = $conn->query("INSERT INTO revenue_tbl (amount, time_Created) VALUES (20,NOW())");
     }
     return [
         'resident_id'=>$result['id'],
@@ -139,6 +144,7 @@ if(isset($id)){
 if(isset($other_id)){
     $resident_information = getOthersInfo($other_id);
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
