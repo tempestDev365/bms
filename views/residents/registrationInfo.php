@@ -63,6 +63,7 @@ $email = $_GET['email'];
                         <input type="text" placeholder="Last Name" class="form-control me-2" name="last_name" required>
                         <select name="suffix" class="form-control">
                              <option value=""  disabled selected>Suffix</option>
+                             <option value="Na">N/A</option>
                             <option value="Jr">Jr</option>
                             <option value="Sr">Sr</option>
                             <option value="I">I</option>
