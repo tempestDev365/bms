@@ -242,7 +242,7 @@ $resident_result = $stmt->fetchAll();
                                         <label>Suffix:</label>
                                         <select class="form-control" id="edit_suffix" name="suffix">
                                             <option value="Jr">Jr</option>
-                                            <option value="Senior">Senior</option>
+                                            <option value="SeniorWD">Senior</option>
                                             <option value="II">II</option>
                                             <option value="III">III</option>
                                             <option value="IV">IV</option>
