@@ -143,7 +143,8 @@ $document_request = getAllDocumentRequest();
                 <div class="modal-body">
                     <div class="container-fluid">
                       <div class="profile-header d-flex justify-content-start align-items-center" style="gap: 20px">
-                        <img src="" class="img-fluid" style="width: 150px" alt="" id = "picture">
+                        <label for="">Resident Picture:</label>
+                        <img src="" class="img-fluid" style="width: 150px" alt="Resident Picture" id = "picture">
                         <div class="profile-detail">
                             <p id = "name">Name:</p>
                             <p id = "age">Age:</p>
@@ -173,13 +174,14 @@ $document_request = getAllDocumentRequest();
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Profile Information</h5>
+                    <h5 class="modal-title">Requested For another resident</h5>
                     <button class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
                       <div class="profile-header d-flex justify-content-start align-items-center" style="gap: 20px">
-                        <img src="" class="img-fluid" style="width: 150px" alt="" id = "picture2">
+                        <label for="">Proof:</label>
+                        <img src="" class="img-fluid" style="width: 150px" alt="Resident Proof" id = "picture2">
                         <div class="profile-detail">
                             <p id = "name2">Name:</p>
                             <p id = "age2">Age:</p>

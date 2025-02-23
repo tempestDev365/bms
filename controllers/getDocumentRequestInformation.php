@@ -7,7 +7,7 @@ function getDocumentRequestInformation($resident_id, $id){
     $sql = "SELECT d.*, r.age, r.first_name, r.last_name, r.middle_name, rc.phone_number,ri.resident_picture,r.birthday
             FROM document_requested d
             LEFT JOIN residents_information r ON r.id = d.resident_id
-            LEFT JOIN residents_personal_information ri ON ri.id = d.resident_id
+            LEFT JOIN residents_personal_information ri ON ri.resident_id = d.resident_id
             LEFT JOIN residents_contact_information rc ON rc.resident_id = d.resident_id
             WHERE d.resident_id = :resident_id AND d.id = :id";    
     $stmt = $conn->prepare($sql);
