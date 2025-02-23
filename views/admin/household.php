@@ -107,7 +107,15 @@ include_once "../../database/databaseConnection.php";
     <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.colVis.min.js"></script>
     <script src="../components/sidebar.js?v=<?php echo time(); ?>" defer></script>
     <script>  
-    
+    $(document).ready(function() {
+        $('#example').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'pdf', 'print'
+            ]
+        });
+    });
+
         $('#genderFilter').on('change', function() {
             var filterValue = $(this).val();
             var table = $('#example').DataTable();
