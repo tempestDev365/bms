@@ -132,7 +132,6 @@ $resident_result = $stmt->fetchAll();
                             <div class="box-header">
                                 <h4>Personal Information</h4>
                             </div>
-                            <label id="fullName">First Name:</label>
                             <label id="firstName">First Name:</label>
                             <label id="middleName">Middle Name:</label>
                             <label id="lastName">Last Name:</label>
@@ -418,7 +417,6 @@ $resident_result = $stmt->fetchAll();
             const response = await api.json();
             document.querySelector('.picture').src = `data:image/jpeg;base64,${response.resident_picture}`;
             document.querySelector('.valid_id').src = `data:image/jpeg;base64,${response.resident_valid_id}`;
-            document.querySelector('#fullName').textContent = `Full Name: ${response.resident_fullname}`;
             document.querySelector('#firstName').textContent = `First Name: ${response.resident_first_name}`;
             document.querySelector('#middleName').textContent = `Middle Name: ${response.resident_middle_name}`;
             document.querySelector('#lastName').textContent = `Last Name: ${response.resident_last_name}`;
@@ -446,6 +444,7 @@ $resident_result = $stmt->fetchAll();
             document.querySelector('#birthPlace').textContent = `Birth Place: ${response.resident_birthplace}`;
             document.querySelector('#age').textContent = `Age: ${response.resident_age}`;
             document.querySelector('#nationality').textContent = `Nationality: ${response.resident_nationality}`;
+            document.querySelector('#suffix').textContent = `Suffix: ${response.resident_suffix}`;
 
 
           

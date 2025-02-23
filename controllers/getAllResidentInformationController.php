@@ -23,7 +23,7 @@ function getAllResidentInformation($id){
         'resident_middle_name'=>$result['middle_name'] ?? "N/A",
         'resident_last_name'=>$result['last_name'] ?? "N/A",
         'resident_nationality'=>$result['nationality'] ??  "N/A",
-        'resident_suffix'=>$result['suffix'] ?? "",
+        'resident_suffix'=>$result['suffix'] ?? "N/A",
         'resident_age'=>$result['age'] ?? "",
         'resident_sex'=>$result['sex'] ?? "",
         'resident_birthdate'=>$result['birthday'] ?? "",
