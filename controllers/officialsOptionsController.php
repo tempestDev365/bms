@@ -5,7 +5,7 @@ $action = $_GET['action'] ?? null;
 function deleteOfficial($id){
     include '../database/databaseConnection.php';
     $conn = $GLOBALS['conn'];
-    $qry = "DELETE FROM officials_db WHERE id = $id";
+    $qry = "DELETE FROM `officials_db` WHERE id = $id";
     $conn->query($qry);
     header('Location: ../views/admin/officials.php');
 }

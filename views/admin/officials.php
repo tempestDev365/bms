@@ -136,7 +136,7 @@ $officials = getAllOfficials();
         });
     const deleteOfficial = (id) => {
         if(confirm('Are you sure you want to delete this official?')){
-            window.location.href = `./officialsOptionsController.php?action=delete&id=${id}`;
+            window.location.href = `../../controllers/officialsOptionsController.php?action=delete&id=${id}`;
         }
     }
     const editOfficial = (id) => {

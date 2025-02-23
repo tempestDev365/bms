@@ -220,6 +220,7 @@ $demographic = getAllDemographic();
         var ageCounts = <?php echo json_encode($demographic['age_counts']); ?>;
         var labels = ageCounts.map(function(item) { return item.age_range; });
         var data = ageCounts.map(function(item) { return item.count; });
+        console.log(labels)
 
         var ageDistributionChart = new Chart(ctx, {
             type: 'bar',
@@ -240,6 +241,7 @@ $demographic = getAllDemographic();
                         beginAtZero: true
                     }
                 }
+
             }
         });
     });
