@@ -234,7 +234,7 @@ $allConcernsReplies = getAllConcernsReplies();
         </div>
         <div class="offcanvas-body">
             <div class="sidebar">
-                <ul class="nav flex-column">
+               <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link" href="./userResident.php">Profile</a>
                     </li>
@@ -245,7 +245,10 @@ $allConcernsReplies = getAllConcernsReplies();
                         <a class="nav-link" href="./userDocument.php">Document Request</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./blotter.php">Blotter</a>
+                        <a class="nav-link" href="./blotter.php">Blotter Schedule</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./residentConcerns.php">Concerns</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./userNotification.php">Notification</a>

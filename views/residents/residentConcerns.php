@@ -115,15 +115,15 @@ $allConcerns = getAllConcerns($_SESSION['user_id']);
         </main>
     </div>
 
-    <!--Offcanvas sidebar-->
-    <div class="offcanvas offcanvas-end" id="mobile-sidebar">
+  <!--Offcanvas sidebar-->
+  <div class="offcanvas offcanvas-end" id="mobile-sidebar">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title">Brgy.Sinbanali</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
             <div class="sidebar">
-                <ul class="nav flex-column">
+               <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link" href="./userResident.php">Profile</a>
                     </li>
@@ -134,7 +134,10 @@ $allConcerns = getAllConcerns($_SESSION['user_id']);
                         <a class="nav-link" href="./userDocument.php">Document Request</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./residentBlotter.php">Blotter</a>
+                        <a class="nav-link" href="./blotter.php">Blotter Schedule</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./residentConcerns.php">Concerns</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./userNotification.php">Notification</a>
