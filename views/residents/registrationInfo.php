@@ -23,11 +23,20 @@ $email = $_GET['email'];
         .pagination .page-item.active .page-link::after {
             content: ' ➔';
         }
+
+        @media (max-width: 536px) {
+            #suffixMobile, #sexMobile, #civilMobile, #houseMobile, #uploadMobile{
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+        }
+
     </style>
 </head>
 <body>
 
-    <main style="background-color: #2D3187; min-height: 100vh" class="d-flex justify-content-center align-items-center p-2 flex-column">
+    <main style="background-color: #2D3187; min-height: 100vh;" class="d-flex justify-content-center align-items-center p-2 flex-column">
 
         <!-- Pagination -->
         <ul class="pagination">
@@ -39,7 +48,7 @@ $email = $_GET['email'];
         </ul>
 
         <!-- Form 1 -->
-        <div class="card p-3" id="form1" style="max-width: 500px; max-height: 500px; width: 500px; height: 500px;">
+        <div class="container bg-light p-3" style="max-width: 500px;" id="form1" >
             <div class="card-title">
                 <h2>Register!</h2>
             </div>
@@ -59,7 +68,7 @@ $email = $_GET['email'];
                         <input type="checkbox" id="no_middle_name_checkbox"> &nbsp;
                         <label for="no_middle_name_checkbox">I have no middle name</label>
                     </div>
-                    <div class="form-group mt-2 d-flex">
+                    <div class="form-group mt-2 d-flex" id="suffixMobile">
                         <input type="text" placeholder="Last Name" class="form-control me-2" name="last_name" required>
                         <select name="suffix" class="form-control">
                              <option value=""  disabled selected>Suffix</option>
@@ -73,7 +82,7 @@ $email = $_GET['email'];
                             <option value="V">V</option>
                         </select>
                     </div>
-                    <div class="form-group mt-2 d-flex justify-content-between" style="gap: 5px">
+                    <div class="form-group mt-2 d-flex justify-content-between" id="sexMobile" style="gap: 5px">
                         <select name="sex" id="sex" class="form-control" required>
                             <option value="" disabled selected>Sex</option>
                             <option value="Male">Male</option>
@@ -93,12 +102,12 @@ $email = $_GET['email'];
             </div>
             
             <!-- Form 2 -->
-            <div class="card p-3" id="form2" style="max-width: 500px; max-height: 500px; width: 500px; height: 500px;">
+            <div class="container bg-light p-3" style="max-width: 500px" id="form2" >
                 <div class="card-title">
                 <h2>Register!</h2>
             </div>
             <div class="card-body">
-                <div class="form-group mt-2 d-flex justify-content-between" style="gap: 5px">
+                <div class="form-group mt-2 d-flex justify-content-between" id="civilMobile" style="gap: 5px">
                     <select name="civil_status" id="civil_status" class="form-select" required>
                         <option value="" disabled selected>Civil Status</option>
                         <option value="Single">SINGLE</option>
@@ -121,7 +130,7 @@ $email = $_GET['email'];
                         <option value="Sineguelasan">SINEGUELASAN</option>
                     </select>
                 </div>
-                <div class="form-group mt-2 d-flex justify-content-between" style="gap: 5px">
+                <div class="form-group mt-2 d-flex justify-content-between" id="houseMobile" style="gap: 5px">
                     <input type="text" placeholder="House Number" class="form-control" name="house_number" required>
                     <input type="text" placeholder="Street" class="form-control" name="street" required>
                 </div>
@@ -132,7 +141,7 @@ $email = $_GET['email'];
         </div>
 
         <!-- Form 4-->
-        <div class="card p-3" id="form4" style="min-width: 600px; min-height: 600px; width: 600px;">
+        <div class="container bg-light p-3" style="max-width: 500px" id="form4">
             <div class="card-title">
                 <h2>IDENTITY VERIFICATION!</h2>
             </div>
@@ -164,7 +173,7 @@ $email = $_GET['email'];
                         <label>Original full-sized. Unedited Document</label>
                         <label>No black and white images</label>
                     </div>
-                    <div class="bottom-card mt-3 border d-flex">
+                    <div class="bottom-card mt-3 border d-flex" id="uploadMobile">
                         <div class="form-group" style="flex-grow: 1;">
                             <input type="file" name="frontID" hidden id="frontID" onchange="previewImage(this, 'frontPreview');" required>
                             <label class="d-flex justify-content-center align-items-center" for="frontID" style="width: 100%; border: 1px dotted black; height: 200px; cursor: pointer;">
@@ -195,41 +204,41 @@ $email = $_GET['email'];
         </div>
 
     <!--Form 3-->
-<div class="card p-3" id="form3" style="max-width: 600px; min-height: 600px; width: 600px;">
-    <div class="card-title">
-        <h2>PROFILE PHOTO</h2>
-        <label>Please upload a clear photo of yourself</label>
-    </div>
-    <div class="card-body">
-        <div class="profile-preview-container d-flex justify-content-center align-items-center    text-center mb-3">
-            <img id="profilePreview" src="#" alt="Profile Preview" 
-                 style="display: none; max-width: 350px; max-height: 400px; object-fit: cover; border-radius: 50%;">
+        <div class="container bg-light p-3" style="max-width: 500px"  id="form3" >
+            <div class="card-title">
+                <h2>PROFILE PHOTO</h2>
+                <label>Please upload a clear photo of yourself</label>
+            </div>
+            <div class="card-body">
+                <div class="profile-preview-container d-flex justify-content-center align-items-center    text-center mb-3">
+                    <img id="profilePreview" src="#" alt="Profile Preview" 
+                        style="display: none; max-width: 350px; max-height: 400px; object-fit: cover; border-radius: 50%;">
+                </div>
+                <div class="form-group mb-3">
+                    <input type="file" class="form-control" name="profile" id="profileInput" 
+                        accept="image/*" onchange="previewProfileImage(this);"  required>
+                    
+                    </label>
+                </div>
+                <div class="camera-controls">
+                    <button type="button" class="btn btn-primary w-100 mb-2" onclick="openProfileCamera()">
+                        USE CAMERA
+                    </button>
+                    <video id="profileCamera" style="display: none; width: 100%; margin-top: 10px;" autoplay></video>
+                    <button id="profileCaptureBtn" class="btn btn-success w-100 mt-2" 
+                            style="display: none;" onclick="captureProfileImage()">
+                        Capture Photo
+                    </button>
+                </div>
+                <div class="form-group mt-3 d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary" id="prev3">Previous</button>
+                    <button type="button" class="btn btn-primary" id="next3">Next</button>
+                </div>
+            </div>
         </div>
-        <div class="form-group mb-3">
-            <input type="file" class="form-control" name="profile" id="profileInput" 
-                   accept="image/*" onchange="previewProfileImage(this);"  required>
-            
-            </label>
-        </div>
-        <div class="camera-controls">
-            <button type="button" class="btn btn-primary w-100 mb-2" onclick="openProfileCamera()">
-                USE CAMERA
-            </button>
-            <video id="profileCamera" style="display: none; width: 100%; margin-top: 10px;" autoplay></video>
-            <button id="profileCaptureBtn" class="btn btn-success w-100 mt-2" 
-                    style="display: none;" onclick="captureProfileImage()">
-                Capture Photo
-            </button>
-        </div>
-        <div class="form-group mt-3 d-flex justify-content-between">
-            <button type="button" class="btn btn-secondary" id="prev3">Previous</button>
-            <button type="button" class="btn btn-primary" id="next3">Next</button>
-        </div>
-    </div>
-</div>
 
         <!-- Form 5 -->
-        <div class="card p-3" id="form5" style="max-width: 600px; min-height: 600px; width: 600px;">
+        <div class="container bg-light p-3" style="max-width: 500px" id="form5">
             <div class="card-title">
                 <h2>CONFIRMATION INFORMATION!</h2>
                 <label for="">Please make sure that all the details are correct</label>
@@ -249,6 +258,7 @@ $email = $_GET['email'];
                 <button class="btn btn-primary w-100 p-3" style="border-radius: 20px;" id="confirmBtn">CONFIRM</button>
             </div>
         </div>
+
         </form>
 
     </main>
