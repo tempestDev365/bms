@@ -116,7 +116,7 @@ $document_request = getAllDocumentRequest();
                                 <td id = 'status'>{$others['status']}</td>
                                 <td>{$others['time_Created']}</td>
                                 <td>
-<button class='btn btn-primary btn-sm' data-bs-toggle='modal' data-bs-target='#viewProfile2' onclick='viewOthers(\"{$others['name']}\")' id='viewBtn'>View</button>                                   
+<button class='btn btn-primary btn-sm' data-bs-toggle='modal' data-bs-target='#viewProfile2' onclick='viewOthers(\"{$others['name']}\",\"{$others['document_type']}\")' id='viewBtn'>View</button>                                   
  <button class='btn btn-success btn-sm' data-bs-toggle='modal' data-bs-target='#selectDocument' onclick='setName(\"{$others['id']}\")''{$others['id']}' $status >Print</button>
                                 </td>
                             </tr>
@@ -357,11 +357,16 @@ $document_request = getAllDocumentRequest();
 document.querySelector('#cancel').removeAttribute('hidden');
                
             }
+            else {
+        document.querySelector('#approve').removeAttribute('disabled');
+        document.querySelector('#reject').removeAttribute('disabled');
+        document.querySelector('#cancel').setAttribute('hidden', true);
+            }
        }
-       async function viewOthers(name){
-        const api = await fetch(`../../controllers/getOthersInformation.php?name=${name}&action=view`);
+       async function viewOthers(name, documentType){
+        const api = await fetch(`../../controllers/getOthersInformation.php?name=${name}&document_type=${documentType}&action=view`);
                 const response = await api.json();
-                           document.querySelector('#picture2').src = `data:image/jpeg;base64,${response.resident_proof}`;
+            document.querySelector('#picture2').src = `data:image/jpeg;base64,${response.resident_proof}`;
             document.querySelector('#name2').textContent = `Name: ${response.resident_name || "N/A"}`;
             document.querySelector('#age2').textContent = `Age: ${response.resident_age || "N/A"}`;
             document.querySelector('#birthDate2').textContent = `Birth Date: ${response.resident_birthdate || "N/A"}`;
@@ -380,6 +385,12 @@ document.querySelector('#cancel').removeAttribute('hidden');
                 document.querySelector('#cancel2').removeAttribute('hidden');
                
             }
+            else {
+        document.querySelector('#approve2').removeAttribute('disabled');
+        document.querySelector('#reject2').removeAttribute('disabled');
+        document.querySelector('#cancel2').setAttribute('hidden', true);
+    }
+           
        }
 
 
@@ -390,6 +401,7 @@ document.querySelector('#cancel').removeAttribute('hidden');
                 const resident_id = e.target.getAttribute('name');
                 const currentURL  = new URL(window.location.href);
                 currentURL.searchParams.delete('resident_id');
+                currentURL.searchParams.delete('id');
                 currentURL.searchParams.set('resident_id', resident_id);
                 window.history.pushState({}, '', currentURL);
 
@@ -398,7 +410,10 @@ document.querySelector('#cancel').removeAttribute('hidden');
         function setName(name){
                 const currentURL  = new URL(window.location.href);
                 currentURL.searchParams.delete('id');
+                currentURL.searchParams.delete('resident_id');
                 currentURL.searchParams.set('id', name);
+                
+
                 window.history.pushState({}, '', currentURL);
         }
      modalPrintbtn.addEventListener('click', function(e) {

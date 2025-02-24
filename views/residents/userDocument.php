@@ -209,8 +209,13 @@ $document_requested = getDocumentRequested($_SESSION['user_id']);
                     <div class="form">
                         <form action="../../controllers/documentRequestOthers.php" method="POST" enctype="multipart/form-data"> 
                         <div class="form-group">
-                            <label for="">Name:</label>
-                            <input type="text" class="form-control" name = "name">
+                            <label for="">First Name:</label>
+                            <input type="text" class="form-control" name = "first_name">
+
+                            <label for="">Last Name:</label>
+                            <input type="text" class="form-control" name = "last_name">
+                            <label for="">Middle Name:</label>
+                            <input type="text" class="form-control" name = "middle_name">
                         </div>
                         <div class="form-group mt-3" >
                             <label>SELECT TYPE OF DOCUMENT</label>
@@ -306,6 +311,14 @@ if(params.get('error') == 1){
     Swal.fire({
         title: 'Error',
         text: 'User does not exist',
+        icon: 'error',
+        confirmButtonText: 'OK'
+    });
+}
+if(params.get('error') == 2){
+    Swal.fire({
+        title: 'Error',
+        text: 'You already requested for this document',
         icon: 'error',
         confirmButtonText: 'OK'
     });

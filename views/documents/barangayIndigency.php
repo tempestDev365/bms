@@ -82,7 +82,7 @@ function getOthersInfo($id){
             LEFT JOIN residents_personal_information ri ON r.id = ri.resident_id
             LEFT JOIN residents_additional_information ra ON r.id = ra.resident_id
             LEFT JOIN residents_contact_information rc ON r.id = rc.resident_id
-            WHERE CONCAT(first_name, ' ', last_name) = :full_name";
+            WHERE CONCAT(first_name,' ',middle_name,' ', last_name) = :full_name";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':full_name', $others['name'], PDO::PARAM_STR);
     $stmt->execute();
@@ -144,6 +144,7 @@ if(isset($id)){
 if(isset($other_id)){
     $resident_information = getOthersInfo($other_id);
 }
+
 
 ?>
 <!DOCTYPE html>

@@ -82,7 +82,7 @@ function getOthersInfo($id){
             LEFT JOIN residents_personal_information ri ON r.id = ri.resident_id
             LEFT JOIN residents_additional_information ra ON r.id = ra.resident_id
             LEFT JOIN residents_contact_information rc ON r.id = rc.resident_id
-            WHERE CONCAT(first_name, ' ', last_name) = :full_name";
+            WHERE CONCAT(first_name,' ',middle_name,' ', last_name) = :full_name";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':full_name', $others['name'], PDO::PARAM_STR);
     $stmt->execute();
@@ -144,7 +144,6 @@ if(isset($id)){
 if(isset($other_id)){
     $resident_information = getOthersInfo($other_id);
 }
-
 
 ?>
 <!DOCTYPE html>
@@ -225,7 +224,7 @@ if(isset($other_id)){
                 <img src="data:image/jpeg;base64, <?php echo $resident_information['resident_picture'] ?>" class="img-fluid" style="width: 50px;" alt="">
             </div>
             <div class="card-mid p-3 d-flex justify-content-start align-items-center" style="flex-grow: 1; gap: 5px;">
-                <img src="https://placehold.co/300x200" class="img-fluid" style="width:200px; height: 150px;" alt="Sample Image">
+                <img src="data:image/jpeg;base64, <?php echo $resident_information['resident_picture'] ?>" class="img-fluid" style="width:200px; height: 150px;" alt="Sample Image">
                 <div class="card-info d-flex flex-column" style="font-size: .7rem;">
                 <label>Name: <?php echo $resident_information['resident_fullname']  ?></label>
                             <label>Birthday: <?php echo $resident_information['resident_birthdate']  ?></label>
@@ -262,17 +261,17 @@ if(isset($other_id)){
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
         
-        window.onload = function() {
-            window.print();
-        };
+        // window.onload = function() {
+        //     window.print();
+        // };
 
-        window.onafterprint = function() {
-            window.history.back();
-        };
+        // window.onafterprint = function() {
+        //     window.history.back();
+        // };
 
-        document.querySelector('.btn-close').addEventListener('click', function() {
-            window.history.back();
-        });
+        // document.querySelector('.btn-close').addEventListener('click', function() {
+        //     window.history.back();
+        // });
         
     </script>
 </body>

@@ -1,18 +1,20 @@
 <?php
 $action = $_GET['action'];
 $name = $_GET['name'];
+$document_type = $_GET['document_type'];
 
-function getInfo($name){
+function getInfo($name,$document_type){
     include '../database/databaseConnection.php';
-    $sql = "SELECT * FROM residents_information WHERE CONCAT(first_name, ' ', last_name) = :full_name";
+    $sql = "SELECT * FROM residents_information WHERE CONCAT(first_name,' ',middle_name,' ', last_name) = :full_name";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':full_name', $name, PDO::PARAM_STR);
     $stmt->execute();
     $result = $stmt->fetch();
 
-    $qry = "SELECT proof, purpose,id, document_type,status FROM documents_requested_for_others WHERE name = :name";
+    $qry = "SELECT proof, purpose,id, document_type,status FROM documents_requested_for_others WHERE name = :name AND document_type = :document_type";
     $stmt = $conn->prepare($qry);
     $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+    $stmt->bindParam(':document_type', $document_type, PDO::PARAM_STR);
     $stmt->execute();
     $proof = $stmt->fetch();
 
@@ -37,6 +39,7 @@ function getInfo($name){
 
 if($action == 'view'){
     header('Content-Type: application/json');   
-    echo json_encode(getInfo($name));
+    echo json_encode(getInfo($name,$document_type));
 }
+
 ?>
