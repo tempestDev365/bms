@@ -9,10 +9,29 @@ session_start();
     <title>CONFIRM OTP</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
+
+<style>
+
+
+    .otp-box {
+        text-align: center;
+    }
+    @media (max-width: 465px) {
+
+        .pin-group {
+            padding: 1rem;
+        }
+
+        .otp-box {
+          width: 40px;
+          height: 40px;
+    }
+    }
+</style>
 <body>
 
-    <main style="background-color: #2D3187; min-height: 100vh;" class="d-flex justify-content-center align-items-center p-2">
-        <div class="card p-3" style="max-width: 600px; min-height: 600px; width: 600px;">
+    <main style="background-color: #2D3187; min-height: 100vh;" class="d-flex justify-content-center align-items-center p-3">
+        <div class="card p-3 otp-card" style="max-width: 600px; min-height: 600px; width: 600px;">
             <div class="card-title">
                 <h2>Enter One-Time Password</h2>
                 <label for="">Please check your inbox message</label>
@@ -23,12 +42,12 @@ session_start();
                     <h5>Enter OTP</h5>
                     <div class="pin-group d-flex justify-content-between align-items-center" style="gap: 5px;">
                         <form action="../../controllers/verifyOtp.php" method="post">
-                            <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="first" id="">
-                        <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="second" id="">
-                        <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="third" id="">
-                        <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="fourth" id="">
-                        <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="fifth" id="">
-                        <input class="fw-bold ps-4" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="sixth" id="">
+                            <input class="otp-box fw-bold" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="first" id="">
+                            <input class="otp-box fw-bold" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="second" id="">
+                            <input class="otp-box fw-bold" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="third" id="">
+                            <input class="otp-box fw-bold" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="fourth" id="">
+                            <input class="otp-box fw-bold" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="fifth" id="">
+                            <input class="otp-box fw-bold" type="text" maxlength="1" style="max-width: 60px; max-height: 60px; height: 60px;" name="sixth" id="">
                     </div>
                       <div class="card-btn mt-3">
                 <button id="clear" class="btn btn-primary w-100 p-3" style="border-radius: 20px;">CONFIRM</button>
