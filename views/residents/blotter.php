@@ -39,8 +39,28 @@
             <!-- Sidebar header -->
         </div>
 
+        
+
 
         <div class="container-fluid p-3">
+
+        <div class="container-fluid d-flex justify-content-between align-items-center"> 
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page">Resident</li>
+                        <li class="breadcrumb-item"><a href="./blotter.php">Blotter Schedule</a></li>
+                    </ol>
+                </nav>
+
+                <button class="navbar-toggler navbar-light bg-light"
+                        type="button"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#mobile-sidebar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+
+                <div class="container border shadow-sm p-3 rounded-3">
                         <h3>Blotter Schedule</h3>
                         <form action="../../controllers/addBlotterController.php" method="POST">
                             <div class="form-group">
@@ -73,6 +93,7 @@
                                 <button class="btn btn-sm btn-success" id="reportBtn">Report</button>
                             </div>
                         </form>
+                        </div>
                     </div>
         
     </div>
