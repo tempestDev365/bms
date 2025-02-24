@@ -21,7 +21,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         $_SESSION['user_id'] = $result['id'];
         unset($_SESSION['otp']);
         unset($_SESSION['email']);
-        header("Location: ../views/residents/userAnnouncement.php");
+        header("Location: ../views/residents/userNotification.php");
         
     }else{
        header("Location: ../views/residents/otpVerificationLogin.php?error=1");

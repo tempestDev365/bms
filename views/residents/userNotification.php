@@ -180,7 +180,7 @@ $allConcernsReplies = getAllConcernsReplies();
                             <div class="notifContainer unread" id =  "<?php echo $count ?>">
                                 <div>
                                     <h5 class="notification-title">Document request for <?php echo $document['name']; ?></h5>
-                                    <p class="notification-message">Your request for <strong><?php echo $document['document_type']; ?></strong> has been <?php echo $status?>.</p>
+                                    <p class="notification-message">Your request for <strong><?php echo $document['document_type']; ?></strong> has been <?php echo $document['status']?>.</p>
                                     <p class="notification-date"><?php echo $document['time_Created']; ?></p>
                                 </div>
                                 <button class="btn btn-sm btn-success" id="markAsReadBtn" data-id="<?php echo $count ?>">Mark As Read</button>
