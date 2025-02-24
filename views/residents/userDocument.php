@@ -210,10 +210,10 @@ $document_requested = getDocumentRequested($_SESSION['user_id']);
                         <form action="../../controllers/documentRequestOthers.php" method="POST" enctype="multipart/form-data"> 
                         <div class="form-group">
                             <label for="">First Name:</label>
-                            <input type="text" class="form-control" name = "first_name">
+                            <input type="text" class="form-control" name = "first_name" required>
 
                             <label for="">Last Name:</label>
-                            <input type="text" class="form-control" name = "last_name">
+                            <input type="text" class="form-control" name = "last_name" required>
                             <label for="">Middle Name:</label>
                             <input type="text" class="form-control" name = "middle_name">
                         </div>
