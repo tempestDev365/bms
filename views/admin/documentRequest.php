@@ -464,7 +464,7 @@ document.querySelector('#cancel').removeAttribute('hidden');
                 window.location.href = `${baseURL}singleParent.php?${search}=${resident_id}`;
                 break;
             case 'BARANGAYID':
-                window.location.href = `${baseURL}barangayID.php?${search}=${resident_id}`;
+                window.location.href = `${baseURL}barangayId.php?${search}=${resident_id}`;
                 break;
         }
     });

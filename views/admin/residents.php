@@ -505,7 +505,7 @@ $resident_result = $stmt->fetchAll();
                     window.location.href = `${baseURL}singleParent.php?resident_id=${resident_id}`;
                     break;
                 case "BARANGAYID":
-                    window.location.href = `${baseURL}barangayID.php?resident_id=${resident_id}`;
+                    window.location.href = `${baseURL}barangayId.php?resident_id=${resident_id}`;
                     break;
             }
         }
