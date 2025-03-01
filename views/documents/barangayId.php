@@ -221,7 +221,8 @@ if(isset($other_id)){
                     <label>BARANGAY</label>
                     <label>SINBANALI</label>    
                 </div>
-                <img src="data:image/jpeg;base64, <?php echo $resident_information['resident_picture'] ?>" class="img-fluid" style="width: 50px;" alt="">
+                <img src="../../assets/img/logo-125.png" class="img-fluid" style="width: 50px;" alt="">
+
             </div>
             <div class="card-mid p-3 d-flex justify-content-start align-items-center" style="flex-grow: 1; gap: 5px;">
                 <img src="data:image/jpeg;base64, <?php echo $resident_information['resident_picture'] ?>" class="img-fluid" style="width:200px; height: 150px;" alt="Sample Image">
